@@ -9,13 +9,13 @@ UPDATE "user" AS u
 SET "botAvatarSet" = 'agentic-smith'
 FROM (
   SELECT "userId",
-         COUNT(*) FILTER (WHERE "avatarSet" = 'agentic-smith') AS agentic-smith,
+         COUNT(*) FILTER (WHERE "avatarSet" = 'agentic-smith') AS "agentic-smith",
          COUNT(*) FILTER (WHERE "avatarSet" <> 'agentic-smith') AS other
   FROM "bots"
   WHERE "archivedAt" IS NULL
   GROUP BY "userId"
 ) AS counts
-WHERE counts."userId" = u."id" AND counts.agentic-smith > counts.other;
+WHERE counts."userId" = u."id" AND counts."agentic-smith" > counts.other;
 
 UPDATE "bots" AS b
 SET "avatarSetPinned" = true
