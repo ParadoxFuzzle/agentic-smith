@@ -1,5 +1,5 @@
-import type { ApprovalRuleChoice } from "@rakazo/core";
-import { approvalRuleChoices, listSearch } from "@rakazo/core";
+import type { ApprovalRuleChoice } from "@agentic-smith/core";
+import { approvalRuleChoices, listSearch } from "@agentic-smith/core";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { ScrollView, StyleSheet, Text } from "react-native";

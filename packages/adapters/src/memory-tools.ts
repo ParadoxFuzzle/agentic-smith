@@ -1,5 +1,5 @@
-import type { ConnectorTool } from "@rakazo/adapter-kit";
-import { BOT_MEMORY_MAX_BYTES } from "@rakazo/contracts";
+import type { ConnectorTool } from "@agentic-smith/adapter-kit";
+import { BOT_MEMORY_MAX_BYTES } from "@agentic-smith/contracts";
 import { byteLength } from "./utf8.js";
 
 const SEMANTIC_MEMORY_TOOL_NAMES = new Set(["recall_memory", "save_memory", "forget_memory"]);

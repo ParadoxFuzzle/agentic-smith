@@ -1,6 +1,6 @@
+import type { SpaceMember, SpaceMembers } from "@agentic-smith/contracts";
+import { accountDisplay } from "@agentic-smith/core";
 import { MenuView } from "@expo/ui/community/menu";
-import type { SpaceMember, SpaceMembers } from "@rakazo/contracts";
-import { accountDisplay } from "@rakazo/core";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {

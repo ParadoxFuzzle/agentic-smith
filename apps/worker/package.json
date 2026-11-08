@@ -1,5 +1,5 @@
 {
-  "name": "@rakazo/worker",
+  "name": "@agentic-smith/worker",
   "version": "0.1.0",
   "license": "Apache-2.0",
   "type": "module",
@@ -11,12 +11,12 @@
     "test": "vitest run --root ../.. apps/worker/src"
   },
   "dependencies": {
-    "@rakazo/adapter-kit": "workspace:*",
-    "@rakazo/adapters": "workspace:*",
-    "@rakazo/core": "workspace:*",
-    "@rakazo/db": "workspace:*",
-    "@rakazo/logging": "workspace:*",
-    "@rakazo/memory": "workspace:*"
+    "@agentic-smith/adapter-kit": "workspace:*",
+    "@agentic-smith/adapters": "workspace:*",
+    "@agentic-smith/core": "workspace:*",
+    "@agentic-smith/db": "workspace:*",
+    "@agentic-smith/logging": "workspace:*",
+    "@agentic-smith/memory": "workspace:*"
   },
   "devDependencies": {
     "typescript": "7.0.2",

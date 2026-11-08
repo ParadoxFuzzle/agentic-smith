@@ -1,9 +1,8 @@
 "use client";
 
+import { Button } from "@agentic-smith/ui-web/components/ui/button";
+import { cn } from "@agentic-smith/ui-web/lib/utils";
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
-import { Button } from "@rakazo/ui-web/components/ui/button";
-
-import { cn } from "@rakazo/ui-web/lib/utils";
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 import { XIcon } from "lucide-react";

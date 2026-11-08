@@ -1,4 +1,4 @@
-import { isRetryableError, reconcileRefreshedThread } from "@rakazo/core";
+import { isRetryableError, reconcileRefreshedThread } from "@agentic-smith/core";
 import { useFocusEffect } from "expo-router";
 import type { Dispatch, RefObject, SetStateAction } from "react";
 import { useCallback, useEffect } from "react";

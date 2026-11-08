@@ -1,21 +1,21 @@
-import { ORPCError } from "@orpc/server";
-import { runContinueJob } from "@rakazo/adapter-kit";
+import { runContinueJob } from "@agentic-smith/adapter-kit";
 import {
   lockMcpOAuthMaterial,
   McpOAuthClientRequiredError,
   persistPreparedSecret,
   recordMcpServerHealth,
-} from "@rakazo/adapters";
-import { MCP_OAUTH_REDIRECT_MISMATCH } from "@rakazo/contracts";
-import type { Prisma } from "@rakazo/db";
+} from "@agentic-smith/adapters";
+import { MCP_OAUTH_REDIRECT_MISMATCH } from "@agentic-smith/contracts";
+import type { Prisma } from "@agentic-smith/db";
 import {
   AVAILABILITY_SELECT,
   availableInSpace,
   IsolationError,
   isUniqueViolation,
   itemSecretIn,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { ORPCError } from "@orpc/server";
 import {
   assertNameFreeWhereAvailable,
   lockOwner,

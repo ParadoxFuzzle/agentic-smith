@@ -1,4 +1,4 @@
-import type { MessageAuthor, MessageBlock } from "@rakazo/contracts";
+import type { MessageAuthor, MessageBlock } from "@agentic-smith/contracts";
 import type { Prisma, PrismaClient } from "./client.js";
 import { markThreadUnreadForMembers } from "./thread-reads.js";
 import { THREAD_LOCK_TRANSACTION_OPTIONS, withTransactionRetry } from "./transaction-retry.js";

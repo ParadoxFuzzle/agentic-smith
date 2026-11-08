@@ -11,7 +11,7 @@ async function withArchive<T>(
   bytes: Uint8Array,
   run: (handle: Awaited<ReturnType<typeof open>>) => Promise<T>,
 ): Promise<T> {
-  const file = path.join(tmpdir(), `rakazo-zip-reader-test-${randomUUID()}`);
+  const file = path.join(tmpdir(), `agentic-smith-zip-reader-test-${randomUUID()}`);
   await writeFile(file, bytes);
   const handle = await open(file, "r+");
   try {

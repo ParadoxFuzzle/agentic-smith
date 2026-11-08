@@ -3,13 +3,13 @@ import {
   isAbandonedRequest,
   isConnectionFailure,
   isServerUnreachable,
-} from "@rakazo/core/user-error";
-import type { ClientOperation, MonitoringConfig } from "@rakazo/logging/monitoring";
+} from "@agentic-smith/core/user-error";
+import type { ClientOperation, MonitoringConfig } from "@agentic-smith/logging/monitoring";
 import {
   createClientErrorReporter,
   isMonitoringUserId,
   sanitizeMonitoringEvent,
-} from "@rakazo/logging/monitoring";
+} from "@agentic-smith/logging/monitoring";
 import type * as SentryReact from "@sentry/react";
 import type { ErrorInfo } from "react";
 import { desktopBridge } from "./desktop";

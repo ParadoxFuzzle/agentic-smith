@@ -1,9 +1,13 @@
-import type { JobPublisher } from "@rakazo/adapter-kit";
-import { ModelAccountError, routineWakeupJob } from "@rakazo/adapter-kit";
-import type { RunErrorKind } from "@rakazo/contracts";
-import { nextCronDateAcross, nextRoutineRunDateAcross, normalizeRunError } from "@rakazo/core";
-import type { Prisma, PrismaClient } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+import type { JobPublisher } from "@agentic-smith/adapter-kit";
+import { ModelAccountError, routineWakeupJob } from "@agentic-smith/adapter-kit";
+import type { RunErrorKind } from "@agentic-smith/contracts";
+import {
+  nextCronDateAcross,
+  nextRoutineRunDateAcross,
+  normalizeRunError,
+} from "@agentic-smith/core";
+import type { Prisma, PrismaClient } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 
 /** The first account-error failure holds the routine this long; each further one doubles it. */
 const ROUTINE_ACCOUNT_BACKOFF_BASE_MS = 5 * 60_000;

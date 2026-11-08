@@ -1,4 +1,3 @@
-import { Trans, useLingui } from "@lingui/react/macro";
 import type {
   AgentSkillCatalogEntry,
   Bot,
@@ -7,8 +6,12 @@ import type {
   ModelCatalogEntry,
   ReplyMode,
   ThinkingLevel,
-} from "@rakazo/contracts";
-import { BOT_NAME_MAX_LENGTH, isBuiltinToolName, resolveBotAvatarSet } from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
+import {
+  BOT_NAME_MAX_LENGTH,
+  isBuiltinToolName,
+  resolveBotAvatarSet,
+} from "@agentic-smith/contracts";
 import {
   chatModelChoices,
   connectedModelChoices,
@@ -16,8 +19,9 @@ import {
   modelOptionKey,
   parseModelOptionKey,
   resolveSelectableModelId,
-} from "@rakazo/core";
-import { Button, Input, Tabs, TabsContent, TabsList, TabsTrigger } from "@rakazo/ui-web";
+} from "@agentic-smith/core";
+import { Button, Input, Tabs, TabsContent, TabsList, TabsTrigger } from "@agentic-smith/ui-web";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { Mail } from "lucide-react";
 import type { ReactNode } from "react";

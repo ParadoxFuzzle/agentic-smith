@@ -1,27 +1,27 @@
-import type { AdapterContext, AgentHomeStore, ArtifactStore } from "@rakazo/adapter-kit";
-import { resolveBotWorkspacePath } from "@rakazo/adapters";
-import type { Auth } from "@rakazo/auth";
+import type { AdapterContext, AgentHomeStore, ArtifactStore } from "@agentic-smith/adapter-kit";
+import { resolveBotWorkspacePath } from "@agentic-smith/adapters";
+import type { Auth } from "@agentic-smith/auth";
 import type {
   AccountExportExecutables,
   AccountExportManifest,
   AccountExportRecord,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   ACCOUNT_EXPORT_FORMAT,
   ACCOUNT_EXPORT_MANIFEST_PATH,
   ACCOUNT_EXPORT_MAX_HOME_FILE_BYTES,
   ACCOUNT_EXPORT_VERSION,
   accountExportPaths,
-} from "@rakazo/contracts";
-import type { AccountExportSource, PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/contracts";
+import type { AccountExportSource, PrismaClient } from "@agentic-smith/db";
 import {
   accountDeactivated,
   parseComputerMode,
   readAccountExport,
   runAsTenant,
   runGeneratorAsTenant,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { Zip, ZipDeflate } from "fflate";
 import type { Hono } from "hono";
 
@@ -199,7 +199,7 @@ async function* iterate<T>(items: AsyncIterable<T>): AsyncGenerator<T> {
 }
 
 export function accountExportFilename(now = new Date()): string {
-  return `rakazo-export-${now.toISOString().slice(0, 10)}.zip`;
+  return `agentic-smith-export-${now.toISOString().slice(0, 10)}.zip`;
 }
 
 /**

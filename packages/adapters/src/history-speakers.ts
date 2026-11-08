@@ -1,7 +1,7 @@
-import type { MessageBlock } from "@rakazo/contracts";
-import { botMessageContext } from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
-import { loadMessageAuthors } from "@rakazo/db";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { botMessageContext } from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
+import { loadMessageAuthors } from "@agentic-smith/db";
 
 /** What the model reads for the person of a personal space: never their real name. */
 export const USER_SPEAKER = "User";

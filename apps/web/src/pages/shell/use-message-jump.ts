@@ -1,6 +1,6 @@
-import type { Bot, ComputerStatus, Routine } from "@rakazo/contracts";
-import { foldPeerReplies, jumpTargetId, searchHitThreadTarget } from "@rakazo/core";
-import { fetchFresh } from "@rakazo/core/query";
+import type { Bot, ComputerStatus, Routine } from "@agentic-smith/contracts";
+import { foldPeerReplies, jumpTargetId, searchHitThreadTarget } from "@agentic-smith/core";
+import { fetchFresh } from "@agentic-smith/core/query";
 import type { Dispatch, RefObject, SetStateAction } from "react";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { SetURLSearchParams } from "react-router-dom";

@@ -26,7 +26,7 @@ vi.mock("@lingui/react/macro", () => {
   return { useLingui: () => ({ t }), Trans: ({ children }: { children: ReactNode }) => children };
 });
 // Menus and popovers render open and inline, so a test clicks straight through them.
-vi.mock("@rakazo/ui-web", async () => {
+vi.mock("@agentic-smith/ui-web", async () => {
   const { createContext, useContext } = await import("react");
   const Group = createContext<{ value: string[]; onValueChange: (value: string[]) => void }>({
     value: [],

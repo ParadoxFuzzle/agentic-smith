@@ -1,10 +1,10 @@
-import type { ProductAnalytics, RealtimeFanout } from "@rakazo/adapter-kit";
-import type { ChatAlert, MessageBlock, ProductEvent } from "@rakazo/contracts";
+import type { ProductAnalytics, RealtimeFanout } from "@agentic-smith/adapter-kit";
+import type { ChatAlert, MessageBlock, ProductEvent } from "@agentic-smith/contracts";
 import {
   AnalyticsTrigger,
   hasThinkingActivityMarker,
   ThreadActivityPayloadSchema,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   BACKGROUND_HELPER_TRIGGER,
   callIdFromClientNonce,
@@ -15,8 +15,8 @@ import {
   normalizeRunError,
   QUEUE_HOLDING_RUN_STATUSES,
   sanitizeJsonValue,
-} from "@rakazo/core";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/core";
+import { getLogger } from "@agentic-smith/logging";
 import { cancelRunsInTransaction } from "./cancel-runs.js";
 import { createChatAlerts } from "./chat-alerts.js";
 import type { PrismaClient } from "./client.js";

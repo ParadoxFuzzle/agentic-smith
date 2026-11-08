@@ -6,16 +6,16 @@ import type {
   MessagingSurface,
   SandboxProvider,
   SecretStore,
-} from "@rakazo/adapter-kit";
-import type { MessagingInstallations } from "@rakazo/adapters";
+} from "@agentic-smith/adapter-kit";
+import type { MessagingInstallations } from "@agentic-smith/adapters";
 import {
   applyMessagingOutboundStatus,
   createMessagingTeamChatHistory,
   createMessagingTeamChatSender,
-} from "@rakazo/adapters";
-import type { PrismaClient, ThreadEvents } from "@rakazo/db";
-import { provisionMessagingIdentity, runAsSystem } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapters";
+import type { PrismaClient, ThreadEvents } from "@agentic-smith/db";
+import { provisionMessagingIdentity, runAsSystem } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type { Hono } from "hono";
 import { storeInboundAttachment } from "./artifacts.js";
 import type { AppEnv } from "./env.js";

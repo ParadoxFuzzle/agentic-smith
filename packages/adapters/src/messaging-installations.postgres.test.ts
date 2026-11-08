@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import type { Actor } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
+import type { Actor } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   asSystem,
   createDb,
@@ -9,7 +9,7 @@ import {
   runAsTenant,
   teamChatRunClientNonce,
   teamChatRunFromOwner,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { MessagingInstallations } from "./messaging-installations.js";
 import { EncryptedSecretStore } from "./secrets.js";

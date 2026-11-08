@@ -6,14 +6,14 @@ import { chmod, mkdir, mkdtemp, open, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { createInterface } from "node:readline";
-import type { AdapterContext } from "@rakazo/adapter-kit";
-import { normalizeWorkspacePath, resolveBotWorkspacePath } from "@rakazo/adapters";
+import type { AdapterContext } from "@agentic-smith/adapter-kit";
+import { normalizeWorkspacePath, resolveBotWorkspacePath } from "@agentic-smith/adapters";
 import type {
   AccountExportManifest,
   AccountExportRecord,
   AccountImportResult,
   Actor,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   ACCOUNT_EXPORT_FORMAT,
   ACCOUNT_EXPORT_MANIFEST_PATH,
@@ -24,8 +24,8 @@ import {
   AccountExportRecordSchema,
   attachmentSizeLabel,
   resolveBotAvatarSet,
-} from "@rakazo/contracts";
-import { organicAvatarFamily, STOPPED_HELPER_RESULT } from "@rakazo/core";
+} from "@agentic-smith/contracts";
+import { organicAvatarFamily, STOPPED_HELPER_RESULT } from "@agentic-smith/core";
 import {
   createRepos,
   createSpaceForMember,
@@ -35,10 +35,10 @@ import {
   runAsSystem,
   runAsTenant,
   SpaceLimitError,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
-import { pageViewerCode } from "@rakazo/page-kit/compile";
-import { checkPageSource } from "@rakazo/page-kit/validate";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { pageViewerCode } from "@agentic-smith/page-kit/compile";
+import { checkPageSource } from "@agentic-smith/page-kit/validate";
 import type { Hono } from "hono";
 import { inflateEntry, parseZipArchive, readExact, ZipFormatError } from "./account-zip-reader.js";
 import { cancelBody } from "./http-body.js";
@@ -62,7 +62,7 @@ type ArchiveLimits = typeof ACCOUNT_IMPORT_LIMITS & { artifactBytes: number };
 const MESSAGE_BATCH_SIZE = 500;
 
 /** Prefix of the private spool files, exposed so tests can assert cleanup. */
-export const SPOOL_PREFIX = "rakazo-account-import-archive-";
+export const SPOOL_PREFIX = "agentic-smith-account-import-archive-";
 
 /** Slice size for streaming a spilled entry back to its sink. */
 const READ_SPILL_BYTES = 16 * 1024;
@@ -77,7 +77,7 @@ export class AccountImportError extends Error {
   }
 }
 
-const unreadable = () => new AccountImportError("The file is not a readable Rakazo export.");
+const unreadable = () => new AccountImportError("The file is not a readable Agentic Smith export.");
 const invalidEntry = () => new AccountImportError("The export contains an unexpected file.");
 const outOfOrder = () => new AccountImportError("The export's files are out of order.");
 const missingRecord = () => new AccountImportError("The export refers to a missing record.");
@@ -530,7 +530,7 @@ class AccountImporter implements ArchiveSink {
       }
     });
     this.created.push({ ...created, sourceId: space.id });
-    const tempDir = await mkdtemp(path.join(tmpdir(), "rakazo-account-import-"));
+    const tempDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-account-import-"));
     return new SpaceImport(space.id, { ...this.actor, spaceId: created.id }, tempDir);
   }
 
@@ -1096,7 +1096,7 @@ function parseManifest(bytes: Uint8Array): AccountExportManifest {
   const manifest = AccountExportManifestSchema.safeParse(parsed);
   if (manifest.success) return manifest.data;
   if (version !== ACCOUNT_EXPORT_VERSION)
-    throw new AccountImportError("This export is from a newer version of Rakazo.");
+    throw new AccountImportError("This export is from a newer version of Agentic Smith.");
   throw unreadable();
 }
 

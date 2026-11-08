@@ -1,8 +1,8 @@
+import type { SecretStore } from "@agentic-smith/adapter-kit";
+import type { ThinkingLevel } from "@agentic-smith/contracts";
+import { ThinkingLevelSchema } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import type { OAuthCredential } from "@earendil-works/pi-ai";
-import type { SecretStore } from "@rakazo/adapter-kit";
-import type { ThinkingLevel } from "@rakazo/contracts";
-import { ThinkingLevelSchema } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
 import type { StoredModelSecret } from "./model-secret.js";
 import { parseModelSecret } from "./model-secret.js";
 import { listAvailablePiCatalog } from "./pi-catalog-availability.js";
@@ -96,7 +96,7 @@ export async function fetchCodexCatalog(
       headers: {
         authorization: `Bearer ${accessToken}`,
         "chatgpt-account-id": accountId,
-        originator: "rakazo",
+        originator: "agentic-smith",
         accept: "application/json",
       },
       redirect: "error",

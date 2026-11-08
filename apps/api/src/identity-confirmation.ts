@@ -1,7 +1,7 @@
+import type { Auth } from "@agentic-smith/auth";
+import type { Actor } from "@agentic-smith/contracts";
+import { IDENTITY_CONFIRMATION_REQUIRED } from "@agentic-smith/contracts";
 import { ORPCError } from "@orpc/server";
-import type { Auth } from "@rakazo/auth";
-import type { Actor } from "@rakazo/contracts";
-import { IDENTITY_CONFIRMATION_REQUIRED } from "@rakazo/contracts";
 
 /**
  * Guards a procedure that reveals sensitive data: the calling session must have confirmed its

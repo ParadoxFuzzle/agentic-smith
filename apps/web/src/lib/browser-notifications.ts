@@ -1,11 +1,11 @@
-import type { ProductEvent } from "@rakazo/contracts";
+import type { ProductEvent } from "@agentic-smith/contracts";
 import {
   displayName,
   memberMessageAlerts,
   messageUnreadFor,
   payloadAuthor,
   plainTextFromMarkdown,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import { i18n } from "./i18n";
 
 export type BrowserNotificationPermission = "default" | "denied" | "granted";

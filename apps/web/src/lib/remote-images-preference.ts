@@ -1,4 +1,4 @@
-import { normalizeRemoteImagesPreference, REMOTE_IMAGES_STORAGE_KEY } from "@rakazo/core";
+import { normalizeRemoteImagesPreference, REMOTE_IMAGES_STORAGE_KEY } from "@agentic-smith/core";
 import { createStoredPreference } from "./stored-preference";
 
 /** Saved choice wins. Nothing saved keeps web images behind a tap. */

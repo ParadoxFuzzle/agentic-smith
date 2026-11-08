@@ -1,3 +1,4 @@
+import { SNOOZE_PRESETS, snoozePresetTime } from "@agentic-smith/core";
 import {
   Button,
   ContextMenu,
@@ -21,7 +22,6 @@ import {
   shapes,
   tint,
 } from "@expo/ui/swift-ui/modifiers";
-import { SNOOZE_PRESETS, snoozePresetTime } from "@rakazo/core";
 import { useState } from "react";
 import { PlatformColor, useWindowDimensions, View } from "react-native";
 import { useI18n } from "../lib/i18n";

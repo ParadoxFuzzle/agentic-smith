@@ -1,4 +1,4 @@
-import type { SpaceMemoryConfig } from "@rakazo/contracts";
+import type { SpaceMemoryConfig } from "@agentic-smith/contracts";
 import type { ComponentType } from "react";
 import { HonchoSettingsForm } from "./HonchoSettingsForm";
 import { SerenitySettingsForm } from "./SerenitySettingsForm";

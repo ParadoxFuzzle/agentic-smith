@@ -1,4 +1,4 @@
-import { IOS_APP_STORE_URL } from "@rakazo/contracts";
+import { IOS_APP_STORE_URL } from "@agentic-smith/contracts";
 import { useQuery } from "@tanstack/react-query";
 import * as Application from "expo-application";
 import { Linking, Platform } from "react-native";

@@ -1,5 +1,5 @@
-import type { RunActivityRow } from "@rakazo/contracts";
-import { activitySections } from "@rakazo/core";
+import type { RunActivityRow } from "@agentic-smith/contracts";
+import { activitySections } from "@agentic-smith/core";
 import type { Href } from "expo-router";
 import type { ReactElement, ReactNode } from "react";
 import { useMemo } from "react";

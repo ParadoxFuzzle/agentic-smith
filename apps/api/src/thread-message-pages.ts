@@ -3,18 +3,18 @@ import type {
   MessageBlock,
   ThreadMessage,
   ThreadMessagePage,
-} from "@rakazo/contracts";
-import { MessageBlock as MessageBlockSchema } from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
+import { MessageBlock as MessageBlockSchema } from "@agentic-smith/contracts";
 import {
   BACKGROUND_RUN_TRIGGERS,
   callIdFromClientNonce,
   isBackgroundInputBlock,
   isBackgroundRunTrigger,
   isPeerReceiptBlocks,
-} from "@rakazo/core";
-import { messageReplyPreview } from "@rakazo/core/message-quote";
-import type { Prisma, PrismaClient } from "@rakazo/db";
-import { loadMessageAuthors } from "@rakazo/db";
+} from "@agentic-smith/core";
+import { messageReplyPreview } from "@agentic-smith/core/message-quote";
+import type { Prisma, PrismaClient } from "@agentic-smith/db";
+import { loadMessageAuthors } from "@agentic-smith/db";
 
 type MessageDb = PrismaClient | Prisma.TransactionClient;
 

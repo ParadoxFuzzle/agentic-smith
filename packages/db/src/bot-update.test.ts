@@ -16,7 +16,7 @@ describe("botProfileLabelsChanged", () => {
     expect(botProfileLabelsChanged({ name: "SEO" })).toBe(true);
     expect(botProfileLabelsChanged({ description: "Helps with SEO" })).toBe(true);
     expect(botProfileLabelsChanged({ color: "#8B5CF6::shape_1" })).toBe(true);
-    expect(botProfileLabelsChanged({ avatarSet: "rakazo" })).toBe(true);
+    expect(botProfileLabelsChanged({ avatarSet: "agentic-smith" })).toBe(true);
   });
 });
 
@@ -210,9 +210,9 @@ describe("commitBotUpdate", () => {
           spaceId: "space-1",
           threadId: "thread-1",
           botId: "bot-1",
-          data: { avatarSet: "rakazo" },
+          data: { avatarSet: "agentic-smith" },
           emitBotUpdated: true,
-          expectedUserAvatarSet: { userId: "user-1", botAvatarSet: "rakazo" },
+          expectedUserAvatarSet: { userId: "user-1", botAvatarSet: "agentic-smith" },
         },
         appendEvent,
       ),
@@ -229,7 +229,7 @@ describe("commitBotUpdate", () => {
     const tx = {
       $queryRaw: vi.fn(async (strings: TemplateStringsArray) =>
         strings.join("").includes("FOR SHARE")
-          ? [{ botAvatarSet: "rakazo" }]
+          ? [{ botAvatarSet: "agentic-smith" }]
           : ([{ id: "thread-1" }] as Array<unknown>),
       ),
       bot: { update: botUpdate },
@@ -247,9 +247,9 @@ describe("commitBotUpdate", () => {
           spaceId: "space-1",
           threadId: "thread-1",
           botId: "bot-1",
-          data: { avatarSet: "rakazo" },
+          data: { avatarSet: "agentic-smith" },
           emitBotUpdated: true,
-          expectedUserAvatarSet: { userId: "user-1", botAvatarSet: "rakazo" },
+          expectedUserAvatarSet: { userId: "user-1", botAvatarSet: "agentic-smith" },
         },
         appendEvent,
       ),

@@ -36,7 +36,7 @@ vi.mock("react-native", async () => {
   };
 });
 
-vi.mock("@rakazo/core", () => ({
+vi.mock("@agentic-smith/core", () => ({
   threadWindowMessages: (messages: unknown[]) => messages,
 }));
 

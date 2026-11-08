@@ -16,7 +16,7 @@ const { preview, accept, selectSpace } = vi.hoisted(() => ({
 vi.mock("@lingui/react/macro", () => ({
   Trans: ({ children }: { children: ReactNode }) => children,
 }));
-vi.mock("@rakazo/ui-web", () => ({
+vi.mock("@agentic-smith/ui-web", () => ({
   Button: ({ variant: _variant, ...props }: ComponentProps<"button"> & { variant?: string }) => (
     <button {...props} />
   ),

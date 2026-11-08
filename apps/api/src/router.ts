@@ -9,7 +9,7 @@ import type {
   SandboxProvider,
   SecretStore,
   TransactionalEmailProvider,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import type {
   CloudAgentConnection,
   CodexLiveCatalog,
@@ -30,10 +30,10 @@ import type {
   TicketChangeNotifier,
   verifyModelServesAgents,
   WorkActivities,
-} from "@rakazo/adapters";
-import type { Auth } from "@rakazo/auth";
-import type { NavLink } from "@rakazo/contracts";
-import type { BoardEvents, PrismaClient, ThreadEvents } from "@rakazo/db";
+} from "@agentic-smith/adapters";
+import type { Auth } from "@agentic-smith/auth";
+import type { NavLink } from "@agentic-smith/contracts";
+import type { BoardEvents, PrismaClient, ThreadEvents } from "@agentic-smith/db";
 import type { BillingService } from "./billing.js";
 import { accountRoutes } from "./routes/account.js";
 import { availabilityRoutes } from "./routes/availability.js";

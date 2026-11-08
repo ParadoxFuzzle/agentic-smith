@@ -1,5 +1,5 @@
-import { truncateReplyQuote } from "@rakazo/contracts";
-import { typeScale } from "@rakazo/ui-tokens";
+import { truncateReplyQuote } from "@agentic-smith/contracts";
+import { typeScale } from "@agentic-smith/ui-tokens";
 import { useMemo, useState } from "react";
 import { Modal, Platform, ScrollView, TextInput, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";

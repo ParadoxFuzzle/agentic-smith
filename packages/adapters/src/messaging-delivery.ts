@@ -5,11 +5,11 @@ import type {
   MessagingOutboundAttachment,
   MessagingOutboundStatus,
   MessagingSurface,
-} from "@rakazo/adapter-kit";
-import { messagingDeliverJob, runContinueJob } from "@rakazo/adapter-kit";
-import type { MessageBlock } from "@rakazo/contracts";
-import { botMessageHopExhausted, nextBotMessageHop, pageLinksAsTitles } from "@rakazo/core";
-import type { Prisma, PrismaClient, ThreadEvents } from "@rakazo/db";
+} from "@agentic-smith/adapter-kit";
+import { messagingDeliverJob, runContinueJob } from "@agentic-smith/adapter-kit";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { botMessageHopExhausted, nextBotMessageHop, pageLinksAsTitles } from "@agentic-smith/core";
+import type { Prisma, PrismaClient, ThreadEvents } from "@agentic-smith/db";
 import {
   accountDeactivated,
   appendEventInTransaction,
@@ -19,8 +19,8 @@ import {
   runAsSystem,
   SpaceDeletionInProgressError,
   THREAD_LOCK_TRANSACTION_OPTIONS,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { MessagingSendError } from "./chat-sdk-surface.js";
 import { splitOutboundBody } from "./messaging-platforms.js";
 import { isUserProgressClientNonce } from "./user-progress.js";

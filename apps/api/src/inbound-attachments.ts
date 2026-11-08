@@ -1,7 +1,7 @@
-import type { MessagingInboundAttachment } from "@rakazo/adapter-kit";
-import { isAttachmentAudioMimeType } from "@rakazo/contracts";
-import { sanitizeMessagingLabel } from "@rakazo/core";
-import { getLogger } from "@rakazo/logging";
+import type { MessagingInboundAttachment } from "@agentic-smith/adapter-kit";
+import { isAttachmentAudioMimeType } from "@agentic-smith/contracts";
+import { sanitizeMessagingLabel } from "@agentic-smith/core";
+import { getLogger } from "@agentic-smith/logging";
 
 type InboundArtifact = { id: string; name: string; mimeType: string; size: number };
 

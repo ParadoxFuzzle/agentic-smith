@@ -9,7 +9,7 @@ function subscribe(channel) {
   };
 }
 
-contextBridge.exposeInMainWorld("rakazoDesktop", {
+contextBridge.exposeInMainWorld("agenticSmithDesktop", {
   platform: process.platform,
   nativeWindowFrame: process.platform === "win32",
   badge: {

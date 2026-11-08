@@ -6,9 +6,8 @@ import https from "node:https";
 import net from "node:net";
 import path from "node:path";
 import tls from "node:tls";
-import { lingui } from "@lingui/vite-plugin";
-import type { DesktopStackProbeResponse } from "@rakazo/contracts";
-import { buildIdAt } from "@rakazo/contracts/client-build";
+import type { DesktopStackProbeResponse } from "@agentic-smith/contracts";
+import { buildIdAt } from "@agentic-smith/contracts/client-build";
 import {
   appContentSecurityPolicy,
   COMPUTER_SCREEN_PREFIX,
@@ -17,11 +16,12 @@ import {
   contentSecurityPolicyFor,
   parseContentSecuritySources,
   parseCrispWebsiteId,
-} from "@rakazo/contracts/content-security-policy";
+} from "@agentic-smith/contracts/content-security-policy";
 import {
   safeScreenProxyResponseHeaders,
   stripSensitiveHandshakeHeaders,
-} from "@rakazo/core/node/screen-proxy-response";
+} from "@agentic-smith/core/node/screen-proxy-response";
+import { lingui } from "@lingui/vite-plugin";
 import babel from "@rolldown/plugin-babel";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
@@ -48,7 +48,7 @@ import {
   rewrittenNovncHeaders,
   shouldInjectNovncStorageShim,
 } from "./src/novnc-html.js";
-import { rakazoPwa } from "./src/pwa/plugin.js";
+import { agenticSmithPwa } from "./src/pwa/plugin.js";
 import type { ScreenTargetFailure } from "./src/screen-proxy.js";
 import {
   checkScreenAuthorization,
@@ -64,10 +64,10 @@ import {
 } from "./src/screen-proxy.js";
 
 const webPort = Number(process.env.WEB_PORT ?? 5173);
-const DESKTOP_STACK_PROBE_PATH = "/.well-known/rakazo-desktop-stack";
-const DESKTOP_STACK_TOKEN_HEADER = "x-rakazo-desktop-stack-token";
+const DESKTOP_STACK_PROBE_PATH = "/.well-known/agentic-smith-desktop-stack";
+const DESKTOP_STACK_TOKEN_HEADER = "x-agentic-smith-desktop-stack-token";
 const SCREEN_UPSTREAM_TIMEOUT_MS = 20_000;
-const screenLog = createServiceLogger({ service: "rakazo-web" });
+const screenLog = createServiceLogger({ service: "agentic-smith-web" });
 
 function screenPolicy(url: string | undefined) {
   return url?.startsWith("/novnc/session/control/") ? "control" : "view";
@@ -480,10 +480,10 @@ export default defineConfig(({ command, mode }) => {
   const buildId = command === "build" ? buildIdAt(new Date()) : "";
   const rootEnv = loadEnv(mode, path.resolve(import.meta.dirname, "../.."), "");
   const api = process.env.API_PROXY_TARGET ?? rootEnv.API_PROXY_TARGET ?? "http://127.0.0.1:3100";
-  const previewHost = process.env.RAKAZO_HOST ?? rootEnv.RAKAZO_HOST ?? "localhost";
+  const previewHost = process.env.AGENTIC_SMITH_HOST ?? rootEnv.AGENTIC_SMITH_HOST ?? "localhost";
   const allowedHosts = [
     previewHost,
-    ...(process.env.RAKAZO_ALLOWED_HOSTS ?? rootEnv.RAKAZO_ALLOWED_HOSTS ?? "")
+    ...(process.env.AGENTIC_SMITH_ALLOWED_HOSTS ?? rootEnv.AGENTIC_SMITH_ALLOWED_HOSTS ?? "")
       .split(",")
       .map((entry) => entry.trim())
       .filter(Boolean),
@@ -500,25 +500,27 @@ export default defineConfig(({ command, mode }) => {
         process.env.SANDBOX_SUPERVISOR_TOKEN ?? rootEnv.SANDBOX_SUPERVISOR_TOKEN,
       BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET ?? rootEnv.BETTER_AUTH_SECRET,
     });
-  const performanceAssetDelayMs = Number(process.env.RAKAZO_PERFORMANCE_ASSET_DELAY_MS ?? 0);
+  const performanceAssetDelayMs = Number(process.env.AGENTIC_SMITH_PERFORMANCE_ASSET_DELAY_MS ?? 0);
   const desktopStackToken =
-    process.env.RAKAZO_DESKTOP_STACK_TOKEN ?? rootEnv.RAKAZO_DESKTOP_STACK_TOKEN ?? "";
-  const themeFile = process.env.RAKAZO_THEME ?? rootEnv.RAKAZO_THEME;
+    process.env.AGENTIC_SMITH_DESKTOP_STACK_TOKEN ??
+    rootEnv.AGENTIC_SMITH_DESKTOP_STACK_TOKEN ??
+    "";
+  const themeFile = process.env.AGENTIC_SMITH_THEME ?? rootEnv.AGENTIC_SMITH_THEME;
   const instanceTheme =
     themeFile &&
     instanceThemeMiddleware(themeFile, (reason) =>
       screenLog.warn("web.instance_theme_ignored", { reason }),
     );
-  const imageTag = process.env.RAKAZO_IMAGE_TAG ?? rootEnv.RAKAZO_IMAGE_TAG ?? "edge";
+  const imageTag = process.env.AGENTIC_SMITH_IMAGE_TAG ?? rootEnv.AGENTIC_SMITH_IMAGE_TAG ?? "edge";
   // Invalid origins throw here, so the server refuses to start rather than serve a wider policy.
   const appPolicy = appContentSecurityPolicy({
     scriptSrc: parseContentSecuritySources(
-      "RAKAZO_CSP_SCRIPT_SRC",
-      process.env.RAKAZO_CSP_SCRIPT_SRC ?? rootEnv.RAKAZO_CSP_SCRIPT_SRC,
+      "AGENTIC_SMITH_CSP_SCRIPT_SRC",
+      process.env.AGENTIC_SMITH_CSP_SCRIPT_SRC ?? rootEnv.AGENTIC_SMITH_CSP_SCRIPT_SRC,
     ),
     connectSrc: parseContentSecuritySources(
-      "RAKAZO_CSP_CONNECT_SRC",
-      process.env.RAKAZO_CSP_CONNECT_SRC ?? rootEnv.RAKAZO_CSP_CONNECT_SRC,
+      "AGENTIC_SMITH_CSP_CONNECT_SRC",
+      process.env.AGENTIC_SMITH_CSP_CONNECT_SRC ?? rootEnv.AGENTIC_SMITH_CSP_CONNECT_SRC,
     ),
     crisp: parseCrispWebsiteId(process.env.CRISP_WEBSITE_ID ?? rootEnv.CRISP_WEBSITE_ID) !== null,
   });
@@ -537,12 +539,12 @@ export default defineConfig(({ command, mode }) => {
         },
       },
     },
-    define: { "import.meta.env.RAKAZO_BUILD": JSON.stringify(buildId) },
+    define: { "import.meta.env.AGENTIC_SMITH_BUILD": JSON.stringify(buildId) },
     plugins: [
       {
         // The API reads this to name the deployed build, and a tab fetches it to confirm the
         // server already serves a newer build before it reloads.
-        name: "rakazo-build-id",
+        name: "agentic-smith-build-id",
         apply: "build",
         generateBundle() {
           this.emitFile({ type: "asset", fileName: "build-id", source: `${buildId}\n` });
@@ -552,10 +554,10 @@ export default defineConfig(({ command, mode }) => {
       babel({ plugins: ["@lingui/babel-plugin-lingui-macro"] }),
       lingui(),
       tailwindcss(),
-      rakazoPwa(buildId),
+      agenticSmithPwa(buildId),
       {
         // Dev keeps React Refresh unrestricted in app pages; screen documents always use CSP.
-        name: "rakazo-content-security-policy",
+        name: "agentic-smith-content-security-policy",
         generateBundle() {
           for (const [pathname, asset] of Object.entries(wuyingScreenAssets)) {
             this.emitFile({ type: "asset", fileName: pathname.slice(1), source: asset.source });
@@ -599,7 +601,7 @@ export default defineConfig(({ command, mode }) => {
       },
       {
         // A shared page's link is its only key: keep it out of search results and Referer.
-        name: "rakazo-shared-page-headers",
+        name: "agentic-smith-shared-page-headers",
         configureServer(server) {
           server.middlewares.use(sharedPageHeaders);
         },
@@ -608,7 +610,7 @@ export default defineConfig(({ command, mode }) => {
         },
       },
       {
-        name: "rakazo-missing-asset-404",
+        name: "agentic-smith-missing-asset-404",
         configurePreviewServer({ config, middlewares }) {
           const outDir = path.resolve(config.root, config.build.outDir);
           const assetsDir = path.join(outDir, config.build.assetsDir);
@@ -629,8 +631,8 @@ export default defineConfig(({ command, mode }) => {
         },
       },
       {
-        // Without RAKAZO_THEME the page never links the theme, so the default deploy is unchanged.
-        name: "rakazo-instance-theme",
+        // Without AGENTIC_SMITH_THEME the page never links the theme, so the default deploy is unchanged.
+        name: "agentic-smith-instance-theme",
         transformIndexHtml: (html) =>
           command === "serve" && instanceTheme ? withInstanceThemeLink(html) : html,
         configureServer: (server) => {
@@ -645,13 +647,13 @@ export default defineConfig(({ command, mode }) => {
         },
       },
       {
-        name: "rakazo-desktop-stack-probe",
+        name: "agentic-smith-desktop-stack-probe",
         configureServer: (server) => attachDesktopStackProbe(server, desktopStackToken, imageTag),
         configurePreviewServer: (server) =>
           attachDesktopStackProbe(server, desktopStackToken, imageTag),
       },
       {
-        name: "rakazo-performance-asset-delay",
+        name: "agentic-smith-performance-asset-delay",
         configurePreviewServer(server) {
           if (!Number.isFinite(performanceAssetDelayMs) || performanceAssetDelayMs <= 0) return;
           server.middlewares.use((req, _res, next) => {
@@ -666,7 +668,7 @@ export default defineConfig(({ command, mode }) => {
       },
       {
         // The hosts the running server allows, as Vite resolved them, for proxied upgrades.
-        name: "rakazo-api-proxy-hosts",
+        name: "agentic-smith-api-proxy-hosts",
         configureServer: (server) => {
           proxyHosts = server.config.server.allowedHosts;
         },
@@ -675,13 +677,13 @@ export default defineConfig(({ command, mode }) => {
         },
       },
       {
-        name: "rakazo-novnc-proxy",
+        name: "agentic-smith-novnc-proxy",
         configureServer: (server) => attachNovncProxy(server, screenProxySecret(), api),
         configurePreviewServer: (server) => attachNovncProxy(server, screenProxySecret(), api),
       },
     ],
     server: {
-      host: process.env.RAKAZO_DEV_HOST ?? rootEnv.RAKAZO_DEV_HOST ?? "127.0.0.1",
+      host: process.env.AGENTIC_SMITH_DEV_HOST ?? rootEnv.AGENTIC_SMITH_DEV_HOST ?? "127.0.0.1",
       port: webPort,
       strictPort: true,
       allowedHosts,

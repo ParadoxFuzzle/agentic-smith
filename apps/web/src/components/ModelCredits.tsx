@@ -1,5 +1,4 @@
-import { Trans, useLingui } from "@lingui/react/macro";
-import type { BillingStatus, ByokInterval, ByokTier } from "@rakazo/contracts";
+import type { BillingStatus, ByokInterval, ByokTier } from "@agentic-smith/contracts";
 import {
   ByokIntervalSchema,
   ByokTierSchema,
@@ -11,7 +10,7 @@ import {
   isCancelledTrial,
   MODEL_CREDIT_AMOUNTS,
   ModelCreditAmountSchema,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -39,7 +38,8 @@ import {
   SelectValue,
   ToggleGroup,
   ToggleGroupItem,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Check } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -305,7 +305,7 @@ export function CreditChoice({
         <AccountMenu disabled={pending} signingOut={signingOut} onLogOut={() => void logOut()} />
       )}
       <h1 className="text-heading1 font-medium">
-        <Trans>Choose how to use Rakazo</Trans>
+        <Trans>Choose how to use Agentic Smith</Trans>
       </h1>
       <div className="grid gap-4 min-[480px]:grid-cols-2">
         <Card>
@@ -843,7 +843,7 @@ export function ModelCreditsSettings({
             })
           }
         >
-          <Trans>Use Rakazo credits</Trans>
+          <Trans>Use Agentic Smith credits</Trans>
         </Button>
       ) : null}
       {status.canManage && status.funding !== "byok" && (!recurring || status.cancelAtPeriodEnd) ? (

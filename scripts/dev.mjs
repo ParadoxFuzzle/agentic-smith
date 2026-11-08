@@ -8,13 +8,13 @@
 //
 // The database is `.env`'s DATABASE_URL when it is set: it must accept a
 // connection, or startup fails rather than falling back to a different one.
-// With no DATABASE_URL, a local Postgres container (`rakazo-dev-postgres`) is
+// With no DATABASE_URL, a local Postgres container (`agentic-smith-dev-postgres`) is
 // started and reused by every checkout.
 // Setting WEB_PORT or API_PORT, in the shell or `.env`, turns off port selection. A relative
 // DATA_DIR resolves in the main checkout, so checkouts sharing the database share its files.
 // Branch databases, and their copied files, are dropped once the branch is deleted or merged.
 //
-// RAKAZO_DEV_TAILNET=1 also serves the web app over HTTPS to your other Tailscale devices, at
+// AGENTIC_SMITH_DEV_TAILNET=1 also serves the web app over HTTPS to your other Tailscale devices, at
 // https://<this machine>.<tailnet>.ts.net:<web port>. Everything still listens on loopback; the
 // Tailscale daemon forwards to it, so only devices signed in to your tailnet can reach it.
 import { execFileSync, spawn } from "node:child_process";
@@ -43,15 +43,20 @@ const dotenv = require("dotenv");
 const DEFAULT_PORTS = { web: 5173, api: 3100, supervisor: 7091 };
 const PORT_STEP = 10;
 const MANAGED = {
-  container: "rakazo-dev-postgres",
+  container: "agentic-smith-dev-postgres",
   image: "postgres:18",
   port: 54318,
-  owner: "rakazo",
-  runtime: "rakazo_dev",
-  database: "rakazo",
+  owner: "agentic-smith",
+  runtime: "agentic_smith_dev",
+  database: "agentic-smith",
 };
 const TAILSCALE_APP_CLI = "/Applications/Tailscale.app/Contents/MacOS/Tailscale";
-const SERVICES = ["@rakazo/api", "@rakazo/worker", "@rakazo/web", "@rakazo/sandbox-supervisor"];
+const SERVICES = [
+  "@agentic-smith/api",
+  "@agentic-smith/worker",
+  "@agentic-smith/web",
+  "@agentic-smith/sandbox-supervisor",
+];
 
 const fileEnv = existsSync(path.join(root, ".env"))
   ? dotenv.parse(readFileSync(path.join(root, ".env")))
@@ -61,18 +66,18 @@ const log = (message) => process.stdout.write(`[dev] ${message}\n`);
 
 // A command that runs another with secrets added to its environment, such as a secrets manager's
 // `run --`. Values it adds win over `.env`.
-const runWith = setting("RAKAZO_DEV_RUN_WITH")?.trim();
-if (runWith && !setting("RAKAZO_DEV_RUNNING_WITH")) {
+const runWith = setting("AGENTIC_SMITH_DEV_RUN_WITH")?.trim();
+if (runWith && !setting("AGENTIC_SMITH_DEV_RUNNING_WITH")) {
   const [command, ...args] = runWith.split(/\s+/);
   const self = [process.execPath, fileURLToPath(import.meta.url), ...process.argv.slice(2)];
   const wrapper = spawn(command, [...args, ...self], {
     stdio: "inherit",
-    env: { ...process.env, RAKAZO_DEV_RUNNING_WITH: "1" },
+    env: { ...process.env, AGENTIC_SMITH_DEV_RUNNING_WITH: "1" },
   });
   for (const signal of ["SIGINT", "SIGTERM"]) process.on(signal, () => wrapper.kill(signal));
   const [code, signal] = await new Promise((resolve, reject) => {
     wrapper.once("error", (error) =>
-      reject(new Error(`RAKAZO_DEV_RUN_WITH could not start ${command}`, { cause: error })),
+      reject(new Error(`AGENTIC_SMITH_DEV_RUN_WITH could not start ${command}`, { cause: error })),
     );
     wrapper.once("exit", (...outcome) => resolve(outcome));
   });
@@ -251,7 +256,7 @@ function branchMigrations(branch) {
 }
 
 // Marks a finished branch database and records which repository and branch own it.
-const BRANCH_DATABASE_COMMENT = "rakazo dev branch: ";
+const BRANCH_DATABASE_COMMENT = "agentic-smith dev branch: ";
 
 function branchDatabaseComment(branch) {
   return BRANCH_DATABASE_COMMENT + JSON.stringify({ repo: repositoryId(), branch });
@@ -279,7 +284,7 @@ function branchDatabaseName(sharedName, branch) {
 
 /** A branch database's files, kept apart so deleting one never removes a file main still uses. */
 function branchDataDir(sharedDataDir, name) {
-  return path.join(path.dirname(sharedDataDir), ".rakazo-dev-branches", name, "data");
+  return path.join(path.dirname(sharedDataDir), ".agentic-smith-dev-branches", name, "data");
 }
 
 async function branchDatabase(shared, sharedDataDir) {
@@ -391,7 +396,7 @@ function tailscaleCli() {
       return cli;
     } catch {}
   }
-  throw new Error("RAKAZO_DEV_TAILNET is set, but the tailscale CLI was not found.");
+  throw new Error("AGENTIC_SMITH_DEV_TAILNET is set, but the tailscale CLI was not found.");
 }
 
 /** Serve the loopback web port to the tailnet over HTTPS on the same port number. */
@@ -421,7 +426,7 @@ function generateClientIfStale(env) {
   const schema = path.join(dbPackage, "prisma/schema.prisma");
   if (existsSync(client) && statSync(client).mtimeMs >= statSync(schema).mtimeMs) return;
   log("Generating the Prisma client");
-  runPnpm(["--filter", "@rakazo/db", "generate"], {
+  runPnpm(["--filter", "@agentic-smith/db", "generate"], {
     cwd: root,
     env,
     stdio: "inherit",
@@ -462,18 +467,18 @@ generateClientIfStale(env);
 const migrationLock = new Client({ connectionString: shared.migrationUrl });
 await migrationLock.connect();
 try {
-  await migrationLock.query("SELECT pg_advisory_lock(hashtext('rakazo dev migrate'))");
+  await migrationLock.query("SELECT pg_advisory_lock(hashtext('agentic-smith dev migrate'))");
   runPnpm(["db:migrate"], { cwd: root, env, stdio: "inherit" });
 } finally {
   await migrationLock.end();
 }
 
 let tailnet = null;
-if (/^(1|true)$/i.test(setting("RAKAZO_DEV_TAILNET") ?? "")) {
+if (/^(1|true)$/i.test(setting("AGENTIC_SMITH_DEV_TAILNET") ?? "")) {
   // The emulator's inbox has no sign-in check; it is safe only while nothing but this machine
   // can reach the web server.
   if (setting("EMAIL_EMULATOR") === "true") {
-    throw new Error("RAKAZO_DEV_TAILNET cannot be used with EMAIL_EMULATOR=true.");
+    throw new Error("AGENTIC_SMITH_DEV_TAILNET cannot be used with EMAIL_EMULATOR=true.");
   }
   tailnet = shareOnTailnet(Number(env.WEB_PORT ?? setting("WEB_PORT") ?? 5173));
   // Every way this process ends, including a failed launch, turns sharing off.
@@ -481,7 +486,7 @@ if (/^(1|true)$/i.test(setting("RAKAZO_DEV_TAILNET") ?? "")) {
   // Sign-in cookies and links follow this origin, so use the tailnet URL on this machine too.
   env.WEB_ORIGIN = tailnet.origin;
   env.BETTER_AUTH_URL = tailnet.origin;
-  env.RAKAZO_ALLOWED_HOSTS = [setting("RAKAZO_ALLOWED_HOSTS"), tailnet.host]
+  env.AGENTIC_SMITH_ALLOWED_HOSTS = [setting("AGENTIC_SMITH_ALLOWED_HOSTS"), tailnet.host]
     .filter(Boolean)
     .join(",");
 }

@@ -1,8 +1,8 @@
 import { execFile } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { promisify } from "node:util";
-import type { PrismaClient } from "@rakazo/db";
-import { asSystem, bootstrapUserSpace, createDb, createRepos } from "@rakazo/db";
+import type { PrismaClient } from "@agentic-smith/db";
+import { asSystem, bootstrapUserSpace, createDb, createRepos } from "@agentic-smith/db";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 const run = promisify(execFile);
@@ -27,7 +27,7 @@ describePostgres("the operator's account status command (PostgreSQL)", { timeout
     const { SCIM_BEARER_TOKEN: _off, ...rest } = process.env;
     return run(
       "pnpm",
-      ["--filter", "@rakazo/api", "exec", "tsx", "src/cli/account-status.ts", ...args],
+      ["--filter", "@agentic-smith/api", "exec", "tsx", "src/cli/account-status.ts", ...args],
       { env: { ...rest, ...env } },
     );
   }

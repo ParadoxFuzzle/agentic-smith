@@ -4,9 +4,9 @@ import { mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { parseArgs } from "node:util";
-import type { AgentRunRequest } from "@rakazo/adapter-kit";
-import { ModelConnectInputSchema, ReplyModeSchema } from "@rakazo/contracts";
-import { loadRootEnv } from "@rakazo/core/node/load-root-env";
+import type { AgentRunRequest } from "@agentic-smith/adapter-kit";
+import { ModelConnectInputSchema, ReplyModeSchema } from "@agentic-smith/contracts";
+import { loadRootEnv } from "@agentic-smith/core/node/load-root-env";
 import { BOT_FILES_EVAL_CASES, BOT_FILES_FIXTURE_VERSION } from "../evals/bot-files.js";
 import type { EvalCase } from "../evals/cases.js";
 import { EVAL_CASES, HISTORY_EVAL_CASES, wakesRoutines } from "../evals/cases.js";
@@ -513,7 +513,7 @@ async function main() {
     return;
   }
   // This CLI owns a disposable database. Never migrate or evaluate against an inherited database.
-  const dataDir = mkdtempSync(path.join(tmpdir(), "rakazo-evals-"));
+  const dataDir = mkdtempSync(path.join(tmpdir(), "agentic-smith-evals-"));
   let postgres: DisposablePostgres | undefined;
   let stopRequested = false;
   const stop = new AbortController();
@@ -564,18 +564,18 @@ async function main() {
       STRIPE_WEBHOOK_SECRET: "",
       STRIPE_PRICE_ID: "",
     });
-    execFileSync("pnpm", ["--filter", "@rakazo/db", "generate"], {
+    execFileSync("pnpm", ["--filter", "@agentic-smith/db", "generate"], {
       stdio: "pipe",
       timeout: 120_000,
     });
-    execFileSync("pnpm", ["--filter", "@rakazo/db", "exec", "prisma", "migrate", "deploy"], {
+    execFileSync("pnpm", ["--filter", "@agentic-smith/db", "exec", "prisma", "migrate", "deploy"], {
       stdio: "pipe",
       timeout: 120_000,
     });
     // Import runtime modules only after generation; their barrel exports load Prisma.
-    const { createApp } = await import("@rakazo/api/app");
+    const { createApp } = await import("@agentic-smith/api/app");
     const { runTrial } = await import("../evals/runner.js");
-    const { dispatcherFetch, PiAgentRuntime } = await import("@rakazo/adapters");
+    const { dispatcherFetch, PiAgentRuntime } = await import("@agentic-smith/adapters");
     const { EvalSandboxProvider } = await import("../evals/sandbox.js");
     const { observeToolCalls } = await import("../evals/tool-calls.js");
     for (let i = 0; i < trials.length; i++) {

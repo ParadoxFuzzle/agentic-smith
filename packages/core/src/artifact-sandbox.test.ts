@@ -74,20 +74,20 @@ describe("pageViewerDocument", () => {
     const code =
       'const App = () => React.createElement(Text, null, "</script><script>steal()</script><!--");';
     const html = pageViewerDocument({
-      runtime: "window.RakazoPage={mount(){}};",
+      runtime: "window.AgenticSmithPage={mount(){}};",
       code,
       theme: "light",
       errorTitle: "Couldn't show",
     });
     const boot = html.slice(
-      html.indexOf("RakazoPage.mount(") + "RakazoPage.mount(".length,
+      html.indexOf("AgenticSmithPage.mount(") + "AgenticSmithPage.mount(".length,
       -"</script></body></html>".length - 1,
     );
     expect(html.match(/<\/script>/g)).toHaveLength(2);
     expect(html).not.toContain("<!--");
     expect(JSON.parse(boot)).toEqual({ code, theme: "light", errorTitle: "Couldn't show" });
     const ja = pageViewerDocument({ ...base, lang: "ja" });
-    expect(JSON.parse(ja.match(/RakazoPage\.mount\((.*)\)<\/script>/)![1]!).lang).toBe("ja");
+    expect(JSON.parse(ja.match(/AgenticSmithPage\.mount\((.*)\)<\/script>/)![1]!).lang).toBe("ja");
     // The reader's language is not the content's, so it never becomes the frame's lang or dir.
     expect(ja).toContain("<html><head>");
   });
@@ -114,7 +114,7 @@ describe("pageReplyText", () => {
 
 describe("pageCopyRequest", () => {
   it("passes a page's text to copy and nothing else, up to the cap", () => {
-    const copy = { type: "rakazo-page:copy", id: "c1", text: "yes" };
+    const copy = { type: "agentic-smith-page:copy", id: "c1", text: "yes" };
     expect(pageCopyRequest(copy)).toEqual({ id: "c1", text: "yes" });
     const longest = "x".repeat(PAGE_COPY_MAX_LENGTH);
     expect(pageCopyRequest({ ...copy, text: longest })).toEqual({ id: "c1", text: longest });
@@ -123,14 +123,14 @@ describe("pageCopyRequest", () => {
     expect(pageCopyRequest({ ...copy, text: 7 })).toBeNull();
     expect(pageCopyRequest({ ...copy, id: "" })).toBeNull();
     expect(pageCopyRequest({ ...copy, id: "i".repeat(65) })).toBeNull();
-    expect(pageCopyRequest({ ...copy, type: "rakazo-page:paste" })).toBeNull();
-    expect(pageCopyRequest("rakazo-page:copy")).toBeNull();
+    expect(pageCopyRequest({ ...copy, type: "agentic-smith-page:paste" })).toBeNull();
+    expect(pageCopyRequest("agentic-smith-page:copy")).toBeNull();
   });
 });
 
 describe("pageLinkRequest", () => {
   it("opens only web and mail links a page asks for", () => {
-    const ask = (url: unknown, type = "rakazo-page:open-link") => ({ type, url });
+    const ask = (url: unknown, type = "agentic-smith-page:open-link") => ({ type, url });
     expect(pageLinkRequest(ask("https://example.com/a?b=1"))).toBe("https://example.com/a?b=1");
     expect(pageLinkRequest(ask("http://example.com"))).toBe("http://example.com/");
     expect(pageLinkRequest(ask("mailto:rj@example.com"))).toBe("mailto:rj@example.com");
@@ -139,7 +139,7 @@ describe("pageLinkRequest", () => {
       "JavaScript:alert(1)",
       "data:text/html,<b>x</b>",
       "file:///etc/passwd",
-      "rakazo://settings",
+      "agentic-smith://settings",
       "intent://x#Intent;end",
       "/relative",
       `https://example.com/${"a".repeat(5000)}`,
@@ -147,7 +147,7 @@ describe("pageLinkRequest", () => {
     ]) {
       expect(pageLinkRequest(ask(refused))).toBeNull();
     }
-    expect(pageLinkRequest(ask("https://example.com", "rakazo-page:other"))).toBeNull();
+    expect(pageLinkRequest(ask("https://example.com", "agentic-smith-page:other"))).toBeNull();
     expect(pageLinkRequest(null)).toBeNull();
   });
 });

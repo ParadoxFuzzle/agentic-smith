@@ -4,14 +4,13 @@ Chat with your bots, answer their questions, watch their computers and take call
 
 ## Install
 
-- iPhone: [App Store](https://apps.apple.com/app/rakazo/id6801531099).
-- Android: [Google Play](https://play.google.com/store/apps/details?id=com.rakazo.app).
+- Build the client from source; see [mobile releases](./mobile-release.md).
 
 You can also choose **Get the mobile app** from the account menu in the web or desktop app.
 
 ## Sign in
 
-Sign in with your rakazo.com account. To use your own server instead, tap **Use a custom server** on
+Sign in with your jerithai.com account. To use your own server instead, tap **Use a custom server** on
 the sign-in screen and enter its address. For a server on your local network, follow
 [Connecting a phone on the same network](./self-host-clients.md#connecting-a-phone-on-the-same-network).
 
@@ -46,7 +45,7 @@ working status while a bot runs.
 
 ## Shortcuts and Siri
 
-On iPhone, Rakazo adds actions to Shortcuts, Siri and the Action button:
+On iPhone, Agentic Smith adds actions to Shortcuts, Siri and the Action button:
 
 - **Message Bot** and **Ask Bot**: send a message. Ask Bot also returns the reply.
 - **Record Message**: talk, then pause or press again to send it to the bot whose chat you opened last.
@@ -55,5 +54,5 @@ On iPhone, Rakazo adds actions to Shortcuts, Siri and the Action button:
 
 ## Share to a bot
 
-On Android, share text, images, audio, video, PDFs or files from another app to Rakazo and pick the
+On Android, share text, images, audio, video, PDFs or files from another app to Agentic Smith and pick the
 bot to send them to.

@@ -1,4 +1,4 @@
-import { getLogger } from "@rakazo/logging";
+import { getLogger } from "@agentic-smith/logging";
 import type { ComputerEgressMode } from "./computer-spec.js";
 import { COMPUTER_IMAGE } from "./computer-spec.js";
 import { computerDns, computerEgressSetting, docker, screenNetworkMode } from "./context.js";
@@ -7,7 +7,7 @@ import { EgressNotEnforced, verifyRestrictedEgress } from "./egress-probe.js";
 // `auto` starts open and becomes restricted once the probe shows the host rules are in place.
 export let computerEgressMode: ComputerEgressMode =
   computerEgressSetting === "restricted" ? "restricted" : "open";
-// Enforcement is host-side (DOCKER-USER/INPUT on rakazo-c* bridges); the flag only
+// Enforcement is host-side (DOCKER-USER/INPUT on asmith-c* bridges); the flag only
 // names the interfaces. Refuse restricted computers until a probe shows the host
 // rules are in place. Only success is cached, so installing the rules needs no restart.
 // `auto` keeps the first answer a completed probe gives: restricted when the rules are in place,

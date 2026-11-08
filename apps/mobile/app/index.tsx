@@ -1,5 +1,5 @@
-import type { SpaceBot, SpaceGroup } from "@rakazo/contracts";
-import { accountDisplay, chatSnoozed } from "@rakazo/core";
+import type { SpaceBot, SpaceGroup } from "@agentic-smith/contracts";
+import { accountDisplay, chatSnoozed } from "@agentic-smith/core";
 import type { Href } from "expo-router";
 import {
   Redirect,

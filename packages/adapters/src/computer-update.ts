@@ -1,15 +1,15 @@
-import type { AdapterContext } from "@rakazo/adapter-kit";
+import type { AdapterContext } from "@agentic-smith/adapter-kit";
 import {
   computerControlExpireJobKey,
   isSandboxProviderOutage,
   SandboxAllowanceUsedError,
-} from "@rakazo/adapter-kit";
-import type { ComputerUpdate } from "@rakazo/contracts";
-import { ComputerUpdateSchema } from "@rakazo/contracts";
-import { ACTIVE_RUN_STATUSES, COMPUTER_USING_RUNS } from "@rakazo/core";
-import type { Prisma, PrismaClient, ThreadEvents } from "@rakazo/db";
-import { spaceTakesWork } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import type { ComputerUpdate } from "@agentic-smith/contracts";
+import { ComputerUpdateSchema } from "@agentic-smith/contracts";
+import { ACTIVE_RUN_STATUSES, COMPUTER_USING_RUNS } from "@agentic-smith/core";
+import type { Prisma, PrismaClient, ThreadEvents } from "@agentic-smith/db";
+import { spaceTakesWork } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import {
   enqueueTakeoverContinuation,
   isIdleOwnComputerTakeover,

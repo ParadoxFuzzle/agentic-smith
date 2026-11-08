@@ -15,9 +15,9 @@ import type {
   PageBrowserCommand,
   PageBrowserResult,
   SandboxProvider,
-} from "@rakazo/adapter-kit";
-import { SandboxRequestRejectedError } from "@rakazo/adapter-kit";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import { SandboxRequestRejectedError } from "@agentic-smith/adapter-kit";
+import { getLogger } from "@agentic-smith/logging";
 import type { FakeBrowserProviderOptions } from "./fake-browser.js";
 import { FakeBrowserProvider } from "./fake-browser.js";
 
@@ -64,7 +64,7 @@ export type LivePageBrowserDriver = (
  *
  * Fake computers (and the fake sandbox) use the in-process DOM session.
  * Real computers drive the live Chrome already on the graphical display via
- * CDP (`rakazo-page-browser`). If that path cannot operate, return
+ * CDP (`agentic-smith-page-browser`). If that path cannot operate, return
  * `fallback: "computer_act"` — never report success against a detached DOM.
  */
 export class ComputerBrowserProvider implements BrowserProvider {

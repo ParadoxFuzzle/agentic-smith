@@ -23,7 +23,7 @@ COPY packages/core packages/core
 COPY packages/ui-tokens packages/ui-tokens
 COPY packages/logging packages/logging
 COPY infra/updater infra/updater
-RUN corepack enable && pnpm install --frozen-lockfile --prod --filter "@rakazo/updater..."
+RUN corepack enable && pnpm install --frozen-lockfile --prod --filter "@agentic-smith/updater..."
 RUN /tmp/apt-security.sh --check && rm -f /tmp/apt-security.sh
 WORKDIR /app/infra/updater
 ARG GIT_SHA

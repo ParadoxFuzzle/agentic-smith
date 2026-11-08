@@ -1,4 +1,4 @@
-import { McpServerConfigInput } from "@rakazo/contracts";
+import { McpServerConfigInput } from "@agentic-smith/contracts";
 import { describe, expect, it } from "vitest";
 import { buildMcpUpdateMaterial as buildFromParsed } from "./mcp-material.js";
 

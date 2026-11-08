@@ -1,5 +1,5 @@
-import type { SecurityEventInput, SecurityEventType } from "@rakazo/db";
-import { recordSecurityEvent } from "@rakazo/db";
+import type { SecurityEventInput, SecurityEventType } from "@agentic-smith/db";
+import { recordSecurityEvent } from "@agentic-smith/db";
 
 type AuditedProcedure = {
   type: SecurityEventType;

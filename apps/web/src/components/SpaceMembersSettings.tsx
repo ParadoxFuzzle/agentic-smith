@@ -1,6 +1,5 @@
-import { Trans, useLingui } from "@lingui/react/macro";
-import type { SpaceMember, SpaceMembers } from "@rakazo/contracts";
-import { accountDisplay } from "@rakazo/core";
+import type { SpaceMember, SpaceMembers } from "@agentic-smith/contracts";
+import { accountDisplay } from "@agentic-smith/core";
 import {
   Badge,
   Button,
@@ -13,7 +12,8 @@ import {
   InputGroupButton,
   InputGroupInput,
   toast,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Copy, MoreHorizontal, UserPlus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSpaceRpc } from "../lib/space-rpc";

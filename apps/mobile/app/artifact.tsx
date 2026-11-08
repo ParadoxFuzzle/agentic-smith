@@ -1,6 +1,6 @@
-import { ChatMarkdown } from "@rakazo/chat-ui/native";
-import type { ArtifactVersion, ArtifactWithContent } from "@rakazo/contracts";
-import { artifactPreviewKind } from "@rakazo/contracts";
+import { ChatMarkdown } from "@agentic-smith/chat-ui/native";
+import type { ArtifactVersion, ArtifactWithContent } from "@agentic-smith/contracts";
+import { artifactPreviewKind } from "@agentic-smith/contracts";
 import type { File } from "expo-file-system";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import type { ReactNode } from "react";

@@ -1,6 +1,6 @@
+import { isIdentityConfirmationRequired } from "@agentic-smith/contracts";
+import { Button, Spinner } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { isIdentityConfirmationRequired } from "@rakazo/contracts";
-import { Button, Spinner } from "@rakazo/ui-web";
 import { useRef, useState } from "react";
 import { recheckSessionOnUnauthorized, rpc } from "../lib/rpc";
 import { errorText } from "../lib/user-error";

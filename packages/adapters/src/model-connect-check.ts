@@ -1,6 +1,6 @@
+import type { AgentRunModel } from "@agentic-smith/adapter-kit";
+import { MODEL_REQUEST_LIMIT_ERROR, normalizeRunError } from "@agentic-smith/core";
 import type { Context } from "@earendil-works/pi-ai";
-import type { AgentRunModel } from "@rakazo/adapter-kit";
-import { MODEL_REQUEST_LIMIT_ERROR, normalizeRunError } from "@rakazo/core";
 import { Type } from "typebox";
 import { withChatCompletionsCompatibility } from "./chat-completions-compat.js";
 import { withCloudflareAuth } from "./cloudflare-ai-gateway.js";

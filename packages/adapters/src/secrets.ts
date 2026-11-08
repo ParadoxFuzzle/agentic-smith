@@ -13,9 +13,9 @@ import type {
   SecretPutOptions,
   SecretRecord,
   SecretStore,
-} from "@rakazo/adapter-kit";
-import { SecretStoreUnavailableError } from "@rakazo/adapter-kit";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import { SecretStoreUnavailableError } from "@agentic-smith/adapter-kit";
+import { getLogger } from "@agentic-smith/logging";
 import { SecretChanges } from "./secret-changes.js";
 
 const VERSION_PREFIX = "v2:";

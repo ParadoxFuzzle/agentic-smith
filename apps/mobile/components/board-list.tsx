@@ -1,6 +1,6 @@
+import type { Ticket, TicketStatus } from "@agentic-smith/contracts";
+import { TICKET_STATUSES } from "@agentic-smith/contracts";
 import { MenuView } from "@expo/ui/community/menu";
-import type { Ticket, TicketStatus } from "@rakazo/contracts";
-import { TICKET_STATUSES } from "@rakazo/contracts";
 import { useState } from "react";
 import { RefreshControl, ScrollView, StyleSheet, Text } from "react-native";
 import type { BoardSection } from "../lib/board";

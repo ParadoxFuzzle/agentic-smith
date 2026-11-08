@@ -1,5 +1,5 @@
-import type { Actor, RunActivityRow } from "@rakazo/contracts";
-import { MessageBlock } from "@rakazo/contracts";
+import type { Actor, RunActivityRow } from "@agentic-smith/contracts";
+import { MessageBlock } from "@agentic-smith/contracts";
 import {
   ACTIVE_RUN_STATUSES,
   BACKGROUND_HELPER_TRIGGER,
@@ -8,9 +8,9 @@ import {
   displayName,
   HELPER_RESULT_TRIGGER,
   truncatePlainText,
-} from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
-import { Prisma } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
+import { Prisma } from "@agentic-smith/db";
 
 const RECENT_LIMIT = 20;
 // Background ticket work belongs on the board, not in the activity list. A background helper and

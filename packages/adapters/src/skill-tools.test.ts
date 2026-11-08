@@ -1,4 +1,4 @@
-import { buildSkillMd, formatSkillsCatalogInstruction, parseSkillMd } from "@rakazo/core";
+import { buildSkillMd, formatSkillsCatalogInstruction, parseSkillMd } from "@agentic-smith/core";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { BUILTIN_AGENT_SKILLS } from "./builtin-skills.js";
 import {

@@ -1,12 +1,12 @@
-import { getSupportedThinkingLevels } from "@earendil-works/pi-ai";
-import type { ModelConnectInput, ModelCredential, ThinkingLevel } from "@rakazo/contracts";
+import type { ModelConnectInput, ModelCredential, ThinkingLevel } from "@agentic-smith/contracts";
 import {
   assertHeaderSafeApiKey,
   OPENAI_COMPATIBLE_PROVIDER_ID as CONTRACT_OPENAI_COMPAT,
   canonicalPiProviderId,
   MAX_ENABLED_MODEL_IDS,
   modelOutputLeavesInputRoom,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
+import { getSupportedThinkingLevels } from "@earendil-works/pi-ai";
 import {
   cloudflareModelConfigMessage,
   cloudflareModelRouting,

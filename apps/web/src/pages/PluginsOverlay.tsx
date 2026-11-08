@@ -1,18 +1,17 @@
-import { Plural, Trans, useLingui } from "@lingui/react/macro";
 import type {
   CapabilityInstall,
   ConnectionCatalogItem,
   IntegrationCatalogResult,
   IntegrationCatalogSurface,
   McpSourcePreset,
-} from "@rakazo/contracts";
-import { mcpServerConnection } from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
+import { mcpServerConnection } from "@agentic-smith/contracts";
 import {
   CONNECTION_CATALOG_PAGE_SIZE,
   catalogItemKey,
   installedPluginParts,
   managedAppFor,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import {
   Button,
   Dialog,
@@ -26,7 +25,8 @@ import {
   DropdownMenuTrigger,
   Input,
   Spinner,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Plural, Trans, useLingui } from "@lingui/react/macro";
 import { ChevronDown, ChevronRight, LayoutTemplate, X } from "lucide-react";
 import { useMemo, useState } from "react";
 import { IntegrationSetup } from "../components/integrations/IntegrationSetup";

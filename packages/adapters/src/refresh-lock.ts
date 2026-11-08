@@ -1,4 +1,4 @@
-import type { Prisma, PrismaClient } from "@rakazo/db";
+import type { Prisma, PrismaClient } from "@agentic-smith/db";
 
 const REFRESH_LOCK_WAIT_MS = 10_000;
 const REFRESH_TRANSACTION_MS = 60_000;

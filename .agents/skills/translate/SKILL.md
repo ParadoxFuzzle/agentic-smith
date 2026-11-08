@@ -12,7 +12,7 @@ description: Fill untranslated strings in the web translation catalogs (`apps/we
 If an open pull request from `i18n/catalog-sync` exists (`gh pr list --head i18n/catalog-sync --state open`), check out that branch; otherwise branch `i18n/translate-<date>` from `origin/main`. Either way, bring in the newest strings before translating:
 
 1. Merge `origin/main`. If a `messages.po` conflicts, keep the branch's copy (`git checkout --ours -- <file>`) so its translations survive, and finish the merge.
-2. Run `pnpm --filter @rakazo/web intl:extract`. It adds main's new strings and drops removed ones, keeping every existing translation.
+2. Run `pnpm --filter @agentic-smith/web intl:extract`. It adds main's new strings and drops removed ones, keeping every existing translation.
 3. Fill in anything main translated that the branch had not, for each locale: `git show origin/main:apps/web/src/locales/<locale>/messages.po > /tmp/main-<locale>.po`, then `node .agents/skills/translate/catalog-gaps.ts apply <locale> /tmp/main-<locale>.po`.
 4. Commit the result.
 
@@ -22,7 +22,7 @@ Run `node .agents/skills/translate/catalog-gaps.ts check`. If it exits 0, push w
 
 For each locale with gaps, `node .agents/skills/translate/catalog-gaps.ts list <locale>` prints the empty entries with their source files and placeholder notes. With several locales, fan out one subagent per locale (pair the small ones).
 
-- Read the catalog's existing translations first and match their terms, tone and formality. Keep "Rakazo" and other names as they are.
+- Read the catalog's existing translations first and match their terms, tone and formality. Keep "Agentic Smith" and other names as they are.
 - Keep every placeholder (`{name}`, `{0}`), numbered tag (`<0>…</0>`, `<1/>`) and plural `#`. In `plural`/`select` messages keep the structure and variable, translate only the branch text, and use the language's own plural categories (Russian one/few/many/other, Hebrew one/two/other, Japanese, Korean and Chinese only other).
 - Short labels stay short. Read the source file when the meaning is unclear. Use the source text for code, URLs and example values.
 
@@ -31,7 +31,7 @@ Write translations as JSON objects `{ "<key>": "<translation>" }`, about 120 per
 ## 3. Verify
 
 - `node .agents/skills/translate/catalog-gaps.ts check` exits 0.
-- `pnpm --filter @rakazo/web exec lingui compile --strict` passes.
+- `pnpm --filter @agentic-smith/web exec lingui compile --strict` passes.
 - `pnpm exec vitest run apps/web/src/lib/i18n apps/web/src/lib/agent-import-locales apps/web/src/lib/bot-templates-locales` passes.
 - Only translations changed: `git diff -U0 -- apps/web/src/locales | grep -E '^[-+][^-+]' | grep -vE '^[-+]msgstr '` prints nothing.
 

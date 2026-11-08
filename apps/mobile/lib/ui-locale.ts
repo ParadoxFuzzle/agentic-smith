@@ -1,5 +1,5 @@
-import { AppLocaleSchema } from "@rakazo/contracts";
-import { matchUiLocale } from "@rakazo/core";
+import { AppLocaleSchema } from "@agentic-smith/contracts";
+import { matchUiLocale } from "@agentic-smith/core";
 
 /** The app languages mobile ships catalogs for. */
 const SHIPPED_LOCALES = [
@@ -21,7 +21,7 @@ export const UI_LOCALES = AppLocaleSchema.options.filter((locale): locale is UiL
   (SHIPPED_LOCALES as readonly string[]).includes(locale),
 );
 
-export const UI_LOCALE_STORAGE_KEY = "rakazo.uiLocale";
+export const UI_LOCALE_STORAGE_KEY = "agentic-smith.uiLocale";
 
 export function htmlLangForLocale(locale: string): string {
   return locale === "zh-CN" ? "zh-CN" : locale;

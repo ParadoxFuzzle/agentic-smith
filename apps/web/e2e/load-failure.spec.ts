@@ -4,7 +4,7 @@ import { captureScreenshot, completeOnboarding, signup } from "./helpers";
 test("a failed integrations load offers Retry instead of an empty catalog", async ({
   page,
 }, testInfo) => {
-  await signup(page, `catalog-load-${Date.now()}@rakazo.test`, "password12", "Catalog Load");
+  await signup(page, `catalog-load-${Date.now()}@agentic-smith.test`, "password12", "Catalog Load");
   await completeOnboarding(page);
 
   // A 502 is what the proxy answers while the API restarts.
@@ -57,7 +57,7 @@ for (const result of ["empty", "plugin", "unavailable"] as const) {
   }, testInfo) => {
     await signup(
       page,
-      `catalog-pending-${result}-${Date.now()}@rakazo.test`,
+      `catalog-pending-${result}-${Date.now()}@agentic-smith.test`,
       "password12",
       "Catalog Load",
     );

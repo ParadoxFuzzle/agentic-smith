@@ -1,8 +1,8 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { SERVICE_NAMES } from "@agentic-smith/logging";
+import { createRootLogger } from "@agentic-smith/logging/axiom";
 import { serve } from "@hono/node-server";
-import { SERVICE_NAMES } from "@rakazo/logging";
-import { createRootLogger } from "@rakazo/logging/axiom";
 import { computerResourceLimits } from "./computer-spec.js";
 import { computerEgressSetting, ensureComputerImage, screenNetworkMode } from "./context.js";
 import { computerEgressMode, ensureRestrictedEgressEnforced } from "./egress.js";
@@ -14,7 +14,7 @@ export { supervisorApp };
 async function startSupervisor() {
   const logger = await createRootLogger(SERVICE_NAMES.supervisor);
   // Resolve the ceilings before binding the port. They are otherwise parsed inside
-  // containerCreateOptions, so a malformed RAKAZO_COMPUTER_* value would let the supervisor start
+  // containerCreateOptions, so a malformed AGENTIC_SMITH_COMPUTER_* value would let the supervisor start
   // and pass its healthcheck, then fail the first POST /computers with a 500 that reads like a
   // Docker problem. Failing here names the variable while the deployment is still coming up.
   computerResourceLimits();

@@ -3,9 +3,9 @@ import * as SecureStore from "expo-secure-store";
 import type { WaitTone, WaitUnit } from "./wait-pattern";
 import { nextWaitUnit, WAIT_PATTERNS } from "./wait-pattern";
 
-export const CALL_SOUNDS_KEY = "rakazo.call-sounds";
-export const WAIT_SOUND_KEY = "rakazo.wait-sound";
-export const CALL_GREETING_KEY = "rakazo.call-greeting";
+export const CALL_SOUNDS_KEY = "agentic-smith.call-sounds";
+export const WAIT_SOUND_KEY = "agentic-smith.wait-sound";
+export const CALL_GREETING_KEY = "agentic-smith.call-greeting";
 
 export type CallCue = "start" | "end";
 

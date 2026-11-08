@@ -1,14 +1,7 @@
 import { lookup } from "node:dns/promises";
 import type { LookupFunction } from "node:net";
 import { isDeepStrictEqual } from "node:util";
-import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import {
-  StreamableHTTPClientTransport,
-  StreamableHTTPError,
-} from "@modelcontextprotocol/sdk/client/streamableHttp.js";
-import type { RequestOptions } from "@modelcontextprotocol/sdk/shared/protocol.js";
-import type { Tool } from "@modelcontextprotocol/sdk/types.js";
-import type { ConnectorTool } from "@rakazo/adapter-kit";
+import type { ConnectorTool } from "@agentic-smith/adapter-kit";
 import {
   ipVersion,
   isCloudMetadataAddress,
@@ -20,8 +13,15 @@ import {
   isNonPublicAddress,
   MCP_APP_READ_TIMEOUT_MS,
   normalizeHost,
-} from "@rakazo/contracts";
-import { cancelResponseBody } from "@rakazo/core";
+} from "@agentic-smith/contracts";
+import { cancelResponseBody } from "@agentic-smith/core";
+import { Client } from "@modelcontextprotocol/sdk/client/index.js";
+import {
+  StreamableHTTPClientTransport,
+  StreamableHTTPError,
+} from "@modelcontextprotocol/sdk/client/streamableHttp.js";
+import type { RequestOptions } from "@modelcontextprotocol/sdk/shared/protocol.js";
+import type { Tool } from "@modelcontextprotocol/sdk/types.js";
 import type { Dispatcher } from "undici";
 import { Agent, EnvHttpProxyAgent, Pool } from "undici";
 import { composioToolBatch } from "./composio-batch.js";
@@ -124,7 +124,7 @@ export async function listRemoteMcpTools(options: RemoteMcpOptions): Promise<Con
 
 function newMcpClient(): Client {
   return new Client(
-    { name: "rakazo", version: "0.1.0" },
+    { name: "agentic-smith", version: "0.1.0" },
     { capabilities: MCP_APP_CLIENT_CAPABILITIES },
   );
 }

@@ -1,19 +1,18 @@
-import { Trans, useLingui } from "@lingui/react/macro";
 import type {
   ActionApprovalRule,
   ActionAutoReviewSettings,
   ApprovalMode,
   SettingsScope,
-} from "@rakazo/contracts";
-import type { ApprovalRuleChoice } from "@rakazo/core";
+} from "@agentic-smith/contracts";
+import type { ApprovalRuleChoice } from "@agentic-smith/core";
 import {
   APPROVAL_RULE_EFFECTS,
   approvalRuleApplies,
   approvalRuleChoices,
   approvalRuleEffectChoices,
   approvalRuleLabel,
-} from "@rakazo/core";
-import { writeSaved } from "@rakazo/core/query";
+} from "@agentic-smith/core";
+import { writeSaved } from "@agentic-smith/core/query";
 import {
   Button,
   Command,
@@ -26,7 +25,8 @@ import {
   PopoverTrigger,
   ToggleGroup,
   ToggleGroupItem,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Trash2 } from "lucide-react";
 import { useRef, useState } from "react";

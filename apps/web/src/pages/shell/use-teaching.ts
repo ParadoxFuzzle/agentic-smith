@@ -1,4 +1,4 @@
-import { fetchFresh } from "@rakazo/core/query";
+import { fetchFresh } from "@agentic-smith/core/query";
 import type { RefObject } from "react";
 import { useCallback, useState } from "react";
 import type { spaceQueries } from "../../lib/query";

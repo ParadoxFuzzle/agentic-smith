@@ -1,8 +1,8 @@
-import type { MessageBlock } from "@rakazo/contracts";
-import { truncateReplyQuote } from "@rakazo/contracts";
-import { blocksToAgentHistoryText, messageReaction } from "@rakazo/core";
-import { isPageCardMessage } from "@rakazo/core/message-quote";
-import type { PrismaClient } from "@rakazo/db";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { truncateReplyQuote } from "@agentic-smith/contracts";
+import { blocksToAgentHistoryText, messageReaction } from "@agentic-smith/core";
+import { isPageCardMessage } from "@agentic-smith/core/message-quote";
+import type { PrismaClient } from "@agentic-smith/db";
 
 type QuotedMessage = {
   id: string;

@@ -1,17 +1,17 @@
-import type { SandboxProvider } from "@rakazo/adapter-kit";
+import type { SandboxProvider } from "@agentic-smith/adapter-kit";
 import {
   cancelComputerRunWork,
   returnHelperOutcome,
   screenLeaseIdForRun,
   toComputerRef,
-} from "@rakazo/adapters";
-import type { Actor, MessageBlock } from "@rakazo/contracts";
+} from "@agentic-smith/adapters";
+import type { Actor, MessageBlock } from "@agentic-smith/contracts";
 import {
   ACTIVE_RUN_STATUSES,
   BACKGROUND_HELPER_TRIGGER,
   parseMessagingCommand,
-} from "@rakazo/core";
-import type { Prisma, PrismaClient, ThreadEvents } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { Prisma, PrismaClient, ThreadEvents } from "@agentic-smith/db";
 import {
   appendEventInTransaction,
   clearEndedRunState,
@@ -19,8 +19,8 @@ import {
   expireComputerExecutionLeases,
   THREAD_LOCK_TRANSACTION_OPTIONS,
   transientRunEventsWhere,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type { ThreadTarget } from "./thread-target.js";
 
 /** A bare "stop" or "stop now" with nothing attached: the owner's Stop, sent as text. */

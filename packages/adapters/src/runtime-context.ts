@@ -1,8 +1,8 @@
 import { createHash, randomBytes } from "node:crypto";
+import type { AdapterContext, AgentRunRequest, AgentUsage } from "@agentic-smith/adapter-kit";
+import { DEFAULT_CONTEXT_STRATEGY } from "@agentic-smith/adapter-kit";
+import { getLogger } from "@agentic-smith/logging";
 import type { Api, Context, Message, Model } from "@earendil-works/pi-ai";
-import type { AdapterContext, AgentRunRequest, AgentUsage } from "@rakazo/adapter-kit";
-import { DEFAULT_CONTEXT_STRATEGY } from "@rakazo/adapter-kit";
-import { getLogger } from "@rakazo/logging";
 import { imagePartCount, normalizedImageLimit, pruneForRebuild } from "./context-pruning.js";
 import type { CacheRequest, ContextBudget } from "./context-selection.js";
 import {
@@ -91,14 +91,15 @@ interface SentTranscript {
   messages: Message[];
   projection: ProjectionEntry[];
   truncatedToolResults: number;
+  compressedMessages: number;
   /** Size of the transcript at the last rebuild, and calls appended to it since. */
   rebuiltTokens: number;
   appends: number;
 }
 interface OriginalMetadata {
-  rakazoHistory?: boolean;
-  rakazoMessageId?: string;
-  rakazoCreatedAt?: string;
+  agenticSmithHistory?: boolean;
+  agenticSmithMessageId?: string;
+  agenticSmithCreatedAt?: string;
 }
 function text(message: Message): string {
   if (typeof message.content === "string") return message.content;
@@ -107,6 +108,14 @@ function text(message: Message): string {
     .map((block) => block.text)
     .join("\n");
 }
+const AUTHORITATIVE_USER_RE =
+  /\b(?:do not|don't|never|must not|not allowed|requires?|approval|approved|authorize|authorized|permission|policy|constraint)\b/i;
+
+/** Never squeeze an older user turn that carries an explicit approval or constraint. */
+function isAuthoritativeUserMessage(message: Message): boolean {
+  return message.role === "user" && AUTHORITATIVE_USER_RE.test(text(message));
+}
+
 function snapshot(content: string, maxLength = 400): string {
   if (content.length <= maxLength) return content;
   return `${content.slice(0, Math.floor(maxLength * 0.7))}\n[… snapshot shortened; read original …]\n${content.slice(-Math.floor(maxLength * 0.3))}`;
@@ -117,6 +126,7 @@ export interface RuntimeContextDecision {
   estimatedInputTokens: number;
   droppedMessages: number;
   truncatedToolResults: number;
+  compressedMessages: number;
   observedReuse: boolean | null;
 }
 /** Applies one shared free context policy immediately before every model call.
@@ -201,8 +211,8 @@ export function createRuntimeContextPolicy(
   );
   function original(message: Message) {
     const metadata = message as Message & OriginalMetadata;
-    if (metadata.rakazoMessageId) return historyById.get(metadata.rakazoMessageId);
-    if (metadataPresent && !metadata.rakazoHistory) return undefined;
+    if (metadata.agenticSmithMessageId) return historyById.get(metadata.agenticSmithMessageId);
+    if (metadataPresent && !metadata.agenticSmithHistory) return undefined;
     const content = text(message);
     // Older persisted checkpoints replay own replies as user text "Assistant: ...".
     return request.history.find(
@@ -285,7 +295,7 @@ export function createRuntimeContextPolicy(
         ? "cache-aware"
         : DEFAULT_CONTEXT_STRATEGY);
     metadataPresent = ctx.messages.some((message) =>
-      Boolean((message as Message & OriginalMetadata).rakazoHistory),
+      Boolean((message as Message & OriginalMetadata).agenticSmithHistory),
     );
     const fullPrefix = providerContextPrefix(ctx.systemPrompt ?? "", ctx.tools ?? [], ctx.messages);
     const cacheRequest: CacheRequest = cache.stamp({
@@ -327,6 +337,7 @@ export function createRuntimeContextPolicy(
           estimatedInputTokens: cacheRequest.prefixTokens,
           droppedMessages: 0,
           truncatedToolResults: 0,
+          compressedMessages: 0,
           observedReuse: null,
         },
       };
@@ -349,7 +360,9 @@ export function createRuntimeContextPolicy(
       .slice(currentIndex + 1)
       .filter((message) => message.role === "user").length;
     let protectedIndexes = messages.flatMap((message, index) =>
-      message.role === "system" || (index >= currentIndex && message.role === "user")
+      message.role === "system" ||
+      (index >= currentIndex && message.role === "user") ||
+      isAuthoritativeUserMessage(message)
         ? [index]
         : [],
     );
@@ -411,7 +424,9 @@ export function createRuntimeContextPolicy(
       ];
       protectedIndexes = messages.flatMap((message, index) =>
         message.role === "system" ||
-        (index >= earlierSystem.length + Math.min(8, historical.length) && message.role === "user")
+        (index >= earlierSystem.length + Math.min(8, historical.length) &&
+          message.role === "user") ||
+        isAuthoritativeUserMessage(message)
           ? [index]
           : [],
       );
@@ -439,9 +454,11 @@ export function createRuntimeContextPolicy(
     }
     const summaries = ctx.messages.filter(
       (message) =>
-        (message as Message & OriginalMetadata).rakazoHistory &&
-        !(message as Message & OriginalMetadata).rakazoMessageId &&
-        (text(message).startsWith("Rakazo-owned compacted context through message sequence ") ||
+        (message as Message & OriginalMetadata).agenticSmithHistory &&
+        !(message as Message & OriginalMetadata).agenticSmithMessageId &&
+        (text(message).startsWith(
+          "Agentic Smith-owned compacted context through message sequence ",
+        ) ||
           text(message).startsWith(
             "Memory recalled from earlier conversations that fell outside the visible history.",
           )),
@@ -570,6 +587,7 @@ export function createRuntimeContextPolicy(
         estimatedInputTokens: selected.estimatedInputTokens,
         droppedMessages: Math.max(0, ctx.messages.length - selected.messages.length),
         truncatedToolResults: Math.max(selected.truncatedToolResults, shortenedStructuredResults),
+        compressedMessages: selected.compressedMessages,
         observedReuse: null,
       },
     };
@@ -585,7 +603,12 @@ export function createRuntimeContextPolicy(
     built: Prepared,
     projection: ProjectionEntry[],
     model: Model<Api>,
-    fields: Partial<Pick<RuntimeContextDecision, "droppedMessages" | "truncatedToolResults">> = {},
+    fields: Partial<
+      Pick<
+        RuntimeContextDecision,
+        "droppedMessages" | "truncatedToolResults" | "compressedMessages"
+      >
+    > = {},
   ): Context {
     const prefix = providerContextPrefix(
       context.systemPrompt ?? "",
@@ -689,6 +712,7 @@ export function createRuntimeContextPolicy(
         return commit({ ...ctx, messages: appended }, built, projection, model, {
           droppedMessages: Math.max(0, ctx.messages.length - appended.length),
           truncatedToolResults: previous.truncatedToolResults,
+          compressedMessages: previous.compressedMessages,
         });
       }
       const messages = previous
@@ -724,6 +748,7 @@ export function createRuntimeContextPolicy(
         messages: [...messages],
         projection,
         truncatedToolResults: built.decision.truncatedToolResults,
+        compressedMessages: built.decision.compressedMessages,
         rebuiltTokens: measure(ctx, messages).tokens,
         appends: 0,
       };

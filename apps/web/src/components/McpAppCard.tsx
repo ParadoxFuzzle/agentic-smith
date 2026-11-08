@@ -1,9 +1,9 @@
+import { useExternalLinkOpener } from "@agentic-smith/chat-ui/web";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { MCP_APP_VIEWER_PATH } from "@agentic-smith/contracts/content-security-policy";
+import { createMcpAppHost, mcpAppCsp, mcpAppDocument } from "@agentic-smith/core";
+import { cn } from "@agentic-smith/ui-web";
 import { useLingui } from "@lingui/react/macro";
-import { useExternalLinkOpener } from "@rakazo/chat-ui/web";
-import type { MessageBlock } from "@rakazo/contracts";
-import { MCP_APP_VIEWER_PATH } from "@rakazo/contracts/content-security-policy";
-import { createMcpAppHost, mcpAppCsp, mcpAppDocument } from "@rakazo/core";
-import { cn } from "@rakazo/ui-web";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ArtifactTarget } from "../lib/artifact-open";
@@ -106,7 +106,7 @@ export function McpAppCard({ block, target }: { block: AppBlock; target: Artifac
       hostContext: contextRef.current,
       csp,
       send: (message) =>
-        frame.current?.contentWindow?.postMessage({ type: "rakazo-app:host", message }, "*"),
+        frame.current?.contentWindow?.postMessage({ type: "agentic-smith-app:host", message }, "*"),
       // One action per click or key, and only while this frame still holds the focus.
       allowAction: () => {
         const gesture = usedGesture.latest;
@@ -128,7 +128,7 @@ export function McpAppCard({ block, target }: { block: AppBlock; target: Artifac
     function receive(event: MessageEvent) {
       if (!host || event.source !== frame.current?.contentWindow) return;
       const data = event.data as { type?: unknown; message?: unknown; gesture?: unknown };
-      if (data?.type !== "rakazo-app:view") return;
+      if (data?.type !== "agentic-smith-app:view") return;
       host.usedGesture.latest = typeof data.gesture === "string" ? data.gesture : null;
       const message = data.message as { method?: unknown };
       if (message?.method === "ui/initialize") setStarted(true);
@@ -177,7 +177,7 @@ export function McpAppCard({ block, target }: { block: AppBlock; target: Artifac
             referrerPolicy="no-referrer"
             onLoad={() =>
               frame.current?.contentWindow?.postMessage(
-                { type: "rakazo-app:load", ...appDocument },
+                { type: "agentic-smith-app:load", ...appDocument },
                 "*",
               )
             }

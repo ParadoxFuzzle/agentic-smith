@@ -1,5 +1,5 @@
-import type { ColorTokens } from "@rakazo/ui-tokens";
-import { typeScale } from "@rakazo/ui-tokens";
+import type { ColorTokens } from "@agentic-smith/ui-tokens";
+import { typeScale } from "@agentic-smith/ui-tokens";
 import type { ReactNode } from "react";
 import { Fragment, memo } from "react";
 import type { TextStyle } from "react-native";

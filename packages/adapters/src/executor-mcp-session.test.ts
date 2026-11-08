@@ -1,6 +1,6 @@
-import type { AgentRunRequest, AgentRuntimeEvent } from "@rakazo/adapter-kit";
-import type { AppendEventInput, Prisma } from "@rakazo/db";
-import { appendEventInTransaction } from "@rakazo/db";
+import type { AgentRunRequest, AgentRuntimeEvent } from "@agentic-smith/adapter-kit";
+import type { AppendEventInput, Prisma } from "@agentic-smith/db";
+import { appendEventInTransaction } from "@agentic-smith/db";
 import { describe, expect, it, vi } from "vitest";
 import type * as ComputerLifecycleModule from "./computer-lifecycle.js";
 import { createRunExecutor } from "./executor.js";

@@ -1,4 +1,4 @@
-import type { UserDeviceHub, UserDeviceRevokeReason, UserDevices } from "@rakazo/adapters";
+import type { UserDeviceHub, UserDeviceRevokeReason, UserDevices } from "@agentic-smith/adapters";
 import {
   createUserDeviceToken,
   hashUserDeviceToken,
@@ -8,17 +8,17 @@ import {
   userDeviceDisconnectBody,
   userDeviceForwardBody,
   validUserDeviceForwardSecret,
-} from "@rakazo/adapters";
-import type { UserDeviceList, UserDevicePairResponse } from "@rakazo/contracts";
+} from "@agentic-smith/adapters";
+import type { UserDeviceList, UserDevicePairResponse } from "@agentic-smith/contracts";
 import {
   USER_DEVICE_CONNECT_PATH,
   USER_DEVICE_PAIR_PATH,
   USER_DEVICE_PATH,
   USER_DEVICE_SESSION_PATH,
   userDevicePairRequest,
-} from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
-import { recordSecurityEvent, runAsSystem } from "@rakazo/db";
+} from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
+import { recordSecurityEvent, runAsSystem } from "@agentic-smith/db";
 import type { Hono } from "hono";
 import { lockOwner } from "./availability.js";
 import { readBoundedBody } from "./http-body.js";

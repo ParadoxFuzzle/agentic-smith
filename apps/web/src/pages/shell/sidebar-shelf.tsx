@@ -3,7 +3,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
   SectionHeading,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
 import { ChevronRight } from "lucide-react";
 import type { ReactNode } from "react";
 import { useState } from "react";

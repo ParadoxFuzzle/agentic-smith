@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import type { AgentRunModel, AgentRuntime, SecretStore } from "@rakazo/adapter-kit";
+import type { AgentRunModel, AgentRuntime, SecretStore } from "@agentic-smith/adapter-kit";
 import {
   deploymentModelRole,
   formatCurrentTimeInstruction,
@@ -13,11 +13,11 @@ import {
   secretValuesToRedact,
   serializeModelSecret,
   toOAuthCredential,
-} from "@rakazo/adapters";
-import { redactSecrets } from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
-import { findModelCredential, recordUsage } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapters";
+import { redactSecrets } from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
+import { findModelCredential, recordUsage } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 
 const MAX_RULES_CHARS = 4_000;
 const MAX_MESSAGES = 20;

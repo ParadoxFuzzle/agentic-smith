@@ -1,4 +1,4 @@
-import type { ModelApiProtocol, ModelHeaderRow, ThinkingLevel } from "@rakazo/contracts";
+import type { ModelApiProtocol, ModelHeaderRow, ThinkingLevel } from "@agentic-smith/contracts";
 import {
   compatibleEndpointPresets,
   connectionDisplayName,
@@ -11,7 +11,7 @@ import {
   modelRoutingForm,
   OPENAI_COMPATIBLE_PROVIDER_ID,
   savedCompatibleEndpointMatches,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   clampCatalogThinkingLevel,
   compatibleConnectionReady,
@@ -24,7 +24,7 @@ import {
   initialModelProbeState,
   modelConnectRequest,
   savedCompatibleModelIds,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import { useFocusEffect, useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
@@ -795,7 +795,7 @@ export default function ModelConnection() {
         {selected.auth === "oauth" && !subscriptionSignIn ? (
           <Text style={styles.secondary}>
             {t(
-              "This subscription sign-in is not available in Rakazo yet. Use a deployment credential or choose another provider.",
+              "This subscription sign-in is not available in Agentic Smith yet. Use a deployment credential or choose another provider.",
             )}
           </Text>
         ) : null}

@@ -1,7 +1,7 @@
+import type { Bot, ComputerMode } from "@agentic-smith/contracts";
+import { AGENT_IMPORT_PROMPT } from "@agentic-smith/core";
+import { Button, CopyTextFallback, Textarea, useCopyText } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { Bot, ComputerMode } from "@rakazo/contracts";
-import { AGENT_IMPORT_PROMPT } from "@rakazo/core";
-import { Button, CopyTextFallback, Textarea, useCopyText } from "@rakazo/ui-web";
 import { ArrowLeft, X } from "lucide-react";
 import { useId, useRef, useState } from "react";
 import { rpc } from "../../lib/rpc";

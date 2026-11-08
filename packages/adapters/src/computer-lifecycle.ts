@@ -5,7 +5,7 @@ import type {
   ComputerRef,
   JobPublisher,
   SandboxProvider,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import {
   computerControlExpireJobKey,
   SandboxAllowanceUsedError,
@@ -13,8 +13,8 @@ import {
   SandboxSizeUnavailableError,
   SandboxUnavailableError,
   SandboxUnresponsiveError,
-} from "@rakazo/adapter-kit";
-import type { ComputerSize, ComputerUpdate } from "@rakazo/contracts";
+} from "@agentic-smith/adapter-kit";
+import type { ComputerSize, ComputerUpdate } from "@agentic-smith/contracts";
 import {
   ACTIVE_RUN_STATUSES,
   abortableDelay,
@@ -22,8 +22,8 @@ import {
   isRetryableError,
   parseScreenLeaseId,
   screenLeaseId,
-} from "@rakazo/core";
-import type { Prisma, PrismaClient, ThreadEvents } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { Prisma, PrismaClient, ThreadEvents } from "@agentic-smith/db";
 import {
   expireComputerExecutionLeases,
   isUniqueViolation,
@@ -32,8 +32,8 @@ import {
   recordComputerRunEnd,
   recordComputerRunStart,
   spaceTakesWork,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import {
   clearInactiveUserComputerControl,
   expireComputerControl,

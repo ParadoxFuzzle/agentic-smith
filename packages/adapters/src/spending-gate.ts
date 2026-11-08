@@ -1,7 +1,7 @@
-import type { PurchaseStatus } from "@rakazo/adapter-kit";
-import { formatMinorAmount, parsePageAmount } from "@rakazo/core";
-import type { PaymentInput, PaymentRefusal, PrismaClient } from "@rakazo/db";
-import { checkPayment, recordPayment, releasePayment } from "@rakazo/db";
+import type { PurchaseStatus } from "@agentic-smith/adapter-kit";
+import { formatMinorAmount, parsePageAmount } from "@agentic-smith/core";
+import type { PaymentInput, PaymentRefusal, PrismaClient } from "@agentic-smith/db";
+import { checkPayment, recordPayment, releasePayment } from "@agentic-smith/db";
 import type { PurchaseApproval } from "./purchase-gate.js";
 
 const PERIOD_TEXT = { day: "a day", week: "a week", month: "a month", none: "in total" } as const;

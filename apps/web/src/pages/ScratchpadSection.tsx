@@ -1,7 +1,7 @@
+import type { ScratchpadItem } from "@agentic-smith/contracts";
+import { fetchFresh, writeSaved } from "@agentic-smith/core/query";
+import { Button, Checkbox, Input, SectionHeading } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { ScratchpadItem } from "@rakazo/contracts";
-import { fetchFresh, writeSaved } from "@rakazo/core/query";
-import { Button, Checkbox, Input, SectionHeading } from "@rakazo/ui-web";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Plus, X } from "lucide-react";
 import { useState } from "react";

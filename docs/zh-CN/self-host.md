@@ -1,9 +1,9 @@
-# 自托管 Rakazo
+# 自托管 Agentic Smith
 
 [English](../self-host.md) | 简体中文
 
 在自己掌控的机器上运行 API、后台任务、网页应用、数据库和机器人计算机。
-Rakazo 需要持续运行的后端服务，不是静态网站；`apps/www` 中的官网可以单独托管。
+Agentic Smith 需要持续运行的后端服务，不是静态网站；`apps/www` 中的官网可以单独托管。
 
 ## 准备条件
 
@@ -16,8 +16,8 @@ Rakazo 需要持续运行的后端服务，不是静态网站；`apps/www` 中�
 在空目录中运行：
 
 ```bash
-mkdir -p rakazo && cd rakazo &&
-curl -fsSLO https://raw.githubusercontent.com/elie222/rakazo/main/infra/compose/install-images.sh &&
+mkdir -p agentic-smith && cd agentic-smith &&
+curl -fsSLO https://raw.githubusercontent.com/ParadoxFuzzle/agentic-smith/main/infra/compose/install-images.sh &&
 bash install-images.sh
 ```
 
@@ -32,7 +32,7 @@ bash install-images.sh --prepare-only
 bash install-images.sh
 ```
 
-当 `RAKAZO_IMAGE_TAG` 为 `v0.8.0` 这样的发布版本时，安装脚本会从该版本而不是 `main` 下载 Compose 文件。
+当 `AGENTIC_SMITH_IMAGE_TAG` 为 `v0.8.0` 这样的发布版本时，安装脚本会从该版本而不是 `main` 下载 Compose 文件。
 
 `SANDBOX_PROVIDER` 默认为 `docker`，无需远程计算机服务账号即可使用本地 Docker 计算机。
 镜像版 Compose 会在内部网络运行沙箱监督服务，并拉取计算机镜像。
@@ -56,7 +56,7 @@ app.example.com {
 ```
 
 在 `.env` 中将 `BETTER_AUTH_URL`、`WEB_ORIGIN` 和 `API_URL` 都设为同一个 HTTPS 来源地址，
-并将 `RAKAZO_HOST` 设为其主机名，例如 `app.example.com`。Cookie 和跨域检查使用这些地址。
+并将 `AGENTIC_SMITH_HOST` 设为其主机名，例如 `app.example.com`。Cookie 和跨域检查使用这些地址。
 网页服务会将 `/api` 和 `/rpc` 代理到后端，不要将 `3100` 端口暴露到公网。
 如需 Compose 内置 Caddy 或完整的主机加固流程，使用[生产部署指南（英文）](../self-host-production.md#public-single-vm-deployment)。
 
@@ -86,10 +86,10 @@ pnpm dev
 ```
 
 打开终端打印的地址，默认是 `http://127.0.0.1:5173`。`pnpm dev` 会先准备数据库并应用迁移。
-开发服务运行时，可用 `pnpm --filter @rakazo/desktop dev` 启动桌面端，并选择“已有实例”。
+开发服务运行时，可用 `pnpm --filter @agentic-smith/desktop dev` 启动桌面端，并选择“已有实例”。
 桌面端的“本机”选项会自行安装镜像版服务，默认使用 `45173` 端口，与开发服务不同。
 
-在 WSL 中开发时，将仓库和 `data` 放在 Linux 文件系统中，例如 `~/rakazo`，并以普通用户运行。
+在 WSL 中开发时，将仓库和 `data` 放在 Linux 文件系统中，例如 `~/agentic-smith`，并以普通用户运行。
 宿主机运行的监督服务会让机器人容器使用该用户的 UID/GID。
 若无法访问 Docker Desktop 容器 IP，在 `.env` 中设置 `SANDBOX_CONTROL_VIA_LOOPBACK=true`；
 Compose 内运行监督服务时不要设置此项。
@@ -118,7 +118,7 @@ Postgres 默认仅在 Compose 内部网络开放。密码宜使用无需 URI 转
 
 ## 报告问题
 
-镜像版可以生成诊断报告，附到[自托管问题](https://github.com/elie222/rakazo/issues/new?template=self-host.yml)中：
+镜像版可以生成诊断报告，附到[自托管问题](https://github.com/ParadoxFuzzle/agentic-smith/issues/new?template=self-host.yml)中：
 
 ```bash
 docker compose -f docker-compose.images.yml exec api node dist/cli/diagnostics.js
@@ -126,4 +126,4 @@ docker compose -f docker-compose.images.yml exec api node dist/cli/diagnostics.j
 
 源码版改用 `-f infra/compose/docker-compose.yml`，生产部署使用对应的生产文件。
 报告包含版本、功能开关、迁移状态、MCP 健康状态与最近运行情况；不会输出密钥、设置值、姓名、地址、路径或消息内容。
-用户让机器人报告问题时，反馈只保存在本服务器的 `feedback_reports` 表中，不会自动发送给 Rakazo 项目。
+用户让机器人报告问题时，反馈只保存在本服务器的 `feedback_reports` 表中，不会自动发送给 Agentic Smith 项目。

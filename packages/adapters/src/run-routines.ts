@@ -1,26 +1,26 @@
-import type { JobPublisher } from "@rakazo/adapter-kit";
+import type { JobPublisher } from "@agentic-smith/adapter-kit";
 import {
   routineJobKey,
   routineRetryJob,
   routineWakeupJob,
   runContinueJob,
   TransientModelError,
-} from "@rakazo/adapter-kit";
-import { ROUTINE_WATCH_DEFAULT_MINUTES } from "@rakazo/contracts";
+} from "@agentic-smith/adapter-kit";
+import { ROUTINE_WATCH_DEFAULT_MINUTES } from "@agentic-smith/contracts";
 import {
   displayName,
   expandSkillReferencesInPrompt,
   isOneShotRoutineCrons,
   nextRoutineRunDateAcross,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import {
   accountDeactivated,
   isUniqueViolation,
   SpaceDeletionInProgressError,
   spaceTakesWork,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
-import { sanitizedError } from "@rakazo/logging/monitoring";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { sanitizedError } from "@agentic-smith/logging/monitoring";
 import { protectedComputerLifecycleRefusal } from "./desktop-command-guard.js";
 import type { ExecutorDeps } from "./executor-deps.js";
 import { routineRunModelPin } from "./model-selection.js";

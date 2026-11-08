@@ -1,4 +1,4 @@
-import type { AttachmentMimeType, MessageBlock } from "@rakazo/contracts";
+import type { AttachmentMimeType, MessageBlock } from "@agentic-smith/contracts";
 import {
   ATTACHMENT_COUNT_CEILING,
   ATTACHMENT_MAX_BYTES,
@@ -6,7 +6,7 @@ import {
   attachmentSizeLabel,
   isAllowedAttachmentMimeType,
   isAttachmentImageMimeType,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import { isApprovalAskBlock, isSecretAskBlock } from "./action-approval.js";
 
 export class AttachmentValidationError extends Error {

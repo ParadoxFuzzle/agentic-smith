@@ -38,7 +38,7 @@ vi.mock("@lingui/react/macro", () => ({
       parts.reduce((text, part, i) => text + (i ? String(values[i - 1]) : "") + part, ""),
   }),
 }));
-vi.mock("@rakazo/ui-web", async () => {
+vi.mock("@agentic-smith/ui-web", async () => {
   const { createElement } = await import("react");
   const container = ({ children }: { children?: ReactNode }) =>
     createElement("div", null, children);

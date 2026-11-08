@@ -36,7 +36,7 @@ import {
 } from "./session";
 
 /** The Space last used in each organization on this device, by organization id. */
-const ORGANIZATION_SPACES_KEY = "rakazo.org_spaces";
+const ORGANIZATION_SPACES_KEY = "agentic-smith.org_spaces";
 const confirmedSpaceSwitchListeners = new Set<() => void>();
 /** Fires when a selection change to another Space is confirmed durable; a
  * rollback after a failed switch, or selecting the same Space again, does not. */

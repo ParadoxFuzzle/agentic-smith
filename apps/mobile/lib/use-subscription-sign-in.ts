@@ -1,5 +1,5 @@
-import type { ModelOAuthBegin, ThinkingLevel } from "@rakazo/contracts";
-import { clampCatalogThinkingLevel } from "@rakazo/core";
+import type { ModelOAuthBegin, ThinkingLevel } from "@agentic-smith/contracts";
+import { clampCatalogThinkingLevel } from "@agentic-smith/core";
 import * as Clipboard from "expo-clipboard";
 import type { RefObject } from "react";
 import { useCallback, useRef, useState } from "react";

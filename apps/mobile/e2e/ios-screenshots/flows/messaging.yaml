@@ -1,11 +1,11 @@
-appId: com.rakazo.app
+appId: com.agenticsmith.app
 name: Messaging
 ---
 - runFlow:
     file: ../subflows/sign-in.yaml
     env:
-      RAKAZO_ACTIVE_EMAIL: ${RAKAZO_SCREENSHOT_EMAIL}
-- openLink: "rakazo:///messaging"
+      AGENTIC_SMITH_ACTIVE_EMAIL: ${AGENTIC_SMITH_SCREENSHOT_EMAIL}
+- openLink: "agentic-smith:///messaging"
 - extendedWaitUntil:
     visible: ".*#launch.*"
     timeout: 15000

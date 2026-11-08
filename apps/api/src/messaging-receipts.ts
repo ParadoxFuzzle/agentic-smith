@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
-import type { MessagingReceipt, MessagingSurface } from "@rakazo/adapter-kit";
-import { providerOfThreadId } from "@rakazo/adapters";
-import { getLogger } from "@rakazo/logging";
+import type { MessagingReceipt, MessagingSurface } from "@agentic-smith/adapter-kit";
+import { providerOfThreadId } from "@agentic-smith/adapters";
+import { getLogger } from "@agentic-smith/logging";
 
 // A reaction stays on the message, so it only goes on a late one: a fast reply
 // is its own acknowledgement.

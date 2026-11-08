@@ -1,5 +1,5 @@
-import type { BotEmailAddress, BotEmailAddresses } from "@rakazo/contracts";
-import { parseBotEmailName, suggestedEmailName } from "@rakazo/contracts";
+import type { BotEmailAddress, BotEmailAddresses } from "@agentic-smith/contracts";
+import { parseBotEmailName, suggestedEmailName } from "@agentic-smith/contracts";
 import * as Clipboard from "expo-clipboard";
 import { useFocusEffect } from "expo-router";
 import type { ReactElement } from "react";

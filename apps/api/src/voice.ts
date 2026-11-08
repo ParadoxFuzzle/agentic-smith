@@ -1,6 +1,5 @@
-import { ORPCError } from "@orpc/server";
-import type { AdapterContext, SecretStore } from "@rakazo/adapter-kit";
-import { VoiceAccountError } from "@rakazo/adapter-kit";
+import type { AdapterContext, SecretStore } from "@agentic-smith/adapter-kit";
+import { VoiceAccountError } from "@agentic-smith/adapter-kit";
 import {
   createVoiceProvider,
   isSpeechModelId,
@@ -13,17 +12,17 @@ import {
   openAiCompatibleVoiceServer,
   serializeOpenAiCompatibleVoiceSecret,
   voiceCatalogEntry,
-} from "@rakazo/adapters";
+} from "@agentic-smith/adapters";
 import type {
   Actor,
   SettingsScope,
   VoiceAccountErrorCode,
   VoiceCredential,
   VoiceStatus,
-} from "@rakazo/contracts";
-import { SettingsScopeSchema } from "@rakazo/contracts";
-import { speakable, toUtterances } from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/contracts";
+import { SettingsScopeSchema } from "@agentic-smith/contracts";
+import { speakable, toUtterances } from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   deleteUnreferencedCredentialSecret,
   findDefaultVoiceCredential,
@@ -39,9 +38,10 @@ import {
   selectVoicePreference,
   voicePreferenceTarget,
   withTransactionRetry,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
-import { markExpectedFailure } from "@rakazo/logging/hono";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { markExpectedFailure } from "@agentic-smith/logging/hono";
+import { ORPCError } from "@orpc/server";
 import type { Context, Hono } from "hono";
 import { readBoundedBody } from "./http-body.js";
 import type { SpeechSummarizer } from "./speech-summary.js";

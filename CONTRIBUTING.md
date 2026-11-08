@@ -1,6 +1,6 @@
-# Contributing to Rakazo
+# Contributing to Agentic Smith
 
-Thanks for helping improve Rakazo. Keep changes focused and testable.
+Thanks for helping improve Agentic Smith. Keep changes focused and testable.
 
 ## Run locally
 
@@ -13,7 +13,7 @@ The main checkout is the original clone, located through `git worktree list` rat
 a fixed directory or branch name.
 Worktrees attached to a bare repository skip copying because there is no original checkout.
 The source must be a Git-ignored regular file; symbolic links are rejected.
-Settings such as `RAKAZO_DEV_TAILNET=1` are inherited only when you enabled them locally;
+Settings such as `AGENTIC_SMITH_DEV_TAILNET=1` are inherited only when you enabled them locally;
 the setup command does not enable sharing or change any settings. If the main checkout
 has no `.env`, development uses its usual defaults.
 
@@ -63,9 +63,9 @@ entries on that pull request, or in a separate translation-only pull request onc
 
 The web and Electron-hosted UI use Lingui catalogs. To add a locale, register it in
 `apps/web/lingui.config.ts`, `apps/web/src/lib/ui-locale.ts`, and
-`apps/web/src/lib/i18n.ts`, then run `pnpm --filter @rakazo/web intl:extract`, fill the new
+`apps/web/src/lib/i18n.ts`, then run `pnpm --filter @agentic-smith/web intl:extract`, fill the new
 `apps/web/src/locales/<locale>/messages.po` catalog, and validate it with
-`pnpm --filter @rakazo/web intl:compile`. Commit the new catalog in the same pull request,
+`pnpm --filter @agentic-smith/web intl:compile`. Commit the new catalog in the same pull request,
 since the app imports it and the sync workflow only updates catalogs that already exist. Keep message IDs, placeholders, JSX markers, and
 ICU plural branches intact; do not commit generated `*.js`/`*.mjs` catalog files.
 
@@ -121,6 +121,6 @@ capability config, fixtures, logs, or snapshots; use the encrypted secret store 
 
 | Address | Use for |
 | --- | --- |
-| [security@rakazo.com](mailto:security@rakazo.com) | Vulnerabilities only — see [SECURITY.md](SECURITY.md) |
-| [support@rakazo.com](mailto:support@rakazo.com) | User and support questions |
-| [elie@rakazo.com](mailto:elie@rakazo.com) | Maintainer |
+| [security@jerithai.com](mailto:security@jerithai.com) | Vulnerabilities only — see [SECURITY.md](SECURITY.md) |
+| [support@jerithai.com](mailto:support@jerithai.com) | User and support questions |
+| [business@jerithai.com](mailto:business@jerithai.com) | Maintainer |

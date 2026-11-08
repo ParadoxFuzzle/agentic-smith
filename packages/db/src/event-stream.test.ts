@@ -1,4 +1,4 @@
-import type { RealtimeFanout } from "@rakazo/adapter-kit";
+import type { RealtimeFanout } from "@agentic-smith/adapter-kit";
 import { describe, expect, it, vi } from "vitest";
 import { notifyRealtime, observeThreadChanges } from "./event-stream.js";
 

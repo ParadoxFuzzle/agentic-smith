@@ -1,5 +1,5 @@
-import type { computerHoursOut } from "@rakazo/contracts";
-import type { normalizeRunError, RunErrorRecovery, RunErrorTranslator } from "@rakazo/core";
+import type { computerHoursOut } from "@agentic-smith/contracts";
+import type { normalizeRunError, RunErrorRecovery, RunErrorTranslator } from "@agentic-smith/core";
 
 /** The label of the one action that fixes the failure; transient failures have none. */
 export function runErrorActionLabel(

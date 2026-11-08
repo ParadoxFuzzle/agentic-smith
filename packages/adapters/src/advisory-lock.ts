@@ -1,4 +1,4 @@
-import type { Prisma } from "@rakazo/db";
+import type { Prisma } from "@agentic-smith/db";
 
 /**
  * How a lock's namespace and key become a Postgres advisory-lock key: `pair` locks

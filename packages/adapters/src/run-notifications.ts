@@ -1,5 +1,5 @@
-import type { NotificationMessage } from "@rakazo/adapter-kit";
-import type { MessageBlock } from "@rakazo/contracts";
+import type { NotificationMessage } from "@agentic-smith/adapter-kit";
+import type { MessageBlock } from "@agentic-smith/contracts";
 import {
   BACKGROUND_HELPER_TRIGGER,
   displayName,
@@ -8,10 +8,10 @@ import {
   redactSecrets,
   truncatedPlainText,
   truncatePlainText,
-} from "@rakazo/core";
-import type { PrismaClient, ThreadEvents } from "@rakazo/db";
-import { countUnreadInboxChats, membersSnoozing } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/core";
+import type { PrismaClient, ThreadEvents } from "@agentic-smith/db";
+import { countUnreadInboxChats, membersSnoozing } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type { ExecutorDeps } from "./executor-deps.js";
 import { notificationIdentity } from "./notification-identity.js";
 import { messageBlocksText } from "./run-replies.js";

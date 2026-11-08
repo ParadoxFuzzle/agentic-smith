@@ -1,6 +1,6 @@
 import { setImmediate } from "node:timers/promises";
-import type { ProcessEvent } from "@rakazo/adapter-kit";
-import { redactSecrets } from "@rakazo/core";
+import type { ProcessEvent } from "@agentic-smith/adapter-kit";
+import { redactSecrets } from "@agentic-smith/core";
 import { redactShellStreams } from "./agent-environment.js";
 import { automated } from "./automated-messages.js";
 import { shortenPlainText } from "./context-selection.js";

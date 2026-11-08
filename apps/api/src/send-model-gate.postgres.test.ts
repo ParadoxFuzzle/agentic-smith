@@ -1,8 +1,7 @@
 import { randomUUID } from "node:crypto";
-import { RPCHandler } from "@orpc/server/fetch";
-import type { Actor } from "@rakazo/contracts";
-import { MODEL_REQUIRED_SEND_ERROR } from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
+import type { Actor } from "@agentic-smith/contracts";
+import { MODEL_REQUIRED_SEND_ERROR } from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   asSystem,
   createDb,
@@ -10,7 +9,8 @@ import {
   createThreadMessage,
   provisionMessagingIdentity,
   runAsSystem,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
+import { RPCHandler } from "@orpc/server/fetch";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import type { RouterDeps } from "./router.js";
 import { createRouter } from "./router.js";

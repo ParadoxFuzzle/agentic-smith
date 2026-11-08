@@ -1,5 +1,5 @@
-import type { IncomingBotCall, SpaceBot, SpaceNavigation } from "@rakazo/contracts";
-import type { ringingCall } from "@rakazo/core";
+import type { IncomingBotCall, SpaceBot, SpaceNavigation } from "@agentic-smith/contracts";
+import type { ringingCall } from "@agentic-smith/core";
 import {
   abortableDelay,
   callIsRinging,
@@ -7,7 +7,7 @@ import {
   nextIncomingCall,
   respondToIncomingCall,
   retryDelayMs,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import { requireOptionalNativeModule } from "expo-modules-core";
 import * as Notifications from "expo-notifications";
 import { AppState, Platform } from "react-native";
@@ -24,7 +24,7 @@ type Ringing = NonNullable<ReturnType<typeof ringingCall>>;
 export function usesNativeIncomingCallRingtone() {
   return Platform.OS === "ios" && native !== null;
 }
-export type { IncomingBotCall } from "@rakazo/contracts";
+export type { IncomingBotCall } from "@agentic-smith/contracts";
 
 type NativeAction = { action: "answer" | "end"; callId: string; botId: string; expiresAt: string };
 type NativeCalls = {
@@ -40,7 +40,7 @@ type NativeCalls = {
   clearIncomingCalls(): Promise<void>;
   addListener(name: string, callback: () => void): { remove(): void };
 };
-const module = requireOptionalNativeModule<NativeCalls>("RakazoNotifications");
+const module = requireOptionalNativeModule<NativeCalls>("AgenticSmithNotifications");
 const native = module?.incomingState ? module : null;
 const listeners = new Set<() => void>();
 let calls: IncomingBotCall[] = [];

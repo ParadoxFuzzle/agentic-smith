@@ -1,5 +1,5 @@
+import { typeScale } from "@agentic-smith/ui-tokens";
 import { MenuView } from "@expo/ui/community/menu";
-import { typeScale } from "@rakazo/ui-tokens";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { useI18n } from "../lib/i18n";
 import type { MobileBot, MobileGroup } from "../lib/mobile-types";

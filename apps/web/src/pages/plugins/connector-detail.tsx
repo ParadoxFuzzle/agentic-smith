@@ -1,8 +1,8 @@
+import type { ConnectionCatalogItem } from "@agentic-smith/contracts";
+import { CONNECTION_LABEL_MAX_LENGTH } from "@agentic-smith/contracts";
+import { catalogItemAccounts, catalogItemKey, humanizeToolName } from "@agentic-smith/core";
+import { Badge, Button, Disclosure, Input } from "@agentic-smith/ui-web";
 import { Plural, Trans, useLingui } from "@lingui/react/macro";
-import type { ConnectionCatalogItem } from "@rakazo/contracts";
-import { CONNECTION_LABEL_MAX_LENGTH } from "@rakazo/contracts";
-import { catalogItemAccounts, catalogItemKey, humanizeToolName } from "@rakazo/core";
-import { Badge, Button, Disclosure, Input } from "@rakazo/ui-web";
 import { ChevronLeft, Plus } from "lucide-react";
 import type { PluginConnections } from "./use-plugin-connections";
 

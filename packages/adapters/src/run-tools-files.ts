@@ -1,12 +1,12 @@
-import type { MessageBlock } from "@rakazo/contracts";
-import { ATTACHMENT_MAX_BYTES } from "@rakazo/contracts";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { ATTACHMENT_MAX_BYTES } from "@agentic-smith/contracts";
 import {
   inferAttachmentMimeType,
   isBackgroundRunTrigger,
   messageBlockForArtifact,
-} from "@rakazo/core";
-import type { Artifact, Prisma } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/core";
+import type { Artifact, Prisma } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { resolveBotWorkspacePath } from "./computer-support.js";
 import { desktopGuardApplies, desktopProtectionGuardMessage } from "./desktop-command-guard.js";
 import { protectedActivateScriptWriteRefusal } from "./desktop-guard-words.js";

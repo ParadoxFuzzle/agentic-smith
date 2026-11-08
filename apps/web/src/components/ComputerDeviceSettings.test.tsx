@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import type { RakazoDesktop } from "@rakazo/contracts";
+import type { AgenticSmithDesktop } from "@agentic-smith/contracts";
 import type { ComponentProps, ReactNode } from "react";
 import { act } from "react";
 import { createRoot } from "react-dom/client";
@@ -15,7 +15,7 @@ vi.mock("@lingui/react/macro", () => ({
   }),
   Trans: ({ children }: { children: ReactNode }) => children,
 }));
-vi.mock("@rakazo/ui-web", () => ({
+vi.mock("@agentic-smith/ui-web", () => ({
   Button: ({
     variant: _variant,
     size: _size,
@@ -55,14 +55,14 @@ beforeEach(() => {
 afterEach(async () => {
   await act(async () => root.unmount());
   host.remove();
-  delete window.rakazoDesktop;
+  delete window.agenticSmithDesktop;
 });
 
 const laptop = { deviceId: "d1", name: "Laptop", connected: true };
 const desk = { deviceId: "d2", name: "Desk PC", connected: false };
 
-function desktopWith(device: NonNullable<RakazoDesktop["device"]>) {
-  window.rakazoDesktop = { platform: "darwin", device } as RakazoDesktop;
+function desktopWith(device: NonNullable<AgenticSmithDesktop["device"]>) {
+  window.agenticSmithDesktop = { platform: "darwin", device } as AgenticSmithDesktop;
 }
 
 it("stays hidden without any computer", async () => {
@@ -158,11 +158,11 @@ it("turns this computer on and off for the app-managed local server", async () =
     }),
     onConfigure: () => () => undefined,
   };
-  window.rakazoDesktop = {
+  window.agenticSmithDesktop = {
     platform: "darwin",
     computer,
     device: { state: async () => null, setAllowed: vi.fn() },
-  } as unknown as RakazoDesktop;
+  } as unknown as AgenticSmithDesktop;
   await act(async () => root.render(<ComputerDeviceSettings />));
   const toggle = host.querySelector<HTMLInputElement>('[data-testid="this-computer-toggle"]')!;
   expect(toggle.checked).toBe(false);
@@ -182,11 +182,11 @@ it("stays hidden on a server that does not run bots on this computer", async () 
     canChooseHostComputer: false,
     computerHost: null,
   } as Awaited<ReturnType<typeof rpc.me>>);
-  window.rakazoDesktop = {
+  window.agenticSmithDesktop = {
     platform: "darwin",
     computer: { managesHostChoice: true },
     device: { state: async () => null },
-  } as unknown as RakazoDesktop;
+  } as unknown as AgenticSmithDesktop;
   await act(async () => root.render(<ComputerDeviceSettings />));
   expect(host.innerHTML).toBe("");
 });
@@ -206,11 +206,11 @@ it("keeps the local switch when a later profile read fails", async () => {
     }),
     onConfigure: () => () => undefined,
   };
-  window.rakazoDesktop = {
+  window.agenticSmithDesktop = {
     platform: "darwin",
     computer,
     device: { state: async () => null, setAllowed: vi.fn() },
-  } as unknown as RakazoDesktop;
+  } as unknown as AgenticSmithDesktop;
   await act(async () => root.render(<ComputerDeviceSettings />));
   await act(async () =>
     host.querySelector<HTMLInputElement>('[data-testid="this-computer-toggle"]')!.click(),

@@ -1,4 +1,4 @@
-import { createDb } from "@rakazo/db";
+import { createDb } from "@agentic-smith/db";
 
 /** Keep the shared fixture healthy outside this section, including failed captures. */
 export async function captureIosProviderLimitError(

@@ -1,4 +1,4 @@
-import type { SpendingStatus } from "@rakazo/contracts";
+import type { SpendingStatus } from "@agentic-smith/contracts";
 import { router, useFocusEffect } from "expo-router";
 import { useCallback, useState } from "react";
 import { rpc } from "../lib/api";

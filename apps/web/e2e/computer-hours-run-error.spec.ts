@@ -1,6 +1,6 @@
+import type { BillingStatus } from "@agentic-smith/contracts";
 import type { Route } from "@playwright/test";
 import { expect, test } from "@playwright/test";
-import type { BillingStatus } from "@rakazo/contracts";
 import { captureScreenshot, completeOnboarding, signup } from "./helpers";
 
 function billingStatus(overrides: Partial<BillingStatus>): BillingStatus {
@@ -52,7 +52,7 @@ for (const plan of plans) {
   }, testInfo) => {
     await signup(
       page,
-      `computer-hours-${plan.name}-${Date.now()}@rakazo.test`,
+      `computer-hours-${plan.name}-${Date.now()}@agentic-smith.test`,
       "password12",
       "Hours Out",
     );

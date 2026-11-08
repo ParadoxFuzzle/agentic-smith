@@ -1,6 +1,5 @@
-import { ORPCError } from "@orpc/server";
-import type { Actor, SpaceNavigation } from "@rakazo/contracts";
-import type { createGroupRepos, createRepos, PrismaClient } from "@rakazo/db";
+import type { Actor, SpaceNavigation } from "@agentic-smith/contracts";
+import type { createGroupRepos, createRepos, PrismaClient } from "@agentic-smith/db";
 import {
   acceptSpaceInvite,
   CannotDeleteDefaultSpaceError,
@@ -36,7 +35,8 @@ import {
   SpaceOwnerCannotLeaveError,
   setSpaceSettingOverride,
   spaceSettingOverrides,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
+import { ORPCError } from "@orpc/server";
 import { otherSpaceOfBot } from "../bot-space.js";
 import type { RouterDeps } from "../router.js";
 import { listRoutinesDto } from "../routines.js";

@@ -1,5 +1,5 @@
+import type { McpSourcePreset } from "@agentic-smith/contracts";
 import { MenuView } from "@expo/ui/community/menu";
-import type { McpSourcePreset } from "@rakazo/contracts";
 import { Text, TextInput, View } from "react-native";
 import { useI18n } from "../lib/i18n";
 import { native, useResolvedAppearance, useThemedStyles } from "../lib/native";

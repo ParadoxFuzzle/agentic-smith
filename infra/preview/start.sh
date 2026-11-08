@@ -14,7 +14,7 @@ PORT=${PORT:-8080}
 HOST=${PREVIEW_HOST:-${FLY_APP_NAME:?Set PREVIEW_HOST or FLY_APP_NAME}.fly.dev}
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 OWNER_EMAIL=preview@example.com
-OWNER_PASSWORD=rakazo-preview-demo
+OWNER_PASSWORD=agentic-smith-preview-demo
 PGDATA="$DATA/postgres"
 IMAGE_ID=$(cat "$ROOT/infra/preview/image-id" 2> /dev/null || true)
 INITIALIZED_IMAGE="$PGDATA/.preview-image"
@@ -43,7 +43,7 @@ init_database() {
   pwfile=$(mktemp)
   printf '%s\n' "$PG_OWNER_PASSWORD" > "$pwfile"
   chown postgres "$pwfile"
-  as_postgres "$PG_BIN/initdb" -D "$PGDATA" -U rakazo --auth=scram-sha-256 --pwfile="$pwfile" \
+  as_postgres "$PG_BIN/initdb" -D "$PGDATA" -U agentic_smith --auth=scram-sha-256 --pwfile="$pwfile" \
     > /dev/null
   rm -f "$pwfile"
 }
@@ -51,10 +51,10 @@ init_database() {
 start_database() {
   as_postgres "$PG_BIN/pg_ctl" -D "$PGDATA" -l "$PGDATA/server.log" -w -s \
     -o "-c listen_addresses=127.0.0.1 -c port=5432 -c unix_socket_directories=''" start
-  if ! PGPASSWORD=$PG_OWNER_PASSWORD "$PG_BIN/psql" -qtA -h 127.0.0.1 -U rakazo -d postgres \
-    -c "SELECT 1 FROM pg_database WHERE datname = 'rakazo'" | grep -q 1; then
+  if ! PGPASSWORD=$PG_OWNER_PASSWORD "$PG_BIN/psql" -qtA -h 127.0.0.1 -U agentic_smith -d postgres \
+    -c "SELECT 1 FROM pg_database WHERE datname = 'agentic-smith'" | grep -q 1; then
     rm -f "$INITIALIZED_IMAGE"
-    PGPASSWORD=$PG_OWNER_PASSWORD "$PG_BIN/createdb" -h 127.0.0.1 -U rakazo rakazo
+    PGPASSWORD=$PG_OWNER_PASSWORD "$PG_BIN/createdb" -h 127.0.0.1 -U agentic_smith agentic_smith
   fi
 }
 
@@ -63,25 +63,25 @@ stop_database() {
 }
 
 export NODE_ENV=production
-export DATABASE_URL="postgres://rakazo_app:${PG_APP_PASSWORD}@127.0.0.1:5432/rakazo"
+export DATABASE_URL="postgres://agentic_smith_app:${PG_APP_PASSWORD}@127.0.0.1:5432/agentic_smith"
 export DATA_DIR="$DATA/app"
-export WEB_ORIGIN="https://$HOST" BETTER_AUTH_URL="https://$HOST" RAKAZO_HOST="$HOST"
+export WEB_ORIGIN="https://$HOST" BETTER_AUTH_URL="https://$HOST" AGENTIC_SMITH_HOST="$HOST"
 export API_HOST=127.0.0.1 API_PORT=3100 API_URL=http://127.0.0.1:3100
 export API_PROXY_TARGET=http://127.0.0.1:3100 WEB_PORT="$PORT"
 export TRUSTED_PROXIES=127.0.0.1 CLIENT_IP_HEADER=fly-client-ip
 export WAKEUP_DRIVER=graphile AGENT_RUNTIME=scripted SANDBOX_PROVIDER=fake
 export CLOUD_AGENT_PROVIDER=emulator PAYMENT_WALLET_PROVIDER=emulator
-export RAKAZO_LIVE_MODEL_CATALOG=off SIGNUPS_ENABLED=false CONTENT_ENCRYPTION=on
+export AGENTIC_SMITH_LIVE_MODEL_CATALOG=off SIGNUPS_ENABLED=false CONTENT_ENCRYPTION=on
 
 migrate() {
-  DATABASE_MIGRATION_URL="postgres://rakazo:${PG_OWNER_PASSWORD}@127.0.0.1:5432/rakazo" \
+  DATABASE_MIGRATION_URL="postgres://agentic_smith:${PG_OWNER_PASSWORD}@127.0.0.1:5432/agentic_smith" \
     gosu node bash -c 'cd "$1/apps/api" && node --enable-source-maps dist/cli/migrate-database.js' \
     _ "$ROOT"
 }
 
 demo_account_exists() {
   PGPASSWORD=$PG_OWNER_PASSWORD "$PG_BIN/psql" -qtA -v ON_ERROR_STOP=1 \
-    -v owner_email="$OWNER_EMAIL" -h 127.0.0.1 -U rakazo -d rakazo <<'SQL' | grep -qx t
+    -v owner_email="$OWNER_EMAIL" -h 127.0.0.1 -U agentic_smith -d agentic_smith <<'SQL' | grep -qx t
 SELECT EXISTS (SELECT 1 FROM "user" WHERE email = :'owner_email' AND "emailVerified");
 SQL
 }

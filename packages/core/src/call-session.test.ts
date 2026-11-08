@@ -1,4 +1,4 @@
-import type { MessageBlock } from "@rakazo/contracts";
+import type { MessageBlock } from "@agentic-smith/contracts";
 import { describe, expect, it, vi } from "vitest";
 import type { CallThread } from "./call-session.js";
 import { callTurn, createCallSendTracker, pendingCallSecretAsk } from "./call-session.js";

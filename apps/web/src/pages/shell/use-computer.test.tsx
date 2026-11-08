@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
-import { COMPUTER_ALLOWANCE_USED_ERROR } from "@rakazo/contracts";
-import { SCREEN_RECONNECT_STABLE_MS } from "@rakazo/core";
+import { COMPUTER_ALLOWANCE_USED_ERROR } from "@agentic-smith/contracts";
+import { SCREEN_RECONNECT_STABLE_MS } from "@agentic-smith/core";
 import type { ComponentProps, ReactNode } from "react";
 import { act } from "react";
 import type { Root } from "react-dom/client";
@@ -15,7 +15,7 @@ vi.mock("@lingui/react/macro", () => ({
     t: (parts: TemplateStringsArray, ...values: unknown[]) => String.raw(parts, ...values),
   }),
 }));
-vi.mock("@rakazo/ui-web", () => ({
+vi.mock("@agentic-smith/ui-web", () => ({
   Button: (props: ComponentProps<"button">) => <button type="button" {...props} />,
   Spinner: () => null,
 }));
@@ -63,11 +63,11 @@ async function read() {
   });
 }
 
-async function report(rakazoScreen: string) {
+async function report(agenticSmithScreen: string) {
   const frame = container.querySelector("iframe");
   await act(async () => {
     window.dispatchEvent(
-      new MessageEvent("message", { data: { rakazoScreen }, source: frame?.contentWindow }),
+      new MessageEvent("message", { data: { agenticSmithScreen }, source: frame?.contentWindow }),
     );
   });
 }
@@ -370,10 +370,10 @@ it("keeps a newer read's answer when the hung reconnect read runs out of time", 
 const proxied = (policy: "view" | "control", token: string) =>
   `/novnc/session/${policy}/9999999999999.${token}/embed.html`;
 
-async function reportFrom(frame: HTMLIFrameElement, rakazoScreen: string) {
+async function reportFrom(frame: HTMLIFrameElement, agenticSmithScreen: string) {
   await act(async () => {
     window.dispatchEvent(
-      new MessageEvent("message", { data: { rakazoScreen }, source: frame.contentWindow }),
+      new MessageEvent("message", { data: { agenticSmithScreen }, source: frame.contentWindow }),
     );
   });
 }

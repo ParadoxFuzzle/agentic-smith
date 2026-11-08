@@ -1,8 +1,8 @@
+import type { Routine, RoutineWatch, RoutineWatchInput } from "@agentic-smith/contracts";
+import { ROUTINE_WATCH_DEFAULT_MINUTES } from "@agentic-smith/contracts";
+import type { RoutineDraft } from "@agentic-smith/core";
+import { draftFromRoutine, emptyRoutineDraft, isOneShotRoutineCrons } from "@agentic-smith/core";
 import { t } from "@lingui/core/macro";
-import type { Routine, RoutineWatch, RoutineWatchInput } from "@rakazo/contracts";
-import { ROUTINE_WATCH_DEFAULT_MINUTES } from "@rakazo/contracts";
-import type { RoutineDraft } from "@rakazo/core";
-import { draftFromRoutine, emptyRoutineDraft, isOneShotRoutineCrons } from "@rakazo/core";
 import { modelOptionKey } from "./model-catalog";
 
 function toDatetimeLocalValue(date: Date): string {

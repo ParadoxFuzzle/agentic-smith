@@ -1,5 +1,4 @@
-import { useLingui } from "@lingui/react/macro";
-import type { ThinkingLevel } from "@rakazo/contracts";
+import type { ThinkingLevel } from "@agentic-smith/contracts";
 import {
   compatibleEndpointPresets,
   MAX_MODEL_CONTEXT_WINDOW,
@@ -12,14 +11,15 @@ import {
   parseModelContextWindow,
   parseModelMaxImagesPerPrompt,
   parseModelMaxTokens,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   clampCatalogThinkingLevel,
   compatibleThinkingLevels,
   connectionFormFields,
   pickCatalogModelId,
   popularModelProvidersFirst,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
+import { useLingui } from "@lingui/react/macro";
 import { useMemo, useState } from "react";
 import { useCopyText } from "../../lib/copy-text";
 import { providerDisplayName } from "../../lib/localized-provider-hint";
@@ -29,8 +29,8 @@ import { useModelOAuthSignIn } from "../../lib/use-model-oauth-signin";
 import { errorText } from "../../lib/user-error";
 import { useModelConnectionForm } from "../model-settings/use-model-connection-form";
 
-/** Rakazo credits sit among the providers as the one choice that needs no account of its own. */
-const CREDITS_OPTION = "__rakazo_credits__";
+/** Agentic Smith credits sit among the providers as the one choice that needs no account of its own. */
+const CREDITS_OPTION = "__agentic_smith_credits__";
 /** Select value for a hosted compatible service; the rest of the value is its base URL. */
 const ENDPOINT_PRESET_OPTION = "endpoint-preset:";
 /** A provider whose catalog entry offers both sign-in and a key appears once per way to connect. */
@@ -156,7 +156,7 @@ export function useOnboardingModel({
       return providerDisplayName(id, byId.get(id)?.providerName ?? id, auth);
     };
     const main = [
-      ...(billingEnabled ? [{ value: CREDITS_OPTION, label: t`Rakazo credits` }] : []),
+      ...(billingEnabled ? [{ value: CREDITS_OPTION, label: t`Agentic Smith credits` }] : []),
       ...MAIN_PROVIDER_OPTIONS.filter((option) => byId.has(option.provider)).map((option) => ({
         value: providerOptionValue(option.provider, option.auth),
         label: optionLabel(option.provider, option.auth),

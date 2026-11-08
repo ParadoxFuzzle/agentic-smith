@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
-import type { ArtifactStore, MessagingInboundAttachment } from "@rakazo/adapter-kit";
-import { createAdapterContext } from "@rakazo/adapter-kit";
-import type { Actor } from "@rakazo/contracts";
+import type { ArtifactStore, MessagingInboundAttachment } from "@agentic-smith/adapter-kit";
+import { createAdapterContext } from "@agentic-smith/adapter-kit";
+import type { Actor } from "@agentic-smith/contracts";
 import {
   ARTIFACT_NAME_MAX_LENGTH,
   ATTACHMENT_MAX_BYTES,
@@ -9,7 +9,7 @@ import {
   attachmentSizeLabel,
   isAttachmentAudioMimeType,
   MCP_APP_MIME_TYPE,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   AttachmentValidationError,
   decodeAttachmentBase64,
@@ -17,9 +17,14 @@ import {
   messageBlockForArtifact,
   promptTextForAttachments,
   validateAttachmentMimeType,
-} from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
-import { IsolationError, isRecordNotFound, Prisma, withResolvedArtifactVersion } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
+import {
+  IsolationError,
+  isRecordNotFound,
+  Prisma,
+  withResolvedArtifactVersion,
+} from "@agentic-smith/db";
 
 export async function createOwnedArtifact(
   deps: {

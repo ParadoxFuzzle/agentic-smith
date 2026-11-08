@@ -1,4 +1,4 @@
-import type { PrismaClient } from "@rakazo/db";
+import type { PrismaClient } from "@agentic-smith/db";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createRunExecutor } from "./executor.js";
 import { serializeModelSecret } from "./model-secret.js";

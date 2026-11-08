@@ -1,4 +1,4 @@
-import { CHART_CATALOG, searchChartCatalog } from "@rakazo/core/plot-catalog";
+import { CHART_CATALOG, searchChartCatalog } from "@agentic-smith/core/plot-catalog";
 import { JSDOM } from "jsdom";
 import { describe, expect, it } from "vitest";
 import type { PlotSpec } from "./plot-tool.js";

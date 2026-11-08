@@ -1,5 +1,5 @@
-import type { BotAvatarSet } from "@rakazo/contracts";
-import type { AvatarEyes, BotColorDef, LogoAvatarActivity } from "@rakazo/core";
+import type { BotAvatarSet } from "@agentic-smith/contracts";
+import type { AvatarEyes, BotColorDef, LogoAvatarActivity } from "@agentic-smith/core";
 import {
   ACTIVE_RUN_STATUSES,
   avatarEyeRects,
@@ -18,7 +18,7 @@ import {
   SHIPPED_BOT_AVATAR_SHAPES,
   SHIPPED_BOT_AVATAR_VIEWBOX,
   shippedBotAvatarShapePath,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import type { ComponentProps, CSSProperties } from "react";
 import { memo, useEffect, useId, useMemo, useSyncExternalStore } from "react";
 import { useBotAvatarActivity } from "./bot-avatar-activity.js";
@@ -110,16 +110,16 @@ export const BotAvatar = memo(function BotAvatar({
   if (parsed.isImage && parsed.imageUrl) {
     return (
       <div
-        className={cn("rakazo-bot-avatar relative shrink-0 select-none", className)}
+        className={cn("agentic-smith-bot-avatar relative shrink-0 select-none", className)}
         data-working={isWorking}
         style={{ width: size, height: size }}
       >
-        <div className="rakazo-bot-avatar-picture relative flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-border bg-secondary">
+        <div className="agentic-smith-bot-avatar-picture relative flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-border bg-secondary">
           <img src={parsed.imageUrl} alt="" className="h-full w-full object-cover" />
         </div>
         {isWorking ? (
           <svg
-            className="rakazo-bot-avatar-ring rakazo-bot-avatar-ring-working absolute pointer-events-none"
+            className="agentic-smith-bot-avatar-ring agentic-smith-bot-avatar-ring-working absolute pointer-events-none"
             style={{
               inset: -4,
               width: size + 8,
@@ -144,7 +144,7 @@ export const BotAvatar = memo(function BotAvatar({
     );
   }
 
-  if (parsed.shapeIndex === undefined && avatarSet === "rakazo") {
+  if (parsed.shapeIndex === undefined && avatarSet === "agentic-smith") {
     const Avatar = activity === undefined ? LiveLogoAvatar : LogoAvatar;
     return (
       <Avatar
@@ -172,7 +172,7 @@ export const BotAvatar = memo(function BotAvatar({
   return (
     <div
       className={cn(
-        "rakazo-bot-avatar bot-avatar-container relative inline-flex items-center justify-center shrink-0 select-none",
+        "agentic-smith-bot-avatar bot-avatar-container relative inline-flex items-center justify-center shrink-0 select-none",
         className,
       )}
       style={{
@@ -182,7 +182,7 @@ export const BotAvatar = memo(function BotAvatar({
       data-working={isWorking}
     >
       <svg
-        className="rakazo-bot-avatar-ring absolute pointer-events-none"
+        className="agentic-smith-bot-avatar-ring absolute pointer-events-none"
         style={{
           inset: -4,
           width: size + 8,
@@ -240,7 +240,7 @@ export const BotAvatar = memo(function BotAvatar({
   );
 });
 
-/** Only live Rakazo consumers subscribe to public activity updates. */
+/** Only live Agentic Smith consumers subscribe to public activity updates. */
 function LiveLogoAvatar({
   status,
   ...props
@@ -283,7 +283,7 @@ function OrganicAvatar({
       ref={ref}
       viewBox={ORGANIC_AVATAR_VIEWBOX}
       aria-hidden="true"
-      className={cn("rakazo-organic-avatar overflow-visible select-none", className)}
+      className={cn("agentic-smith-organic-avatar overflow-visible select-none", className)}
       data-working={isWorking}
       data-paused={!visible}
       data-shape-family={seed % 10}
@@ -297,12 +297,12 @@ function OrganicAvatar({
       {(["idle", "working"] as const).map((mode) => (
         <path
           key={mode}
-          className={`rakazo-organic-avatar-body rakazo-organic-avatar-body-${mode}`}
+          className={`agentic-smith-organic-avatar-body agentic-smith-organic-avatar-body-${mode}`}
           d={shapeA}
           fill={color}
           style={
             {
-              "--rakazo-organic-path": `path("${shapeA}")`,
+              "--agentic-smith-organic-path": `path("${shapeA}")`,
               filter:
                 mode === "working"
                   ? `drop-shadow(0 0 ${Math.round(size * 0.16)}px ${color})`
@@ -325,7 +325,7 @@ function OrganicAvatar({
         {(["idle", "working"] as const).map((mode) => (
           <g
             key={mode}
-            className={`rakazo-organic-avatar-eyes rakazo-organic-avatar-eyes-${mode} ${eyeFill(color)}`}
+            className={`agentic-smith-organic-avatar-eyes agentic-smith-organic-avatar-eyes-${mode} ${eyeFill(color)}`}
           >
             <BarEyes eyes={ORGANIC_AVATAR_EYES} />
           </g>
@@ -417,7 +417,7 @@ export function Wordmark({ className }: { className?: string }) {
       </div>
       {/* off-scale: wordmark sized to the 44px logo mark */}
       <span className="font-[Aeonik,ui-sans-serif] text-[28px] tracking-tight text-foreground">
-        Rakazo
+        Agentic Smith
       </span>
     </div>
   );

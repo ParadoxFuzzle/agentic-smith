@@ -8,16 +8,16 @@ import type {
   ComputerRef,
   JobPublisher,
   SandboxProvider,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import {
   SandboxAllowanceUsedError,
   SandboxDamagedError,
   SandboxSizeUnavailableError,
   SandboxUnresponsiveError,
-} from "@rakazo/adapter-kit";
-import type * as Db from "@rakazo/db";
-import type { PrismaClient, ThreadEvents } from "@rakazo/db";
-import { clearThread, planComputerSize } from "@rakazo/db";
+} from "@agentic-smith/adapter-kit";
+import type * as Db from "@agentic-smith/db";
+import type { PrismaClient, ThreadEvents } from "@agentic-smith/db";
+import { clearThread, planComputerSize } from "@agentic-smith/db";
 import { describe, expect, it, vi } from "vitest";
 import {
   acquireComputerExecutionLease,
@@ -38,7 +38,7 @@ import { LocalAgentHomeStore } from "./home.js";
 import { SandboxUnsafeStopError } from "./sandbox-errors.js";
 
 // The plan's size is read from billing, which these Prisma doubles do not model.
-vi.mock("@rakazo/db", async (importOriginal) => ({
+vi.mock("@agentic-smith/db", async (importOriginal) => ({
   ...(await importOriginal<typeof Db>()),
   planComputerSize: vi.fn(async () => "standard"),
 }));
@@ -54,7 +54,7 @@ const context = {
 
 describe("computer provisioning", () => {
   it("provisions a Private Computer with Wuying selected", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-private-provision-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-private-provision-"));
     const ref: ComputerRef = {
       id: "computer-1",
       botId: "bot-1",
@@ -109,7 +109,7 @@ describe("computer provisioning", () => {
   });
 
   it("starts a computer in its owner's time zone and language, or the provider's defaults", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-owner-locale-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-owner-locale-"));
     const ref: ComputerRef = {
       id: "computer-1",
       botId: "bot-1",
@@ -181,7 +181,7 @@ describe("computer provisioning", () => {
   });
 
   it("stops a provider when archive invalidates its boot claim", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-provision-race-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-provision-race-"));
     const stop = vi.fn().mockResolvedValue(undefined);
     const releaseScreen = vi.fn().mockResolvedValue(undefined);
     const updateMany = vi
@@ -387,7 +387,7 @@ describe("computer provisioning", () => {
   });
 
   it("reclaims a stale suspending computer after the wait times out", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-stale-suspend-reclaim-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-stale-suspend-reclaim-"));
     const observed = new Date("2024-01-01T00:00:00.000Z");
     const row = {
       id: "computer-1",
@@ -603,7 +603,7 @@ describe("computer provisioning", () => {
   });
 
   it("does not adopt a concurrent reclaim stamp after claiming", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-claim-stamp-race-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-claim-stamp-race-"));
     const row = {
       id: "computer-1",
       homeKey: "bot-1",
@@ -661,7 +661,7 @@ describe("computer provisioning", () => {
   });
 
   it("advances the claim stamp past the observed updatedAt when the clock does not move", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-claim-stamp-skew-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-claim-stamp-skew-"));
     const observed = new Date("2024-01-01T00:00:00.000Z");
     const row = {
       id: "computer-1",
@@ -743,7 +743,7 @@ describe("computer provisioning", () => {
   });
 
   it("does not reclaim a fresh booting claim without waiting", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-fresh-boot-claim-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-fresh-boot-claim-"));
     const nowMs = Date.parse("2024-06-01T12:00:00.000Z");
     const row = {
       id: "computer-1",
@@ -799,7 +799,7 @@ describe("computer provisioning", () => {
   });
 
   it("does not reclaim a stale booting claim while another run still holds a live worker lease", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-stale-boot-live-run-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-stale-boot-live-run-"));
     const row = {
       id: "computer-1",
       homeKey: "bot-1",
@@ -861,7 +861,7 @@ describe("computer provisioning", () => {
   });
 
   it("activates a boot even if another Team bot takes a lease mid-provision", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-team-lease-mid-boot-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-team-lease-mid-boot-"));
     const row = {
       id: "computer-1",
       homeKey: "bot-1",
@@ -939,7 +939,7 @@ describe("computer provisioning", () => {
   ] as const)(
     "reuses a running Team Computer only when the provider confirms it runs: %s",
     async (status) => {
-      const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-team-reuse-"));
+      const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-team-reuse-"));
       const sandbox = new FakeSandboxProvider();
       const ref = await sandbox.provision({ botId: "team-1", homePath: dataDir }, context);
       const row = {
@@ -1083,7 +1083,7 @@ describe("computer provisioning", () => {
     "handles a failed reconnect $stage (rollbackFails=$rollbackFails, replacement $kind/$providerRef)",
     async ({ stage, rollbackFails, providerRef, kind }) => {
       const sameName = providerRef === "provider-1" && kind === "boat";
-      const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-reconnect-rollback-"));
+      const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-reconnect-rollback-"));
       const failure = new Error(`${stage} failed`);
       const rollbackError = new Error("replacement deletion failed");
       const original = {
@@ -1181,7 +1181,7 @@ describe("computer provisioning", () => {
   );
 
   it("does not stop a pre-existing computer when reconnect setup fails", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-reconnect-unowned-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-reconnect-unowned-"));
     const failure = new Error("prepare failed");
     const original = {
       id: "computer-1",
@@ -1241,7 +1241,7 @@ describe("computer provisioning", () => {
   });
 
   it("marks a new machine under the stored name that automatic recovery creates", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-auto-recover-mark-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-auto-recover-mark-"));
     const resumed = {
       id: "provider-1",
       botId: "bot-1",
@@ -1308,7 +1308,7 @@ describe("computer provisioning", () => {
   });
 
   it("does not restore a new machine under the stored name once the boot claim is lost", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-provision-mark-lost-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-provision-mark-lost-"));
     const sandbox = new FakeSandboxProvider();
     const ref = {
       ...(await sandbox.provision({ botId: "bot-1", homePath: dataDir }, context)),
@@ -1368,7 +1368,9 @@ describe("computer provisioning", () => {
   ])(
     "restores saved files before starting $kind/$providerRef (fresh=$fresh) from $state",
     async ({ state, ...next }) => {
-      const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-provision-reconnect-update-"));
+      const dataDir = await mkdtemp(
+        path.join(tmpdir(), "agentic-smith-provision-reconnect-update-"),
+      );
       const home = new LocalAgentHomeStore(dataDir);
       const sandbox = new FakeSandboxProvider();
       const ref = {
@@ -1510,7 +1512,7 @@ describe("computer provisioning", () => {
     },
     { saved: "no save", homeRevision: "empty", homeRevisionAt: savedAt, expected: undefined },
   ])("tells the provider when the workspace was saved for $saved", async (row) => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-provision-saved-at-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-provision-saved-at-"));
     const home = new LocalAgentHomeStore(dataDir);
     const sandbox = new FakeSandboxProvider();
     const ref = await sandbox.provision({ botId: "bot-1", homePath: dataDir }, context);
@@ -1560,7 +1562,7 @@ describe("computer provisioning", () => {
     { fresh: true, cleanup: "destroy" as const },
     { fresh: false, cleanup: "stop" as const },
   ])("rolls back $cleanup when shared preparation fails", async ({ fresh, cleanup }) => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-prepare-rollback-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-prepare-rollback-"));
     const ref = {
       id: "provider-1",
       botId: "bot-1",
@@ -1620,7 +1622,7 @@ describe("computer provisioning", () => {
   });
 
   it("releases the screen when activation fails on a resumed Team computer", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-team-activation-rollback-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-team-activation-rollback-"));
     const ref = {
       id: "provider-1",
       botId: "team-home",
@@ -1690,7 +1692,7 @@ describe("computer provisioning", () => {
   ])(
     "retains a fresh provider reference when rollback also fails (unsafe stop=$unsafeStop, reconnecting=$reconnecting)",
     async ({ unsafeStop, reconnecting }) => {
-      const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-prepare-rollback-failure-"));
+      const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-prepare-rollback-failure-"));
       const prepareError = unsafeStop
         ? new SandboxUnsafeStopError("provider preparation failed", new Error("stop unconfirmed"))
         : new Error("provider preparation failed");
@@ -1763,7 +1765,7 @@ describe("computer provisioning", () => {
   );
 
   it("reports only the start failure when the provider is also down for the rollback", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-rollback-outage-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-rollback-outage-"));
     const prepareError = new SandboxUnresponsiveError("provider unreachable");
     const updateMany = vi.fn().mockResolvedValue({ count: 1 });
     const prisma = {
@@ -1825,7 +1827,7 @@ describe("computer provisioning", () => {
   it.each([false, true])(
     "preserves a running computer's files on ordinary reconnect (prepare fails=%s)",
     async (prepareFails) => {
-      const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-provision-reconnect-"));
+      const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-provision-reconnect-"));
       const ref = {
         id: "provider-1",
         botId: "bot-1",
@@ -1891,7 +1893,7 @@ describe("computer provisioning", () => {
   );
 
   it("restores the workspace and records the new reference when reconnect replaces the sandbox", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-reconnect-replacement-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-reconnect-replacement-"));
     const ref = {
       id: "provider-2",
       botId: "bot-1",
@@ -2016,7 +2018,7 @@ describe("Team Computer wake", () => {
   }
 
   async function boot(harness: ReturnType<typeof wakeHarness>) {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-team-wake-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-team-wake-"));
     try {
       return await provisionComputer(
         {
@@ -2865,8 +2867,8 @@ describe("computer replacement", () => {
   });
 
   it("replaces a wedged computer and restores the durable home", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-replace-"));
-    const homeRoot = await mkdtemp(path.join(tmpdir(), "rakazo-replace-home-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-replace-"));
+    const homeRoot = await mkdtemp(path.join(tmpdir(), "agentic-smith-replace-home-"));
     const home = new LocalAgentHomeStore(homeRoot);
     const sandbox = new FakeSandboxProvider();
     const first = await sandbox.provision({ botId: "bot-1", homePath: dataDir }, context);
@@ -3856,7 +3858,7 @@ describe("computer replacement", () => {
   });
 
   it("claims a stopped computer before teardown so concurrent replacements serialize", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-replace-stopped-claim-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-replace-stopped-claim-"));
     const updateMany = vi
       .fn()
       .mockResolvedValueOnce({ count: 1 })
@@ -3958,8 +3960,8 @@ describe("computer replacement", () => {
   });
 
   it("continues recover when checkpoint fails with an ordinary provider error", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-recover-checkpoint-"));
-    const homeRoot = await mkdtemp(path.join(tmpdir(), "rakazo-recover-checkpoint-home-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-recover-checkpoint-"));
+    const homeRoot = await mkdtemp(path.join(tmpdir(), "agentic-smith-recover-checkpoint-home-"));
     const home = new LocalAgentHomeStore(homeRoot);
     const sandbox = new FakeSandboxProvider();
     const first = await sandbox.provision({ botId: "bot-1", homePath: dataDir }, context);
@@ -4031,8 +4033,8 @@ describe("computer replacement", () => {
   });
 
   it("aborts update when checkpoint fails with an ordinary provider error", async () => {
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-update-checkpoint-"));
-    const homeRoot = await mkdtemp(path.join(tmpdir(), "rakazo-update-checkpoint-home-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-update-checkpoint-"));
+    const homeRoot = await mkdtemp(path.join(tmpdir(), "agentic-smith-update-checkpoint-home-"));
     const home = new LocalAgentHomeStore(homeRoot);
     const sandbox = new FakeSandboxProvider();
     const first = await sandbox.provision({ botId: "bot-1", homePath: dataDir }, context);

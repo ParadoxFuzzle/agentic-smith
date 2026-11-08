@@ -1,6 +1,3 @@
-import type { Agent, AgentTool, AgentToolResult } from "@earendil-works/pi-agent-core";
-import type { Api, Model, Models } from "@earendil-works/pi-ai";
-import { validateToolArguments } from "@earendil-works/pi-ai";
 import type {
   AdapterContext,
   AgentRunRequest,
@@ -9,10 +6,13 @@ import type {
   AgentToolExecutionResult,
   ConnectorTool,
   ModelCallObserver,
-} from "@rakazo/adapter-kit";
-import { DEFAULT_CONTEXT_STRATEGY } from "@rakazo/adapter-kit";
-import { FLEET_TOOL_NAMES } from "@rakazo/contracts";
-import { batchActions, humanizeToolName, redactSecrets } from "@rakazo/core";
+} from "@agentic-smith/adapter-kit";
+import { DEFAULT_CONTEXT_STRATEGY } from "@agentic-smith/adapter-kit";
+import { FLEET_TOOL_NAMES } from "@agentic-smith/contracts";
+import { batchActions, humanizeToolName, redactSecrets } from "@agentic-smith/core";
+import type { Agent, AgentTool, AgentToolResult } from "@earendil-works/pi-agent-core";
+import type { Api, Model, Models } from "@earendil-works/pi-ai";
+import { validateToolArguments } from "@earendil-works/pi-ai";
 import { MAX_APPROVAL_DETAIL_LENGTH } from "./approval-ask.js";
 import {
   isInternalTermination,

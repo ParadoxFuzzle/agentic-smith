@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { setTimeout as sleep } from "node:timers/promises";
-import type { TransactionalEmail, TransactionalEmailProvider } from "@rakazo/adapter-kit";
-import { cancelResponseBody, readBoundedJsonResponse } from "@rakazo/core";
+import type { TransactionalEmail, TransactionalEmailProvider } from "@agentic-smith/adapter-kit";
+import { cancelResponseBody, readBoundedJsonResponse } from "@agentic-smith/core";
 
 const MAX_RESPONSE_BYTES = 4_096;
 

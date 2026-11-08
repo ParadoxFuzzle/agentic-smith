@@ -15,7 +15,7 @@ const blog = defineCollection({
     author: z.literal("Elie Steinbock"),
     category: z.enum(["comparisons", "guides", "roundups", "product"]),
     tldr: z.string(),
-    sources: z.array(z.object({ label: z.string(), href: z.string().url() })).min(1),
+    sources: z.array(z.object({ label: z.string(), href: z.url() })).min(1),
     related: z
       .array(
         z.object({

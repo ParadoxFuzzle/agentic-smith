@@ -1,5 +1,5 @@
-import type { MessageBlock } from "@rakazo/contracts";
-import { REPLY_QUOTE_MAX_LENGTH } from "@rakazo/contracts";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { REPLY_QUOTE_MAX_LENGTH } from "@agentic-smith/contracts";
 import { describe, expect, it } from "vitest";
 import {
   deriveMessageQuote,

@@ -13,9 +13,9 @@ import type {
   TerminalRequest,
   WorkspaceDirectoryRequest,
   WorkspaceExportLimits,
-} from "@rakazo/adapter-kit";
-import type { PrismaClient } from "@rakazo/db";
-import { runAsSystem } from "@rakazo/db";
+} from "@agentic-smith/adapter-kit";
+import type { PrismaClient } from "@agentic-smith/db";
+import { runAsSystem } from "@agentic-smith/db";
 import { cancelComputerRunWork, probeBackgroundWork, providerKeepsHome } from "./computer-idle.js";
 import {
   computerProviderDescriptor,

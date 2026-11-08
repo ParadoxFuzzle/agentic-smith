@@ -1,4 +1,4 @@
-import type { MessageAuthor } from "@rakazo/contracts";
+import type { MessageAuthor } from "@agentic-smith/contracts";
 import { messageUnreadFor } from "./message-replies.js";
 
 type DividerCandidate = { id: string; role: string; seq?: number; author?: MessageAuthor };

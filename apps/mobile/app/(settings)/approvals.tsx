@@ -1,11 +1,11 @@
-import { MenuView } from "@expo/ui/community/menu";
-import type { ActionApprovalRule } from "@rakazo/contracts";
+import type { ActionApprovalRule } from "@agentic-smith/contracts";
 import {
   APPROVAL_RULE_EFFECTS,
   approvalRuleApplies,
   approvalRuleEffectChoices,
   approvalRuleLabel,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
+import { MenuView } from "@expo/ui/community/menu";
 import { useQuery } from "@tanstack/react-query";
 import { useFocusEffect, useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import { useCallback, useLayoutEffect, useMemo, useState } from "react";

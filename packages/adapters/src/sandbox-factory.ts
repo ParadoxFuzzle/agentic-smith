@@ -1,5 +1,5 @@
-import type { ComputerRef, SandboxProvider } from "@rakazo/adapter-kit";
-import { SandboxKind } from "@rakazo/contracts";
+import type { ComputerRef, SandboxProvider } from "@agentic-smith/adapter-kit";
+import { SandboxKind } from "@agentic-smith/contracts";
 import { CreateOSSandboxProvider } from "./createos-sandbox.js";
 import { assertHostCommandsAllowed, DesktopSandboxProvider } from "./desktop-sandbox.js";
 import { DockerSandboxProvider } from "./docker-sandbox.js";

@@ -1,4 +1,4 @@
-import { displayIdentityResult, displayMessageBlock } from "@rakazo/core";
+import { displayIdentityResult, displayMessageBlock } from "@agentic-smith/core";
 import { beforeEach, expect, it, vi } from "vitest";
 import { resetI18nForTests } from "./i18n";
 import { identityLabels } from "./identity-display";

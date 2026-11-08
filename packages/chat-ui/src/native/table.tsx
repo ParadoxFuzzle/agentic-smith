@@ -1,4 +1,4 @@
-import { typeScale } from "@rakazo/ui-tokens";
+import { typeScale } from "@agentic-smith/ui-tokens";
 import type { ASTNode } from "@ronradtke/react-native-markdown-display";
 import type { ReactNode } from "react";
 import { createContext, useContext, useMemo, useState } from "react";

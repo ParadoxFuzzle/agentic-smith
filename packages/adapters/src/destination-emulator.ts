@@ -4,7 +4,7 @@ import type {
   ConnectorEvent,
   ConnectorProvider,
   ConnectorTool,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 
 export interface DestinationRecord {
   id: string;

@@ -4,9 +4,9 @@ import type {
   AgentRuntime,
   ModelCredentialFailedState,
   ModelCredentialRetireReason,
-} from "@rakazo/adapter-kit";
-import { OPENAI_COMPATIBLE_PROVIDER_ID } from "@rakazo/contracts";
-import { MISSING_MODEL_RUN_ERROR } from "@rakazo/core";
+} from "@agentic-smith/adapter-kit";
+import { OPENAI_COMPATIBLE_PROVIDER_ID } from "@agentic-smith/contracts";
+import { MISSING_MODEL_RUN_ERROR } from "@agentic-smith/core";
 import {
   CLOUDFLARE_AI_GATEWAY_CONFIG_MESSAGE,
   CLOUDFLARE_WORKERS_AI_PROVIDER_ID,

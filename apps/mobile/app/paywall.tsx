@@ -1,12 +1,12 @@
-import { MenuView } from "@expo/ui/community/menu";
-import type { BillingStatus, ByokInterval } from "@rakazo/contracts";
+import type { BillingStatus, ByokInterval } from "@agentic-smith/contracts";
 import {
   AI_PRIVACY_URL,
   DEFAULT_MONTHLY_CREDIT_AMOUNT,
   MODEL_CREDIT_AMOUNTS,
   ModelCreditAmountSchema,
-} from "@rakazo/contracts";
-import { botColors, botEyeColor, typeScale } from "@rakazo/ui-tokens";
+} from "@agentic-smith/contracts";
+import { botColors, botEyeColor, typeScale } from "@agentic-smith/ui-tokens";
+import { MenuView } from "@expo/ui/community/menu";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import type { ComponentProps, ReactNode } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -55,7 +55,7 @@ import { errorText } from "../lib/user-error";
 type Amount = (typeof MODEL_CREDIT_AMOUNTS)[number];
 type SymbolName = ComponentProps<typeof NativeSymbol>["android"];
 
-const TERMS_URL = "https://rakazo.com/terms/";
+const TERMS_URL = "https://jerithai.com/terms/";
 
 // Bots carry the app's only colour, so the paywall's colour is a small crew of them.
 const CREW = [
@@ -277,7 +277,7 @@ export default function Paywall() {
         </View>
         <View style={styles.footer}>
           <NativeActionButton
-            label={started === "byok" ? t("Connect your AI") : t("Start using Rakazo")}
+            label={started === "byok" ? t("Connect your AI") : t("Start using Agentic Smith")}
             onPress={() => {
               router.back();
               if (started === "byok") router.push("/models");

@@ -1,13 +1,13 @@
-import { Trans, useLingui } from "@lingui/react/macro";
 import type {
   ConnectionCatalogItem,
   McpServer,
   McpServerConnection,
   PluginMarketplaceEntry,
-} from "@rakazo/contracts";
-import { mcpServerConnection } from "@rakazo/contracts";
-import { catalogItemKey } from "@rakazo/core";
-import { Button, SectionHeading } from "@rakazo/ui-web";
+} from "@agentic-smith/contracts";
+import { mcpServerConnection } from "@agentic-smith/contracts";
+import { catalogItemKey } from "@agentic-smith/core";
+import { Button, SectionHeading } from "@agentic-smith/ui-web";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Check, ChevronLeft, CircleAlert, TriangleAlert } from "lucide-react";
 import type { ReactElement, ReactNode } from "react";
 import { ROW_BUTTON, ROW_HOVER, ROW_SHELL } from "../../components/integrations/plugin-marketplace";

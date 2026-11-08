@@ -1,6 +1,6 @@
 @import "tw-animate-css";
 @import "./shadcn.css";
-@import "@rakazo/ui-tokens/css";
+@import "@agentic-smith/ui-tokens/css";
 
 @source "./**/*.{ts,tsx}";
 
@@ -138,7 +138,7 @@
   }
 }
 
-@keyframes rakazo-avatar-spin {
+@keyframes agentic-smith-avatar-spin {
   0% {
     transform: rotate(0deg);
   }
@@ -147,26 +147,26 @@
   }
 }
 
-.rakazo-bot-avatar-ring {
-  animation: rakazo-avatar-spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+.agentic-smith-bot-avatar-ring {
+  animation: agentic-smith-avatar-spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   opacity: 0;
   transition: opacity 180ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.rakazo-bot-avatar {
+.agentic-smith-bot-avatar {
   transition: box-shadow 180ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.rakazo-bot-avatar[data-working="true"] .rakazo-bot-avatar-ring {
+.agentic-smith-bot-avatar[data-working="true"] .agentic-smith-bot-avatar-ring {
   opacity: 1;
 }
 
 /* Hidden idle rings would otherwise keep the compositor drawing every frame. */
-.rakazo-bot-avatar[data-working="false"] .rakazo-bot-avatar-ring {
+.agentic-smith-bot-avatar[data-working="false"] .agentic-smith-bot-avatar-ring {
   animation-play-state: paused;
 }
 
-@keyframes rakazo-avatar-breathe {
+@keyframes agentic-smith-avatar-breathe {
   0%,
   100% {
     transform: scale(1);
@@ -178,112 +178,112 @@
   }
 }
 
-.rakazo-bot-avatar-picture {
+.agentic-smith-bot-avatar-picture {
   box-shadow: 0 2px 5px rgb(0 0 0 / 0.5);
 }
 
-.rakazo-bot-avatar-ring-working {
+.agentic-smith-bot-avatar-ring-working {
   filter: drop-shadow(0 0 4px var(--status-working));
 }
 
-.rakazo-bot-avatar[data-working="true"] .rakazo-bot-avatar-picture {
-  animation: rakazo-avatar-breathe 1.6s ease-in-out infinite;
+.agentic-smith-bot-avatar[data-working="true"] .agentic-smith-bot-avatar-picture {
+  animation: agentic-smith-avatar-breathe 1.6s ease-in-out infinite;
   box-shadow:
     0 0 0 2px var(--status-working),
     0 0 10px color-mix(in srgb, var(--status-working) 60%, transparent);
 }
 
-.rakazo-organic-avatar-body {
+.agentic-smith-organic-avatar-body {
   transform-origin: center;
   transition: opacity 180ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.rakazo-organic-avatar-body-working {
+.agentic-smith-organic-avatar-body-working {
   opacity: 0;
 }
 
-.rakazo-organic-avatar[data-working="true"] .rakazo-organic-avatar-body-idle {
+.agentic-smith-organic-avatar[data-working="true"] .agentic-smith-organic-avatar-body-idle {
   opacity: 0;
 }
 
-.rakazo-organic-avatar[data-working="true"] .rakazo-organic-avatar-body-working {
+.agentic-smith-organic-avatar[data-working="true"] .agentic-smith-organic-avatar-body-working {
   opacity: 1;
 }
 
-.rakazo-organic-avatar-eyes {
+.agentic-smith-organic-avatar-eyes {
   transition: opacity 180ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.rakazo-organic-avatar-eyes-working {
+.agentic-smith-organic-avatar-eyes-working {
   opacity: 0;
 }
 
-.rakazo-organic-avatar[data-working="true"] .rakazo-organic-avatar-eyes-idle {
+.agentic-smith-organic-avatar[data-working="true"] .agentic-smith-organic-avatar-eyes-idle {
   opacity: 0;
 }
 
-.rakazo-organic-avatar[data-working="true"] .rakazo-organic-avatar-eyes-working {
+.agentic-smith-organic-avatar[data-working="true"] .agentic-smith-organic-avatar-eyes-working {
   opacity: 1;
 }
 
-.rakazo-organic-avatar[data-eye-pattern="0"] .rakazo-organic-avatar-eyes-working {
-  animation: rakazo-organic-eyes-loop-0 6.6s ease-in-out infinite;
+.agentic-smith-organic-avatar[data-eye-pattern="0"] .agentic-smith-organic-avatar-eyes-working {
+  animation: agentic-smith-organic-eyes-loop-0 6.6s ease-in-out infinite;
 }
 
-.rakazo-organic-avatar[data-eye-pattern="1"] .rakazo-organic-avatar-eyes-working {
-  animation: rakazo-organic-eyes-loop-1 7.2s ease-in-out -1.4s infinite;
+.agentic-smith-organic-avatar[data-eye-pattern="1"] .agentic-smith-organic-avatar-eyes-working {
+  animation: agentic-smith-organic-eyes-loop-1 7.2s ease-in-out -1.4s infinite;
 }
 
-.rakazo-organic-avatar[data-eye-pattern="2"] .rakazo-organic-avatar-eyes-working {
-  animation: rakazo-organic-eyes-loop-2 6.1s ease-in-out -3.2s infinite;
+.agentic-smith-organic-avatar[data-eye-pattern="2"] .agentic-smith-organic-avatar-eyes-working {
+  animation: agentic-smith-organic-eyes-loop-2 6.1s ease-in-out -3.2s infinite;
 }
 
-.rakazo-organic-avatar[data-eye-pattern="3"] .rakazo-organic-avatar-eyes-working {
-  animation: rakazo-organic-eyes-loop-3 7.8s ease-in-out -2.1s infinite;
+.agentic-smith-organic-avatar[data-eye-pattern="3"] .agentic-smith-organic-avatar-eyes-working {
+  animation: agentic-smith-organic-eyes-loop-3 7.8s ease-in-out -2.1s infinite;
 }
 
-/* Durations mirror @rakazo/core WORKING_AVATAR_DURATIONS_MS (avatar-motion). */
-.rakazo-organic-avatar[data-shape-family="0"] .rakazo-organic-avatar-body-working {
-  animation: rakazo-organic-float 1.8s ease-in-out infinite;
+/* Durations mirror @agentic-smith/core WORKING_AVATAR_DURATIONS_MS (avatar-motion). */
+.agentic-smith-organic-avatar[data-shape-family="0"] .agentic-smith-organic-avatar-body-working {
+  animation: agentic-smith-organic-float 1.8s ease-in-out infinite;
 }
 
-.rakazo-organic-avatar[data-shape-family="1"] .rakazo-organic-avatar-body-working {
-  animation: rakazo-organic-stretch 1.35s ease-in-out infinite;
+.agentic-smith-organic-avatar[data-shape-family="1"] .agentic-smith-organic-avatar-body-working {
+  animation: agentic-smith-organic-stretch 1.35s ease-in-out infinite;
 }
 
-.rakazo-organic-avatar[data-shape-family="2"] .rakazo-organic-avatar-body-working,
-.rakazo-organic-avatar[data-shape-family="8"] .rakazo-organic-avatar-body-working {
-  animation: rakazo-organic-sway 1.6s ease-in-out infinite;
+.agentic-smith-organic-avatar[data-shape-family="2"] .agentic-smith-organic-avatar-body-working,
+.agentic-smith-organic-avatar[data-shape-family="8"] .agentic-smith-organic-avatar-body-working {
+  animation: agentic-smith-organic-sway 1.6s ease-in-out infinite;
 }
 
-.rakazo-organic-avatar[data-shape-family="3"] .rakazo-organic-avatar-body-working,
-.rakazo-organic-avatar[data-shape-family="4"] .rakazo-organic-avatar-body-working {
-  animation: rakazo-organic-turn 2.4s ease-in-out infinite;
+.agentic-smith-organic-avatar[data-shape-family="3"] .agentic-smith-organic-avatar-body-working,
+.agentic-smith-organic-avatar[data-shape-family="4"] .agentic-smith-organic-avatar-body-working {
+  animation: agentic-smith-organic-turn 2.4s ease-in-out infinite;
 }
 
-.rakazo-organic-avatar[data-shape-family="5"] .rakazo-organic-avatar-body-working,
-.rakazo-organic-avatar[data-shape-family="9"] .rakazo-organic-avatar-body-working {
-  animation: rakazo-organic-squash 1.35s ease-in-out infinite;
+.agentic-smith-organic-avatar[data-shape-family="5"] .agentic-smith-organic-avatar-body-working,
+.agentic-smith-organic-avatar[data-shape-family="9"] .agentic-smith-organic-avatar-body-working {
+  animation: agentic-smith-organic-squash 1.35s ease-in-out infinite;
 }
 
-.rakazo-organic-avatar[data-shape-family="6"] .rakazo-organic-avatar-body-working {
-  animation: rakazo-organic-pulse 1.1s ease-in-out infinite;
+.agentic-smith-organic-avatar[data-shape-family="6"] .agentic-smith-organic-avatar-body-working {
+  animation: agentic-smith-organic-pulse 1.1s ease-in-out infinite;
 }
 
-.rakazo-organic-avatar[data-shape-family="7"] .rakazo-organic-avatar-body-working {
+.agentic-smith-organic-avatar[data-shape-family="7"] .agentic-smith-organic-avatar-body-working {
   transform-origin: center 20%;
-  animation: rakazo-organic-ring 1.35s ease-in-out infinite;
+  animation: agentic-smith-organic-ring 1.35s ease-in-out infinite;
 }
 
 /* Idle, offscreen and hidden avatars hold still: SVG motion repaints on the main thread. */
-.rakazo-organic-avatar[data-paused="true"] .rakazo-organic-avatar-body,
-.rakazo-organic-avatar[data-paused="true"] .rakazo-organic-avatar-eyes,
-.rakazo-organic-avatar[data-working="false"] .rakazo-organic-avatar-body-working,
-.rakazo-organic-avatar[data-working="false"] .rakazo-organic-avatar-eyes-working {
+.agentic-smith-organic-avatar[data-paused="true"] .agentic-smith-organic-avatar-body,
+.agentic-smith-organic-avatar[data-paused="true"] .agentic-smith-organic-avatar-eyes,
+.agentic-smith-organic-avatar[data-working="false"] .agentic-smith-organic-avatar-body-working,
+.agentic-smith-organic-avatar[data-working="false"] .agentic-smith-organic-avatar-eyes-working {
   animation-play-state: paused;
 }
 
-@keyframes rakazo-organic-float {
+@keyframes agentic-smith-organic-float {
   0%,
   100% {
     transform: translateY(2px) scaleX(1.02);
@@ -293,7 +293,7 @@
   }
 }
 
-@keyframes rakazo-organic-stretch {
+@keyframes agentic-smith-organic-stretch {
   0%,
   100% {
     transform: translateY(2px) scale(1.04, 0.96);
@@ -303,7 +303,7 @@
   }
 }
 
-@keyframes rakazo-organic-sway {
+@keyframes agentic-smith-organic-sway {
   0%,
   100% {
     transform: rotate(-3deg) translateX(-1px);
@@ -313,7 +313,7 @@
   }
 }
 
-@keyframes rakazo-organic-turn {
+@keyframes agentic-smith-organic-turn {
   0%,
   100% {
     transform: rotate(-4deg) scale(0.98);
@@ -323,7 +323,7 @@
   }
 }
 
-@keyframes rakazo-organic-squash {
+@keyframes agentic-smith-organic-squash {
   0%,
   100% {
     transform: scale(1.04, 0.96);
@@ -333,7 +333,7 @@
   }
 }
 
-@keyframes rakazo-organic-pulse {
+@keyframes agentic-smith-organic-pulse {
   0%,
   100% {
     transform: scale(0.96);
@@ -343,7 +343,7 @@
   }
 }
 
-@keyframes rakazo-organic-ring {
+@keyframes agentic-smith-organic-ring {
   0%,
   100% {
     transform: rotate(-4deg);
@@ -356,7 +356,7 @@
   }
 }
 
-@keyframes rakazo-organic-eyes-loop-0 {
+@keyframes agentic-smith-organic-eyes-loop-0 {
   0%,
   100% {
     transform: translate(-9%, 1%) scaleY(0.94);
@@ -384,7 +384,7 @@
   }
 }
 
-@keyframes rakazo-organic-eyes-loop-1 {
+@keyframes agentic-smith-organic-eyes-loop-1 {
   0%,
   100% {
     transform: translate(0, -8%) scale(1.06);
@@ -409,7 +409,7 @@
   }
 }
 
-@keyframes rakazo-organic-eyes-loop-2 {
+@keyframes agentic-smith-organic-eyes-loop-2 {
   0%,
   100% {
     transform: scale(0.9, 1.08);
@@ -434,7 +434,7 @@
   }
 }
 
-@keyframes rakazo-organic-eyes-loop-3 {
+@keyframes agentic-smith-organic-eyes-loop-3 {
   0%,
   100% {
     transform: translateY(7%) scaleY(0.9);
@@ -460,23 +460,23 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rakazo-bot-avatar-ring,
-  .rakazo-bot-avatar[data-working="true"] .rakazo-bot-avatar-picture {
+  .agentic-smith-bot-avatar-ring,
+  .agentic-smith-bot-avatar[data-working="true"] .agentic-smith-bot-avatar-picture {
     animation: none;
     transition: none;
   }
 
-  .rakazo-bot-avatar {
+  .agentic-smith-bot-avatar {
     transition: none;
   }
 
-  .rakazo-organic-avatar[data-shape-family] .rakazo-organic-avatar-body {
+  .agentic-smith-organic-avatar[data-shape-family] .agentic-smith-organic-avatar-body {
     animation: none;
-    d: var(--rakazo-organic-path);
+    d: var(--agentic-smith-organic-path);
     transition: none;
   }
 
-  .rakazo-organic-avatar[data-eye-pattern] .rakazo-organic-avatar-eyes {
+  .agentic-smith-organic-avatar[data-eye-pattern] .agentic-smith-organic-avatar-eyes {
     animation: none;
     transition: none;
   }

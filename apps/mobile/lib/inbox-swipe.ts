@@ -1,4 +1,4 @@
-import type { SnoozePreset } from "@rakazo/core";
+import type { SnoozePreset } from "@agentic-smith/core";
 
 export type InboxChatKind = "bot" | "group";
 export type InboxRowAction = "read" | "unread" | "archive" | "pin" | "unpin" | "delete";

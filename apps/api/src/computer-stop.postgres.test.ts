@@ -1,17 +1,21 @@
 import { randomUUID } from "node:crypto";
 import { mkdtemp, rm } from "node:fs/promises";
 import { join } from "node:path";
-import { RPCHandler } from "@orpc/server/fetch";
-import type { AdapterContext, ComputerRef, JobPublisher, PortableFile } from "@rakazo/adapter-kit";
-import { SandboxDamagedError, SandboxRateLimitError } from "@rakazo/adapter-kit";
+import type {
+  AdapterContext,
+  ComputerRef,
+  JobPublisher,
+  PortableFile,
+} from "@agentic-smith/adapter-kit";
+import { SandboxDamagedError, SandboxRateLimitError } from "@agentic-smith/adapter-kit";
 import {
   createIdleComputerSweeper,
   FakeSandboxProvider,
   LocalAgentHomeStore,
   provisionComputer,
-} from "@rakazo/adapters";
-import type { Actor } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/adapters";
+import type { Actor } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   asSystem,
   createDb,
@@ -19,7 +23,8 @@ import {
   reconcileComputerRuns,
   runAsSystem,
   runAsTenant,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
+import { RPCHandler } from "@orpc/server/fetch";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import type { RouterDeps } from "./router.js";
 import { createRouter } from "./router.js";

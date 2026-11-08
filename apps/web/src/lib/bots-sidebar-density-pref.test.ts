@@ -15,7 +15,7 @@ async function loadPreference() {
 
 describe("bot sidebar density preference", () => {
   it("defaults to Comfortable and accepts only Compact as the compact value", async () => {
-    expect(BOTS_SIDEBAR_DENSITY_STORAGE_KEY).toBe("rakazo.botsSidebarDensity");
+    expect(BOTS_SIDEBAR_DENSITY_STORAGE_KEY).toBe("agentic-smith.botsSidebarDensity");
     expect(normalizeBotsSidebarDensity(null)).toBe("comfortable");
     expect(normalizeBotsSidebarDensity("unknown")).toBe("comfortable");
     expect(normalizeBotsSidebarDensity(" COMPACT ")).toBe("compact");

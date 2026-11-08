@@ -1,7 +1,7 @@
+import type { SpaceInvitePreview } from "@agentic-smith/contracts";
+import { Button, cn } from "@agentic-smith/ui-web";
 import { Trans } from "@lingui/react/macro";
 import { ORPCError } from "@orpc/client";
-import type { SpaceInvitePreview } from "@rakazo/contracts";
-import { Button, cn } from "@rakazo/ui-web";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { SharedSpaceRules } from "../components/SharedSpaceRules";
@@ -101,7 +101,7 @@ export function InvitePage() {
         }}
       >
         <Button type="submit" className={submitClass}>
-          {state.kind === "invalid" ? <Trans>Open Rakazo</Trans> : <Trans>Retry</Trans>}
+          {state.kind === "invalid" ? <Trans>Open Agentic Smith</Trans> : <Trans>Retry</Trans>}
         </Button>
       </AuthFrame>
     );

@@ -37,7 +37,7 @@ describe("passkeysSupported", () => {
 
   it("on the macOS app, offers passkeys only for relying parties the build is associated with", async () => {
     const mac = (rpIds?: string[] | Error) => ({
-      ...browser("app.rakazo.com"),
+      ...browser("app.jerithai.com"),
       desktop: {
         platform: "darwin",
         passkeys:
@@ -51,21 +51,24 @@ describe("passkeysSupported", () => {
               },
       },
     });
-    await expect(passkeysSupported("app.rakazo.com", mac(["app.rakazo.com"]))).resolves.toBe(true);
-    await expect(passkeysSupported("App.Rakazo.com", mac(["app.rakazo.com"]))).resolves.toBe(true);
-    await expect(passkeysSupported("app.rakazo.com", mac([]))).resolves.toBe(false);
-    await expect(passkeysSupported("app.rakazo.com", mac())).resolves.toBe(false);
-    await expect(passkeysSupported("app.rakazo.com", mac(new Error("ipc")))).resolves.toBe(false);
-    const selfHosted = { ...mac(["app.rakazo.com"]), host: "rakazo.example.com" };
-    await expect(passkeysSupported("rakazo.example.com", selfHosted)).resolves.toBe(false);
+    await expect(passkeysSupported("app.jerithai.com", mac(["app.jerithai.com"]))).resolves.toBe(
+      true,
+    );
+    const rebranded = { ...mac(["app.agentic-smith.com"]), host: "App.Agentic-Smith.com" };
+    await expect(passkeysSupported("app.agentic-smith.com", rebranded)).resolves.toBe(true);
+    await expect(passkeysSupported("app.jerithai.com", mac([]))).resolves.toBe(false);
+    await expect(passkeysSupported("app.jerithai.com", mac())).resolves.toBe(false);
+    await expect(passkeysSupported("app.jerithai.com", mac(new Error("ipc")))).resolves.toBe(false);
+    const selfHosted = { ...mac(["app.jerithai.com"]), host: "agentic-smith.example.com" };
+    await expect(passkeysSupported("agentic-smith.example.com", selfHosted)).resolves.toBe(false);
     expect(
       selfHosted.credential.isUserVerifyingPlatformAuthenticatorAvailable,
     ).not.toHaveBeenCalled();
   });
 
   it("leaves other desktop platforms to their own platform authenticator", async () => {
-    const windows = { ...browser("rakazo.example.com"), desktop: { platform: "win32" } };
-    await expect(passkeysSupported("rakazo.example.com", windows)).resolves.toBe(true);
+    const windows = { ...browser("agentic-smith.example.com"), desktop: { platform: "win32" } };
+    await expect(passkeysSupported("agentic-smith.example.com", windows)).resolves.toBe(true);
   });
 
   it("does not ask the authenticator when the host cannot use the relying party", async () => {

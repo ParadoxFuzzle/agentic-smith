@@ -5,8 +5,8 @@ import type {
   ArtifactStore,
   ComputerRef,
   SandboxProvider,
-} from "@rakazo/adapter-kit";
-import type { ComputerMode, MessageBlock } from "@rakazo/contracts";
+} from "@agentic-smith/adapter-kit";
+import type { ComputerMode, MessageBlock } from "@agentic-smith/contracts";
 import {
   ARTIFACT_DESCRIPTION_MAX_LENGTH,
   ARTIFACT_NAME_MAX_LENGTH,
@@ -15,20 +15,20 @@ import {
   attachmentSizeLabel,
   HISTORY_ATTACHMENTS_PER_RESPONSE,
   MCP_APP_MIME_TYPE,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   attachmentComputerPath,
   inferAttachmentMimeType,
   messageBlockForArtifact,
   validateAttachmentMimeType,
-} from "@rakazo/core";
-import type { Artifact, Prisma, PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { Artifact, Prisma, PrismaClient } from "@agentic-smith/db";
 import {
   THREAD_LOCK_TRANSACTION_OPTIONS,
   withResolvedArtifactVersion,
   withTransactionRetry,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { resolveBotWorkspacePath } from "./computer-support.js";
 
 export type MaterializedThreadFile = {

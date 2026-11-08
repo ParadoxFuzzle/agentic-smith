@@ -74,9 +74,12 @@ describe("computer keyboard edits", () => {
       type: "text",
       text: '</script>\u2028");alert(1)',
     });
-    expect(script.startsWith("window.rakazoComputerKeyboard?.run(")).toBe(true);
+    expect(script.startsWith("window.agenticSmithComputerKeyboard?.run(")).toBe(true);
     expect(script.endsWith(");true;")).toBe(true);
-    const json = script.slice("window.rakazoComputerKeyboard?.run(".length, -");true;".length);
+    const json = script.slice(
+      "window.agenticSmithComputerKeyboard?.run(".length,
+      -");true;".length,
+    );
     expect(json).not.toContain("<");
     expect(JSON.parse(json)).toEqual({ type: "text", text: '</script>\u2028");alert(1)' });
   });
@@ -100,7 +103,7 @@ describe("computer keyboard edits", () => {
   it("asks the screen page to report when the keyboard bridge exists", () => {
     const script = computerKeyboardReadyProbe('1"</script>');
     expect(script.endsWith(";true;")).toBe(true);
-    expect(script).toContain("window.rakazoComputerKeyboard");
+    expect(script).toContain("window.agenticSmithComputerKeyboard");
     expect(script).toContain("ReactNativeWebView.postMessage");
     expect(script).not.toContain("<");
     const literal = script.slice(

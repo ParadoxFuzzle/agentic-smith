@@ -1,4 +1,4 @@
-import { recentPayments, saveSpendingLimit, spendingStatus } from "@rakazo/db";
+import { recentPayments, saveSpendingLimit, spendingStatus } from "@agentic-smith/db";
 import type { RouterContext } from "./context.js";
 
 /** The account's spending limit. Only the user sets it; bots have no tool for it. */

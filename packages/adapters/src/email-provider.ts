@@ -1,4 +1,4 @@
-import type { TransactionalEmailProvider } from "@rakazo/adapter-kit";
+import type { TransactionalEmailProvider } from "@agentic-smith/adapter-kit";
 import { ResendEmailProvider } from "./resend-email.js";
 import { SmtpEmailProvider } from "./smtp-email.js";
 

@@ -984,8 +984,8 @@ export const PLUGIN_SUBMISSIONS_PATH = "/api/v1/plugin-submissions";
 export const INTEGRATION_CLAIMS_PATH = "/api/v1/integration-claims";
 /** Opened from the email that proves a claimant reads mail at the app's domain. */
 export const INTEGRATION_CLAIM_CONFIRM_PATH = "/api/v1/integration-claims/confirm";
-export const SUBMIT_PLUGIN_URL = "https://rakazo.com/plugins/submit/";
-export const integrationPageUrl = (slug: string) => `https://rakazo.com/integrations/${slug}/`;
+export const SUBMIT_PLUGIN_URL = "https://jerithai.com/plugins/submit/";
+export const integrationPageUrl = (slug: string) => `https://jerithai.com/integrations/${slug}/`;
 
 /** People type a bare domain like `acme.com`, so a URL without a scheme gets `https://`. */
 const HttpsUrlSchema = z
@@ -1459,7 +1459,7 @@ export const MeSchema = z.object({
   spaceId: Id,
   /** Deprecated: app accounts never have server administrator privileges. Always false. */
   isDeploymentOwner: z.boolean(),
-  /** Listed in RAKAZO_ADMIN_EMAILS with a verified email: reviews plugins, adds stdio MCP servers, grants access. */
+  /** Listed in AGENTIC_SMITH_ADMIN_EMAILS with a verified email: reviews plugins, adds stdio MCP servers, grants access. */
   isAdmin: z.boolean().default(false),
   needsModel: z.boolean(),
   defaultProvider: z.string().nullable(),

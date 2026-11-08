@@ -1,8 +1,8 @@
 import { randomInt } from "node:crypto";
-import type { BillingProvider } from "@rakazo/adapter-kit";
-import type { BillingStatus } from "@rakazo/contracts";
-import { BYOK_TIERS } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
+import type { BillingProvider } from "@agentic-smith/adapter-kit";
+import type { BillingStatus } from "@agentic-smith/contracts";
+import { BYOK_TIERS } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   billingAccountForOrganization,
   extendByokFreePeriod,
@@ -10,8 +10,8 @@ import {
   hasBillingAccess,
   isUniqueViolation,
   reconcileCreditPurchase,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 
 const CODE_ALPHABET = "abcdefghjkmnpqrstuvwxyz23456789";
 const CODE_LENGTH = 8;

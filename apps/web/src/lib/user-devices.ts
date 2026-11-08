@@ -1,7 +1,7 @@
+import type { UserDeviceSummary } from "@agentic-smith/contracts";
+import { USER_DEVICE_PATH, userDeviceListSchema } from "@agentic-smith/contracts";
+import { readBoundedJsonResponse } from "@agentic-smith/core";
 import { t } from "@lingui/core/macro";
-import type { UserDeviceSummary } from "@rakazo/contracts";
-import { USER_DEVICE_PATH, userDeviceListSchema } from "@rakazo/contracts";
-import { readBoundedJsonResponse } from "@rakazo/core";
 
 export async function listUserDevices(): Promise<UserDeviceSummary[]> {
   const response = await fetch(USER_DEVICE_PATH, { signal: AbortSignal.timeout(8_000) });

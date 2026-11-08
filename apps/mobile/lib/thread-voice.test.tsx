@@ -40,7 +40,7 @@ vi.mock("./api-live", () => ({}));
 vi.mock("./api", () => ({
   captureApiRequestContext: vi.fn(async () => ({
     apiBase: "https://api.example.test",
-    headers: { "x-rakazo-space-id": "space-riley" },
+    headers: { "x-agentic-smith-space-id": "space-riley" },
     sessionGeneration: currentSessionGeneration(),
   })),
   rpc: vi.fn(async () => {
@@ -142,7 +142,7 @@ describe("useThreadVoiceCall hand-over", () => {
     expect(startCall).toHaveBeenCalledWith(
       expect.objectContaining({
         requestContext: expect.objectContaining({
-          headers: expect.objectContaining({ "x-rakazo-space-id": "space-riley" }),
+          headers: expect.objectContaining({ "x-agentic-smith-space-id": "space-riley" }),
         }),
       }),
     );

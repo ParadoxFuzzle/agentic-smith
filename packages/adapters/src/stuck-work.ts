@@ -1,6 +1,10 @@
-import type { JobPublisher, NotificationMessage, NotificationProvider } from "@rakazo/adapter-kit";
-import { runContinueJob } from "@rakazo/adapter-kit";
-import type { StuckWorkStatus } from "@rakazo/core";
+import type {
+  JobPublisher,
+  NotificationMessage,
+  NotificationProvider,
+} from "@agentic-smith/adapter-kit";
+import { runContinueJob } from "@agentic-smith/adapter-kit";
+import type { StuckWorkStatus } from "@agentic-smith/core";
 import {
   isStuckWorkStatus,
   STUCK_WORK_NOTICE,
@@ -10,15 +14,15 @@ import {
   stuckWorkDueAfterMs,
   stuckWorkReminder,
   stuckWorkStoppedNotification,
-} from "@rakazo/core";
-import type { Prisma, PrismaClient, ThreadEvents } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { Prisma, PrismaClient, ThreadEvents } from "@agentic-smith/db";
 import {
   appendEventInTransaction,
   expireStuckRun,
   THREAD_LOCK_TRANSACTION_OPTIONS,
   withTransactionRetry,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { ExpoPushProvider } from "./expo-push.js";
 import { notificationIdentity } from "./notification-identity.js";
 import { publishChatAlert } from "./run-notifications.js";

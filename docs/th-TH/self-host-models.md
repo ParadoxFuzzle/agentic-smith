@@ -15,17 +15,17 @@
 รายการ id และ endpoint ที่ API กับ worker เข้าถึงได้:
 
 ```env
-RAKAZO_LOCAL_MODELS=qwen3:4b,llama3.1:8b,qwen3-vl
-RAKAZO_LOCAL_MODELS_URL=http://127.0.0.1:11434/v1
-RAKAZO_LOCAL_CONTEXT_WINDOW=32768
-RAKAZO_LOCAL_MAX_TOKENS=4096
+AGENTIC_SMITH_LOCAL_MODELS=qwen3:4b,llama3.1:8b,qwen3-vl
+AGENTIC_SMITH_LOCAL_MODELS_URL=http://127.0.0.1:11434/v1
+AGENTIC_SMITH_LOCAL_CONTEXT_WINDOW=32768
+AGENTIC_SMITH_LOCAL_MAX_TOKENS=4096
 # Optional: model ids on this endpoint that accept images (screenshot computer tools).
-RAKAZO_LOCAL_VISION_MODELS=qwen3-vl
+AGENTIC_SMITH_LOCAL_VISION_MODELS=qwen3-vl
 # Optional: model ids on this endpoint that accept OpenAI-style reasoning_effort.
-RAKAZO_LOCAL_REASONING_MODELS=qwen3:4b
+AGENTIC_SMITH_LOCAL_REASONING_MODELS=qwen3:4b
 ```
 
-จากคอนเทนเนอร์ให้ชี้ไปที่ LAN หรือ `host.docker.internal` (Docker Desktop) อย่าเปิดบริการที่ละเอียดอ่อนโดยไม่มีการยืนยันตัวตนบน loopback ขณะ bot ทำงาน ปล่อย `RAKAZO_LOCAL_MODELS` ว่างเพื่อปิด
+จากคอนเทนเนอร์ให้ชี้ไปที่ LAN หรือ `host.docker.internal` (Docker Desktop) อย่าเปิดบริการที่ละเอียดอ่อนโดยไม่มีการยืนยันตัวตนบน loopback ขณะ bot ทำงาน ปล่อย `AGENTIC_SMITH_LOCAL_MODELS` ว่างเพื่อปิด
 
 ใน **ตั้งค่า (Settings) → Models** เลือก **Ollama Cloud** วาง API key จาก ollama.com แล้ว **Find models** ได้โดยไม่ต้องตั้ง env
 

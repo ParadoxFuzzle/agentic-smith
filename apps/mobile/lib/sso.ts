@@ -24,7 +24,8 @@ export async function continueWithSso(
       if (apiBase !== currentApiBase() || generation !== currentSessionGeneration())
         throw new Error(t("Could not continue"));
     };
-    const callbackURL = action === "sign-in" ? "rakazo://sign-in" : "rakazo://account";
+    const callbackURL =
+      action === "sign-in" ? "agentic-smith://sign-in" : "agentic-smith://account";
     const headers = action === "sign-in" ? {} : await authHeaders();
     requireCurrentSession();
     const previous = action === "reauthenticate" ? await sessionUser(apiBase, headers) : undefined;
@@ -38,7 +39,7 @@ export async function continueWithSso(
         method: "POST",
         headers: {
           "content-type": "application/json",
-          origin: "rakazo://",
+          origin: "agentic-smith://",
           "x-skip-oauth-proxy": "true",
           ...headers,
         },
@@ -73,7 +74,7 @@ export async function continueWithSso(
     if (result.type !== "success") return false;
     const callback = new URL(result.url);
     if (
-      callback.protocol !== "rakazo:" ||
+      callback.protocol !== "agentic-smith:" ||
       callback.host !== new URL(callbackURL).host ||
       (callback.pathname && callback.pathname !== "/")
     )
@@ -111,7 +112,7 @@ export async function continueWithSso(
 async function sessionUser(apiBase: string, headers: Record<string, string>): Promise<string> {
   const { response, body, invalidJson } = await fetchMobileJson<{ user?: { id?: string } }>(
     `${apiBase}/api/auth/get-session`,
-    { headers: { origin: "rakazo://", ...headers } },
+    { headers: { origin: "agentic-smith://", ...headers } },
     {},
   );
   if (!response.ok || typeof body?.user?.id !== "string" || invalidJson)

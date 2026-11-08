@@ -1,7 +1,7 @@
+import type { SkillPlaybook } from "@agentic-smith/contracts";
+import { formatSkillRunPrompt } from "@agentic-smith/core";
+import { Button, Input, Label, Textarea } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { SkillPlaybook } from "@rakazo/contracts";
-import { formatSkillRunPrompt } from "@rakazo/core";
-import { Button, Input, Label, Textarea } from "@rakazo/ui-web";
 import { useEffect, useId, useRef, useState } from "react";
 import { rpc } from "../../lib/rpc";
 import { errorText } from "../../lib/user-error";

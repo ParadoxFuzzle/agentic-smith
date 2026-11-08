@@ -1,4 +1,3 @@
-import { ORPCError } from "@orpc/server";
 import type {
   Actor,
   AgentImportPlan,
@@ -7,12 +6,12 @@ import type {
   ConnectionCatalogItem,
   CreateRoutineInput as CreateRoutineInputType,
   MessageBlock,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   BOT_TEMPLATE_CHANGED,
   BOT_TEMPLATE_IMPORT_KEY_PREFIX,
   CreateRoutineInput,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   appConnectCard,
   BOT_TEMPLATES,
@@ -21,8 +20,9 @@ import {
   findBotTemplate,
   renameRoutineSkillMentions,
   renameSkillMd,
-} from "@rakazo/core";
-import { availableInSpace, Prisma } from "@rakazo/db";
+} from "@agentic-smith/core";
+import { availableInSpace, Prisma } from "@agentic-smith/db";
+import { ORPCError } from "@orpc/server";
 import type { AgentImportServices, Built } from "./agent-import.js";
 import { requestDigest, savedTimeZone, writeImportedBot } from "./agent-import.js";
 

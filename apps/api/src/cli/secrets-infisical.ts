@@ -7,10 +7,10 @@ import {
   PostgresRealtimeFanout,
   secretStoreOptionsFromEnv,
   unwrapEnvFromKeyManager,
-} from "@rakazo/adapters";
-import { resolveEncryptionKey } from "@rakazo/core";
-import { loadRootEnv } from "@rakazo/core/node/load-root-env";
-import { createDb, runAsSystem } from "@rakazo/db";
+} from "@agentic-smith/adapters";
+import { resolveEncryptionKey } from "@agentic-smith/core";
+import { loadRootEnv } from "@agentic-smith/core/node/load-root-env";
+import { createDb, runAsSystem } from "@agentic-smith/db";
 import { createSecretMigrationRepository } from "../secret-migration.js";
 
 loadRootEnv();

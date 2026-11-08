@@ -3,11 +3,11 @@ import type {
   PaymentWalletCredential,
   PaymentWalletProvider,
   SecretStore,
-} from "@rakazo/adapter-kit";
-import { PaymentWalletDisconnected, SecretStoreUnavailableError } from "@rakazo/adapter-kit";
-import type { PaymentWalletStatus } from "@rakazo/contracts";
-import type { PaymentWallet, Prisma, PrismaClient } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import { PaymentWalletDisconnected, SecretStoreUnavailableError } from "@agentic-smith/adapter-kit";
+import type { PaymentWalletStatus } from "@agentic-smith/contracts";
+import type { PaymentWallet, Prisma, PrismaClient } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { advisoryLock } from "./advisory-lock.js";
 import { withRefreshLock } from "./refresh-lock.js";
 import { deleteSecretBestEffort, holdSecretNotifications } from "./secret-store-factory.js";
@@ -272,7 +272,7 @@ export async function connectPaymentWallet(
   const provider = deps.paymentWallet;
   if (!provider) throw new Error("No payment wallet is configured");
   const start = await provider.beginConnect(
-    { clientName: "Rakazo" },
+    { clientName: "Agentic Smith" },
     providerContext(actor, "connect"),
   );
   const ciphertext = await storeMaterial(deps, actor, {

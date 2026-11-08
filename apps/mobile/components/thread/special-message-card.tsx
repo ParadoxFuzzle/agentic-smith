@@ -1,7 +1,11 @@
-import { ChatMarkdown } from "@rakazo/chat-ui/native";
-import type { MessageBlock } from "@rakazo/contracts";
-import { cloudAgentHttpsUrl, helperCardState, displayName as safeDisplayName } from "@rakazo/core";
-import { typeScale } from "@rakazo/ui-tokens";
+import { ChatMarkdown } from "@agentic-smith/chat-ui/native";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import {
+  cloudAgentHttpsUrl,
+  helperCardState,
+  displayName as safeDisplayName,
+} from "@agentic-smith/core";
+import { typeScale } from "@agentic-smith/ui-tokens";
 import { useEffect, useRef, useState } from "react";
 import { Linking, Pressable, Text, View } from "react-native";
 import Animated, {

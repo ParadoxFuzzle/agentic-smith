@@ -1,12 +1,14 @@
 import { createHash } from "node:crypto";
-import type { AgentContextStrategy, CacheCapabilities } from "@rakazo/adapter-kit";
+import type { AgentContextStrategy, CacheCapabilities } from "@agentic-smith/adapter-kit";
 import {
   MODEL_CONTEXT_TOO_SMALL_ERROR,
   shortenedTextLength,
   textBoundary,
   truncatePlainText,
   VERBATIM_TOOL_RESULT_TOO_LARGE_ERROR,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
+import { squeezeColdMessages } from "./context-squeeze.js";
+import { compactToolOutput } from "./tool-output-compact.js";
 import type { VerbatimMcpServers } from "./verbatim-mcp-result.js";
 import { isVerbatimMcpResult, toolCallIdentity } from "./verbatim-mcp-result.js";
 
@@ -41,6 +43,18 @@ export interface ContextSelectionOptions {
   truncateToolResults?: boolean;
   /** Servers that asked to keep tool results whole. Those results are never cut. */
   verbatimMcpServers?: VerbatimMcpServers;
+  /** Deterministic cold-history squeezing. Off for current and warm-cache prefixes by default. */
+  compressColdHistory?: boolean;
+  /** Most recent messages kept verbatim while squeezing cold history. */
+  keepRecentMessages?: number;
+  /** Histories shorter than this many messages are not squeezed. */
+  minMessagesBeforeCompression?: number;
+  /** Target size of squeezed cold messages as a fraction of their original size. */
+  compressionRatio?: number;
+  /** Cold messages shorter than this stay verbatim. */
+  minMessageChars?: number;
+  /** Preserve exact paths, commands, addresses, ids and similar facts. */
+  anchorPreserve?: boolean;
 }
 export class ContextBudgetError extends Error {
   constructor(
@@ -477,6 +491,75 @@ function shortenMcpEnvelope(source: string, size: number, marker: string): strin
   return encoded;
 }
 
+function isShellTool(name: string | undefined): boolean {
+  return name === "shell" || name === "user_computer_shell";
+}
+
+/**
+ * Shell results are JSON envelopes around stdout/stderr. Compact those streams
+ * directly so duplicate build lines and ANSI colour survive the trip as a short
+ * summary, while the exit code and every other control field stay exact.
+ */
+function compactShellResult(
+  source: string,
+  size: number,
+  marker: string,
+  toolName: string | undefined,
+): string | undefined {
+  if (!isShellTool(toolName)) return undefined;
+  let payload: unknown;
+  try {
+    payload = JSON.parse(source);
+  } catch {
+    return undefined;
+  }
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return undefined;
+  const record = payload as Record<string, unknown>;
+  const streamKeys = ["stdout", "stderr", "output"] as const;
+  const streams = streamKeys.flatMap((key) => {
+    const value = record[key];
+    return typeof value === "string" && value.length > 0 ? [{ key, value }] : [];
+  });
+  if (streams.length === 0) return undefined;
+
+  const overhead = JSON.stringify({
+    ...record,
+    stdout: "",
+    stderr: "",
+    output: "",
+    contextTruncated: true,
+  }).length;
+  if (overhead >= size) return undefined;
+
+  let scale = 1;
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const available = Math.max(1, Math.floor((size - overhead) * scale));
+    const total = streams.reduce((sum, stream) => sum + stream.value.length, 0);
+    let compactedAny = false;
+    const next: Record<string, unknown> = { ...record, contextTruncated: true };
+    for (const stream of streams) {
+      const streamBudget = Math.max(
+        1,
+        Math.min(
+          stream.value.length,
+          Math.floor((available * stream.value.length) / Math.max(1, total)),
+        ),
+      );
+      if (stream.value.length <= streamBudget) {
+        next[stream.key] = stream.value;
+        continue;
+      }
+      compactedAny = true;
+      next[stream.key] = compactToolOutput(stream.value, streamBudget, marker).text;
+    }
+    if (!compactedAny) return undefined;
+    const encoded = JSON.stringify(next);
+    if (encoded.length <= size) return encoded.length < source.length ? encoded : undefined;
+    scale *= 0.55;
+  }
+  return undefined;
+}
+
 /**
  * Shorten evidence cheaply while keeping structured controls and original-history offsets.
  * Pass afterUse when the model already read the result on an earlier step.
@@ -491,9 +574,10 @@ export function shortenToolResultText(
   const marker = afterUse ? OMITTED_AFTER_USE : OMITTED_BEFORE_USE;
   return (
     shortenHistoryResult(source, size, tool) ??
+    compactShellResult(source, size, marker, tool.name) ??
     shortenMcpEnvelope(source, size, marker) ??
     shortenStructuredResult(source, size, marker) ??
-    shortenPlainText(source, size, afterUse ? OMITTED_AFTER_USE : OMITTED_TEXT_BEFORE_USE)
+    compactToolOutput(source, size, afterUse ? OMITTED_AFTER_USE : OMITTED_TEXT_BEFORE_USE).text
   );
 }
 
@@ -584,17 +668,18 @@ export function selectContext<T extends ContextMessage>(
   estimatedInputTokens: number;
   droppedMessages: number;
   truncatedToolResults: number;
+  compressedMessages: number;
   availableMessageTokens: number;
   estimation: "text-estimate";
 } {
   const fixed = fixedTokens(options.budget);
   const available = Math.floor(options.budget.contextWindow - options.budget.outputReserve - fixed);
-  const groups = messageGroups(messages, options.budget.imageTokens);
+  const initialGroups = messageGroups(messages, options.budget.imageTokens);
   // Pi can carry mandatory instructions and tool schemas in system messages.
   // A new conversation cannot make either representation fit a smaller model.
   const requiredFixed =
     fixed +
-    groups
+    initialGroups
       .filter((group) => messages[group.indexes[0]!]!.role === "system")
       .reduce((total, group) => total + group.tokens, 0);
   if (requiredFixed > options.budget.contextWindow - options.budget.outputReserve) {
@@ -617,11 +702,57 @@ export function selectContext<T extends ContextMessage>(
   if (Array.isArray(latestContent) && latestContent.some((part) => part?.type === "toolCall"))
     protectedIndexes.add(latestAssistant);
   // Keep the final group intact. Earlier complete groups can be omitted.
-  for (const index of groups.at(-1)?.indexes ?? []) protectedIndexes.add(index);
+  for (const index of initialGroups.at(-1)?.indexes ?? []) protectedIndexes.add(index);
   for (const index of protectedIndexes) {
     if (!Number.isInteger(index) || index < 0 || index >= messages.length)
       throw new Error("Invalid protected context index");
   }
+
+  // A warm cached prefix must stay byte-identical, and a current-only strategy is
+  // deliberately unbounded. Every other strategy may squeeze cold prose instead
+  // of dropping it: exact anchors survive, recent turns stay verbatim, and tool
+  // calls/results are untouched.
+  let working: readonly T[] = messages;
+  let groups = initialGroups;
+  let compressedMessages = 0;
+  const totalGroupTokens = groups.reduce((sum, group) => sum + group.tokens, 0);
+  const squeezeAllowed =
+    options.compressColdHistory !== false &&
+    totalGroupTokens > available &&
+    options.strategy !== "current" &&
+    !(options.strategy === "cache-aware" && options.cacheWarmth === "likely-warm");
+  if (squeezeAllowed) {
+    // This is a full content scan, so only do it when squeezing can actually run.
+    const hasSignedThinking = groups.some((group) =>
+      group.indexes.some((index) =>
+        Array.isArray(messages[index]!.content)
+          ? messages[index]!.content.some(
+              (part) =>
+                part &&
+                typeof part === "object" &&
+                "type" in part &&
+                (part.type === "thinking" || part.type === "redacted_thinking"),
+            )
+          : false,
+      ),
+    );
+    if (!hasSignedThinking) {
+      const squeezed = squeezeColdMessages(working, {
+        keepRecentMessages: options.keepRecentMessages,
+        minMessagesBeforeCompression: options.minMessagesBeforeCompression,
+        compressionRatio: options.compressionRatio,
+        minMessageChars: options.minMessageChars,
+        anchorPreserve: options.anchorPreserve,
+        protectedIndexes,
+      });
+      if (squeezed.compressedMessages > 0) {
+        working = squeezed.messages;
+        compressedMessages = squeezed.compressedMessages;
+        groups = messageGroups(working, options.budget.imageTokens);
+      }
+    }
+  }
+
   const protectedGroupIndexes = new Set<number>();
   const selected = new Set<Group>();
   let used = 0;
@@ -636,7 +767,11 @@ export function selectContext<T extends ContextMessage>(
     if (options.truncateToolResults !== false) {
       let shortenedCount = 0;
       let keptVerbatimWhole = false;
-      const shortened = messages.map((message, index) => {
+      const groupByIndex = new Map<number, Group>();
+      for (const group of groups) {
+        for (const index of group.indexes) groupByIndex.set(index, group);
+      }
+      const shortened = working.map((message, index) => {
         if (!protectedGroupIndexes.has(index) || message.role !== "toolResult") return message;
         const parts = Array.isArray(message.content) ? message.content : undefined;
         const images =
@@ -653,8 +788,8 @@ export function selectContext<T extends ContextMessage>(
             ? message.content
             : JSON.stringify(message.content);
         if (!serialized || serialized.length <= 256) return message;
-        const group = groups.find((group) => group.indexes.includes(index));
-        const assistant = group ? messages[group.indexes[0]!] : undefined;
+        const group = groupByIndex.get(index);
+        const assistant = group ? working[group.indexes[0]!] : undefined;
         const nativeCall = Array.isArray(assistant?.content)
           ? assistant.content.find(
               (part) => part?.type === "toolCall" && part.id === message.toolCallId,
@@ -680,15 +815,20 @@ export function selectContext<T extends ContextMessage>(
         return { ...message, content: [{ type: "text", text }, ...images] } as T;
       });
       if (shortenedCount) {
-        const retry = selectContext(shortened, options);
+        const retry = selectContext(shortened, { ...options, compressColdHistory: false });
         return {
           ...retry,
           truncatedToolResults: Math.max(retry.truncatedToolResults, shortenedCount),
+          compressedMessages: Math.max(retry.compressedMessages, compressedMessages),
         };
       }
       if (keptVerbatimWhole) {
         // Throws the generic error when shortening the kept results would not make it fit either.
-        selectContext(messages, { ...options, verbatimMcpServers: undefined });
+        selectContext(working, {
+          ...options,
+          compressColdHistory: false,
+          verbatimMcpServers: undefined,
+        });
         throw new ContextBudgetError(
           used + fixed,
           options.budget.contextWindow - options.budget.outputReserve,
@@ -713,7 +853,7 @@ export function selectContext<T extends ContextMessage>(
   // Retain a contiguous recent suffix. Skip no holes inside a retained tool group.
   for (let index = groups.length - 1; index >= 0; index--) {
     const group = groups[index]!;
-    if (group.indexes.some((i) => messages[i]!.role === "user")) exchanges += 1;
+    if (group.indexes.some((i) => working[i]!.role === "user")) exchanges += 1;
     if (exchanges > exchangeLimit && !selected.has(group)) break;
     if (selected.has(group)) continue;
     if (used + group.tokens > available) break;
@@ -722,10 +862,11 @@ export function selectContext<T extends ContextMessage>(
   }
   const selectedIndexes = new Set([...selected].flatMap((group) => group.indexes));
   return {
-    messages: messages.filter((_message, index) => selectedIndexes.has(index)),
+    messages: working.filter((_message, index) => selectedIndexes.has(index)),
     estimatedInputTokens: fixed + used,
-    droppedMessages: messages.length - selectedIndexes.size,
+    droppedMessages: working.length - selectedIndexes.size,
     truncatedToolResults: 0,
+    compressedMessages,
     availableMessageTokens: available,
     estimation: "text-estimate" as const,
   };

@@ -1,7 +1,7 @@
 import { setTimeout as sleep } from "node:timers/promises";
-import { BOT_EMAIL_NAME_TAKEN, BotEmailNameSchema } from "@rakazo/contracts";
-import { attachmentComputerPath, matchesSearchQuery, redactSecrets } from "@rakazo/core";
-import { claimBotEmailName, contentEncryptionOf, reserveBotEmailSend } from "@rakazo/db";
+import { BOT_EMAIL_NAME_TAKEN, BotEmailNameSchema } from "@agentic-smith/contracts";
+import { attachmentComputerPath, matchesSearchQuery, redactSecrets } from "@agentic-smith/core";
+import { claimBotEmailName, contentEncryptionOf, reserveBotEmailSend } from "@agentic-smith/db";
 import { z } from "zod";
 import { redactConnectorPayload } from "./connector-safety.js";
 import type { RunContext } from "./run-context.js";

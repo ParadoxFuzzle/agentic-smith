@@ -1,5 +1,5 @@
-import type { Ticket, TicketStatus } from "@rakazo/contracts";
-import { TICKET_STATUSES } from "@rakazo/contracts";
+import type { Ticket, TicketStatus } from "@agentic-smith/contracts";
+import { TICKET_STATUSES } from "@agentic-smith/contracts";
 
 /** The board's columns, in the order the web board shows them. */
 export const BOARD_COLUMN_STATUSES = TICKET_STATUSES;

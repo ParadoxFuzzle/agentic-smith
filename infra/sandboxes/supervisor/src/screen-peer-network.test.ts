@@ -1,6 +1,6 @@
 import type * as NodeHttp from "node:http";
 import { Readable } from "node:stream";
-import { resolveSupervisorToken } from "@rakazo/core";
+import { resolveSupervisorToken } from "@agentic-smith/core";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const mocks = vi.hoisted(() => ({
@@ -56,7 +56,11 @@ function fixture() {
     inspect: vi.fn().mockResolvedValue({
       Id: "computer",
       Config: {
-        Labels: { "rakazo.managed": "true", "rakazo.botId": "bot", "rakazo.spaceId": "space" },
+        Labels: {
+          "agentic-smith.managed": "true",
+          "agentic-smith.botId": "bot",
+          "agentic-smith.spaceId": "space",
+        },
       },
       HostConfig: { NetworkMode: "bot-network" },
       State: { Running: true },
@@ -92,9 +96,9 @@ async function observe() {
     method: "POST",
     headers: {
       authorization: `Bearer ${resolveSupervisorToken(process.env)}`,
-      "x-rakazo-bot-id": "bot",
-      "x-rakazo-space-id": "space",
-      "x-rakazo-screen-id": "writer",
+      "x-agentic-smith-bot-id": "bot",
+      "x-agentic-smith-space-id": "space",
+      "x-agentic-smith-screen-id": "writer",
     },
   });
 }
@@ -106,9 +110,9 @@ async function openScreen() {
     headers: {
       authorization: `Bearer ${resolveSupervisorToken(process.env)}`,
       "content-type": "application/json",
-      "x-rakazo-bot-id": "bot",
-      "x-rakazo-space-id": "space",
-      "x-rakazo-screen-id": "writer",
+      "x-agentic-smith-bot-id": "bot",
+      "x-agentic-smith-space-id": "space",
+      "x-agentic-smith-screen-id": "writer",
     },
     body: JSON.stringify({ interactive: false }),
   });

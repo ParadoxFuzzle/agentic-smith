@@ -1,6 +1,6 @@
-import type { SpaceBot, SpaceGroup } from "@rakazo/contracts";
-import { chatSnoozed, chatWoke, isRunWorking } from "@rakazo/core";
-import { botColors } from "@rakazo/ui-tokens";
+import type { SpaceBot, SpaceGroup } from "@agentic-smith/contracts";
+import { chatSnoozed, chatWoke, isRunWorking } from "@agentic-smith/core";
+import { botColors } from "@agentic-smith/ui-tokens";
 import type { ReactElement, ReactNode } from "react";
 import { createContext, memo, useContext, useEffect, useState } from "react";
 import { Platform, Pressable, Text, View } from "react-native";

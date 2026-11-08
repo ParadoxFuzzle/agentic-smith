@@ -1,4 +1,4 @@
-import type { Routine, RoutineEmailSenders } from "@rakazo/contracts";
+import type { Routine, RoutineEmailSenders } from "@agentic-smith/contracts";
 import type { CronPreset } from "./cron.js";
 import { presetFromCron } from "./cron.js";
 

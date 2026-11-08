@@ -1,4 +1,4 @@
-import type { MessageBlock } from "@rakazo/contracts";
+import type { MessageBlock } from "@agentic-smith/contracts";
 import { messagingProviderLabel } from "./messaging-providers.js";
 
 /** A relayed chat-app message with who sent it and over what. */

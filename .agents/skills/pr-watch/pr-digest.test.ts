@@ -194,7 +194,7 @@ describe("pr-digest", () => {
           id: 42,
           user: "github-actions[bot]",
           kind: "Bot",
-          body: "<!-- rakazo-playwright-screenshots -->\n### Playwright screenshots\n",
+          body: "<!-- agentic-smith-playwright-screenshots -->\n### Playwright screenshots\n",
         }),
         comment({
           id: 43,
@@ -243,7 +243,7 @@ describe("pr-digest", () => {
           id: 50,
           user: "github-actions[bot]",
           kind: "Bot",
-          body: "<!-- rakazo-preview -->\n**Preview:** https://example.fly.dev",
+          body: "<!-- agentic-smith-preview -->\n**Preview:** https://example.fly.dev",
         }),
       ],
     });

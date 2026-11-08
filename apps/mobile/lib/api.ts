@@ -1,5 +1,5 @@
-import type { RpcInput, RpcOutput, RpcPath, ThreadSnapshot } from "@rakazo/contracts";
-import { CLIENT_UPDATE_REQUIRED_STATUS, parseServerHeaders } from "@rakazo/contracts";
+import type { RpcInput, RpcOutput, RpcPath, ThreadSnapshot } from "@agentic-smith/contracts";
+import { CLIENT_UPDATE_REQUIRED_STATUS, parseServerHeaders } from "@agentic-smith/contracts";
 import {
   aiConsentTargets,
   aiDataUsesForProcedure,
@@ -11,8 +11,8 @@ import {
   parseRetryAfter,
   readBoundedJsonResponse,
   withAbort,
-} from "@rakazo/core";
-import { clientCorrelationHeaders, responseCorrelation } from "@rakazo/logging/monitoring";
+} from "@agentic-smith/core";
+import { clientCorrelationHeaders, responseCorrelation } from "@agentic-smith/logging/monitoring";
 import * as SecureStore from "expo-secure-store";
 import { promptAiConsent } from "./ai-consent";
 import type { EndpointResult } from "./endpoint";
@@ -39,8 +39,8 @@ import {
 import { clearUnsentSends } from "./thread-feedback";
 import { errorText } from "./user-error";
 
-export const SPACE_KEY = "rakazo.space_id";
-export const SPACE_ROLLBACK_KEY = "rakazo.space_rollback";
+export const SPACE_KEY = "agentic-smith.space_id";
+export const SPACE_ROLLBACK_KEY = "agentic-smith.space_rollback";
 const RPC_TIMEOUT_MS = 8_000;
 export const MAX_MOBILE_AUTH_RESPONSE_BYTES = 256 * 1024;
 export const MAX_MOBILE_RPC_RESPONSE_BYTES = 16 * 1024 * 1024;
@@ -160,7 +160,7 @@ export async function authHeaders(
   return {
     ...clientBuild.headers(),
     ...(token ? { authorization: `Bearer ${token}` } : {}),
-    ...(spaceId ? { "x-rakazo-space-id": spaceId } : {}),
+    ...(spaceId ? { "x-agentic-smith-space-id": spaceId } : {}),
   };
 }
 export type ApiRequestContext = {
@@ -170,7 +170,9 @@ export type ApiRequestContext = {
 };
 /** Keeps consent prompts separate across servers and the selected Space. */
 export function aiConsentCoalesceKey(requestContext: ApiRequestContext): string {
-  return [requestContext.apiBase, requestContext.headers["x-rakazo-space-id"] ?? ""].join("\u0000");
+  return [requestContext.apiBase, requestContext.headers["x-agentic-smith-space-id"] ?? ""].join(
+    "\u0000",
+  );
 }
 /** Pins a request to the current server and session, and to a Space (the selected one by default). */
 export async function captureApiRequestContext(
@@ -230,7 +232,7 @@ export async function fetchMobileJson<T>(
     clearTimeout(timer);
   }
 }
-const PENDING_SIGN_OUT_KEY = "rakazo.pending_sign_out";
+const PENDING_SIGN_OUT_KEY = "agentic-smith.pending_sign_out";
 /**
  * Better-auth expires a session 7 days after its last use, and the signed-out session is not used
  * again; 30 days also covers longer server overrides.
@@ -463,7 +465,7 @@ async function deliverPendingSignOut(record: PendingSignOut): Promise<"delivered
         credentials: "omit",
         headers: {
           "content-type": "application/json",
-          origin: "rakazo://",
+          origin: "agentic-smith://",
           authorization: `Bearer ${record.token}`,
           ...clientBuild.headers(),
           ...record.headers,
@@ -655,7 +657,7 @@ async function request(
   // a 401 arriving after the user switched Spaces — including A → B → A —
   // belongs to a stale request and must not touch the current selection.
   const requestHeaders = consentContext?.headers ?? (await authHeaders());
-  const requestSpaceId = requestHeaders["x-rakazo-space-id"];
+  const requestSpaceId = requestHeaders["x-agentic-smith-space-id"];
   try {
     if (
       consentContext?.sessionGeneration !== undefined &&
@@ -671,7 +673,7 @@ async function request(
           method: "POST",
           headers: {
             "content-type": "application/json",
-            origin: "rakazo://",
+            origin: "agentic-smith://",
             ...requestHeaders,
             ...correlation,
           },

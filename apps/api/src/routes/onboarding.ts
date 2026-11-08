@@ -1,5 +1,5 @@
+import { signupSurveyAsksTeamSize } from "@agentic-smith/contracts";
 import { ORPCError } from "@orpc/server";
-import { signupSurveyAsksTeamSize } from "@rakazo/contracts";
 import {
   chooseFocus,
   dismissFocus,

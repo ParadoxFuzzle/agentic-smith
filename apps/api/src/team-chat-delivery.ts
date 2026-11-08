@@ -1,5 +1,5 @@
-import type { MessageBlock } from "@rakazo/contracts";
-import { teamChatResponseText } from "@rakazo/core";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { teamChatResponseText } from "@agentic-smith/core";
 import type { TargetBot, TeamChatBridgeDeps } from "./team-chat-bridge.js";
 
 const DELIVERY_RESERVATION_MS = 2 * 60_000;
@@ -55,7 +55,7 @@ export class TeamChatDelivery {
     await this.sendOnce(message.id, {
       conversationId: message.externalConversation.conversationId,
       replyThreadId: message.replyThreadId,
-      content: `${this.target()?.name ?? "The agent"} could not complete that request. Open Rakazo for details.`,
+      content: `${this.target()?.name ?? "The agent"} could not complete that request. Open Agentic Smith for details.`,
       idempotencyKey: `external-message:${message.id}:failure`,
     });
   }

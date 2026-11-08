@@ -1,4 +1,4 @@
-import { getLogger } from "@rakazo/logging";
+import { getLogger } from "@agentic-smith/logging";
 import type Docker from "dockerode";
 import {
   computerBridgeNameFor,
@@ -155,10 +155,10 @@ export async function reclaimIdleComputerNetworks() {
   const runtime = await inspectSupervisorContainer();
   const owner = computerNetworkOwnerFor(dataDir, runtime);
   const networks = await docker.listNetworks({
-    filters: { label: [`rakazo.computerOwner=${owner}`] },
+    filters: { label: [`jerithai.computerOwner=${owner}`] },
   });
   for (const { Name, Labels } of networks) {
-    const botId = Labels?.["rakazo.botId"];
+    const botId = Labels?.["agentic-smith.botId"];
     if (!botId || Name !== computerNetworkNameFor(botId)) continue;
     await withBotLifecycleLock(botId, () => removeUnusedComputerNetwork(Name)).catch((error) => {
       getLogger().error("computer network reclaim failed", error);
@@ -293,7 +293,7 @@ async function stopBotContainers(containerIds: string[], botId: string) {
       const inspected = await container.inspect().catch(() => undefined);
       // A failed inspect is not proof this endpoint belongs to someone else.
       // Only a successful inspect of a different bot may skip the stop.
-      if (inspected && inspected.Config.Labels?.["rakazo.botId"] !== botId) return;
+      if (inspected && inspected.Config.Labels?.["agentic-smith.botId"] !== botId) return;
       if (!inspected) return;
       await stopContainer(container);
       stoppedIds.add(containerId);
@@ -330,7 +330,7 @@ export async function removeBotNetwork(botId: string) {
             .inspect()
             .catch(() => undefined)
         )?.Config.Labels ?? {};
-      const owner = labels["rakazo.botId"];
+      const owner = labels["agentic-smith.botId"];
       owners.push(owner);
       if (owner === botId) {
         await network.disconnect({ Container: containerId, Force: true }).catch(() => undefined);

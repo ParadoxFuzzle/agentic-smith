@@ -16,7 +16,7 @@ Under **Advanced**:
 - **Show tool activity**: list the tools a bot used under its reply. Off by default.
 - **Load web images automatically**: show images from outside sites in chat.
 
-When you open an outside link from a chat, Rakazo asks first. Choose **Always open** for a site you
+When you open an outside link from a chat, Agentic Smith asks first. Choose **Always open** for a site you
 trust; those sites are listed under **Trusted sites**, where you can remove them.
 
 ## Sign-in and security
@@ -45,24 +45,24 @@ plan and removes its bots and data.
 In **Settings → General**:
 
 - **Export data** downloads a zip of your account: every space's chats, files and bot workspaces.
-- **Import data** loads an export, for example to move between rakazo.com and your own server.
+- **Import data** loads an export, for example to move between jerithai.com and your own server.
 - **Import an agent** brings in an OpenClaw, Hermes or ChatGPT assistant. See
   [Import an agent](./import-an-agent.md).
 - **Delete account** emails you a code, then permanently deletes your account and data.
 
-## Billing on rakazo.com
+## Billing on jerithai.com
 
-rakazo.com is free to try; the sidebar shows when your free period ends. To keep going, choose a
+jerithai.com is free to try; the sidebar shows when your free period ends. To keep going, choose a
 plan:
 
 - **Use my subscription or API key**: works with your ChatGPT or Claude plan, or any
   [model provider](./models.md) key. You pay the provider for model usage.
-- **Use Rakazo credits**: model usage is paid from **Monthly credits** included in the plan. Choose
+- **Use Agentic Smith credits**: model usage is paid from **Monthly credits** included in the plan. Choose
   **Add credits** for more. Monthly credits expire at renewal; credits you add don't.
 
 Both plans come in monthly or yearly, and include monthly hours on your bots' computers.
 **Settings → Billing** shows your plan, when it renews and the computer hours left. Choose
-**Manage** to change it. See [pricing](https://rakazo.com/pricing) for current plans.
+**Manage** to change it. See [pricing](https://jerithai.com/pricing) for current plans.
 
 **Invite friends** in the account menu gives you a link. You get a free month for each friend who
 starts a trial.

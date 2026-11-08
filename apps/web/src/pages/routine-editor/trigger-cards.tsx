@@ -1,7 +1,14 @@
+import type { Routine, RoutineEmailSenders } from "@agentic-smith/contracts";
+import { ROUTINE_WATCH_MIN_MINUTES } from "@agentic-smith/contracts";
+import {
+  Button,
+  Input,
+  NativeSelect,
+  NativeSelectOption,
+  Switch,
+  Textarea,
+} from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { Routine, RoutineEmailSenders } from "@rakazo/contracts";
-import { ROUTINE_WATCH_MIN_MINUTES } from "@rakazo/contracts";
-import { Button, Input, NativeSelect, NativeSelectOption, Switch, Textarea } from "@rakazo/ui-web";
 import { Eye, GitBranch, Globe, Mail, MessageSquare, X } from "lucide-react";
 import { useId } from "react";
 import { BotEmailAddressField } from "../../components/BotEmailAddressField";

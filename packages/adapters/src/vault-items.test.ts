@@ -1,5 +1,5 @@
-import type { BotSecretDestination } from "@rakazo/contracts";
-import { encodeCardSecret, encodeContactSecret } from "@rakazo/contracts";
+import type { BotSecretDestination } from "@agentic-smith/contracts";
+import { encodeCardSecret, encodeContactSecret } from "@agentic-smith/contracts";
 import { describe, expect, it } from "vitest";
 import {
   defaultVaultItemTitle,

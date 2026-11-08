@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import type { BackgroundJob } from "@rakazo/adapter-kit";
-import type { Prisma, PrismaClient } from "@rakazo/db";
+import type { BackgroundJob } from "@agentic-smith/adapter-kit";
+import type { Prisma, PrismaClient } from "@agentic-smith/db";
 import {
   appendEvent,
   asSystem,
@@ -10,7 +10,7 @@ import {
   runAsSystem,
   SpaceDeletionInProgressError,
   sendUserMessage,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createRunExecutor } from "./executor.js";
 import { createJobReconciler } from "./job-reconciler.js";
@@ -23,7 +23,7 @@ describePostgres("routine tick prompt and model consistency (PostgreSQL)", () =>
   let db: ReturnType<typeof createDb>;
   let system: PrismaClient;
   let identity: { userId: string; spaceId: string; botId: string; threadId: string };
-  const address = `routine-prompt-${randomUUID()}@rakazo.test`;
+  const address = `routine-prompt-${randomUUID()}@agentic-smith.test`;
   beforeAll(async () => {
     db = createDb(url!);
     system = asSystem(db.prisma);

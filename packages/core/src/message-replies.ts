@@ -1,5 +1,5 @@
-import type { MessageAuthor, MessageBlock, ReplyPreview } from "@rakazo/contracts";
-import { MessageAuthorSchema, ReplyPreviewSchema } from "@rakazo/contracts";
+import type { MessageAuthor, MessageBlock, ReplyPreview } from "@agentic-smith/contracts";
+import { MessageAuthorSchema, ReplyPreviewSchema } from "@agentic-smith/contracts";
 import { displayName } from "./display-name.js";
 import { plainTextFromMarkdown } from "./markdown-plain.js";
 import { messageReaction } from "./message-reactions.js";

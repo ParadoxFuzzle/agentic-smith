@@ -1,4 +1,4 @@
-import { GROUP_MEMBER_MIN } from "@rakazo/contracts";
+import { GROUP_MEMBER_MIN } from "@agentic-smith/contracts";
 import { GUEST_ROLE } from "./billing.js";
 import type { PrismaClient } from "./client.js";
 import { runAsSystem } from "./row-security.js";

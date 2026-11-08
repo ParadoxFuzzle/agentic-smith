@@ -1,9 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
-import { onError } from "@orpc/server";
-import { RPCHandler } from "@orpc/server/fetch";
-import { finishRoutineHandover } from "@rakazo/adapters";
-import type { Actor } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
+import { finishRoutineHandover } from "@agentic-smith/adapters";
+import type { Actor } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   asSystem,
   claimSpacesLeavingWithAccount,
@@ -19,7 +17,9 @@ import {
   personalOrganizationIds,
   recordAuditEvent,
   runAsTenant,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
+import { onError } from "@orpc/server";
+import { RPCHandler } from "@orpc/server/fetch";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import type { RouterDeps } from "./router.js";
 import { createRouter } from "./router.js";
@@ -138,7 +138,7 @@ describePostgres("shared spaces: invites and membership (PostgreSQL)", () => {
         screenProxySecret: "fake-test-secret",
         sandboxProvider: "fake",
       },
-      dataDir: "/tmp/rakazo-shared-spaces-test",
+      dataDir: "/tmp/agentic-smith-shared-spaces-test",
     } as unknown as RouterDeps;
     // As the app does, so domain errors answer with their own status.
     handler = new RPCHandler(createRouter(deps), {

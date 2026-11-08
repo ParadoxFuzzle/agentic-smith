@@ -1,4 +1,4 @@
-import type { SpendingLimit } from "@rakazo/contracts";
+import type { SpendingLimit } from "@agentic-smith/contracts";
 
 type PaymentRow = {
   operationKey: string;

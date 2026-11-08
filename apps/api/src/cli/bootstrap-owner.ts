@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
-import { contentKeyProviderFromEnv, unwrapEnvFromKeyManager } from "@rakazo/adapters";
-import { createAuth } from "@rakazo/auth";
-import { bootstrapUserSpace, createDb, runAsSystem } from "@rakazo/db";
+import { contentKeyProviderFromEnv, unwrapEnvFromKeyManager } from "@agentic-smith/adapters";
+import { createAuth } from "@agentic-smith/auth";
+import { bootstrapUserSpace, createDb, runAsSystem } from "@agentic-smith/db";
 
 function required(name: string): string {
   const value = process.env[name];

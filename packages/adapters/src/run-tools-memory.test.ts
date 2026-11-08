@@ -1,4 +1,4 @@
-import { HistoryReadInputSchema, HistorySearchInputSchema } from "@rakazo/contracts";
+import { HistoryReadInputSchema, HistorySearchInputSchema } from "@agentic-smith/contracts";
 import { describe, expect, it } from "vitest";
 import { withoutBlankFields } from "./run-tools-memory.js";
 

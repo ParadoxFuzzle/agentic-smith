@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import { RECREATED_SERVICES } from "@rakazo/core";
+import { RECREATED_SERVICES } from "@agentic-smith/core";
 import { describe, expect, it } from "vitest";
 import { parse } from "yaml";
 
@@ -90,13 +90,15 @@ describe("the updater compose service", () => {
   });
 
   it("is bind-mounted at the same path it has on the host", () => {
-    const mount = (updater.volumes ?? []).find((volume) => volume.includes("RAKAZO_DEPLOY_DIR"));
+    const mount = (updater.volumes ?? []).find((volume) =>
+      volume.includes("AGENTIC_SMITH_DEPLOY_DIR"),
+    );
     // biome-ignore lint/suspicious/noTemplateCurlyInString: this is the literal Compose expression
-    const deployDir = "${RAKAZO_DEPLOY_DIR:-/srv/rakazo}";
+    const deployDir = "${AGENTIC_SMITH_DEPLOY_DIR:-/srv/agentic-smith}";
     const separatorIndex = mount?.indexOf("}:${") ?? -1;
     const source = separatorIndex < 0 ? undefined : mount?.slice(0, separatorIndex + 1);
     const destination = separatorIndex < 0 ? undefined : mount?.slice(separatorIndex + 2);
-    expect(updater.environment?.RAKAZO_DEPLOY_DIR).toBe(deployDir);
+    expect(updater.environment?.AGENTIC_SMITH_DEPLOY_DIR).toBe(deployDir);
     expect(mount).toBe(`${deployDir}:${deployDir}`);
     expect(source).toBe(destination);
   });
@@ -109,15 +111,15 @@ describe("the updater compose service", () => {
   });
 
   it("pins its own image tag separately from the application image", () => {
-    expect(updater.image).toContain("RAKAZO_UPDATER_IMAGE_TAG");
+    expect(updater.image).toContain("AGENTIC_SMITH_UPDATER_IMAGE_TAG");
     for (const service of RECREATED_SERVICES) {
-      expect(compose.services[service]?.image).toContain("RAKAZO_IMAGE_TAG");
+      expect(compose.services[service]?.image).toContain("AGENTIC_SMITH_IMAGE_TAG");
     }
   });
 
   it("uses the official registry namespace and digest-pins third-party runtime images", () => {
-    expect(updater.image).toContain("ghcr.io/elie222/rakazo/updater");
-    expect(compose.services.api?.image).toContain("ghcr.io/elie222/rakazo/app");
+    expect(updater.image).toContain("ghcr.io/paradoxfuzzle/agentic-smith/updater");
+    expect(compose.services.api?.image).toContain("ghcr.io/paradoxfuzzle/agentic-smith/app");
     expect(compose.services.postgres?.image).toMatch(
       /^\$\{POSTGRES_IMAGE:-postgres:18@sha256:edb0c08dc33befd0262ab3b5cf1c4f3f8cfd8b09e88c05b45adee29d6761ddb6\}$/,
     );
@@ -131,11 +133,11 @@ describe("the updater compose service", () => {
     // environment is exactly what this file declares. Pinning them here would make the documented
     // variables inert: the operator sets them, the updater never sees them, and the overlay is
     // dropped on every recreate.
-    expect(updater.environment?.RAKAZO_COMPOSE_FILE).toBe(
-      interpolated("RAKAZO_COMPOSE_FILE", "infra/compose/docker-compose.prod.yml"),
+    expect(updater.environment?.AGENTIC_SMITH_COMPOSE_FILE).toBe(
+      interpolated("AGENTIC_SMITH_COMPOSE_FILE", "infra/compose/docker-compose.prod.yml"),
     );
-    expect(updater.environment?.RAKAZO_UPDATE_SERVICES).toBe(
-      interpolated("RAKAZO_UPDATE_SERVICES"),
+    expect(updater.environment?.AGENTIC_SMITH_UPDATE_SERVICES).toBe(
+      interpolated("AGENTIC_SMITH_UPDATE_SERVICES"),
     );
     expect(updater.environment?.COMPOSE_PATH_SEPARATOR).toBe(
       interpolated("COMPOSE_PATH_SEPARATOR"),
@@ -144,19 +146,23 @@ describe("the updater compose service", () => {
 
   it("injects the actual Compose project name into the updater container", () => {
     // biome-ignore lint/suspicious/noTemplateCurlyInString: this is the literal Compose expression
-    expect(updater.environment?.COMPOSE_PROJECT_NAME).toBe("${COMPOSE_PROJECT_NAME:-rakazo-prod}");
+    expect(updater.environment?.COMPOSE_PROJECT_NAME).toBe(
+      "${COMPOSE_PROJECT_NAME:-agentic-smith-prod}",
+    );
   });
 
   it("does not load the application env_file into the root-equivalent process", () => {
     expect(updater.env_file).toBeUndefined();
     // biome-ignore lint/suspicious/noTemplateCurlyInString: this is the literal Compose expression
-    expect(updater.environment?.RAKAZO_UPDATER_TOKEN).toBe("${RAKAZO_UPDATER_TOKEN:-}");
+    expect(updater.environment?.AGENTIC_SMITH_UPDATER_TOKEN).toBe(
+      "${AGENTIC_SMITH_UPDATER_TOKEN:-}",
+    );
   });
 
   it("does not let the api container reach the Docker socket to update itself", () => {
     expect(compose.services.api?.volumes ?? []).not.toContain("/var/run/docker.sock");
-    expect(compose.services.api?.environment?.RAKAZO_UPDATER_URL).toBeUndefined();
-    expect(compose.services.api?.environment?.RAKAZO_UPDATER_TOKEN).toBeUndefined();
+    expect(compose.services.api?.environment?.AGENTIC_SMITH_UPDATER_URL).toBeUndefined();
+    expect(compose.services.api?.environment?.AGENTIC_SMITH_UPDATER_TOKEN).toBeUndefined();
   });
 
   it("passes logging configuration without using env_file", () => {
@@ -212,7 +218,7 @@ describe("the point-in-time recovery sidecar", () => {
       "PITR_SECRET_ACCESS_KEY",
       "TINI_KILL_PROCESS_GROUP",
     ]);
-    expect(pitr.environment?.PGUSER).toBe("rakazo_pitr");
+    expect(pitr.environment?.PGUSER).toBe("agentic_smith_pitr");
     expect(pitr.environment?.PGPASSWORD).toBe(interpolated("PITR_DATABASE_PASSWORD"));
     expect(pitr.env_file).toBeUndefined();
     expect(pitr.ports).toBeUndefined();
@@ -224,7 +230,7 @@ describe("the point-in-time recovery sidecar", () => {
     for (const file of ["Dockerfile.pitr", "pitr-agent.sh", "apt-security.sh"]) {
       hash.update(readFileSync(path.join(composeDir, file)));
     }
-    expect(pitr.image).toBe(`rakazo-pitr:${hash.digest("hex").slice(0, 16)}`);
+    expect(pitr.image).toBe(`agentic-smith-pitr:${hash.digest("hex").slice(0, 16)}`);
   });
 
   it("runs the apt security helper smoke, including the copy equality check", () => {

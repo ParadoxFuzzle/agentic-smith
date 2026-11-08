@@ -1,5 +1,5 @@
-import { BotAvatarValueSchema, parseBotAvatarValue } from "@rakazo/contracts";
-import { lightTokens } from "@rakazo/ui-tokens";
+import { BotAvatarValueSchema, parseBotAvatarValue } from "@agentic-smith/contracts";
+import { lightTokens } from "@agentic-smith/ui-tokens";
 import type { AvatarEyes } from "./avatar-shape.js";
 import {
   avatarEyeRects,
@@ -44,7 +44,7 @@ export function notificationAvatarSource(bot: {
   if (parsed?.kind === "shape") {
     viewBox = SHIPPED_BOT_AVATAR_VIEWBOX;
     body = `<path d="${shippedBotAvatarShapePath(parsed.shapeIndex)}" fill="${color}"/>${barEyes(SHIPPED_BOT_AVATAR_EYES, botEyeInk(color, lightTokens))}`;
-  } else if (bot.avatarSet === "rakazo") {
+  } else if (bot.avatarSet === "agentic-smith") {
     const fill = logoAvatarTraits(bot.id, color).color;
     const { width, height, leftCx, rightCx, cy } = LOGO_AVATAR_EYES;
     const eyes = [leftCx, rightCx]

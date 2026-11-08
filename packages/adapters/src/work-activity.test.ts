@@ -1,4 +1,4 @@
-import type { PrismaClient } from "@rakazo/db";
+import type { PrismaClient } from "@agentic-smith/db";
 import { describe, expect, it, vi } from "vitest";
 import type { WorkActivityPushProvider } from "./work-activity.js";
 import { WORK_ACTIVITY_ROWS, WorkActivities } from "./work-activity.js";

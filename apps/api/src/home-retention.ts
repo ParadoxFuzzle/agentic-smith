@@ -1,10 +1,10 @@
 import { randomUUID } from "node:crypto";
-import type { TransactionalEmailProvider } from "@rakazo/adapter-kit";
-import type { HomeDeletionReason } from "@rakazo/auth";
-import { emailLocale, homeDeletionEmail } from "@rakazo/auth";
-import type { PrismaClient } from "@rakazo/db";
-import { hasModelAccess, needsBillingPortal, Prisma, runAsSystem } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+import type { TransactionalEmailProvider } from "@agentic-smith/adapter-kit";
+import type { HomeDeletionReason } from "@agentic-smith/auth";
+import { emailLocale, homeDeletionEmail } from "@agentic-smith/auth";
+import type { PrismaClient } from "@agentic-smith/db";
+import { hasModelAccess, needsBillingPortal, Prisma, runAsSystem } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const PLAN_ENDED_DAYS = 30;

@@ -1,6 +1,6 @@
-import type { RealtimeFanout } from "@rakazo/adapter-kit";
-import { MessageBlock as MessageBlockSchema } from "@rakazo/contracts";
-import { releasedTakeoverComputerBlocks } from "@rakazo/core";
+import type { RealtimeFanout } from "@agentic-smith/adapter-kit";
+import { MessageBlock as MessageBlockSchema } from "@agentic-smith/contracts";
+import { releasedTakeoverComputerBlocks } from "@agentic-smith/core";
 import type { Prisma, PrismaClient } from "./client.js";
 import { hasActiveComputerControl, holdsUserControl } from "./computers.js";
 import { notifyRealtime } from "./event-stream.js";

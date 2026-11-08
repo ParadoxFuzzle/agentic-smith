@@ -1,8 +1,8 @@
+import type { CapabilityInstall, ConnectionCatalogItem, McpServer } from "@agentic-smith/contracts";
+import { mcpServerNeedsSignIn } from "@agentic-smith/contracts";
+import { catalogItemKey } from "@agentic-smith/core";
+import { Button } from "@agentic-smith/ui-web";
 import { Plural, Trans } from "@lingui/react/macro";
-import type { CapabilityInstall, ConnectionCatalogItem, McpServer } from "@rakazo/contracts";
-import { mcpServerNeedsSignIn } from "@rakazo/contracts";
-import { catalogItemKey } from "@rakazo/core";
-import { Button } from "@rakazo/ui-web";
 import type { PluginSelection } from "../../components/integrations/plugin-marketplace";
 import {
   PluginLogo,

@@ -17,7 +17,7 @@ const xcode = createRequire(require.resolve("@expo/config-plugins", { paths: [di
 const sharing = (file) => require(`expo-sharing/plugin/build/ios/${file}`);
 
 function withTemplateProject(run) {
-  const directory = mkdtempSync(join(tmpdir(), "rakazo-share-extension-"));
+  const directory = mkdtempSync(join(tmpdir(), "agentic-smith-share-extension-"));
   try {
     const file = join(directory, "project.pbxproj");
     writeFileSync(
@@ -43,10 +43,10 @@ it("names the pinned expo-sharing extension after the app", () => {
     });
     const original = readFileSync(join(directory, "Info.plist"), "utf8");
     expect(original).toContain("<string>$(PRODUCT_NAME)</string>");
-    const renamed = renameShareExtension(original, "Rakazo");
-    expect(renamed).toMatch(/<key>CFBundleDisplayName<\/key>\s*<string>Rakazo<\/string>/);
+    const renamed = renameShareExtension(original, "Agentic Smith");
+    expect(renamed).toMatch(/<key>CFBundleDisplayName<\/key>\s*<string>Agentic Smith<\/string>/);
     // The bundle name and everything else are untouched.
-    expect(renamed.replace("Rakazo", "$(PRODUCT_NAME)")).toBe(original);
+    expect(renamed.replace("Agentic Smith", "$(PRODUCT_NAME)")).toBe(original);
   });
 });
 

@@ -2,7 +2,7 @@ import {
   COMPUTER_ALLOWANCE_USED_ERROR,
   COMPUTER_PROVIDER_UNAVAILABLE_ERROR,
   COMPUTER_RATE_LIMIT_ERROR,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 
 /** The sandbox provider refused the request because an account rate limit or quota was hit. */
 export class SandboxRateLimitError extends Error {

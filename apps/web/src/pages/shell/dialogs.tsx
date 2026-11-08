@@ -1,5 +1,4 @@
-import { Plural, Trans, useLingui } from "@lingui/react/macro";
-import type { AccountItem, Bot, BotSection } from "@rakazo/contracts";
+import type { AccountItem, Bot, BotSection } from "@agentic-smith/contracts";
 import {
   Button,
   Checkbox,
@@ -12,7 +11,8 @@ import {
   Input,
   RadioGroup,
   RadioGroupItem,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Plural, Trans, useLingui } from "@lingui/react/macro";
 import { Lock } from "lucide-react";
 import { useId, useState } from "react";
 import { ConfirmDialog } from "../../components/ConfirmDialog";

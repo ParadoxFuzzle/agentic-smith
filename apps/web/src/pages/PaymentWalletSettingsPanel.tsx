@@ -1,7 +1,7 @@
+import type { PaymentWalletStatus } from "@agentic-smith/contracts";
+import { writeSaved } from "@agentic-smith/core/query";
+import { Button } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { PaymentWalletStatus } from "@rakazo/contracts";
-import { writeSaved } from "@rakazo/core/query";
-import { Button } from "@rakazo/ui-web";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ExternalLink } from "lucide-react";
 import { useState } from "react";

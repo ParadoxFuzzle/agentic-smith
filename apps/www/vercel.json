@@ -3,14 +3,14 @@
   "redirects": [
     {
       "source": "/",
-      "has": [{ "type": "host", "value": { "eq": "www.rakazo.com" } }],
-      "destination": "https://rakazo.com/",
+      "has": [{ "type": "host", "value": { "eq": "www.jerithai.com" } }],
+      "destination": "https://jerithai.com/",
       "statusCode": 301
     },
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": { "eq": "www.rakazo.com" } }],
-      "destination": "https://rakazo.com/:path*",
+      "has": [{ "type": "host", "value": { "eq": "www.jerithai.com" } }],
+      "destination": "https://jerithai.com/:path*",
       "statusCode": 301
     },
     {
@@ -20,22 +20,22 @@
     },
     {
       "source": "/x",
-      "destination": "https://x.com/rakazobot",
+      "destination": "https://x.com/agenticsmithbot",
       "permanent": false
     },
     {
       "source": "/twitter",
-      "destination": "https://x.com/rakazobot",
+      "destination": "https://x.com/agenticsmithbot",
       "permanent": false
     },
     {
       "source": "/github",
-      "destination": "https://github.com/elie222/rakazo",
+      "destination": "https://github.com/ParadoxFuzzle/agentic-smith",
       "permanent": false
     },
     {
       "source": "/discord",
-      "destination": "https://discord.gg/RWwKa2Sn7h",
+      "destination": "https://jerithai.com",
       "permanent": false
     }
   ],

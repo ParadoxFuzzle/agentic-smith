@@ -2,16 +2,6 @@ import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
 import type {
-  BoatApi,
-  Sandbox as BoatMachine,
-  Command200Response,
-  CommandResponse,
-  FileUrlResponse,
-  SandboxStateEnum,
-  SandboxTypeEnum,
-  SavedSnapshot,
-} from "@boatdev/sdk";
-import type {
   AdapterContext,
   CommandRequest,
   ComputerActionRequest,
@@ -30,7 +20,7 @@ import type {
   StreamedPortableFile,
   TerminalRequest,
   WorkspaceExportLimits,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import {
   SandboxDamagedError,
   SandboxRateLimitError,
@@ -38,10 +28,20 @@ import {
   SandboxUnavailableError,
   SandboxUnresponsiveError,
   WorkspaceTooLargeError,
-} from "@rakazo/adapter-kit";
-import type { ComputerSize } from "@rakazo/contracts";
-import { boundedSandboxCommandTimeoutMs } from "@rakazo/core";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import type { ComputerSize } from "@agentic-smith/contracts";
+import { boundedSandboxCommandTimeoutMs } from "@agentic-smith/core";
+import { getLogger } from "@agentic-smith/logging";
+import type {
+  BoatApi,
+  Sandbox as BoatMachine,
+  Command200Response,
+  CommandResponse,
+  FileUrlResponse,
+  SandboxStateEnum,
+  SandboxTypeEnum,
+  SavedSnapshot,
+} from "@boatdev/sdk";
 import {
   BoatApiError,
   BoatRequestGate,
@@ -83,12 +83,12 @@ import {
 const DISPLAY_START = 20;
 const BOAT_API_BASE = "https://boat.dev/api/v1";
 const BOAT_HOME = "/home/user";
-const BOAT_WORKSPACE = `${BOAT_HOME}/rakazo-home`;
+const BOAT_WORKSPACE = `${BOAT_HOME}/agentic-smith-home`;
 const BOAT_BROWSER_PROFILES = `${BOAT_WORKSPACE}/.browser-profiles`;
 /** Outside the workspace so checkpoints never carry it. Boat runs every command as `user`. */
-const BOAT_COMMAND_ENV = "/home/user/.rakazo-command-env";
+const BOAT_COMMAND_ENV = "/home/user/.agentic-smith-command-env";
 /** Where an export archives the workspace; outside it for the same reason. */
-const BOAT_ARCHIVE_PREFIX = "/tmp/rakazo-workspace-archive-";
+const BOAT_ARCHIVE_PREFIX = "/tmp/agentic-smith-workspace-archive-";
 const BOAT_READY_TIMEOUT_MS = 5 * 60_000;
 const BOAT_RECOVER_POLL_MAX_MS = 15_000;
 /**
@@ -320,8 +320,8 @@ export class BoatSandboxProvider implements SandboxProvider {
             ttlSeconds: BOAT_TTL_SECONDS,
             noEnv: true,
             env: {
-              RAKAZO_BOT_ID: request.botId,
-              RAKAZO_SANDBOX: "computer",
+              AGENTIC_SMITH_BOT_ID: request.botId,
+              AGENTIC_SMITH_SANDBOX: "computer",
             },
             ...(from ? { from } : {}),
             ...(type ? { type } : {}),
@@ -1214,7 +1214,7 @@ export class BoatSandboxProvider implements SandboxProvider {
     timeoutMs: number,
     signal?: AbortSignal,
   ): Promise<BoatCommandResult> {
-    const marker = `/tmp/rakazo-command-${randomUUID()}.completed-124`;
+    const marker = `/tmp/agentic-smith-command-${randomUUID()}.completed-124`;
     const wrapped = timeoutCommand(command, timeoutMs, marker);
     const timeoutSeconds = Math.ceil(timeoutMs / 1_000);
     const detached = timeoutSeconds + 5 > BOAT_API_COMMAND_TIMEOUT_SECONDS;
@@ -1374,7 +1374,7 @@ export class BoatSandboxProvider implements SandboxProvider {
   }
 
   private async terminateCommand(id: string, marker: string): Promise<void> {
-    const pattern = marker.replace("rakazo", "[r]akazo");
+    const pattern = marker.replace("agentic-smith", "[r]akazo");
     await this.rawCommand(
       id,
       `pkill -TERM -f ${shellQuote(pattern)} 2>/dev/null || true; sleep 0.2; pkill -KILL -f ${shellQuote(pattern)} 2>/dev/null || true`,

@@ -7,22 +7,22 @@ import { UI_LOCALES } from "./ui-locale";
 const resources = resolve(
   dirname(fileURLToPath(import.meta.url)),
   "..",
-  "modules/rakazo-notifications/android/src/main/res",
+  "modules/agentic-smith-notifications/android/src/main/res",
 );
 const keys = [
-  "rakazo_channel_live",
-  "rakazo_channel_messages",
-  "rakazo_channel_scheduled",
-  "rakazo_channel_attention",
-  "rakazo_live_one",
-  "rakazo_live_many",
-  "rakazo_live_working",
-  "rakazo_scheduled_title",
-  "rakazo_replied_group",
-  "rakazo_replied",
-  "rakazo_attention_failed",
-  "rakazo_attention_takeover",
-  "rakazo_attention_input",
+  "agentic_smith_channel_live",
+  "agentic_smith_channel_messages",
+  "agentic_smith_channel_scheduled",
+  "agentic_smith_channel_attention",
+  "agentic_smith_live_one",
+  "agentic_smith_live_many",
+  "agentic_smith_live_working",
+  "agentic_smith_scheduled_title",
+  "agentic_smith_replied_group",
+  "agentic_smith_replied",
+  "agentic_smith_attention_failed",
+  "agentic_smith_attention_takeover",
+  "agentic_smith_attention_input",
 ];
 
 const resourceDirectories = {

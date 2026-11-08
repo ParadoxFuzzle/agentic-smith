@@ -1,5 +1,5 @@
-import type { BillingStatus } from "@rakazo/contracts";
-import { computerHoursOut } from "@rakazo/contracts";
+import type { BillingStatus } from "@agentic-smith/contracts";
+import { computerHoursOut } from "@agentic-smith/contracts";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { rpc } from "../../lib/api";

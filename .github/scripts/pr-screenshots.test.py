@@ -86,7 +86,7 @@ class SelectTest(unittest.TestCase):
 
     def test_captions_are_plain_text(self):
         [(_, caption)] = self.select(
-            [{"file": "01-chat.png", "caption": "![x](y) <img src=x> @someone\n<!-- rakazo-pr-screenshots:end -->"}]
+            [{"file": "01-chat.png", "caption": "![x](y) <img src=x> @someone\n<!-- agentic-smith-pr-screenshots:end -->"}]
         )
         self.assertIsNone(re.search(r"(?<!\\)[<>\[\]()!@]", caption))
         self.assertNotIn(shots.END, caption)

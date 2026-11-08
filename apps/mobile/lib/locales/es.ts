@@ -203,8 +203,8 @@ export const ES_MESSAGES: Record<string, string> = {
   "Your model provider": "Tu proveedor de modelos",
   "Connect a model in Settings before running bots.":
     "Conecta un modelo en Configuración antes de ejecutar bots.",
-  "Connect your own API key in Models or choose Rakazo credits in Billing.":
-    "Conecta tu propia clave de API en Modelos o elige créditos de Rakazo en Facturación.",
+  "Connect your own API key in Models or choose Agentic Smith credits in Billing.":
+    "Conecta tu propia clave de API en Modelos o elige créditos de Agentic Smith en Facturación.",
   "The model provider returned an error.": "El proveedor de modelos devolvió un error.",
   "{provider} is rate limiting requests. Try again shortly.":
     "{provider} está limitando las solicitudes. Vuelve a intentarlo en breve.",
@@ -256,8 +256,8 @@ export const ES_MESSAGES: Record<string, string> = {
   "Chat Settings": "Configuración del chat",
   "Configure a plugin catalog on the server to connect apps.":
     "Configura un catálogo de plugins en el servidor para conectar apps.",
-  "Paste the OpenAI-compatible address from your server. Rakazo adds /v1 if needed.":
-    "Pega la dirección compatible con OpenAI de tu servidor. Rakazo agrega /v1 si es necesario.",
+  "Paste the OpenAI-compatible address from your server. Agentic Smith adds /v1 if needed.":
+    "Pega la dirección compatible con OpenAI de tu servidor. Agentic Smith agrega /v1 si es necesario.",
   "Settings: General": "Configuración: General",
   "Settings: Usage": "Configuración: Uso",
   "Sign-in did not return a session": "El inicio de sesión no devolvió una sesión",
@@ -298,9 +298,9 @@ export const ES_MESSAGES: Record<string, string> = {
   "Reset your password": "Restablece tu contraseña",
   "Send reset link": "Enviar enlace de restablecimiento",
   Server: "Servidor",
-  "Sign in to Rakazo": "Inicia sesión en Rakazo",
+  "Sign in to Agentic Smith": "Inicia sesión en Agentic Smith",
   "Sign up": "Registrarse",
-  "Sign up for Rakazo": "Regístrate en Rakazo",
+  "Sign up for Agentic Smith": "Regístrate en Agentic Smith",
   "Use a custom server": "Usar un servidor personalizado",
   "Use default server": "Usar el servidor predeterminado",
   Activity: "Actividad",
@@ -654,8 +654,8 @@ export const ES_MESSAGES: Record<string, string> = {
   "Supports images": "Admite imágenes",
   "Supports thinking": "Admite razonamiento",
   "Then paste the code here.": "Luego pega el código aquí.",
-  "This subscription sign-in is not available in Rakazo yet. Use a deployment credential or choose another provider.":
-    "Este inicio de sesión por suscripción aún no está disponible en Rakazo. Usa una credencial de despliegue o elige otro proveedor.",
+  "This subscription sign-in is not available in Agentic Smith yet. Use a deployment credential or choose another provider.":
+    "Este inicio de sesión por suscripción aún no está disponible en AgenticSmith. Usa una credencial de despliegue o elige otro proveedor.",
   "Use a found model": "Usar un modelo encontrado",
   "exact-model-id": "id-exacto-del-modelo",
   "http://127.0.0.1:8000/v1": "http://127.0.0.1:8000/v1",
@@ -912,7 +912,8 @@ export const ES_MESSAGES: Record<string, string> = {
   "Enter a server URL": "Introduce la URL de un servidor",
   "Public servers need https://. HTTP only works on your local network.":
     "Los servidores públicos necesitan https://. HTTP solo funciona en tu red local.",
-  "That URL did not look like a Rakazo server": "Esa URL no parece ser de un servidor de Rakazo",
+  "That URL did not look like a Agentic Smith server":
+    "Esa URL no parece ser de un servidor de Agentic Smith",
   "That URL is missing a host": "A esa URL le falta el host",
   "That doesn’t look like a URL": "Eso no parece una URL",
   "Use an http or https URL": "Usa una URL http o https",
@@ -976,7 +977,7 @@ export const ES_MESSAGES: Record<string, string> = {
   "AI models": "Modelos de IA",
   Memory: "Memoria",
   "Privacy policies": "Políticas de privacidad",
-  Rakazo: "Rakazo",
+  "Agentic Smith": "Agentic Smith",
   "Withdraw all permissions": "Retirar todos los permisos",
   "Withdraw all permissions?": "¿Retirar todos los permisos?",
   "New mobile actions won't send data to these services. Runs already in progress and routines keep going until you stop them.":
@@ -1130,14 +1131,14 @@ export const ES_MESSAGES: Record<string, string> = {
   Subscribe: "Suscribirse",
   "Monthly credits expire at renewal. Top-ups do not expire.":
     "Los créditos mensuales vencen al renovar. Las recargas no vencen.",
-  "Use Rakazo credits": "Usar créditos de Rakazo",
+  "Use Agentic Smith credits": "Usar créditos de Agentic Smith",
   "Choose a plan": "Elige un plan",
   "Change plan": "Cambiar de plan",
   "Current plan": "Plan actual",
   Plan: "Plan",
   None: "Ninguno",
   "Free trial": "Prueba gratuita",
-  "Rakazo credits": "Créditos de Rakazo",
+  "Agentic Smith credits": "Créditos de Agentic Smith",
   "Free until": "Gratis hasta",
   Ends: "Termina",
   Renews: "Se renueva",
@@ -1173,7 +1174,7 @@ export const ES_MESSAGES: Record<string, string> = {
   "Your free trial has started": "Tu prueba gratuita comenzó",
   "Free until {date}": "Gratis hasta el {date}",
   "Connect your AI": "Conecta tu IA",
-  "Start using Rakazo": "Empieza a usar Rakazo",
+  "Start using Agentic Smith": "Empieza a usar Agentic Smith",
   "1 unread": "1 sin leer",
   "{count} unread": "{count} sin leer",
   "{count} need attention": "{count} requieren atención",
@@ -1181,11 +1182,12 @@ export const ES_MESSAGES: Record<string, string> = {
   "{label}, below": "{label}, abajo",
   Work: "Trabajo",
   Both: "Ambos",
-  "How will you use Rakazo?": "¿Cómo usarás Rakazo?",
-  "What do you most want Rakazo to help with?": "¿Con qué quieres que Rakazo te ayude más?",
+  "How will you use Agentic Smith?": "¿Cómo usarás Agentic Smith?",
+  "What do you most want Agentic Smith to help with?":
+    "¿Con qué quieres que Agentic Smith te ayude más?",
   "How big is your team?": "¿De qué tamaño es tu equipo?",
   "How did you hear about us?": "¿Cómo nos conociste?",
-  "Welcome to Rakazo": "Te damos la bienvenida a Rakazo",
+  "Welcome to Agentic Smith": "Te damos la bienvenida a Agentic Smith",
   Loading: "Cargando",
   Show: "Mostrar",
   Submitted: "Enviado",

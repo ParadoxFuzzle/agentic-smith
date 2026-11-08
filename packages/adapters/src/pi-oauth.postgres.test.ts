@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
+import { asSystem, createDb, runAsTenant } from "@agentic-smith/db";
 import type { OAuthCredential } from "@earendil-works/pi-ai";
-import { asSystem, createDb, runAsTenant } from "@rakazo/db";
 import { afterAll, describe, expect, it, vi } from "vitest";
 import { PostgresRealtimeFanout } from "./realtime.js";
 import { EncryptedSecretStore } from "./secrets.js";

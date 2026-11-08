@@ -1,19 +1,19 @@
-import type { SecretStore } from "@rakazo/adapter-kit";
-import { SecretStoreUnavailableError } from "@rakazo/adapter-kit";
-import type { Actor } from "@rakazo/contracts";
+import type { SecretStore } from "@agentic-smith/adapter-kit";
+import { SecretStoreUnavailableError } from "@agentic-smith/adapter-kit";
+import type { Actor } from "@agentic-smith/contracts";
 import {
   canonicalPiProviderId,
   selectCompatibleModelCredential,
   usableModelId,
-} from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   chooseModelCredential,
   findModelCredential,
   findModelCredentialById,
   GUEST_ROLE,
   organizationForMember,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
 import { resolveDeploymentModel } from "./deployment-model.js";
 import { modelCredentialDto } from "./model-connect.js";
 import type { StoredModelSecret } from "./model-secret.js";

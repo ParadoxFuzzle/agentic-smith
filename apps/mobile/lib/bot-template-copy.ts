@@ -1,4 +1,4 @@
-import type { BotTemplate } from "@rakazo/contracts";
+import type { BotTemplate } from "@agentic-smith/contracts";
 import { t } from "./i18n";
 
 export type BotTemplateCopy = Pick<BotTemplate, "name" | "summary" | "sample">;

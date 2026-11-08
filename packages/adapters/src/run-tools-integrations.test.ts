@@ -1,4 +1,4 @@
-import type { ConnectorEvent } from "@rakazo/adapter-kit";
+import type { ConnectorEvent } from "@agentic-smith/adapter-kit";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { RunContext } from "./run-context.js";
 import type { ToolCall } from "./run-tool-gate.js";

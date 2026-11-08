@@ -1,21 +1,25 @@
 import { randomBytes, randomUUID } from "node:crypto";
 import type {
+  ModelCredentialFailedState,
+  ModelCredentialRetireReason,
+  SecretStore,
+} from "@agentic-smith/adapter-kit";
+import type {
+  ModelOAuthBegin,
+  ModelOAuthSignInMode,
+  SettingsScope,
+} from "@agentic-smith/contracts";
+import { canonicalPiProviderId } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
+import { runAsSystem, runAsTenant } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import type {
   AuthInteraction,
   Credential,
   OAuthAuth,
   OAuthCredential,
 } from "@earendil-works/pi-ai";
 import { builtinModels } from "@earendil-works/pi-ai/providers/all";
-import type {
-  ModelCredentialFailedState,
-  ModelCredentialRetireReason,
-  SecretStore,
-} from "@rakazo/adapter-kit";
-import type { ModelOAuthBegin, ModelOAuthSignInMode, SettingsScope } from "@rakazo/contracts";
-import { canonicalPiProviderId } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
-import { runAsSystem, runAsTenant } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
 import type { StoredModelSecret } from "./model-secret.js";
 import { parseModelSecret, serializeModelSecret } from "./model-secret.js";
 import { createManualAnthropicOAuthLogin } from "./pi-anthropic-oauth.js";
@@ -39,19 +43,21 @@ export const SUBSCRIPTION_SIGN_IN_PROVIDERS: Record<
     loginLabel: "Sign in with ChatGPT",
     hint: "ChatGPT Plus/Pro",
     billing:
-      "Sign in with ChatGPT Plus or Pro. Uses your OpenAI subscription. Rakazo does not pay.",
+      "Sign in with ChatGPT Plus or Pro. Uses your OpenAI subscription. Agentic Smith does not pay.",
   },
   [COPILOT_OAUTH_PROVIDER]: {
     mode: "device-code",
     loginLabel: "Sign in with GitHub Copilot",
     hint: "Copilot",
-    billing: "Sign in with GitHub Copilot. Uses your Copilot subscription. Rakazo does not pay.",
+    billing:
+      "Sign in with GitHub Copilot. Uses your Copilot subscription. Agentic Smith does not pay.",
   },
   [XAI_OAUTH_PROVIDER]: {
     mode: "device-code",
     loginLabel: "Sign in with SuperGrok or X Premium",
     hint: "SuperGrok / key",
-    billing: "Sign in with SuperGrok or X Premium, or paste an xAI API key. Rakazo does not pay.",
+    billing:
+      "Sign in with SuperGrok or X Premium, or paste an xAI API key. Agentic Smith does not pay.",
   },
   [ANTHROPIC_OAUTH_PROVIDER]: {
     mode: "auth-url",

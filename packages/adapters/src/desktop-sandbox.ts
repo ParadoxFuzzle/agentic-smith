@@ -28,8 +28,8 @@ import type {
   ScreenRequest,
   ScreenSession,
   WorkspaceDirectoryRequest,
-} from "@rakazo/adapter-kit";
-import { boundedSandboxCommandTimeoutMs } from "@rakazo/core";
+} from "@agentic-smith/adapter-kit";
+import { boundedSandboxCommandTimeoutMs } from "@agentic-smith/core";
 import {
   applyPlaceholderAction,
   boundedComputerActions,
@@ -882,7 +882,8 @@ async function* walkDesktopWorkspace(
 }
 
 function resolveExecuteCwd(requestCwd: string | undefined, home: string) {
-  if (!requestCwd || requestCwd === "/home/rakazo" || requestCwd === "/home/user") return home;
+  if (!requestCwd || requestCwd === "/home/agentic-smith" || requestCwd === "/home/user")
+    return home;
   return path.resolve(home, requestCwd);
 }
 

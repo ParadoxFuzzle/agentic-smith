@@ -16,7 +16,7 @@
 
 ## Production
 
-ติดตั้ง `infra/compose/backup-prod.sh` เป็น timer ได้ snapshot ใต้ `/var/backups/rakazo` ปรับ `RAKAZO_DEPLOY_DIR` ใน `/etc/rakazo/backup.env` ถ้า deploy ไม่ใช่ `/srv/rakazo`
+ติดตั้ง `infra/compose/backup-prod.sh` เป็น timer ได้ snapshot ใต้ `/var/backups/agentic-smith` ปรับ `AGENTIC_SMITH_DEPLOY_DIR` ใน `/etc/agentic-smith/backup.env` ถ้า deploy ไม่ใช่ `/srv/agentic-smith`
 
 **`docker compose down -v` ลบ Postgres ทั้งหมด** — สำรองก่อนทุกครั้ง
 
@@ -25,13 +25,13 @@
 สร้างคู่กุญแจนอกเซิร์ฟเวอร์ เก็บ private key ออฟไลน์ ตั้ง public key ใน env:
 
 ```env
-RAKAZO_BACKUP_AGE_RECIPIENTS=age1exampleprimaryrecipient age1examplerecoveryrecipient
-# or: RAKAZO_BACKUP_AGE_RECIPIENTS_FILE=/etc/rakazo/backup-recipients.txt
+AGENTIC_SMITH_BACKUP_AGE_RECIPIENTS=age1exampleprimaryrecipient age1examplerecoveryrecipient
+# or: AGENTIC_SMITH_BACKUP_AGE_RECIPIENTS_FILE=/etc/agentic-smith/backup-recipients.txt
 ```
 
-ถ้าเคยเข้ารหัสแล้ว การรันโดยไม่มี recipients จะ fail (ยกเว้นตั้ง `RAKAZO_BACKUP_ALLOW_PLAINTEXT=1`)
+ถ้าเคยเข้ารหัสแล้ว การรันโดยไม่มี recipients จะ fail (ยกเว้นตั้ง `AGENTIC_SMITH_BACKUP_ALLOW_PLAINTEXT=1`)
 
-อัปโหลดนอกไซต์: `RAKAZO_BACKUP_OFFSITE_REMOTE` และการตั้ง rclone ในไฟล์ env เดียวกัน — ต้องมีการเข้ารหัสก่อน
+อัปโหลดนอกไซต์: `AGENTIC_SMITH_BACKUP_OFFSITE_REMOTE` และการตั้ง rclone ในไฟล์ env เดียวกัน — ต้องมีการเข้ารหัสก่อน
 
 ## PITR (ทางเลือก)
 
@@ -40,7 +40,7 @@ RAKAZO_BACKUP_AGE_RECIPIENTS=age1exampleprimaryrecipient age1examplerecoveryreci
 ```env
 COMPOSE_PROFILES=pitr
 PITR_DATABASE_PASSWORD=replace-with-openssl-rand-hex-24
-PITR_BUCKET=example-rakazo-pitr
+PITR_BUCKET=example-agentic-smith-pitr
 PITR_ENDPOINT=https://s3.example.com
 PITR_REGION=example-region
 PITR_ACCESS_KEY_ID=replace-me

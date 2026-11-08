@@ -1,4 +1,4 @@
-import type { PrismaClient } from "@rakazo/db";
+import type { PrismaClient } from "@agentic-smith/db";
 import { describe, expect, it, vi } from "vitest";
 import type { DeploymentModelDefaults, MemberMainModel } from "./model-roles.js";
 import {
@@ -220,7 +220,10 @@ describe("model roles", () => {
     });
     expect(
       deploymentModelRole("approval", {
-        env: { RAKAZO_AUTO_REVIEW_PROVIDER: "local-provider", RAKAZO_AUTO_REVIEW_MODEL: "judge" },
+        env: {
+          AGENTIC_SMITH_AUTO_REVIEW_PROVIDER: "local-provider",
+          AGENTIC_SMITH_AUTO_REVIEW_MODEL: "judge",
+        },
       }),
     ).toEqual({ primary: { provider: "local-provider", modelId: "judge" }, backups: [] });
   });

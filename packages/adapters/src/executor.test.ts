@@ -1,11 +1,15 @@
+import { WorkspaceTooLargeError } from "@agentic-smith/adapter-kit";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { FLEET_TOOL_NAMES } from "@agentic-smith/contracts";
+import {
+  BACKGROUND_HELPER_TRIGGER,
+  isOwnerStartedRun,
+  ONCE_ROUTINE_CRON,
+} from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
+import { RunHistoryWriteError } from "@agentic-smith/db";
+import { createLogger, createTestSink, installLogger } from "@agentic-smith/logging";
 import { normalizeContext } from "@earendil-works/pi-ai";
-import { WorkspaceTooLargeError } from "@rakazo/adapter-kit";
-import type { MessageBlock } from "@rakazo/contracts";
-import { FLEET_TOOL_NAMES } from "@rakazo/contracts";
-import { BACKGROUND_HELPER_TRIGGER, isOwnerStartedRun, ONCE_ROUTINE_CRON } from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
-import { RunHistoryWriteError } from "@rakazo/db";
-import { createLogger, createTestSink, installLogger } from "@rakazo/logging";
 import { describe, expect, it, vi } from "vitest";
 import { builtinAgentTools } from "./builtin-tools.js";
 import {
@@ -1498,7 +1502,7 @@ describe("userTurnInstructions", () => {
       archiveBot,
       "Connected plugins: none",
       "Agent skills",
-      expect.stringContaining("read the Rakazo skill"),
+      expect.stringContaining("read the Agentic Smith skill"),
       "Taught skills",
       ...stableTail,
       "Group context",

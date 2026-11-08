@@ -1,12 +1,12 @@
 import type * as TimersPromises from "node:timers/promises";
-import { FetchError, ResponseError } from "@boatdev/sdk";
 import {
   SandboxProviderAccountError,
   SandboxRateLimitError,
   SandboxUnavailableError,
   SandboxUnresponsiveError,
-} from "@rakazo/adapter-kit";
-import { COMPUTER_PROVIDER_UNAVAILABLE_ERROR } from "@rakazo/contracts";
+} from "@agentic-smith/adapter-kit";
+import { COMPUTER_PROVIDER_UNAVAILABLE_ERROR } from "@agentic-smith/contracts";
+import { FetchError, ResponseError } from "@boatdev/sdk";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { BoatApiError, BoatRequestGate, boatResponseError, wrapBoatCall } from "./boat-errors.js";
 import { BoatSandboxProvider } from "./boat-sandbox.js";

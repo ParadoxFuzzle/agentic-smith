@@ -11,17 +11,17 @@ import {
 } from "./computer-support.js";
 
 describe("workspaceCwd", () => {
-  const root = "/home/user/rakazo-home";
+  const root = "/home/user/agentic-smith-home";
 
   it("maps empty, '.', '/', the root and home aliases to the root", () => {
-    for (const cwd of [undefined, "", ".", "/", root, "/home/rakazo", "/home/user"]) {
+    for (const cwd of [undefined, "", ".", "/", root, "/home/agentic-smith", "/home/user"]) {
       expect(workspaceCwd(root, cwd, ["/home/user"])).toBe(root);
     }
   });
 
   it("keeps paths inside the root, a home alias or the bot-visible home", () => {
     expect(workspaceCwd(root, `${root}/notes/a`, ["/home/user"])).toBe(`${root}/notes/a`);
-    expect(workspaceCwd(root, "/home/rakazo/notes", ["/home/user"])).toBe(`${root}/notes`);
+    expect(workspaceCwd(root, "/home/agentic-smith/notes", ["/home/user"])).toBe(`${root}/notes`);
     expect(workspaceCwd(root, "/home/user/notes", ["/home/user"])).toBe(`${root}/notes`);
     expect(workspaceCwd(root, "notes/a")).toBe(`${root}/notes/a`);
     expect(workspaceCwd(root, "/etc")).toBe(`${root}/etc`);
@@ -31,7 +31,7 @@ describe("workspaceCwd", () => {
     for (const cwd of [
       `${root}/../etc`,
       `${root}/notes/../../..`,
-      "/home/rakazo/../etc",
+      "/home/agentic-smith/../etc",
       "/home/user/../../etc",
       "../etc",
       "notes/./a",
@@ -100,32 +100,34 @@ describe("Team Computer bot folders", () => {
     expect(displayBotWorkspacePath("team", "bot-1", "~/bots", "bots/bot-1")).toBe("bots/bot-1");
   });
 
-  it("treats a leading /home/rakazo as the workspace root", () => {
-    expect(resolveBotWorkspacePath("team", "bot-1", "/home/rakazo")).toBe("");
-    expect(resolveBotWorkspacePath("team", "bot-1", "/home/rakazo/notes/x.md")).toBe("notes/x.md");
-    expect(resolveBotWorkspacePath("team", "bot-1", String.raw`\home\rakazo\notes\x.md`)).toBe(
+  it("treats a leading /home/agentic-smith as the workspace root", () => {
+    expect(resolveBotWorkspacePath("team", "bot-1", "/home/agentic-smith")).toBe("");
+    expect(resolveBotWorkspacePath("team", "bot-1", "/home/agentic-smith/notes/x.md")).toBe(
       "notes/x.md",
     );
-    expect(resolveBotWorkspacePath("team", "bot-1", "/home/rakazo/shared/brief.md")).toBe(
+    expect(
+      resolveBotWorkspacePath("team", "bot-1", String.raw`\home\agentic-smith\notes\x.md`),
+    ).toBe("notes/x.md");
+    expect(resolveBotWorkspacePath("team", "bot-1", "/home/agentic-smith/shared/brief.md")).toBe(
       "shared/brief.md",
     );
-    expect(resolveBotWorkspacePath("dedicated", "bot-1", "/home/rakazo/notes/x.md")).toBe(
+    expect(resolveBotWorkspacePath("dedicated", "bot-1", "/home/agentic-smith/notes/x.md")).toBe(
       "/notes/x.md",
     );
-    expect(resolveBotWorkspacePath("dedicated", "bot-1", "/home/rakazo")).toBe("/");
-    expect(resolveBotWorkspacePath("dedicated", "bot-1", String.raw`\home\rakazo\notes\x.md`)).toBe(
-      String.raw`\notes\x.md`,
+    expect(resolveBotWorkspacePath("dedicated", "bot-1", "/home/agentic-smith")).toBe("/");
+    expect(
+      resolveBotWorkspacePath("dedicated", "bot-1", String.raw`\home\agentic-smith\notes\x.md`),
+    ).toBe(String.raw`\notes\x.md`);
+    expect(resolveBotWorkspacePath("team", "bot-1", "/home/agentic-smithtest/file.txt")).toBe(
+      "home/agentic-smithtest/file.txt",
     );
-    expect(resolveBotWorkspacePath("team", "bot-1", "/home/rakazotest/file.txt")).toBe(
-      "home/rakazotest/file.txt",
-    );
-    expect(() => resolveBotWorkspacePath("team", "bot-1", "/home/rakazo/../x")).toThrow(
+    expect(() => resolveBotWorkspacePath("team", "bot-1", "/home/agentic-smith/../x")).toThrow(
       "Path escapes the computer workspace",
     );
   });
 
-  it("keeps root paths for a listing requested under /home/rakazo", () => {
-    expect(displayBotWorkspacePath("team", "bot-1", "/home/rakazo/bots", "bots/bot-1")).toBe(
+  it("keeps root paths for a listing requested under /home/agentic-smith", () => {
+    expect(displayBotWorkspacePath("team", "bot-1", "/home/agentic-smith/bots", "bots/bot-1")).toBe(
       "bots/bot-1",
     );
   });

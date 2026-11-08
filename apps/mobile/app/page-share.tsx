@@ -1,5 +1,5 @@
-import type { PageVisibility } from "@rakazo/contracts";
-import { accountDisplay } from "@rakazo/core";
+import type { PageVisibility } from "@agentic-smith/contracts";
+import { accountDisplay } from "@agentic-smith/core";
 import * as Clipboard from "expo-clipboard";
 import { useLocalSearchParams } from "expo-router";
 import * as WebBrowser from "expo-web-browser";

@@ -9,14 +9,14 @@ import type {
   JobPublisher,
   PortableFile,
   SandboxProvider,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import {
   checkpointAndRecordComputerWorkspace,
   ObjectAgentHomeStore,
   PrismaAgentHomeRecords,
   teamBrowserProfileName,
-} from "@rakazo/adapters";
-import type { PrismaClient, SpaceKeyRecord, SpaceKeyStore } from "@rakazo/db";
+} from "@agentic-smith/adapters";
+import type { PrismaClient, SpaceKeyRecord, SpaceKeyStore } from "@agentic-smith/db";
 import {
   asSystem,
   ContentKeyRing,
@@ -29,7 +29,7 @@ import {
   lockSpaceForContentCreation,
   runAsSystem,
   SpaceDeletionInProgressError,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { MemoryObjectStorage } from "../../../packages/adapters/src/object-storage.test-support.js";
 import { deleteAccountContent } from "./account-deletion.js";
@@ -77,7 +77,7 @@ describePostgres("account deletion on bot computers (PostgreSQL)", () => {
   /** Another API or worker host: same bucket and database, its own empty cache. */
   const freshHost = async () =>
     new ObjectAgentHomeStore(
-      await mkdtemp(path.join(tmpdir(), "rakazo-account-delete-host-")),
+      await mkdtemp(path.join(tmpdir(), "agentic-smith-account-delete-host-")),
       storage,
       records,
     );
@@ -105,7 +105,7 @@ describePostgres("account deletion on bot computers (PostgreSQL)", () => {
   beforeEach(async () => {
     suffix = `${process.pid}-${Date.now()}-${randomBytes(3).toString("hex")}`;
     ids = fixtureIds(suffix);
-    root = await mkdtemp(path.join(tmpdir(), "rakazo-account-delete-"));
+    root = await mkdtemp(path.join(tmpdir(), "agentic-smith-account-delete-"));
     storage = new MemoryObjectStorage();
     records = new PrismaAgentHomeRecords(system, memoryRing());
     home = new ObjectAgentHomeStore(root, storage, records);
@@ -132,7 +132,7 @@ describePostgres("account deletion on bot computers (PostgreSQL)", () => {
       data: [ids.leaver, ids.stayer].map((id) => ({
         id,
         name: id,
-        email: `${id}@rakazo.test`,
+        email: `${id}@agentic-smith.test`,
         emailVerified: false,
       })),
     });
@@ -543,7 +543,7 @@ function memoryRing() {
 }
 
 async function staged(files: readonly string[]) {
-  const dir = await mkdtemp(path.join(tmpdir(), "rakazo-account-delete-staging-"));
+  const dir = await mkdtemp(path.join(tmpdir(), "agentic-smith-account-delete-staging-"));
   for (const name of files) {
     await mkdir(path.dirname(path.join(dir, name)), { recursive: true });
     await writeFile(path.join(dir, name), name);

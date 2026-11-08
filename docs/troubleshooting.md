@@ -9,8 +9,8 @@ You can give this page, the error code, and the app version to an AI assistant f
 applying the instructions to your setup. Copy this prompt and fill in the placeholders:
 
 ```text
-Help me troubleshoot Rakazo using this guide:
-https://rakazo.com/docs/troubleshooting/
+Help me troubleshoot Agentic Smith using this guide:
+https://jerithai.com/docs/troubleshooting/
 
 Error code: <code from the relevant section below>
 App version: <version>
@@ -24,7 +24,7 @@ settings needed. Do not disable authentication or URL validation to bypass the e
 ```
 
 Review proposed commands before running them. If the guide does not resolve the error,
-[report a bug](https://github.com/elie222/rakazo/issues) with the error code, version,
+[report a bug](https://github.com/ParadoxFuzzle/agentic-smith/issues) with the error code, version,
 installation method, and steps to reproduce. Remove secrets and personal information first.
 
 ## MCP OAuth redirect mismatch
@@ -40,7 +40,7 @@ it happens before the external service's sign-in flow starts.
 
 1. Copy the origin from the browser address: scheme, hostname, and port, without a path.
    For example, `https://app.example.com` or `http://127.0.0.1:5173`.
-2. Check the API's effective `WEB_ORIGIN`. If it is the intended public address, open Rakazo
+2. Check the API's effective `WEB_ORIGIN`. If it is the intended public address, open Agentic Smith
    at that address instead. `localhost` and `127.0.0.1` differ for this check, as do
    HTTP and HTTPS or different ports.
 3. If the configuration is wrong, set `WEB_ORIGIN` to the address people actually use.

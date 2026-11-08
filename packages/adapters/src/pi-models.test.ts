@@ -1,4 +1,4 @@
-import { MODEL_KEY_FORMAT_ERROR } from "@rakazo/contracts";
+import { MODEL_KEY_FORMAT_ERROR } from "@agentic-smith/contracts";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { defaultCatalogModelId } from "./model-selection.js";
 import { modelAcceptsImageInput } from "./model-vision.js";
@@ -261,7 +261,7 @@ describe("Pi model catalog", () => {
         providerName: "OpenAI",
         auth: "api-key",
         subscription: false,
-        billing: "Uses your OpenAI API key. Rakazo does not pay for model usage.",
+        billing: "Uses your OpenAI API key. Agentic Smith does not pay for model usage.",
       });
       expect(entry.oauthLabel).toBeUndefined();
       expect(entry.signIn).toBeUndefined();
@@ -274,7 +274,7 @@ describe("Pi model catalog", () => {
         providerName: "Azure OpenAI",
         auth: "api-key",
         subscription: false,
-        billing: "Uses your Azure OpenAI API key. Rakazo does not pay for model usage.",
+        billing: "Uses your Azure OpenAI API key. Agentic Smith does not pay for model usage.",
       });
     }
   });
@@ -391,8 +391,8 @@ describe("Pi model catalog", () => {
     expect(routing("cloudflare-ai-gateway")).toEqual(["accountId", "gatewayId"]);
     expect(routing("anthropic")).toBeUndefined();
 
-    const previous = process.env.RAKAZO_OPENAI_COMPAT_ALLOW_PUBLIC;
-    process.env.RAKAZO_OPENAI_COMPAT_ALLOW_PUBLIC = "0";
+    const previous = process.env.AGENTIC_SMITH_OPENAI_COMPAT_ALLOW_PUBLIC;
+    process.env.AGENTIC_SMITH_OPENAI_COMPAT_ALLOW_PUBLIC = "0";
     try {
       await expect(
         probeOpenAiCompatibleModels(
@@ -417,8 +417,8 @@ describe("Pi model catalog", () => {
         expect(requestedUrl).toContain(baseUrl);
       }
     } finally {
-      if (previous === undefined) delete process.env.RAKAZO_OPENAI_COMPAT_ALLOW_PUBLIC;
-      else process.env.RAKAZO_OPENAI_COMPAT_ALLOW_PUBLIC = previous;
+      if (previous === undefined) delete process.env.AGENTIC_SMITH_OPENAI_COMPAT_ALLOW_PUBLIC;
+      else process.env.AGENTIC_SMITH_OPENAI_COMPAT_ALLOW_PUBLIC = previous;
     }
   });
 
@@ -455,14 +455,14 @@ describe("Pi model catalog", () => {
 
   it("adds a configured OpenRouter model that is newer than the static catalog", async () => {
     vi.stubEnv("PI_DEFAULT_PROVIDER", " openrouter ");
-    vi.stubEnv("PI_DEFAULT_MODEL", " rakazo-test/unknown-future-model ");
+    vi.stubEnv("PI_DEFAULT_MODEL", " agentic-smith-test/unknown-future-model ");
     vi.resetModules();
 
     const { listPiCatalog: listConfiguredCatalog } = await import("./pi-models.js");
     expect(listConfiguredCatalog()[0]).toMatchObject({
       provider: "openrouter",
-      id: "rakazo-test/unknown-future-model",
-      label: "rakazo-test/unknown-future-model",
+      id: "agentic-smith-test/unknown-future-model",
+      label: "agentic-smith-test/unknown-future-model",
     });
   });
 

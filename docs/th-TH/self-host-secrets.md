@@ -26,7 +26,7 @@ openssl rand -hex 32   # BETTER_AUTH_SECRET, ENCRYPTION_KEY, SCREEN_PROXY_SECRET
 
 ## ต้องไม่ซ้ำกัน
 
-`BETTER_AUTH_SECRET`, `ENCRYPTION_KEY`, `SCREEN_PROXY_SECRET`, `SANDBOX_SUPERVISOR_TOKEN` (และ `RAKAZO_UPDATER_TOKEN` ถ้าเปิด updater) ต้องเป็นค่าสุ่ม**คนละค่า**
+`BETTER_AUTH_SECRET`, `ENCRYPTION_KEY`, `SCREEN_PROXY_SECRET`, `SANDBOX_SUPERVISOR_TOKEN` (และ `AGENTIC_SMITH_UPDATER_TOKEN` ถ้าเปิด updater) ต้องเป็นค่าสุ่ม**คนละค่า**
 
 หมุน `ENCRYPTION_KEY` หลังมี credential เก็บไว้จะถอดรหัสไม่ได้
 

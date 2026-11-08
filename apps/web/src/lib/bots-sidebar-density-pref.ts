@@ -2,7 +2,7 @@ import { createStoredPreference } from "./stored-preference";
 
 export type BotsSidebarDensity = "comfortable" | "compact";
 
-export const BOTS_SIDEBAR_DENSITY_STORAGE_KEY = "rakazo.botsSidebarDensity";
+export const BOTS_SIDEBAR_DENSITY_STORAGE_KEY = "agentic-smith.botsSidebarDensity";
 
 export function normalizeBotsSidebarDensity(raw: string | null | undefined): BotsSidebarDensity {
   return raw?.trim().toLowerCase() === "compact" ? "compact" : "comfortable";

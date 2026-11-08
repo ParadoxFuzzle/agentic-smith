@@ -26,7 +26,7 @@ for (const language of [
   }, testInfo) => {
     await signup(
       page,
-      `ui-locale-${language.locale}-${Date.now()}@rakazo.test`,
+      `ui-locale-${language.locale}-${Date.now()}@agentic-smith.test`,
       "password12",
       "Locale QA",
     );

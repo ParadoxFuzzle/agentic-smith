@@ -1,4 +1,4 @@
-import { isApprovalAskBlock, isSecretAskBlock } from "@rakazo/core";
+import { isApprovalAskBlock, isSecretAskBlock } from "@agentic-smith/core";
 import { isCenteredAgentEvent, THREAD_COLUMN_GUTTER } from "./message-presentation";
 import type { MobileMessage } from "./mobile-types";
 

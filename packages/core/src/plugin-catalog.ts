@@ -1,5 +1,5 @@
-import type { PluginMarketplaceEntry, PluginPart } from "@rakazo/contracts";
-import { PluginPartSchema } from "@rakazo/contracts";
+import type { PluginMarketplaceEntry, PluginPart } from "@agentic-smith/contracts";
+import { PluginPartSchema } from "@agentic-smith/contracts";
 
 export const PLUGIN_CATEGORIES = [
   "productivity",

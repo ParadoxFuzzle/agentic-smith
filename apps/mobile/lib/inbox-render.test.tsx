@@ -137,7 +137,7 @@ vi.mock("./api-live", () => ({}));
 vi.mock("./api", () => ({
   rpc: ui.rpc,
   captureApiRequestContext: async (spaceId: string | null = "space-selected") => ({
-    headers: { "x-rakazo-space-id": spaceId },
+    headers: { "x-agentic-smith-space-id": spaceId },
   }),
   selectedSpaceId: () => ui.spaceId,
   spaceSelectionSeq: () => ui.spaceSeq,
@@ -721,7 +721,7 @@ it("pins a bot made for a space to that space while another is selected", async 
   const spaces = () =>
     ui.rpc.mock.calls.map(([method, , options]) => [
       method,
-      options?.requestContext?.headers["x-rakazo-space-id"],
+      options?.requestContext?.headers["x-agentic-smith-space-id"],
     ]);
   ui.rpc
     .mockReset()
@@ -742,7 +742,7 @@ it("pins a bot made for a space to that space while another is selected", async 
   ]);
   await vi.waitFor(() =>
     expect(scheduleFocusPrompt).toHaveBeenLastCalledWith(bot.id, true, {
-      headers: { "x-rakazo-space-id": "space-work" },
+      headers: { "x-agentic-smith-space-id": "space-work" },
     }),
   );
   // The Create menu's bot sends no pin, so it follows the selected space as before.
@@ -843,7 +843,7 @@ it.each([true, false])(
     const openChat = vi.fn();
     await createInboxBot({ refreshBots: async () => undefined, openChat, spaceId: "space-work" });
     expect(ui.rpc).toHaveBeenCalledWith("spaceSettings/overrides", undefined, {
-      requestContext: { headers: { "x-rakazo-space-id": "space-work" } },
+      requestContext: { headers: { "x-agentic-smith-space-id": "space-work" } },
     });
     const buttons = ui.alert.mock.lastCall?.[2] as { text: string; onPress?: () => void }[];
     buttons.find((button) => button.text === "Add model")?.onPress?.();

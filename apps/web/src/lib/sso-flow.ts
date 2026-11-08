@@ -1,5 +1,5 @@
+import { newClientId } from "@agentic-smith/core";
 import { t } from "@lingui/core/macro";
-import { newClientId } from "@rakazo/core";
 import { desktopBridge } from "./desktop";
 
 type SsoResult = {
@@ -8,7 +8,7 @@ type SsoResult = {
 };
 
 export const SSO_CALLBACK_PATH = "/sso/callback";
-const SSO_CHANNEL = "rakazo-sso-oauth";
+const SSO_CHANNEL = "agentic-smith-sso-oauth";
 const SSO_TIMEOUT_MS = 5 * 60_000;
 let cancelActiveAttempt: (() => void) | undefined;
 

@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import type { SpaceMembers } from "@rakazo/contracts";
+import type { SpaceMembers } from "@agentic-smith/contracts";
 import type { ComponentProps, ReactNode } from "react";
 import { act } from "react";
 import { createRoot } from "react-dom/client";
@@ -23,7 +23,7 @@ vi.mock("@lingui/react/macro", () => ({
   }),
   Trans: ({ children }: { children: ReactNode }) => children,
 }));
-vi.mock("@rakazo/ui-web", () => {
+vi.mock("@agentic-smith/ui-web", () => {
   const Plain = ({ children }: { children?: ReactNode }) => <>{children}</>;
   const PlainButton = ({
     variant: _variant,
@@ -132,20 +132,20 @@ it("copies a new invite link, and shows it only when copying fails", async () =>
   Object.defineProperty(navigator, "clipboard", { value: { writeText }, configurable: true });
   await renderWith({ spaceName: "Home", members: [owner], canManage: true });
   rpc.spaces.invites.create.mockResolvedValue({
-    url: "https://rakazo.example/invite/token-1",
+    url: "https://agentic-smith.example/invite/token-1",
     expiresAt: new Date().toISOString(),
   });
   const linkField = () => host.querySelector<HTMLInputElement>('input[aria-label="Invite link"]');
 
   await act(async () => buttonNamed("Invite")?.click());
   expect(rpc.spaces.invites.create).toHaveBeenCalledWith({ spaceId: space.id });
-  expect(writeText).toHaveBeenCalledWith("https://rakazo.example/invite/token-1");
+  expect(writeText).toHaveBeenCalledWith("https://agentic-smith.example/invite/token-1");
   expect(toast).toHaveBeenCalledWith("Invite link copied");
   expect(linkField()).toBeNull();
 
   writeText.mockRejectedValueOnce(new Error("denied"));
   await act(async () => buttonNamed("Invite")?.click());
-  expect(linkField()?.value).toBe("https://rakazo.example/invite/token-1");
+  expect(linkField()?.value).toBe("https://agentic-smith.example/invite/token-1");
   expect(linkField()?.readOnly).toBe(true);
 });
 

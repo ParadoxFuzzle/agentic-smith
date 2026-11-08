@@ -1,5 +1,5 @@
-import type { AgentUsage, ModelUsageLookup } from "@rakazo/adapter-kit";
-import type { PrismaClient } from "@rakazo/db";
+import type { AgentUsage, ModelUsageLookup } from "@agentic-smith/adapter-kit";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   expireModelCredits,
   hasFinalModelCost,
@@ -8,8 +8,8 @@ import {
   RECONCILED_ESTIMATE_COST_SOURCE,
   recordUsage,
   runAsSystem,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 
 /**
  * When the provider never reports a cost, a call that reached it is charged for the tokens we

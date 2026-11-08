@@ -1,9 +1,9 @@
+import type { Routine } from "@agentic-smith/contracts";
+import type { CronLabels } from "@agentic-smith/core";
+import { ENGLISH_CRON_LABELS, formatCron } from "@agentic-smith/core";
+import { Button } from "@agentic-smith/ui-web";
 import { t } from "@lingui/core/macro";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { Routine } from "@rakazo/contracts";
-import type { CronLabels } from "@rakazo/core";
-import { ENGLISH_CRON_LABELS, formatCron } from "@rakazo/core";
-import { Button } from "@rakazo/ui-web";
 import { Clock, Pause, Plus } from "lucide-react";
 import { cronLabels } from "../lib/cron";
 

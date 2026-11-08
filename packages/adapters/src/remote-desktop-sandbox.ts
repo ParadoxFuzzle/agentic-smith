@@ -13,9 +13,9 @@ import type {
   ScreenRequest,
   ScreenSession,
   TerminalRequest,
-} from "@rakazo/adapter-kit";
-import { boundedSandboxCommandTimeoutMs } from "@rakazo/core";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import { boundedSandboxCommandTimeoutMs } from "@agentic-smith/core";
+import { getLogger } from "@agentic-smith/logging";
 import { sandboxIdleMs } from "./computer-idle.js";
 import {
   normalizeWorkspacePath,
@@ -30,7 +30,7 @@ import { isSandboxGoneError, sandboxNotFoundError } from "./sandbox-errors.js";
 import { shouldSkipPortableWorkspaceFile } from "./workspace-save-policy.js";
 
 const DISPLAY_START = 20;
-const REMOTE_WORKSPACE = "/home/user/rakazo-home";
+const REMOTE_WORKSPACE = "/home/user/agentic-smith-home";
 const REMOTE_BROWSER_PROFILES = `${REMOTE_WORKSPACE}/.browser-profiles`;
 
 /** Common boundary used by the E2B and Novita desktop SDKs. */
@@ -99,7 +99,7 @@ export function remoteDesktopCreateOptions(botId: string, apiKey: string) {
   return {
     apiKey,
     timeoutMs: sandboxIdleMs(),
-    metadata: { botId, rakazo: "computer" },
+    metadata: { botId, "agentic-smith": "computer" },
     resolution: [1280, 800] as [number, number],
     lifecycle: { onTimeout: "pause" as const, autoResume: false },
   };

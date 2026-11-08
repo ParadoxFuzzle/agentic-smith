@@ -3,7 +3,7 @@ import {
   CALL_FAREWELL_TIMEOUT_MS,
   callIdFromClientNonce,
   INTERIM_BARGE_IN_MS,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { hapticImpact, hapticSuccess } from "./haptics";
 
@@ -2268,7 +2268,7 @@ describe("mobile call on a session change", () => {
     // organization's Space, which changes no session generation.
     vi.mocked(captureApiRequestContext).mockImplementation(async () => ({
       apiBase: "https://api.example.test",
-      headers: { "x-rakazo-space-id": "space-b" },
+      headers: { "x-agentic-smith-space-id": "space-b" },
       sessionGeneration: currentSessionGeneration(),
     }));
     const fake = fakes();
@@ -2279,7 +2279,7 @@ describe("mobile call on a session change", () => {
         botName: "Ada",
         requestContext: {
           apiBase: "https://api.example.test",
-          headers: { "x-rakazo-space-id": "space-a" },
+          headers: { "x-agentic-smith-space-id": "space-a" },
           sessionGeneration: currentSessionGeneration(),
         },
       },
@@ -2295,7 +2295,7 @@ describe("mobile call on a session change", () => {
       .mocked(rpc)
       .mock.calls.map(([path, , options]) => [
         path,
-        options?.requestContext?.headers["x-rakazo-space-id"],
+        options?.requestContext?.headers["x-agentic-smith-space-id"],
       ]);
     expect(sent).toEqual([
       ["threads/send", "space-a"],

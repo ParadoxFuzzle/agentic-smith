@@ -1,6 +1,5 @@
 import { randomBytes } from "node:crypto";
-import { ORPCError } from "@orpc/server";
-import { runContinueJob } from "@rakazo/adapter-kit";
+import { runContinueJob } from "@agentic-smith/adapter-kit";
 import {
   archiveBot,
   checkpointAndStopComputer,
@@ -20,17 +19,17 @@ import {
   storeBotSecret,
   toComputerRef,
   validateBotModelChange,
-} from "@rakazo/adapters";
+} from "@agentic-smith/adapters";
 import type {
   Actor,
   Bot,
   BotSecretMetadata,
   SettingsScope,
   VaultPutInput,
-} from "@rakazo/contracts";
-import { BotSecretAuth, resolveBotAvatarSet } from "@rakazo/contracts";
-import { ACTIVE_RUN_STATUSES, COMPUTER_USING_RUNS, displayName } from "@rakazo/core";
-import type { Prisma } from "@rakazo/db";
+} from "@agentic-smith/contracts";
+import { BotSecretAuth, resolveBotAvatarSet } from "@agentic-smith/contracts";
+import { ACTIVE_RUN_STATUSES, COMPUTER_USING_RUNS, displayName } from "@agentic-smith/core";
+import type { Prisma } from "@agentic-smith/db";
 import {
   BotSectionNameConflictError,
   botProfileLabelsChanged,
@@ -46,8 +45,9 @@ import {
   SpaceDeletionInProgressError,
   settingsTarget,
   THREAD_LOCK_TRANSACTION_OPTIONS,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { ORPCError } from "@orpc/server";
 import type { AgentImportServices } from "../agent-import.js";
 import { agentImportSetupState, createImportedBot, previewAgentImport } from "../agent-import.js";
 import { deleteAgentSecret, listAgentSecrets, putAgentSecret } from "../agent-secrets.js";

@@ -1,11 +1,11 @@
-appId: com.rakazo.app
+appId: com.agenticsmith.app
 name: Memory
 ---
 - runFlow:
     file: ../subflows/sign-in.yaml
     env:
-      RAKAZO_ACTIVE_EMAIL: ${RAKAZO_SCREENSHOT_EMAIL}
-- openLink: "rakazo:///memory"
+      AGENTIC_SMITH_ACTIVE_EMAIL: ${AGENTIC_SMITH_SCREENSHOT_EMAIL}
+- openLink: "agentic-smith:///memory"
 - extendedWaitUntil:
     visible: "team.md"
     timeout: 20000
@@ -19,7 +19,7 @@ name: Memory
 - waitForAnimationToEnd:
     timeout: 3000
 - takeScreenshot: 02-shared-note
-- openLink: "rakazo:///bot-settings?botId=${RAKAZO_SCREENSHOT_BOT_ID}"
+- openLink: "agentic-smith:///bot-settings?botId=${AGENTIC_SMITH_SCREENSHOT_BOT_ID}"
 - scrollUntilVisible:
     element: "preferences.md"
     direction: DOWN

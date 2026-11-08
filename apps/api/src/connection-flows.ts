@@ -1,22 +1,22 @@
-import { ORPCError } from "@orpc/server";
-import type { AdapterContext } from "@rakazo/adapter-kit";
-import { ConnectorAuthUnavailableError } from "@rakazo/adapter-kit";
+import type { AdapterContext } from "@agentic-smith/adapter-kit";
+import { ConnectorAuthUnavailableError } from "@agentic-smith/adapter-kit";
 import {
   advisoryLock,
   pickReusableConnection,
   prepareManagedConnectorForTransaction,
   sanitizeIntegrationError,
-} from "@rakazo/adapters";
-import type { Actor } from "@rakazo/contracts";
-import { isIntegrationProviderId } from "@rakazo/contracts";
-import type { Prisma, PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/adapters";
+import type { Actor } from "@agentic-smith/contracts";
+import { isIntegrationProviderId } from "@agentic-smith/contracts";
+import type { Prisma, PrismaClient } from "@agentic-smith/db";
 import {
   IsolationError,
   ProviderTransactionBusyError,
   recordSecurityEvent,
   runProviderTransaction,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { ORPCError } from "@orpc/server";
 import type { RouterDeps } from "./router.js";
 import { connectionCreatedEvent } from "./security-audit.js";
 

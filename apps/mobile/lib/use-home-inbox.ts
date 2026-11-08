@@ -1,4 +1,4 @@
-import { isRetryableError, reportUiLocale } from "@rakazo/core";
+import { isRetryableError, reportUiLocale } from "@agentic-smith/core";
 import { useRouter } from "expo-router";
 import type { RefObject } from "react";
 import { useCallback, useRef, useState } from "react";

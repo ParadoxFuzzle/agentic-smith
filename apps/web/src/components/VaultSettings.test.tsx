@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
-import type { BotSecretMetadata, SettingsScope } from "@rakazo/contracts";
-import { encodeCardSecret, encodeLoginSecret } from "@rakazo/contracts";
+import type { BotSecretMetadata, SettingsScope } from "@agentic-smith/contracts";
+import { encodeCardSecret, encodeLoginSecret } from "@agentic-smith/contracts";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { act } from "react";
@@ -21,7 +21,7 @@ const bots = vi.hoisted(() => ({ emailAddresses: vi.fn(async (): Promise<unknown
 // The dialog itself is tested on its own; here it is a pair of buttons that settle it.
 vi.mock("./ConfirmIdentityDialog", async () => {
   const { useState } = await import("react");
-  const { runWithIdentityConfirmation } = await import("@rakazo/contracts");
+  const { runWithIdentityConfirmation } = await import("@agentic-smith/contracts");
   return {
     useIdentityConfirmation: () => {
       const [settle, setSettle] = useState<((confirmed: boolean) => void) | null>(null);

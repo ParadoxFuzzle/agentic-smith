@@ -1,5 +1,5 @@
+import { cn } from "@agentic-smith/ui-web";
 import { Trans } from "@lingui/react/macro";
-import { cn } from "@rakazo/ui-web";
 import { KeyRound, Lock, Users } from "lucide-react";
 
 /** What joining a shared space means, shown once: on the invite, when someone agrees to it. */

@@ -1,5 +1,5 @@
-import type { ActionApprovalRule as StoredActionApprovalRule } from "@rakazo/contracts";
-import { BUILTIN_TOOL_NAMES } from "@rakazo/contracts";
+import type { ActionApprovalRule as StoredActionApprovalRule } from "@agentic-smith/contracts";
+import { BUILTIN_TOOL_NAMES } from "@agentic-smith/contracts";
 import { humanizeToolName } from "./events.js";
 
 const APPROVAL_EXEMPT_TOOLS = new Set([

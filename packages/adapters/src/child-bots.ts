@@ -6,21 +6,21 @@ import type {
   JobPublisher,
   SandboxProvider,
   SecretStore,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import {
   isSandboxProviderOutage,
   routineJobKey,
   runContinueJob,
   runJobKey,
-} from "@rakazo/adapter-kit";
-import type { Actor, Bot, ComputerMode } from "@rakazo/contracts";
+} from "@agentic-smith/adapter-kit";
+import type { Actor, Bot, ComputerMode } from "@agentic-smith/contracts";
 import {
   BOT_DESCRIPTION_MAX_LENGTH,
   BOT_INSTRUCTIONS_MAX_LENGTH,
   GROUP_MEMBER_MIN,
-} from "@rakazo/contracts";
-import { ACTIVE_RUN_STATUSES } from "@rakazo/core";
-import type { Prisma, PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/contracts";
+import { ACTIVE_RUN_STATUSES } from "@agentic-smith/core";
+import type { Prisma, PrismaClient } from "@agentic-smith/db";
 import {
   cancelRunsInTransaction,
   clearEndedRunState,
@@ -33,8 +33,8 @@ import {
   recordComputerRunEnd,
   teamComputerUserId,
   withTransactionRetry,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { BrowserStoppedReleaseError } from "./computer-screens.js";
 import { toComputerRef } from "./computer-support.js";
 import {

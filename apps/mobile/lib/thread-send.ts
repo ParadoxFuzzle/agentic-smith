@@ -1,12 +1,12 @@
-import type { LoginFieldInput, MessageReaction } from "@rakazo/contracts";
-import type { SlashActionId } from "@rakazo/core";
+import type { LoginFieldInput, MessageReaction } from "@agentic-smith/contracts";
+import type { SlashActionId } from "@agentic-smith/core";
 import {
   applyThreadSendReceipt,
   attachmentsForThread,
   newClientId,
   pageReply,
   resolveComposerSendPlan,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import { useNavigation, useRouter } from "expo-router";
 import type { RefObject } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";

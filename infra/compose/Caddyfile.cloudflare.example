@@ -41,16 +41,16 @@
 	lb_try_interval 250ms
 }
 
-http://{$RAKAZO_HOST:app.example.com} {
+http://{$AGENTIC_SMITH_HOST:app.example.com} {
 	import cloudflare_only
-	redir https://{$RAKAZO_HOST:app.example.com}{uri} 308
+	redir https://{$AGENTIC_SMITH_HOST:app.example.com}{uri} 308
 }
 
 :80 {
 	abort
 }
 
-{$RAKAZO_HOST:app.example.com} {
+{$AGENTIC_SMITH_HOST:app.example.com} {
 	import cloudflare_only
 	import access_log
 	encode zstd gzip

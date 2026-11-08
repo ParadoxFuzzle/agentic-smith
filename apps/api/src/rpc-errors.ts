@@ -1,4 +1,3 @@
-import { ORPCError, ValidationError } from "@orpc/server";
 import {
   SandboxAllowanceUsedError,
   SandboxDamagedError,
@@ -6,15 +5,16 @@ import {
   SandboxUnavailableError,
   SandboxUnresponsiveError,
   VoiceAccountError,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import {
   IsolationError,
   ProviderTransactionBusyError,
   SpaceDeletionInProgressError,
   SpaceOwnerRequiredError,
-} from "@rakazo/db";
-import { getLogContext, getLogger } from "@rakazo/logging";
-import { markExpectedFailure } from "@rakazo/logging/hono";
+} from "@agentic-smith/db";
+import { getLogContext, getLogger } from "@agentic-smith/logging";
+import { markExpectedFailure } from "@agentic-smith/logging/hono";
+import { ORPCError, ValidationError } from "@orpc/server";
 import { voiceAccountErrorStatus } from "./voice.js";
 
 /**

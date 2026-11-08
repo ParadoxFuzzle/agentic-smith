@@ -1,4 +1,4 @@
-import type { AppBootstrap } from "@rakazo/contracts";
+import type { AppBootstrap } from "@agentic-smith/contracts";
 import { describe, expect, it } from "vitest";
 import { initialBootstrapTarget, linkedBotRoute } from "./bootstrap-target";
 

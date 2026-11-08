@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react/macro";
 import type {
   Bot,
   ComputerStatus,
@@ -7,9 +6,13 @@ import type {
   MessageReaction,
   ThreadMessage,
   ThreadSnapshot,
-} from "@rakazo/contracts";
-import { attachmentMaxBytes, attachmentMaxCount, attachmentSizeLabel } from "@rakazo/contracts";
-import type { ComposerMention } from "@rakazo/core";
+} from "@agentic-smith/contracts";
+import {
+  attachmentMaxBytes,
+  attachmentMaxCount,
+  attachmentSizeLabel,
+} from "@agentic-smith/contracts";
+import type { ComposerMention } from "@agentic-smith/core";
 import {
   applyThreadSendReceipt,
   attachmentsForThread,
@@ -17,7 +20,8 @@ import {
   isImageInputConfirmation,
   newClientId,
   resolveComposerSendPlan,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
+import { useLingui } from "@lingui/react/macro";
 import type { RefObject } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { requestBrowserNotificationPermission } from "../../lib/browser-notifications";

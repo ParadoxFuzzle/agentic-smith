@@ -1,4 +1,4 @@
-import type { Actor } from "@rakazo/contracts";
+import type { Actor } from "@agentic-smith/contracts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { releaseComputerControl } from "../computer-control.js";
 import type { RouterDeps } from "../router.js";

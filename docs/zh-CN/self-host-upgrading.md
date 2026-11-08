@@ -18,7 +18,7 @@ bash install-images.sh
 
 ## 生产 Compose
 
-先把 `.env` 中的 `RAKAZO_IMAGE_TAG` 改为目标发布标签，再拉取并重建应用服务：
+先把 `.env` 中的 `AGENTIC_SMITH_IMAGE_TAG` 改为目标发布标签，再拉取并重建应用服务：
 
 ```bash
 docker compose --env-file .env -f infra/compose/docker-compose.prod.yml pull api worker web
@@ -46,7 +46,7 @@ GIT_SHA=$(git rev-parse HEAD) docker compose --env-file .env -f infra/compose/do
 
 使用独立应用数据库角色的版本需要 `.env` 中的 `POSTGRES_APP_PASSWORD`。
 桌面端、镜像安装器、更新器和 `deploy-main.sh` 会在缺失时补充；其他部署应在更新前自行生成，例如 `openssl rand -hex 16`。
-缺失时 Compose 会在配置验证阶段停止。首次启动会创建 `rakazo_app`，API 和 worker 随后使用它连接。
+缺失时 Compose 会在配置验证阶段停止。首次启动会创建 `agentic_smith_app`，API 和 worker 随后使用它连接。
 
 若旧版本无法读取新版本的加密内容，不能只回滚应用镜像；需先按[内容加密迁移（英文）](../content-encryption.md#rollout)执行解密。
 行级安全异常的诊断与临时回退方法见[数据库登录升级说明（英文）](../self-host-upgrading.md#upgrading-to-the-separate-app-database-login)。
@@ -60,7 +60,7 @@ GIT_SHA=$(git rev-parse HEAD) docker compose --env-file .env -f infra/compose/do
 先[备份并演练](./self-host-backups.md)，再在生产服务器运行：
 
 ```bash
-cd /srv/rakazo
+cd /srv/agentic-smith
 git pull --ff-only
 sudo infra/compose/upgrade-postgres.sh
 ```
@@ -69,10 +69,10 @@ sudo infra/compose/upgrade-postgres.sh
 例如源码版：
 
 ```bash
-sudo RAKAZO_DEPLOY_DIR="$PWD" infra/compose/upgrade-postgres.sh infra/compose/docker-compose.yml
+sudo AGENTIC_SMITH_DEPLOY_DIR="$PWD" infra/compose/upgrade-postgres.sh infra/compose/docker-compose.yml
 ```
 
-受限网络需设置旧版镜像的 `RAKAZO_POSTGRES_16_IMAGE`，此时 `POSTGRES_IMAGE` 应指向 Postgres 18。
+受限网络需设置旧版镜像的 `AGENTIC_SMITH_POSTGRES_16_IMAGE`，此时 `POSTGRES_IMAGE` 应指向 Postgres 18。
 脚本会停止服务、复制角色和数据库，并验证权限、策略、序列、行数和应用角色登录后才切换。
 整个复制过程会停机。可用磁盘空间至少为旧数据库数据目录占用量的 125%，再加 1 GiB，
 即一份完整副本、其大小的 25% 余量，以及额外 1 GiB，与升级脚本的容量检查一致。
@@ -100,7 +100,7 @@ sudo RAKAZO_DEPLOY_DIR="$PWD" infra/compose/upgrade-postgres.sh infra/compose/do
 ## 可选自动更新器
 
 生产 Compose 的 `updater` 配置默认关闭，手动更新不需要启用。
-启用前设置独立的随机 `RAKAZO_UPDATER_TOKEN`（生产环境至少 32 字符），
+启用前设置独立的随机 `AGENTIC_SMITH_UPDATER_TOKEN`（生产环境至少 32 字符），
 不得复用认证、监督服务或屏幕代理密钥：
 
 ```bash
@@ -116,7 +116,7 @@ docker compose --env-file .env -f infra/compose/docker-compose.prod.yml \
 不要将其端口对外发布。普通应用账号没有更新接口，应用 API 也不持有更新令牌。
 Fork 模式会在服务器构建仓库，只能指向自己掌控且审查过的代码。
 
-`RAKAZO_DEPLOY_DIR` 必须是 Docker 守护进程看到的实际路径，宿主机与更新器内使用同一路径。
-Linux 默认是 `/srv/rakazo`；Docker Desktop 的路径可能与终端中的路径不同，
+`AGENTIC_SMITH_DEPLOY_DIR` 必须是 Docker 守护进程看到的实际路径，宿主机与更新器内使用同一路径。
+Linux 默认是 `/srv/agentic-smith`；Docker Desktop 的路径可能与终端中的路径不同，
 必须先验证挂载。多个 Compose 叠加文件和额外服务也须显式配置，详见
 [更新器部署路径与权限（英文）](../self-host-upgrading.md#the-deploy-directory-must-be-one-path)。

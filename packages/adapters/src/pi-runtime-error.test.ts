@@ -1,10 +1,14 @@
-import { ModelAccountError, ModelOutputError, TransientModelError } from "@rakazo/adapter-kit";
+import {
+  ModelAccountError,
+  ModelOutputError,
+  TransientModelError,
+} from "@agentic-smith/adapter-kit";
 import {
   MODEL_CONTEXT_TOO_SMALL_ERROR,
   MODEL_CREDITS_EXHAUSTED_ERROR,
   MODEL_OUTPUT_LIMIT_ERROR,
   modelFallbackFailure,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const provider = vi.hoisted(() => ({ errorMessage: "" }));

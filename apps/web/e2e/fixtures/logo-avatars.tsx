@@ -1,5 +1,5 @@
-import type { ProductEvent } from "@rakazo/contracts";
-import type { LogoAvatarActivity } from "@rakazo/core";
+import type { ProductEvent } from "@agentic-smith/contracts";
+import type { LogoAvatarActivity } from "@agentic-smith/core";
 import {
   BOT_COLOR_LIST,
   createLogoAvatarActivityStore,
@@ -8,8 +8,8 @@ import {
   logoAvatarTraits,
   reduceLogoAvatarSignals,
   seededLogoAvatarColor,
-} from "@rakazo/core";
-import { BotAvatar, BotAvatarActivityProvider, Button, LogoAvatar } from "@rakazo/ui-web";
+} from "@agentic-smith/core";
+import { BotAvatar, BotAvatarActivityProvider, Button, LogoAvatar } from "@agentic-smith/ui-web";
 import { Fragment, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "../../src/styles.css";
@@ -17,7 +17,8 @@ import "../../src/styles.css";
 const params = new URLSearchParams(location.search);
 const theme = params.get("theme") === "light" ? "light" : "dark";
 document.documentElement.dataset.theme = theme;
-const officialMark = new URL("../../../www/public/brand/rakazo-mark.png", import.meta.url).href;
+const officialMark = new URL("../../../www/public/brand/agentic-smith-mark.png", import.meta.url)
+  .href;
 const team = [
   { id: "inbox-01", name: "Inbox", color: "orange" },
   { id: "scout-02", name: "Scout", color: "green" },
@@ -117,9 +118,15 @@ function Study() {
     <main className="mx-auto max-w-[1260px] p-8 text-foreground" data-rerenders={rerenders}>
       <header className="mb-7 flex items-center justify-between gap-5 border-b border-border pb-6">
         <div className="flex items-center gap-4">
-          <img src={officialMark} alt="Official Rakazo logo" className="size-14 rounded-xl" />
+          <img
+            src={officialMark}
+            alt="Official Agentic Smith logo"
+            className="size-14 rounded-xl"
+          />
           <div>
-            <p className="mb-1 text-label text-muted-foreground">RAKAZO · LOGO AVATAR STUDY</p>
+            <p className="mb-1 text-label text-muted-foreground">
+              AGENTIC_SMITH · LOGO AVATAR STUDY
+            </p>
             <h1 className="text-heading2 font-semibold">Different colours. Their own rhythm.</h1>
           </div>
         </div>
@@ -355,8 +362,8 @@ function Study() {
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <BotAvatar color={portrait} avatarSet="rakazo" size={38} />
-          <BotAvatar color="#8B5CF6::shape_3" avatarSet="rakazo" size={38} />
+          <BotAvatar color={portrait} avatarSet="agentic-smith" size={38} />
+          <BotAvatar color="#8B5CF6::shape_3" avatarSet="agentic-smith" size={38} />
           <span className="text-caption text-muted-foreground">
             Custom avatars
             <br />
@@ -514,7 +521,7 @@ function SeededFleet() {
       <main className="mx-auto max-w-[1140px] p-6 text-foreground" data-renders={renders}>
         <header className="mb-6 flex items-center justify-between gap-4">
           <div>
-            <h1 className="text-heading2 font-semibold">Seeded Rakazo colours</h1>
+            <h1 className="text-heading2 font-semibold">Seeded Agentic Smith colours</h1>
             <p className="mt-1 text-label text-muted-foreground">
               {compact
                 ? "Live status fallback · compact list"
@@ -555,7 +562,7 @@ function SeededFleet() {
                 <BotAvatar
                   color={bot.color}
                   identity={bot.id}
-                  avatarSet="rakazo"
+                  avatarSet="agentic-smith"
                   status="running"
                   size={32}
                 />
@@ -570,7 +577,7 @@ function SeededFleet() {
                 <BotAvatar
                   color={bot.color}
                   identity={bot.id}
-                  avatarSet="rakazo"
+                  avatarSet="agentic-smith"
                   activity={activity}
                   size={88}
                   className="mx-auto"
@@ -583,7 +590,7 @@ function SeededFleet() {
                       <BotAvatar
                         color={bot.color}
                         identity={bot.id}
-                        avatarSet="rakazo"
+                        avatarSet="agentic-smith"
                         activity={activity}
                         size={size}
                       />

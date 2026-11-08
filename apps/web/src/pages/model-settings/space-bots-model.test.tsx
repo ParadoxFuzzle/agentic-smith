@@ -17,7 +17,7 @@ vi.mock("@lingui/react/macro", () => {
     String.raw({ raw: parts }, ...values);
   return { useLingui: () => ({ t }) };
 });
-vi.mock("@rakazo/ui-web", () => ({
+vi.mock("@agentic-smith/ui-web", () => ({
   Button: ({
     variant: _v,
     size: _s,

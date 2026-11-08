@@ -1,10 +1,10 @@
-appId: com.rakazo.app
+appId: com.agenticsmith.app
 name: Search
 ---
 - runFlow:
     file: ../subflows/sign-in.yaml
     env:
-      RAKAZO_ACTIVE_EMAIL: ${RAKAZO_SCREENSHOT_EMAIL}
+      AGENTIC_SMITH_ACTIVE_EMAIL: ${AGENTIC_SMITH_SCREENSHOT_EMAIL}
 - tapOn:
     id: "home-search-button"
     optional: true

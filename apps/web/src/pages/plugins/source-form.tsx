@@ -1,9 +1,8 @@
-import { Trans } from "@lingui/react/macro";
 import type {
   IntegrationCatalogResult,
   IntegrationCatalogSurface,
   McpSourcePreset,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   Button,
   Field,
@@ -12,7 +11,8 @@ import {
   Input,
   NativeSelect,
   NativeSelectOption,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Trans } from "@lingui/react/macro";
 import { useState } from "react";
 import { ViewTitle } from "./parts";
 

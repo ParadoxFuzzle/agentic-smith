@@ -1,8 +1,8 @@
+import { useLinkPrompt } from "@agentic-smith/chat-ui/web";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { appConnectedInput, waitForConnection } from "@agentic-smith/core";
+import { Button, Dialog, DialogClose, DialogContent, DialogTitle } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { useLinkPrompt } from "@rakazo/chat-ui/web";
-import type { MessageBlock } from "@rakazo/contracts";
-import { appConnectedInput, waitForConnection } from "@rakazo/core";
-import { Button, Dialog, DialogClose, DialogContent, DialogTitle } from "@rakazo/ui-web";
 import { X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { BuiCard, SuccessPop } from "../../components/ai/primitives";
@@ -169,7 +169,11 @@ export function AppConnectCard({
         displayName: block.name,
       });
       if (started.authorizationUrl) {
-        window.open(started.authorizationUrl, "rakazo-app-connect", "popup,width=560,height=720");
+        window.open(
+          started.authorizationUrl,
+          "agentic-smith-app-connect",
+          "popup,width=560,height=720",
+        );
       }
       const result = await waitForConnection(
         started.connectionId,
@@ -257,7 +261,7 @@ function ChartCanvas({
     // Plot loads lazily so threads without charts never pay for the library.
     void (async () => {
       try {
-        const { buildPlotParts } = await importChunk(() => import("@rakazo/core/plot"));
+        const { buildPlotParts } = await importChunk(() => import("@agentic-smith/core/plot"));
         if (cancelled || !ref.current) return;
         // Hover inspection by default: give the first mark a tooltip unless
         // the spec already asks for one somewhere.

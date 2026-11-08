@@ -1,0 +1,13 @@
+[Unit]
+Description=Check host storage, backup health and SSH access rules
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/agentic-smith/backup.env
+ExecStart=/usr/local/sbin/agentic-smith-host-check
+StateDirectory=agentic-smith/alerts
+StateDirectoryMode=0700
+ProtectSystem=strict
+ReadWritePaths=/var/lib/agentic-smith/alerts
+ProtectHome=true
+PrivateTmp=true

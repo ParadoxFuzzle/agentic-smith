@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import type { Actor } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
+import type { Actor } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   asSystem,
   clearThread,
@@ -12,7 +12,7 @@ import {
   provisionMessagingIdentity,
   runAsSystem,
   runAsTenant,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { reactToThreadMessage } from "./thread-reactions.js";
 import type { ThreadTarget } from "./thread-target.js";

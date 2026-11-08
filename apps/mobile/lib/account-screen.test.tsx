@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import type { AccountSecurity } from "@rakazo/contracts";
+import type { AccountSecurity } from "@agentic-smith/contracts";
 import * as SecureStore from "expo-secure-store";
 import type { ReactNode } from "react";
 import { act, createElement, useEffect } from "react";
@@ -436,7 +436,7 @@ async function renderAccount() {
 
 it("navigates to sign-in while a silent server still owes the sign-out delivery", async () => {
   const actual = await vi.importActual<typeof ApiAuth>("./api-auth");
-  const store = new Map<string, string>([["rakazo.session_token", "session-token"]]);
+  const store = new Map<string, string>([["agentic-smith.session_token", "session-token"]]);
   vi.mocked(SecureStore.getItemAsync).mockImplementation(async (key) => store.get(key) ?? null);
   vi.mocked(SecureStore.setItemAsync).mockImplementation(async (key, value) => {
     store.set(key, value);
@@ -457,8 +457,8 @@ it("navigates to sign-in while a silent server still owes the sign-out delivery"
 
     // The screen leaves before the request timeout fires; the device is signed out.
     expect(replaceWithSignIn).toHaveBeenCalled();
-    expect(store.has("rakazo.session_token")).toBe(false);
-    expect(JSON.parse(store.get("rakazo.pending_sign_out") ?? "[]")).toHaveLength(1);
+    expect(store.has("agentic-smith.session_token")).toBe(false);
+    expect(JSON.parse(store.get("agentic-smith.pending_sign_out") ?? "[]")).toHaveLength(1);
 
     // The delivery still runs: it times out and the record waits for retry.
     await vi.advanceTimersByTimeAsync(8_000);
@@ -466,7 +466,7 @@ it("navigates to sign-in while a silent server still owes the sign-out delivery"
       "http://127.0.0.1:3100/api/auth/sign-out",
       expect.anything(),
     );
-    expect(JSON.parse(store.get("rakazo.pending_sign_out") ?? "[]")).toHaveLength(1);
+    expect(JSON.parse(store.get("agentic-smith.pending_sign_out") ?? "[]")).toHaveLength(1);
   } finally {
     vi.useRealTimers();
   }

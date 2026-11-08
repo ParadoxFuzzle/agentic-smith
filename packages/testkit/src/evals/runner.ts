@@ -1,15 +1,20 @@
 import { randomUUID } from "node:crypto";
-import type { AgentRuntime, JobPublisher, NotificationProvider } from "@rakazo/adapter-kit";
-import { runJobKey } from "@rakazo/adapter-kit";
+import type { AgentRuntime, JobPublisher, NotificationProvider } from "@agentic-smith/adapter-kit";
+import { runJobKey } from "@agentic-smith/adapter-kit";
 import {
   CapturingNotificationProvider,
   MessagingTeamChatEmulator,
   messageBot,
-} from "@rakazo/adapters";
-import type { MessageBlock, ModelConnectInput, ReplyMode, RunStatus } from "@rakazo/contracts";
-import { ACTIVE_RUN_STATUSES, attachmentComputerPath, isTerminal } from "@rakazo/core";
-import type { createDb } from "@rakazo/db";
-import { createThreadEvents } from "@rakazo/db";
+} from "@agentic-smith/adapters";
+import type {
+  MessageBlock,
+  ModelConnectInput,
+  ReplyMode,
+  RunStatus,
+} from "@agentic-smith/contracts";
+import { ACTIVE_RUN_STATUSES, attachmentComputerPath, isTerminal } from "@agentic-smith/core";
+import type { createDb } from "@agentic-smith/db";
+import { createThreadEvents } from "@agentic-smith/db";
 import { discardBotIntroRun } from "../discard-bot-intro.js";
 import { sessionCookieHeader } from "../index.js";
 import { asSystem } from "../system-db.js";

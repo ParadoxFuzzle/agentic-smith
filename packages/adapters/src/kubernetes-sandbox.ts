@@ -1,15 +1,6 @@
 import { createHash } from "node:crypto";
 import type { Readable } from "node:stream";
 import { PassThrough } from "node:stream";
-import type * as KubernetesClient from "@kubernetes/client-node";
-import type {
-  ConfigurationOptions,
-  CoreV1Api,
-  Exec,
-  V1Pod,
-  V1PodSpec,
-  V1Status,
-} from "@kubernetes/client-node";
 import type {
   AdapterContext,
   CommandRequest,
@@ -25,24 +16,33 @@ import type {
   ScreenRequest,
   ScreenSession,
   TerminalRequest,
-} from "@rakazo/adapter-kit";
-import { COMPUTER_CACHE_ENV } from "@rakazo/core/node/desktop-runtime";
+} from "@agentic-smith/adapter-kit";
+import { COMPUTER_CACHE_ENV } from "@agentic-smith/core/node/desktop-runtime";
+import type * as KubernetesClient from "@kubernetes/client-node";
+import type {
+  ConfigurationOptions,
+  CoreV1Api,
+  Exec,
+  V1Pod,
+  V1PodSpec,
+  V1Status,
+} from "@kubernetes/client-node";
 import type { RawExecEvent } from "./exec-computer.js";
 import { ExecComputer, COMPUTER_IMAGE_WORKSPACE as WORKSPACE } from "./exec-computer.js";
 import { LinuxDesktop, onBotScreen } from "./linux-desktop.js";
 import { sandboxNotFoundError } from "./sandbox-errors.js";
 
 const DISPLAY_START = 20;
-const DEFAULT_NAMESPACE = "rakazo-sandboxes";
+const DEFAULT_NAMESPACE = "agentic-smith-sandboxes";
 // Same default as the Compose stack. Pin a digest with KUBERNETES_SANDBOX_COMPUTER_IMAGE in
 // production so every pod runs the image the API was tested against.
-const DEFAULT_COMPUTER_IMAGE = "ghcr.io/elie222/rakazo/computer:edge";
+const DEFAULT_COMPUTER_IMAGE = "ghcr.io/paradoxfuzzle/agentic-smith/computer:edge";
 const DEFAULT_READY_TIMEOUT_MS = 120_000;
 const REQUEST_TIMEOUT_MS = 10_000;
 const CONTAINER_NAME = "computer";
 // Names the bot that owns a computer pod. A pod carrying another bot's value is
 // never reused or replaced.
-const BOT_ID_LABEL = "rakazo-bot-id";
+const BOT_ID_LABEL = "agentic-smith-bot-id";
 const HOME_VOLUME = "home";
 const READY_PORT = 6080;
 const DESKTOP_PORT_START = 6100;
@@ -56,7 +56,7 @@ export interface KubernetesSandboxOptions {
   podLabels?: Record<string, string>;
   readyTimeoutMs?: number;
   /**
-   * Claim in the sandbox namespace that holds the Rakazo data directory. When
+   * Claim in the sandbox namespace that holds the Agentic Smith data directory. When
    * set, each Computer mounts only its own `homes/<bot id>` directory at the
    * workspace, so the home persists in place and is never copied in or out.
    * The claim's volume is ReadWriteOnce, so the pod must also be placed with
@@ -386,7 +386,7 @@ export class KubernetesSandboxProvider implements SandboxProvider {
         annotations: this.podAnnotations,
         labels: {
           ...this.podLabels,
-          "app.kubernetes.io/name": "rakazo-computer",
+          "app.kubernetes.io/name": "agentic-smith-computer",
           [BOT_ID_LABEL]: botId,
         },
       },
@@ -676,7 +676,7 @@ function podNameForBot(botId: string): string {
     .replaceAll(/^-+|-+$/g, "")
     .slice(0, 40);
   const hash = createHash("sha256").update(botId).digest("hex").slice(0, 12);
-  return `rakazo-${normalized || "bot"}-${hash}`;
+  return `agentic-smith-${normalized || "bot"}-${hash}`;
 }
 
 /** The data directory holds `homes/<bot id>`; a bot id must name exactly one folder. */

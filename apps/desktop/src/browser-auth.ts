@@ -1,6 +1,6 @@
 import type { Server } from "node:http";
 import { createServer } from "node:http";
-import type { RakazoDesktopOAuthCallback } from "@rakazo/contracts";
+import type { AgenticSmithDesktopOAuthCallback } from "@agentic-smith/contracts";
 import { t } from "./i18n.js";
 import { LOOPBACK_HOSTS } from "./oauth-callback.js";
 
@@ -10,7 +10,7 @@ export async function openBrowserAuth(
   options: {
     signal: AbortSignal;
     openExternal: (url: string) => Promise<unknown>;
-    onCallback: (callback: RakazoDesktopOAuthCallback) => void;
+    onCallback: (callback: AgenticSmithDesktopOAuthCallback) => void;
     onClose?: () => void;
   },
 ): Promise<void> {
@@ -85,11 +85,13 @@ export async function openBrowserAuth(
             !code ||
             target.searchParams.has("error")
           ) {
-            response.writeHead(400).end(t("Sign-in callback rejected. Return to Rakazo to retry."));
+            response
+              .writeHead(400)
+              .end(t("Sign-in callback rejected. Return to Agentic Smith to retry."));
             return;
           }
           consumed = true;
-          response.end(t("You can close this tab and return to Rakazo."), close);
+          response.end(t("You can close this tab and return to AgenticSmith."), close);
           options.onCallback({ code, state });
         });
         server.requestTimeout = 10_000;

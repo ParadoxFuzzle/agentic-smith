@@ -1,4 +1,4 @@
-import type { SpaceBot } from "@rakazo/contracts";
+import type { SpaceBot } from "@agentic-smith/contracts";
 import { StyleSheet, View } from "react-native";
 import { mobileTokens } from "../lib/appearance";
 import type { MobileBot } from "../lib/mobile-types";

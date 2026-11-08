@@ -1,5 +1,5 @@
-import type { SpendingLimit } from "@rakazo/contracts";
-import { formatMinorAmount } from "@rakazo/core";
+import type { SpendingLimit } from "@agentic-smith/contracts";
+import { formatMinorAmount } from "@agentic-smith/core";
 import type { t as translate } from "./i18n";
 import { dateLocaleForUi } from "./i18n";
 import type { UiLocale } from "./ui-locale";

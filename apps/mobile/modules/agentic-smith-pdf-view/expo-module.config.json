@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android"],
+  "apple": {
+    "modules": ["AgenticSmithPdfViewModule"]
+  },
+  "android": {
+    "modules": ["com.agenticsmith.pdfview.AgenticSmithPdfViewModule"]
+  }
+}

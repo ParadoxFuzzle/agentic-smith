@@ -2,7 +2,7 @@ import {
   BillingCheckoutCompletedError,
   BillingCustomerNotFoundError,
   BillingPaymentNotCompletedError,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import { describe, expect, it, vi } from "vitest";
 import {
   encodeStripeForm,
@@ -310,7 +310,7 @@ describe("Stripe billing HTTP boundary", () => {
       id: "cbtxn_lost",
       customer: customerId,
       amount: -1000,
-      metadata: { rakazo_reference: "referral_2" },
+      metadata: { agentic_smith_reference: "referral_2" },
     });
     await provider.grantBalanceCredit(customerId, 1000, "referral_2");
     expect(wire.balances.get(customerId)).toBe(-1000);

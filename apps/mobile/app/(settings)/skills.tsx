@@ -1,4 +1,4 @@
-import type { CapabilityInstall } from "@rakazo/contracts";
+import type { CapabilityInstall } from "@agentic-smith/contracts";
 import { useQuery } from "@tanstack/react-query";
 import { useFocusEffect, useNavigation, useRouter } from "expo-router";
 import { useCallback, useLayoutEffect, useState } from "react";

@@ -1,16 +1,16 @@
-import { t } from "@lingui/core/macro";
-import { Trans, useLingui } from "@lingui/react/macro";
-import { ChatMarkdown } from "@rakazo/chat-ui/web";
-import type { AskReceipt, LoginFieldInput, ThreadMessage } from "@rakazo/contracts";
-import { BOT_INSTRUCTIONS_MAX_LENGTH } from "@rakazo/contracts";
+import { ChatMarkdown } from "@agentic-smith/chat-ui/web";
+import type { AskReceipt, LoginFieldInput, ThreadMessage } from "@agentic-smith/contracts";
+import { BOT_INSTRUCTIONS_MAX_LENGTH } from "@agentic-smith/contracts";
 import {
   isApprovalAskBlock,
   isSecretAskBlock,
   receiptItems,
   resolveAskChoice,
   selectedAskActionLabel,
-} from "@rakazo/core";
-import { Button, Input, Textarea } from "@rakazo/ui-web";
+} from "@agentic-smith/core";
+import { Button, Input, Textarea } from "@agentic-smith/ui-web";
+import { t } from "@lingui/core/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import type { RpcClient } from "../lib/rpc";

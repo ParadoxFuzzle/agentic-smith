@@ -7,13 +7,13 @@ import type {
   SandboxProvider,
   SemanticMemoryProvider,
   WebProvider,
-} from "@rakazo/adapter-kit";
-import type { ComputerMode, MessageBlock, ReplyMode } from "@rakazo/contracts";
-import { createStreamingRedactor } from "@rakazo/core";
-import { toolEffectIdempotencyKey } from "@rakazo/core/node/approval-effect-key";
-import type { Bot, Computer, effectiveMemoryScope, Run, Task, Thread } from "@rakazo/db";
-import { dropRunTurnCheckpoint, saveRunTurnCheckpoint } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import type { ComputerMode, MessageBlock, ReplyMode } from "@agentic-smith/contracts";
+import { createStreamingRedactor } from "@agentic-smith/core";
+import { toolEffectIdempotencyKey } from "@agentic-smith/core/node/approval-effect-key";
+import type { Bot, Computer, effectiveMemoryScope, Run, Task, Thread } from "@agentic-smith/db";
+import { dropRunTurnCheckpoint, saveRunTurnCheckpoint } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type {
   ApprovalPausedToolResult,
   ApprovedEffectReplayQueue,

@@ -1,7 +1,12 @@
-import { useNativeLinkConfirm } from "@rakazo/chat-ui/native";
-import type { MessageBlock } from "@rakazo/contracts";
-import { MCP_APP_MIME_TYPE } from "@rakazo/contracts";
-import { createMcpAppHost, mcpAppCsp, mcpAppDocument, mcpAppShellDocument } from "@rakazo/core";
+import { useNativeLinkConfirm } from "@agentic-smith/chat-ui/native";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { MCP_APP_MIME_TYPE } from "@agentic-smith/contracts";
+import {
+  createMcpAppHost,
+  mcpAppCsp,
+  mcpAppDocument,
+  mcpAppShellDocument,
+} from "@agentic-smith/core";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { currentApiBase } from "../../lib/api";
@@ -91,7 +96,7 @@ export function McpAppCard({ block, target }: { block: AppBlock; target: MobileA
           deviceCapabilities: { touch: true, hover: false },
         },
         csp,
-        send: (message) => answer.current?.({ type: "rakazo-app:host", message }),
+        send: (message) => answer.current?.({ type: "agentic-smith-app:host", message }),
         // One tap, one action.
         allowAction: () => {
           if (!pageActionAllowed(tappedAt.current, Date.now())) return false;
@@ -145,7 +150,7 @@ export function McpAppCard({ block, target }: { block: AppBlock; target: MobileA
             onMessage={(data, reply) => {
               answer.current = reply;
               const envelope = pageMessage(data) as { type?: unknown; message?: unknown } | null;
-              if (envelope?.type !== "rakazo-app:view") return;
+              if (envelope?.type !== "agentic-smith-app:view") return;
               if ((envelope.message as { method?: unknown })?.method === "ui/initialize") {
                 setStarted(true);
               }

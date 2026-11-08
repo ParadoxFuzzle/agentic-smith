@@ -1,8 +1,8 @@
 # Pull request previews
 
-Every pull request that changes the app gets its own live copy at `https://rakazo-pr-<number>.fly.dev`,
+Every pull request that changes the app gets its own live copy at `https://agentic-smith-pr-<number>.fly.dev`,
 linked from a comment on the pull request and updated on each push. Sign in with
-`preview@example.com` / `rakazo-preview-demo`.
+`preview@example.com` / `agentic-smith-preview-demo`.
 
 A preview is one Fly.io machine holding Postgres and the whole app, with every outside service
 emulated: scripted model replies, fake computers, and emulated billing and cloud agents. Fly's
@@ -36,7 +36,7 @@ is billed only while running. See [Fly pricing](https://fly.io/docs/about/pricin
    `fly tokens create org --org <org>`.
 2. In the repository's Actions settings, add the secret `FLY_PREVIEW_TOKEN` and the variable
    `FLY_PREVIEW_ORG` (the organization's slug). Optional variables: `FLY_PREVIEW_REGION`
-   (default `iad`) and `FLY_PREVIEW_APP_PREFIX` (default `rakazo-pr`; app names are global).
+   (default `iad`) and `FLY_PREVIEW_APP_PREFIX` (default `agentic-smith-pr`; app names are global).
 3. Set a spending alert on the organization.
 
 Until the token is set, the deploy and cleanup workflows skip themselves, but every pull request

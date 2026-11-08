@@ -1,4 +1,4 @@
-import type { CompatibleEndpointPreset } from "@rakazo/contracts";
+import type { CompatibleEndpointPreset } from "@agentic-smith/contracts";
 import {
   ipVersion,
   isCloudMetadataHost,
@@ -9,7 +9,7 @@ import {
   normalizeHost,
   normalizeOpenAiCompatibleBaseUrl,
   OPENAI_COMPATIBLE_PROVIDER_ID,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 
 export { normalizeOpenAiCompatibleBaseUrl, OPENAI_COMPATIBLE_PROVIDER_ID };
 
@@ -25,7 +25,7 @@ export function compatibleEndpointPreset(baseUrl: string | undefined) {
 }
 
 export function openAiCompatAllowPublicHosts(): boolean {
-  return process.env.RAKAZO_OPENAI_COMPAT_ALLOW_PUBLIC !== "0";
+  return process.env.AGENTIC_SMITH_OPENAI_COMPAT_ALLOW_PUBLIC !== "0";
 }
 
 export function isPrivateOpenAiCompatibleHostname(hostname: string): boolean {
@@ -33,7 +33,7 @@ export function isPrivateOpenAiCompatibleHostname(hostname: string): boolean {
   if (isLoopbackHost(normalized) || normalized === "host.docker.internal") return true;
   if (isCloudMetadataHost(normalized)) return false;
   if (ipVersion(normalized) !== 0) return isNonPublicAddress(normalized);
-  return (process.env.RAKAZO_OPENAI_COMPAT_PRIVATE_HOSTS ?? "")
+  return (process.env.AGENTIC_SMITH_OPENAI_COMPAT_PRIVATE_HOSTS ?? "")
     .split(",")
     .some((entry) => entry.trim() !== "" && normalizeHost(entry.trim()) === normalized);
 }

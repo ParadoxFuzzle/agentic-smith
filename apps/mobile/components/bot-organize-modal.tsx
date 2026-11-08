@@ -1,4 +1,4 @@
-import { SNOOZE_PRESETS, snoozePresetTime } from "@rakazo/core";
+import { SNOOZE_PRESETS, snoozePresetTime } from "@agentic-smith/core";
 import type { ReactNode } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ViewStyle } from "react-native";

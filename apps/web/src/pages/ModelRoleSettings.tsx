@@ -1,4 +1,3 @@
-import { Trans, useLingui } from "@lingui/react/macro";
 import type {
   ModelBackupChoice,
   ModelCredential,
@@ -7,14 +6,14 @@ import type {
   ModelRoleSettings as ModelRoleSettingsValue,
   SettingsScope,
   ThinkingLevel,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   canonicalPiProviderId,
   connectedBackupOptions,
   MAX_MODEL_BACKUPS,
   modelRoleChoiceKey,
-} from "@rakazo/contracts";
-import { createModelRoleSettings, modelRoleListPatch } from "@rakazo/core";
+} from "@agentic-smith/contracts";
+import { createModelRoleSettings, modelRoleListPatch } from "@agentic-smith/core";
 import {
   Button,
   DropdownMenu,
@@ -29,7 +28,8 @@ import {
   DropdownMenuTrigger,
   SectionHeading,
   Spinner,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { GripVertical, MoreHorizontal, Plus } from "lucide-react";
 import type { ReactNode } from "react";

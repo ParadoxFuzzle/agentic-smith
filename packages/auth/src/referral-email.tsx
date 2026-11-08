@@ -1,6 +1,6 @@
 /** @jsxRuntime automatic */
-import type { TransactionalEmail } from "@rakazo/adapter-kit";
-import { INVITED_TRIAL_WEEKS } from "@rakazo/contracts";
+import type { TransactionalEmail } from "@agentic-smith/adapter-kit";
+import { INVITED_TRIAL_WEEKS } from "@agentic-smith/contracts";
 import { Link, Text } from "react-email";
 import { emailText, greeting, linkStyle, message } from "./email.js";
 
@@ -19,18 +19,18 @@ export function referralEmail(
       <Text>{greeting(say, user.name)}</Text>
       <Text>
         {say(
-          "Invite a friend to Rakazo: they get {weeks} weeks free, and you earn a free month when they start a qualifying subscription with a new card.",
+          "Invite a friend to Agentic Smith: they get {weeks} weeks free, and you earn a free month when they start a qualifying subscription with a new card.",
           { weeks: INVITED_TRIAL_WEEKS },
         )}{" "}
         <Link href={invitePageUrl} style={linkStyle}>
-          {say("Open Rakazo")}
+          {say("Open Agentic Smith")}
         </Link>{" "}
         {say("and choose Invite friends for your link.")}
       </Text>
       <Text>{say("Have any questions? Just reply to this email.")}</Text>
       <Text>
-        {say("If you're enjoying Rakazo,")}{" "}
-        <Link href="https://github.com/elie222/rakazo" style={linkStyle}>
+        {say("If you're enjoying Agentic Smith,")}{" "}
+        <Link href="https://github.com/ParadoxFuzzle/agentic-smith" style={linkStyle}>
           {say("give us a star on GitHub")}
         </Link>
         .

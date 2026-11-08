@@ -1,7 +1,7 @@
+import type { AdapterContext, ConnectorEvent } from "@agentic-smith/adapter-kit";
+import { ConnectorAuthUnavailableError } from "@agentic-smith/adapter-kit";
+import { CONNECTOR_AUTH_UNAVAILABLE } from "@agentic-smith/contracts";
 import type { ConnectedAccountStatus } from "@composio/core";
-import type { AdapterContext, ConnectorEvent } from "@rakazo/adapter-kit";
-import { ConnectorAuthUnavailableError } from "@rakazo/adapter-kit";
-import { CONNECTOR_AUTH_UNAVAILABLE } from "@rakazo/contracts";
 import { describe, expect, it } from "vitest";
 import { ComposioConnector } from "./composio-connector.js";
 import { FakeComposioClient } from "./composio-fake.js";
@@ -254,7 +254,7 @@ describe("ComposioConnector over the fake Composio client", () => {
     const events = await run(
       connector,
       "GITHUB_LIST_RELEASES",
-      { owner: "elie222", repo: "rakazo" },
+      { owner: "jerithai", repo: "agentic-smith" },
       ctx,
     );
     expect(events).toEqual([
@@ -276,7 +276,7 @@ describe("ComposioConnector over the fake Composio client", () => {
     const ctx = context([connection("GMAIL", await connect(connector, "GMAIL"))]);
 
     await expect(
-      run(connector, "GITHUB_LIST_RELEASES", { owner: "elie222", repo: "rakazo" }, ctx),
+      run(connector, "GITHUB_LIST_RELEASES", { owner: "jerithai", repo: "agentic-smith" }, ctx),
     ).resolves.toEqual([
       {
         type: "error",

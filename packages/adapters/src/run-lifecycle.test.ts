@@ -1,4 +1,4 @@
-import { runContinueJob } from "@rakazo/adapter-kit";
+import { runContinueJob } from "@agentic-smith/adapter-kit";
 import { describe, expect, it, vi } from "vitest";
 import { returnHelperOutcome } from "./background-helpers.js";
 import type { ExecutorDeps } from "./executor-deps.js";

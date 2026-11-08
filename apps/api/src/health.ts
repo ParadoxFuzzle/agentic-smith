@@ -1,4 +1,4 @@
-import { logSinkHealth } from "@rakazo/logging";
+import { logSinkHealth } from "@agentic-smith/logging";
 import { Hono } from "hono";
 
 /**

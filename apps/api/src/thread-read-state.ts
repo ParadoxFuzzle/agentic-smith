@@ -1,12 +1,12 @@
-import { ORPCError } from "@orpc/server";
-import type { Actor } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
+import type { Actor } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   markThreadReadFor,
   markThreadUnreadFromFor,
   setThreadSnoozeFor,
   setThreadUnreadFor,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
+import { ORPCError } from "@orpc/server";
 import type { ThreadTarget } from "./thread-target.js";
 
 /** The actor's own read state for a chat. */

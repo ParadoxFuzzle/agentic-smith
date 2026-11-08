@@ -5,14 +5,18 @@ import type {
   McpServer,
   PluginPart,
   PluginPreview,
-} from "@rakazo/contracts";
-import { mcpServerConnection, mcpServerNeedsSignIn, PluginPreviewSchema } from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
+import {
+  mcpServerConnection,
+  mcpServerNeedsSignIn,
+  PluginPreviewSchema,
+} from "@agentic-smith/contracts";
 import {
   catalogItemKey,
   connectCatalogItem,
   installedPluginParts,
   isCatalogItemConnected,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import type { NativeStackNavigationOptions } from "expo-router";
 import {
   Redirect,

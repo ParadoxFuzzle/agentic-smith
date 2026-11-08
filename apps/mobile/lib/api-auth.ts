@@ -1,11 +1,11 @@
-import type { AccountSecurity, AuthCapabilities } from "@rakazo/contracts";
+import type { AccountSecurity, AuthCapabilities } from "@agentic-smith/contracts";
 import {
   accountSecuritySchema,
   authCapabilitiesSchema,
   legacyAccountSecurity,
   legacyAuthCapabilitiesSchema,
-} from "@rakazo/contracts";
-import { displayName, signupRequiresEmailVerification } from "@rakazo/core";
+} from "@agentic-smith/contracts";
+import { displayName, signupRequiresEmailVerification } from "@agentic-smith/core";
 import type { PendingSignOut } from "./api";
 import {
   authHeaders,
@@ -45,7 +45,7 @@ async function postAuth(path: string, input: Record<string, string>, apiBase = c
       // Emails sent before an account has a language follow the one this app shows.
       headers: {
         "content-type": "application/json",
-        origin: "rakazo://",
+        origin: "agentic-smith://",
         "accept-language": getActiveUiLocale(),
       },
       body: JSON.stringify(input),
@@ -130,7 +130,7 @@ export type PasswordResetCapabilities = AuthCapabilities;
 export async function passwordResetCapabilities(): Promise<PasswordResetCapabilities> {
   const { response, body } = await fetchMobileJson<unknown>(
     `${currentApiBase()}/api/auth/capabilities`,
-    { headers: { origin: "rakazo://" } },
+    { headers: { origin: "agentic-smith://" } },
   );
   if (!response.ok) throw new Error(t("Could not load sign-in options"));
   return authCapabilitiesSchema.or(legacyAuthCapabilitiesSchema).parse(body);
@@ -142,7 +142,7 @@ export async function requestPasswordReset(email: string, redirectTo: string): P
       method: "POST",
       headers: {
         "content-type": "application/json",
-        origin: "rakazo://",
+        origin: "agentic-smith://",
         "accept-language": getActiveUiLocale(),
       },
       body: JSON.stringify({ email, redirectTo }),
@@ -165,7 +165,7 @@ export async function updateAccountName(name: string): Promise<void> {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        origin: "rakazo://",
+        origin: "agentic-smith://",
         ...(await authHeaders()),
       },
       body: JSON.stringify({ name: nextName }),
@@ -227,7 +227,7 @@ async function replaceSessionAfterPasswordChange(
       method: "POST",
       headers: {
         "content-type": "application/json",
-        origin: "rakazo://",
+        origin: "agentic-smith://",
         ...headers,
       },
       body: JSON.stringify({ currentPassword, newPassword, revokeOtherSessions: true }),
@@ -310,7 +310,7 @@ export async function deleteAccount(password?: string, token?: string) {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        origin: "rakazo://",
+        origin: "agentic-smith://",
         ...(await authHeaders()),
       },
       body: JSON.stringify({ password, token }),
@@ -328,7 +328,7 @@ export async function deleteAccount(password?: string, token?: string) {
 export async function fetchAccountSecurity(): Promise<AccountSecurity> {
   const { response, body } = await fetchMobileJson<unknown>(
     `${currentApiBase()}/api/auth/account-security`,
-    { headers: { origin: "rakazo://", ...(await authHeaders()) } },
+    { headers: { origin: "agentic-smith://", ...(await authHeaders()) } },
     null,
   );
   // Older servers support password accounts and the original change/delete endpoints.
@@ -347,7 +347,7 @@ async function postSignedInAuth(path: string, payload: Record<string, string> = 
       method: "POST",
       headers: {
         "content-type": "application/json",
-        origin: "rakazo://",
+        origin: "agentic-smith://",
         ...(await authHeaders()),
       },
       body: JSON.stringify(payload),

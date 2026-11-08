@@ -1,5 +1,5 @@
-import type { RoutineRun, RunActivityRow } from "@rakazo/contracts";
-import { routineRunLateness } from "@rakazo/core";
+import type { RoutineRun, RunActivityRow } from "@agentic-smith/contracts";
+import { routineRunLateness } from "@agentic-smith/core";
 import { rpc } from "../lib/api";
 import { dateLocaleForUi, t } from "./i18n";
 

@@ -2,10 +2,14 @@ import { randomBytes } from "node:crypto";
 import { mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import type { AdapterContext } from "@rakazo/adapter-kit";
-import { EmailEmulator, ObjectAgentHomeStore, PrismaAgentHomeRecords } from "@rakazo/adapters";
-import type { PrismaClient, SpaceKeyRecord, SpaceKeyStore } from "@rakazo/db";
-import { asSystem, ContentKeyRing, createDb, LocalKeyProvider } from "@rakazo/db";
+import type { AdapterContext } from "@agentic-smith/adapter-kit";
+import {
+  EmailEmulator,
+  ObjectAgentHomeStore,
+  PrismaAgentHomeRecords,
+} from "@agentic-smith/adapters";
+import type { PrismaClient, SpaceKeyRecord, SpaceKeyStore } from "@agentic-smith/db";
+import { asSystem, ContentKeyRing, createDb, LocalKeyProvider } from "@agentic-smith/db";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { MemoryObjectStorage } from "../../../packages/adapters/src/object-storage.test-support.js";
 import { homeRetentionSweep } from "./home-retention.js";
@@ -53,7 +57,7 @@ describePostgres("saved home retention (PostgreSQL)", () => {
       .homeStorageId;
     return [...storage.objects.keys()].filter((key) => !key.includes(`/${storageId}/`));
   };
-  const sent = () => email.sent.filter((message) => message.to === `${id}@rakazo.test`);
+  const sent = () => email.sent.filter((message) => message.to === `${id}@agentic-smith.test`);
 
   beforeAll(async () => {
     const db = createDb(databaseUrl!);
@@ -74,13 +78,13 @@ describePostgres("saved home retention (PostgreSQL)", () => {
     vi.useFakeTimers({ toFake: ["Date"], now });
     id = `retention-${randomBytes(6).toString("hex")}`;
     docker = `${id}-docker`;
-    root = await mkdtemp(path.join(tmpdir(), "rakazo-retention-"));
+    root = await mkdtemp(path.join(tmpdir(), "agentic-smith-retention-"));
     storage = new MemoryObjectStorage();
     home = new ObjectAgentHomeStore(root, storage, new PrismaAgentHomeRecords(system, ring()));
     email = new EmailEmulator();
     errors = [];
     await system.user.create({
-      data: { id, name: "Alex", email: `${id}@rakazo.test`, emailVerified: true },
+      data: { id, name: "Alex", email: `${id}@agentic-smith.test`, emailVerified: true },
     });
     await system.organization.create({ data: { id, name: id, slug: id, createdAt: new Date() } });
     await system.member.create({
@@ -100,7 +104,7 @@ describePostgres("saved home retention (PostgreSQL)", () => {
         createdAt: new Date(now - 100 * DAY),
       },
     });
-    const files = await mkdtemp(path.join(tmpdir(), "rakazo-retention-files-"));
+    const files = await mkdtemp(path.join(tmpdir(), "agentic-smith-retention-files-"));
     await writeFile(path.join(files, "notes.md"), "keep me");
     await home.commit(id, files, context);
     await system.computer.update({
@@ -194,7 +198,7 @@ describePostgres("saved home retention (PostgreSQL)", () => {
     async (_, paid, text) => {
       const owner = `${id}-owner`;
       await system.user.create({
-        data: { id: owner, name: "Sam", email: `${owner}@rakazo.test`, emailVerified: true },
+        data: { id: owner, name: "Sam", email: `${owner}@agentic-smith.test`, emailVerified: true },
       });
       await system.member.update({ where: { id }, data: { role: "member" } });
       await system.member.create({
@@ -219,7 +223,7 @@ describePostgres("saved home retention (PostgreSQL)", () => {
       await sweep();
       expect(errors).toEqual([]);
       expect(sent()).toHaveLength(0);
-      expect(email.sent.map((message) => message.to)).toEqual([`${owner}@rakazo.test`]);
+      expect(email.sent.map((message) => message.to)).toEqual([`${owner}@agentic-smith.test`]);
       expect(email.sent[0]!.text).toContain(text);
     },
   );

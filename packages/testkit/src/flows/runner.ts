@@ -10,10 +10,10 @@ import type {
   ComputerRef,
   JobPublisher,
   SandboxProvider,
-} from "@rakazo/adapter-kit";
-import type { MessageBlock } from "@rakazo/contracts";
-import { WORKING_RUN_STATUSES } from "@rakazo/core";
-import type { createDb } from "@rakazo/db";
+} from "@agentic-smith/adapter-kit";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { WORKING_RUN_STATUSES } from "@agentic-smith/core";
+import type { createDb } from "@agentic-smith/db";
 import type { EvalJudge, JudgeInput, Judgment } from "../evals/judge.js";
 import { createEvalJudge } from "../evals/judge.js";
 import { sessionCookieHeader } from "../index.js";

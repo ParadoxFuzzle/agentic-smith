@@ -10,8 +10,8 @@ import type {
   PaymentWalletProvider,
   PurchaseRequest,
   PurchaseSnapshot,
-} from "@rakazo/adapter-kit";
-import type { PrismaClient, Purchase } from "@rakazo/db";
+} from "@agentic-smith/adapter-kit";
+import type { PrismaClient, Purchase } from "@agentic-smith/db";
 import { fakeSpendingPrisma } from "./fake-spending.js";
 import { readStripeChargeChallenge, stripeChargeAuthorization } from "./mpp-stripe.js";
 

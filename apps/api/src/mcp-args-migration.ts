@@ -1,7 +1,7 @@
-import type { SecretStore } from "@rakazo/adapter-kit";
-import { lockMcpOAuthMaterial, persistPreparedSecret } from "@rakazo/adapters";
-import type { PrismaClient } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+import type { SecretStore } from "@agentic-smith/adapter-kit";
+import { lockMcpOAuthMaterial, persistPreparedSecret } from "@agentic-smith/adapters";
+import type { PrismaClient } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { serverSecretSpace } from "./availability.js";
 import type { McpSecretMaterial } from "./mcp-material.js";
 import { legacyMcpArgs } from "./mcp-material.js";

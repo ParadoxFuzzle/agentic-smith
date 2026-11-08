@@ -1,12 +1,11 @@
-import { Trans, useLingui } from "@lingui/react/macro";
-import type { AccountSecurity, BotAvatarSet, UsageSummary } from "@rakazo/contracts";
+import type { AccountSecurity, BotAvatarSet, UsageSummary } from "@agentic-smith/contracts";
 import {
   APP_LOCALE_LABELS,
   accountDisplay,
   displayName,
   MAX_PASSWORD_LENGTH,
   MIN_PASSWORD_LENGTH,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import {
   Button,
   Field,
@@ -20,7 +19,7 @@ import {
   Switch,
   ToggleGroup,
   ToggleGroupItem,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
 import {
   Table,
   TableBody,
@@ -28,7 +27,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@rakazo/ui-web/components/ui/table";
+} from "@agentic-smith/ui-web/components/ui/table";
+import { Trans, useLingui } from "@lingui/react/macro";
 import type { RefObject } from "react";
 import { useId, useRef, useState } from "react";
 import { AccountAccess, LinkSsoRow } from "../components/AccountAccess";
@@ -300,10 +300,10 @@ export function GeneralSettingsPanels({
                     <Trans>Original</Trans>
                   </ToggleGroupItem>
                   <ToggleGroupItem
-                    value="rakazo"
+                    value="agentic-smith"
                     className="text-body-sm aria-pressed:bg-background aria-pressed:shadow-sm"
                   >
-                    <Trans>Rakazo</Trans>
+                    <Trans>Agentic Smith</Trans>
                   </ToggleGroupItem>
                 </ToggleGroup>
                 {botStyleError ? (

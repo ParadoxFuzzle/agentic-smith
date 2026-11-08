@@ -4,7 +4,7 @@ import type {
   ConnectorEvent,
   ConnectorProvider,
   ConnectorTool,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import { describe, expect, it } from "vitest";
 import { ConnectorRegistry, createConnectorStack } from "./connector-registry.js";
 

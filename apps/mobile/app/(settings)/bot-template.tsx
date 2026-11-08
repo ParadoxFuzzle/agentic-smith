@@ -1,7 +1,7 @@
-import { ChatMarkdown } from "@rakazo/chat-ui/native";
-import type { Bot, BotTemplateListing } from "@rakazo/contracts";
-import { isBotTemplateChanged } from "@rakazo/contracts";
-import { botTemplateApps, formatCron } from "@rakazo/core";
+import { ChatMarkdown } from "@agentic-smith/chat-ui/native";
+import type { Bot, BotTemplateListing } from "@agentic-smith/contracts";
+import { isBotTemplateChanged } from "@agentic-smith/contracts";
+import { botTemplateApps, formatCron } from "@agentic-smith/core";
 import { useQuery } from "@tanstack/react-query";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import type { ReactNode } from "react";

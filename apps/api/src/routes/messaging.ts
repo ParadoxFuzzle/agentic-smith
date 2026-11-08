@@ -1,7 +1,6 @@
-import { ORPCError } from "@orpc/server";
-import { messagingDeliverJob } from "@rakazo/adapter-kit";
-import { displayName } from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
+import { messagingDeliverJob } from "@agentic-smith/adapter-kit";
+import { displayName } from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   crossSpaceCommunicationAllowed,
   formatMessagingLinkCode,
@@ -9,8 +8,9 @@ import {
   isUniqueViolation,
   runAsSystem,
   spaceIsShared,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { ORPCError } from "@orpc/server";
 import type { RouterContext } from "./context.js";
 
 export function messagingRoutes(ctx: RouterContext) {

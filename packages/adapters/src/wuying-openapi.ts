@@ -1,4 +1,4 @@
-import { SandboxRateLimitError, SandboxUnresponsiveError } from "@rakazo/adapter-kit";
+import { SandboxRateLimitError, SandboxUnresponsiveError } from "@agentic-smith/adapter-kit";
 import { sandboxNotFoundError } from "./sandbox-errors.js";
 
 /** Desktop states the ECD API reports; anything else is treated as in transition. */

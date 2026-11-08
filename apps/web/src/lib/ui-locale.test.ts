@@ -1,4 +1,4 @@
-import { APP_LOCALE_LABELS } from "@rakazo/core";
+import { APP_LOCALE_LABELS } from "@agentic-smith/core";
 import { afterEach, describe, expect, it } from "vitest";
 import {
   normalizeUiLocale,

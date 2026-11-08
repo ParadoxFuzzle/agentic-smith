@@ -20,7 +20,7 @@ Linux 默认不提供相同的 `host.docker.internal` 行为。
 
 只连接自己掌控的端点：提示词、附件和工具结果会发往该地址。
 公开地址携带 API 密钥或自定义请求头时需要 HTTPS，并且解析结果必须全部是公网地址。
-`RAKAZO_OPENAI_COMPAT_ALLOW_PUBLIC=0` 可禁止普通公开兼容端点。
+`AGENTIC_SMITH_OPENAI_COMPAT_ALLOW_PUBLIC=0` 可禁止普通公开兼容端点。
 私有端点默认受限。部署运营方可在 API 和 worker 上同时设置 `MCP_ALLOW_PRIVATE_ENDPOINT=true`，
 并重建相应服务，允许用户连接私有模型端点。此权限对部署内所有用户生效，不只对管理员生效；
 仅在接受这项访问范围时启用，元数据和链路本地目标仍会被阻止。
@@ -41,7 +41,7 @@ Linux 默认不提供相同的 `host.docker.internal` 行为。
 
 需要截图计算机工具时，选择支持视觉的模型。
 Compose 也会将运行时支持的标准提供商密钥（例如 `OPENAI_API_KEY`、`GEMINI_API_KEY`）传给 API 和 worker，
-用于没有已存储凭据的模型。`RAKAZO_LIVE_MODEL_CATALOG=off` 可关闭在线模型目录探测。
+用于没有已存储凭据的模型。`AGENTIC_SMITH_LIVE_MODEL_CATALOG=off` 可关闭在线模型目录探测。
 
 使用宿主机凭据的云模型需显式设置 `PI_DEFAULT_CREDENTIALS=host`。
 例如 Bedrock 使用 `PI_DEFAULT_PROVIDER=amazon-bedrock`、`PI_DEFAULT_MODEL`、`AWS_REGION` 和宿主机角色；
@@ -54,27 +54,27 @@ Vertex 使用 `PI_DEFAULT_PROVIDER=google-vertex` 及标准应用默认凭据。
 也可以为整个部署列出本地模型：
 
 ```env
-RAKAZO_LOCAL_MODELS=qwen3:4b,llama3.1:8b,qwen3-vl
-RAKAZO_LOCAL_MODELS_URL=http://127.0.0.1:11434/v1
-RAKAZO_LOCAL_CONTEXT_WINDOW=32768
-RAKAZO_LOCAL_MAX_TOKENS=4096
+AGENTIC_SMITH_LOCAL_MODELS=qwen3:4b,llama3.1:8b,qwen3-vl
+AGENTIC_SMITH_LOCAL_MODELS_URL=http://127.0.0.1:11434/v1
+AGENTIC_SMITH_LOCAL_CONTEXT_WINDOW=32768
+AGENTIC_SMITH_LOCAL_MAX_TOKENS=4096
 # 此端点中支持图片的模型 ID
-RAKAZO_LOCAL_VISION_MODELS=qwen3-vl
+AGENTIC_SMITH_LOCAL_VISION_MODELS=qwen3-vl
 # 此端点中支持标准 reasoning_effort 的模型 ID
-RAKAZO_LOCAL_REASONING_MODELS=qwen3:4b
+AGENTIC_SMITH_LOCAL_REASONING_MODELS=qwen3:4b
 ```
 
 这个回环地址示例适用于在宿主机运行源码服务；容器部署应改为容器可达的地址。
-`RAKAZO_LOCAL_MAX_TOKENS` 是每次请求的输出上限，连接自身设置优先，且不会超过上下文窗口的四分之一。
-输出上限越大，留给提示词的空间越少，长聊天可能更早压缩。将 `RAKAZO_LOCAL_MODELS` 留空可禁用此提供商。
+`AGENTIC_SMITH_LOCAL_MAX_TOKENS` 是每次请求的输出上限，连接自身设置优先，且不会超过上下文窗口的四分之一。
+输出上限越大，留给提示词的空间越少，长聊天可能更早压缩。将 `AGENTIC_SMITH_LOCAL_MODELS` 留空可禁用此提供商。
 
 Ollama Cloud 可直接在“设置 → 模型”中填写其 API 密钥并查找模型，无需配置环境变量；
-即使 `RAKAZO_OPENAI_COMPAT_ALLOW_PUBLIC=0`，该入口仍可用。
+即使 `AGENTIC_SMITH_OPENAI_COMPAT_ALLOW_PUBLIC=0`，该入口仍可用。
 
 ## 思考能力与缓存
 
 服务器支持标准 `reasoning_effort` 时，可在连接的“高级”选项中启用思考能力，无需重启。
-已有连接默认不启用。部署本地列表中的模型可通过 `RAKAZO_LOCAL_REASONING_MODELS` 声明支持标准思考参数的模型 ID，无需重新连接。
+已有连接默认不启用。部署本地列表中的模型可通过 `AGENTIC_SMITH_LOCAL_REASONING_MODELS` 声明支持标准思考参数的模型 ID，无需重新连接。
 启用后默认使用中等思考强度；网页和桌面可在机器人的高级设置中调整，移动端遵循相同后端策略。
 服务器负责将 `minimal`、`low`、`medium`、`high` 或关闭时的 `none` 转为模型所需形式。
 这不会增加独立的思考 token 预算，原有输出限制仍然适用。

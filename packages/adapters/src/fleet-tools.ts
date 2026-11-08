@@ -1,5 +1,5 @@
-import type { AdapterContext, JobPublisher } from "@rakazo/adapter-kit";
-import type { Actor, Group, MessageBlock } from "@rakazo/contracts";
+import type { AdapterContext, JobPublisher } from "@agentic-smith/adapter-kit";
+import type { Actor, Group, MessageBlock } from "@agentic-smith/contracts";
 import {
   BOT_INSTRUCTIONS_MAX_LENGTH,
   BotSectionName,
@@ -13,9 +13,13 @@ import {
   ThinkingLevelSchema,
   TimeZoneSchema,
   UpdateGroupInput,
-} from "@rakazo/contracts";
-import { CARD_TITLE_ESCAPED_CHARACTERS, ONCE_ROUTINE_CRON, redactSecrets } from "@rakazo/core";
-import type { Prisma, PrismaClient, ThreadEvents } from "@rakazo/db";
+} from "@agentic-smith/contracts";
+import {
+  CARD_TITLE_ESCAPED_CHARACTERS,
+  ONCE_ROUTINE_CRON,
+  redactSecrets,
+} from "@agentic-smith/core";
+import type { Prisma, PrismaClient, ThreadEvents } from "@agentic-smith/db";
 import {
   commitBotUpdate,
   createGroupRepos,
@@ -24,8 +28,8 @@ import {
   IsolationError,
   isRecordNotFound,
   SpaceDeletionInProgressError,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type { FleetCardSummary } from "./approval-ask.js";
 import { approvalDetailLength, MAX_APPROVAL_SUMMARY_LENGTH } from "./approval-ask.js";
 import { attachedImageArtifactIds, resolveUpdateBotAvatar } from "./bot-avatar.js";

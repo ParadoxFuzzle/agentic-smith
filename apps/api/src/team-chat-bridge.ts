@@ -4,20 +4,20 @@ import type {
   TeamChatInboundMessage,
   TeamChatSendRequest,
   TeamChatSendResult,
-} from "@rakazo/adapter-kit";
-import { runContinueJob } from "@rakazo/adapter-kit";
-import type { MessageBlock } from "@rakazo/contracts";
-import { ATTACHMENT_MAX_COUNT } from "@rakazo/contracts";
+} from "@agentic-smith/adapter-kit";
+import { runContinueJob } from "@agentic-smith/adapter-kit";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { ATTACHMENT_MAX_COUNT } from "@agentic-smith/contracts";
 import {
   botMessageMaxHops,
   messageBlockForArtifact,
   promptTextForAttachments,
   teamChatPrompt,
   teamChatResponseText,
-} from "@rakazo/core";
-import type { PrismaClient, ThreadEvents } from "@rakazo/db";
-import { clearEndedRunState, teamChatRunClientNonce } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/core";
+import type { PrismaClient, ThreadEvents } from "@agentic-smith/db";
+import { clearEndedRunState, teamChatRunClientNonce } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type { InboundAttachmentStore } from "./inbound-attachments.js";
 import { storeInboundAttachments } from "./inbound-attachments.js";
 import type { MessagingReceipts } from "./messaging-receipts.js";
@@ -466,7 +466,7 @@ export class TeamChatBridge {
       conversation.spaceId !== target.spaceId ||
       !conversation.thread
     ) {
-      throw new Error("Team chat conversation belongs to a different Rakazo target");
+      throw new Error("Team chat conversation belongs to a different Agentic Smith target");
     }
     return { ...conversation, thread: conversation.thread };
   }
@@ -656,7 +656,8 @@ export class TeamChatBridge {
     const pending = this.mirroring.get(message.id);
     if (pending) return pending;
     const mirroring = (async () => {
-      if (!conversation.thread) throw new Error("Team chat conversation has no Rakazo thread");
+      if (!conversation.thread)
+        throw new Error("Team chat conversation has no Agentic Smith thread");
       // Fetchers cannot survive a restart; reuse any completed per-file uploads.
       const stored = attachments
         ? await storeInboundAttachments(this.deps.storeAttachment, conversation, attachments, {
@@ -924,7 +925,7 @@ export class TeamChatBridge {
       const blocks = Array.isArray(response?.blocks) ? (response.blocks as MessageBlock[]) : [];
       const content =
         run.status === "failed"
-          ? `${target.name} could not complete the delegated request. Open Rakazo for details.`
+          ? `${target.name} could not complete the delegated request. Open Agentic Smith for details.`
           : teamChatResponseText(blocks, target.name, true);
       if (content) {
         await this.deps.send({
@@ -990,7 +991,7 @@ export class TeamChatBridge {
     };
   }): Promise<void> {
     const thread = message.externalConversation.thread;
-    if (!thread) throw new Error("Team chat conversation has no Rakazo thread");
+    if (!thread) throw new Error("Team chat conversation has no Agentic Smith thread");
     // In-flight routine wakes own the row via engagementReason; never start a
     // fallback TeamChat agent until that claim is cleared.
     if (isRoutingOwnershipReason(message.engagementReason)) {

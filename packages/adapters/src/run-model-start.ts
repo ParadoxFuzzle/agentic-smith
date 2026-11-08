@@ -1,9 +1,9 @@
-import type { AgentRunRequest } from "@rakazo/adapter-kit";
-import { isModelCredentialRejected } from "@rakazo/adapter-kit";
-import type { ModelRoleChoice } from "@rakazo/contracts";
-import { MISSING_MODEL_RUN_ERROR, MODEL_ACCESS_REQUIRED_RUN_ERROR } from "@rakazo/core";
-import { memberHasModelAccess } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+import type { AgentRunRequest } from "@agentic-smith/adapter-kit";
+import { isModelCredentialRejected } from "@agentic-smith/adapter-kit";
+import type { ModelRoleChoice } from "@agentic-smith/contracts";
+import { MISSING_MODEL_RUN_ERROR, MODEL_ACCESS_REQUIRED_RUN_ERROR } from "@agentic-smith/core";
+import { memberHasModelAccess } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type { ExecutorDeps } from "./executor-deps.js";
 import { HostedModelCreditsRequiredError } from "./model-credit-observer.js";
 import type { DeploymentModelDefaults } from "./model-roles.js";

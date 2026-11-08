@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { BOT_TEMPLATES } from "@rakazo/core";
+import { BOT_TEMPLATES } from "@agentic-smith/core";
 import { describe, expect, it } from "vitest";
 import { UI_LOCALES } from "./ui-locale";
 

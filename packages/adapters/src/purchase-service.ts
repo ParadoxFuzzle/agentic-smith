@@ -8,17 +8,17 @@ import type {
   PurchaseCredentialKind,
   PurchaseSnapshot,
   PurchaseStatus,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import {
   PaymentWalletDisconnected,
   PaymentWalletRequestRejected,
   purchasePollJob,
-} from "@rakazo/adapter-kit";
-import type { PurchaseCardField } from "@rakazo/contracts";
-import { PurchaseIdInput, PurchaseRequestInput } from "@rakazo/contracts";
-import type { Purchase } from "@rakazo/db";
-import { recordPayment, releasePayment } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import type { PurchaseCardField } from "@agentic-smith/contracts";
+import { PurchaseIdInput, PurchaseRequestInput } from "@agentic-smith/contracts";
+import type { Purchase } from "@agentic-smith/db";
+import { recordPayment, releasePayment } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { cardRedactionForms } from "./bot-secrets.js";
 import type { PaymentWalletDeps } from "./payment-wallets.js";
 import { withPaymentWalletCredential } from "./payment-wallets.js";

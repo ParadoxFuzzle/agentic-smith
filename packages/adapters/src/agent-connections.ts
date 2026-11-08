@@ -1,14 +1,14 @@
-import type { JobPublisher } from "@rakazo/adapter-kit";
-import { messagingDeliverJob, runContinueJob } from "@rakazo/adapter-kit";
-import type { MessageBlock } from "@rakazo/contracts";
+import type { JobPublisher } from "@agentic-smith/adapter-kit";
+import { messagingDeliverJob, runContinueJob } from "@agentic-smith/adapter-kit";
+import type { MessageBlock } from "@agentic-smith/contracts";
 import {
   botMessageHopExhausted,
   buildBotMessageWakePrompt,
   clampBotMessage,
   nextBotMessageHop,
   sanitizeMessagingLabel,
-} from "@rakazo/core";
-import type { PrismaClient, ThreadEvents } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { PrismaClient, ThreadEvents } from "@agentic-smith/db";
 import {
   appendEventInTransaction,
   createThreadMessageInTransaction,
@@ -16,8 +16,8 @@ import {
   isUniqueViolation,
   runAsSystem,
   THREAD_LOCK_TRANSACTION_OPTIONS,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { currentBotMessageHop } from "./bot-messages.js";
 import type { ExecutorDeps } from "./executor-deps.js";
 import { runLeaseFor } from "./run-messages.js";

@@ -5,17 +5,17 @@ import type { Server } from "node:http";
 import { createServer } from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { serve } from "@hono/node-server";
 import {
   ComposioConnector,
   EmailEmulator,
   FakeComposioClient,
   PipedreamConnector,
   ThirdPartyConnectorEmulator,
-} from "@rakazo/adapters";
-import { callRequestClientNonce } from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
-import { createThreadMessage } from "@rakazo/db";
+} from "@agentic-smith/adapters";
+import { callRequestClientNonce } from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
+import { createThreadMessage } from "@agentic-smith/db";
+import { serve } from "@hono/node-server";
 import { sessionCookieHeader } from "../index.js";
 import { disposableDatabaseEnv } from "./postgres.js";
 import { runProcess } from "./process.js";
@@ -32,7 +32,7 @@ const HOST_API_URL = `http://127.0.0.1:${API_PORT}`;
 const DEVICE_CONTROL_URL = `http://127.0.0.1:${DEVICE_CONTROL_PORT}`;
 const EXPAND_NOTIFICATIONS_URL = `${DEVICE_CONTROL_URL}/expand-notifications`;
 /** Files the native-features flow picks through the system photo and document pickers. */
-const PICKER_FILES = { image: "rakazo-fixture.png", pdf: "rakazo-fixture.pdf" };
+const PICKER_FILES = { image: "agentic-smith-fixture.png", pdf: "agentic-smith-fixture.pdf" };
 const WEB_ORIGIN = "http://127.0.0.1:5180";
 /** Flows to run, in order. A flow with a window runs on the emulator resized to it. */
 const FLOWS: { name: string; window?: { size: string; density: string } }[] = [
@@ -61,7 +61,7 @@ async function main() {
   await mkdir(REPORT_DIR, { recursive: true });
   await mkdir(DATA_DIR, { recursive: true });
 
-  execFileSync("pnpm", ["--filter", "@rakazo/db", "exec", "prisma", "migrate", "deploy"], {
+  execFileSync("pnpm", ["--filter", "@agentic-smith/db", "exec", "prisma", "migrate", "deploy"], {
     cwd: path.join(ROOT, "packages", "db"),
     env: process.env,
     stdio: "inherit",
@@ -77,7 +77,7 @@ async function main() {
     },
     { fetch: thirdParties.fetch, resolveHostname: thirdParties.resolveHostname },
   );
-  const { createApp } = await import("@rakazo/api/app");
+  const { createApp } = await import("@agentic-smith/api/app");
   const handles = await createApp({
     databaseUrl: process.env.DATABASE_URL!,
     dataDir: DATA_DIR,
@@ -149,7 +149,7 @@ async function main() {
  * that clears app data during that teardown has its fresh launch killed with the old task.
  */
 async function settleApp() {
-  execFileSync("adb", ["shell", "am", "force-stop", "com.rakazo.app"], { stdio: "inherit" });
+  execFileSync("adb", ["shell", "am", "force-stop", "com.agenticsmith.app"], { stdio: "inherit" });
   await new Promise((resolve) => setTimeout(resolve, 10_000));
 }
 
@@ -174,23 +174,23 @@ async function runFlow(flow: string, fixture: Awaited<ReturnType<typeof seedFixt
       "--output",
       path.join(REPORT_DIR, `${flow}.html`),
       "-e",
-      `RAKAZO_MOBILE_API_URL=http://10.0.2.2:${API_PORT}`,
+      `AGENTIC_SMITH_MOBILE_API_URL=http://10.0.2.2:${API_PORT}`,
       "-e",
-      `RAKAZO_SCREENSHOT_EMAIL=${EMAIL}`,
+      `AGENTIC_SMITH_SCREENSHOT_EMAIL=${EMAIL}`,
       "-e",
-      `RAKAZO_SCREENSHOT_PASSWORD=${PASSWORD}`,
+      `AGENTIC_SMITH_SCREENSHOT_PASSWORD=${PASSWORD}`,
       "-e",
-      `RAKAZO_SCREENSHOT_BOT_ID=${fixture.botId}`,
+      `AGENTIC_SMITH_SCREENSHOT_BOT_ID=${fixture.botId}`,
       "-e",
-      `RAKAZO_SCREENSHOT_GROUP_ID=${fixture.groupId}`,
+      `AGENTIC_SMITH_SCREENSHOT_GROUP_ID=${fixture.groupId}`,
       "-e",
-      `RAKAZO_SCREENSHOT_ROUTINE_ID=${fixture.routineId}`,
+      `AGENTIC_SMITH_SCREENSHOT_ROUTINE_ID=${fixture.routineId}`,
       "-e",
-      "RAKAZO_NOTIFICATION_VIDEO=notification-demo",
+      "AGENTIC_SMITH_NOTIFICATION_VIDEO=notification-demo",
       "-e",
-      `RAKAZO_EXPAND_NOTIFICATIONS_URL=${EXPAND_NOTIFICATIONS_URL}`,
+      `AGENTIC_SMITH_EXPAND_NOTIFICATIONS_URL=${EXPAND_NOTIFICATIONS_URL}`,
       "-e",
-      `RAKAZO_DEVICE_CONTROL_URL=${DEVICE_CONTROL_URL}`,
+      `AGENTIC_SMITH_DEVICE_CONTROL_URL=${DEVICE_CONTROL_URL}`,
       path.join(FLOW_DIR, `${flow}.yaml`),
     ],
     process.env,
@@ -214,7 +214,7 @@ function startDeviceControlServer(
         "shell",
         "am start -a android.intent.action.SEND -t text/plain",
         "--es android.intent.extra.TEXT 'Shared from another app'",
-        "-n com.rakazo.app/.MainActivity",
+        "-n com.agenticsmith.app/.MainActivity",
       ]),
     "/ring": () => ringFromResearcher(prisma, fixture),
     "/connect-voice": () =>
@@ -286,7 +286,7 @@ async function pushPickerFiles() {
     "base64",
   );
   await writeFile(path.join(dir, PICKER_FILES.image), png);
-  await writeFile(path.join(dir, PICKER_FILES.pdf), onePagePdf("Rakazo fixture PDF"));
+  await writeFile(path.join(dir, PICKER_FILES.pdf), onePagePdf("Agentic Smith fixture PDF"));
   const targets = [
     [PICKER_FILES.image, "/sdcard/Pictures"],
     [PICKER_FILES.pdf, "/sdcard/Download"],

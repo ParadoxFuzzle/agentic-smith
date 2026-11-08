@@ -1,8 +1,8 @@
 # A pull request preview: the server image plus its own Postgres, so one machine holds the whole
 # stack and can stop when nobody is visiting. Build the server image first and pass its tag:
-#   docker build -f infra/compose/Dockerfile -t rakazo-server:preview .
-#   docker build --build-arg SERVER_IMAGE=rakazo-server:preview -t rakazo-preview infra/preview
-ARG SERVER_IMAGE=rakazo-server:preview
+#   docker build -f infra/compose/Dockerfile -t agentic-smith-server:preview .
+#   docker build --build-arg SERVER_IMAGE=agentic-smith-server:preview -t agentic-smith-preview infra/preview
+ARG SERVER_IMAGE=agentic-smith-server:preview
 FROM ${SERVER_IMAGE}
 USER root
 # The server image runs Postgres 18. Debian's package would create a cluster at install time;

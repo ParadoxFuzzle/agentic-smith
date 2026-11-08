@@ -3,7 +3,7 @@ import {
   BACKGROUND_HELPER_TRIGGER,
   BACKGROUND_RUN_TRIGGERS,
   plainTextFromMarkdown,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 
 import type { PrismaClient } from "./client.js";
 import { Prisma } from "./client.js";

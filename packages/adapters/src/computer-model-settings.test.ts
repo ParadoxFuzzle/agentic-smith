@@ -1,6 +1,6 @@
-import type { AgentRunModel } from "@rakazo/adapter-kit";
-import type { ModelRoleChoice } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
+import type { AgentRunModel } from "@agentic-smith/adapter-kit";
+import type { ModelRoleChoice } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import { describe, expect, it, vi } from "vitest";
 import { computerCheckpointResolver, resolveComputerRunModel } from "./computer-model-settings.js";
 

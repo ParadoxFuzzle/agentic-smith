@@ -19,7 +19,7 @@ vi.mock("@lingui/react/macro", () => ({
   }),
   Trans: ({ children }: { children: ReactNode }) => children,
 }));
-vi.mock("@rakazo/ui-web", () => ({
+vi.mock("@agentic-smith/ui-web", () => ({
   Button: ({
     children,
     variant,
@@ -87,7 +87,7 @@ afterEach(async () => {
   await act(async () => root.unmount());
   host.remove();
   vi.restoreAllMocks();
-  delete window.rakazoDesktop;
+  delete window.agenticSmithDesktop;
 });
 async function render(mode: "in" | "up" | "forgot" = "in", entry = "/") {
   await act(async () =>
@@ -174,7 +174,7 @@ it("hides SSO in password recovery", async () => {
 
 it("selects a non-redirecting SSO request on desktop", async () => {
   vi.spyOn(window, "open").mockReturnValue({ close: vi.fn() } as unknown as Window);
-  window.rakazoDesktop = {} as NonNullable<Window["rakazoDesktop"]>;
+  window.agenticSmithDesktop = {} as NonNullable<Window["agenticSmithDesktop"]>;
   vi.mocked(fetchAuthCapabilities).mockResolvedValue(capabilities);
   vi.mocked(authClient.signIn.social).mockResolvedValue({
     data: null,
@@ -193,7 +193,9 @@ it("selects a non-redirecting SSO request on desktop", async () => {
 
 it("lets the desktop app change its server from sign in", async () => {
   const change = vi.fn(async () => undefined);
-  window.rakazoDesktop = { server: { change } } as unknown as NonNullable<Window["rakazoDesktop"]>;
+  window.agenticSmithDesktop = { server: { change } } as unknown as NonNullable<
+    Window["agenticSmithDesktop"]
+  >;
   vi.mocked(fetchAuthCapabilities).mockResolvedValue(capabilities);
   await render();
   const button = Array.from(host.querySelectorAll("button")).find(

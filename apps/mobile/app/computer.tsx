@@ -1,13 +1,13 @@
-import type { ComputerMode, ComputerReleaseReason } from "@rakazo/contracts";
-import { isComputerAllowanceUsed } from "@rakazo/contracts";
-import type { ScreenPageState } from "@rakazo/core";
+import type { ComputerMode, ComputerReleaseReason } from "@agentic-smith/contracts";
+import { isComputerAllowanceUsed } from "@agentic-smith/contracts";
+import type { ScreenPageState } from "@agentic-smith/core";
 import {
   createScreenReconnect,
   displayName,
   isRetryableError,
   screenProbeUrl,
   waitForScreenPage,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import type { RefObject } from "react";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";

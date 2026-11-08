@@ -6,10 +6,10 @@ import {
   isBackgroundRunTrigger,
   isRunWaitingOnUser,
   truncatePlainText,
-} from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
-import { runAsSystem } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
+import { runAsSystem } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { credentialDigest } from "./credential-digest.js";
 import { EncryptedSecretStore } from "./secrets.js";
 

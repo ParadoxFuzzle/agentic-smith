@@ -1,5 +1,5 @@
+import { Button, Field, FieldLabel, Input } from "@agentic-smith/ui-web";
 import { Trans } from "@lingui/react/macro";
-import { Button, Field, FieldLabel, Input } from "@rakazo/ui-web";
 import type { PluginSelection } from "../../components/integrations/plugin-marketplace";
 import { ViewTitle } from "./parts";
 

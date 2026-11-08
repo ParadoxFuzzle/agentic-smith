@@ -1,6 +1,6 @@
+import { isLocalhostOrLoopbackIp } from "@agentic-smith/contracts";
+import { COMPUTER_SCREEN_PATH } from "@agentic-smith/contracts/content-security-policy";
 import { t } from "@lingui/core/macro";
-import { isLocalhostOrLoopbackIp } from "@rakazo/contracts";
-import { COMPUTER_SCREEN_PATH } from "@rakazo/contracts/content-security-policy";
 import { errorText } from "./user-error";
 
 export interface ComputerScreenResult {
@@ -136,7 +136,7 @@ export const SCREEN_FRAME_LOAD_TIMEOUT_MS = 15_000;
 export type ScreenFrameState = "loading" | "connecting" | "connected" | "failed" | "disconnected";
 
 export interface ScreenFrameMessage {
-  rakazoScreen: ScreenFrameState;
+  agenticSmithScreen: ScreenFrameState;
   detail?: string;
 }
 
@@ -151,21 +151,28 @@ const SCREEN_FRAME_STATES: ReadonlySet<string> = new Set<ScreenFrameState>([
 /** A state report posted by a framed screen page, or null for any other message. */
 export function screenFrameMessage(data: unknown): ScreenFrameMessage | null {
   if (!data || typeof data !== "object") return null;
-  const { rakazoScreen, detail } = data as Record<string, unknown>;
-  if (typeof rakazoScreen !== "string" || !SCREEN_FRAME_STATES.has(rakazoScreen)) return null;
+  const { agenticSmithScreen, detail } = data as Record<string, unknown>;
+  if (typeof agenticSmithScreen !== "string" || !SCREEN_FRAME_STATES.has(agenticSmithScreen))
+    return null;
   const text = typeof detail === "string" ? detail.trim().slice(0, 200) : "";
-  return { rakazoScreen: rakazoScreen as ScreenFrameState, ...(text ? { detail: text } : {}) };
+  return {
+    agenticSmithScreen: agenticSmithScreen as ScreenFrameState,
+    ...(text ? { detail: text } : {}),
+  };
 }
 
 /** Whether a report shows the page got past loading; a page stalled there is still silent. */
 export function screenFrameStarted(message: ScreenFrameMessage): boolean {
-  return message.rakazoScreen !== "loading";
+  return message.agenticSmithScreen !== "loading";
 }
 
 /** The error a frame report means for the screen, or null while it is fine. */
 export function screenFrameError(message: ScreenFrameMessage, fallback: string): string | null {
-  if (message.rakazoScreen !== "failed" && message.rakazoScreen !== "disconnected") return null;
-  return message.rakazoScreen === "disconnected" ? t`The screen connection closed.` : fallback;
+  if (message.agenticSmithScreen !== "failed" && message.agenticSmithScreen !== "disconnected")
+    return null;
+  return message.agenticSmithScreen === "disconnected"
+    ? t`The screen connection closed.`
+    : fallback;
 }
 
 /**

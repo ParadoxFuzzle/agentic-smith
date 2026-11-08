@@ -1,6 +1,6 @@
 import { createStoredPreference } from "./stored-preference";
 
-export const TOOL_ACTIVITY_STORAGE_KEY = "rakazo.showToolActivity";
+export const TOOL_ACTIVITY_STORAGE_KEY = "agentic-smith.showToolActivity";
 
 /** Only a saved "on" shows tool cards. Missing or unreadable storage stays off so chats stay clean. */
 export function normalizeToolActivityEnabled(raw: string | null | undefined): boolean {

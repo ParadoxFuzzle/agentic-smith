@@ -15,7 +15,7 @@ afterEach(async () => {
 });
 
 async function fixture() {
-  const dir = await mkdtemp(path.join(os.tmpdir(), "rakazo-dev-db-"));
+  const dir = await mkdtemp(path.join(os.tmpdir(), "agentic-smith-dev-db-"));
   temporary.push(dir);
   await mkdir(path.join(dir, "scripts"));
   await mkdir(path.join(dir, "packages/db"), { recursive: true });

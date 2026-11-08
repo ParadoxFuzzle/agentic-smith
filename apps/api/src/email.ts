@@ -1,5 +1,5 @@
-import type { TransactionalEmailProvider } from "@rakazo/adapter-kit";
-import { configuredEmailProvider as providerFor } from "@rakazo/adapters";
+import type { TransactionalEmailProvider } from "@agentic-smith/adapter-kit";
+import { configuredEmailProvider as providerFor } from "@agentic-smith/adapters";
 import type { AppEnv } from "./env.js";
 
 export function configuredEmailProvider(

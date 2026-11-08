@@ -1,7 +1,7 @@
+import type { LoginFieldInput } from "@agentic-smith/contracts";
+import { LOGIN_FIELD_LIMIT } from "@agentic-smith/contracts";
+import { Button, Input, Label, Toggle } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { LoginFieldInput } from "@rakazo/contracts";
-import { LOGIN_FIELD_LIMIT } from "@rakazo/contracts";
-import { Button, Input, Label, Toggle } from "@rakazo/ui-web";
 import { Lock, LockOpen, Plus, X } from "lucide-react";
 import { useId } from "react";
 

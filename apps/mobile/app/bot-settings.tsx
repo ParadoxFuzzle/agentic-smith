@@ -1,4 +1,10 @@
-import type { Bot, BotAvatarSet, ComputerMode, ReplyMode, ThinkingLevel } from "@rakazo/contracts";
+import type {
+  Bot,
+  BotAvatarSet,
+  ComputerMode,
+  ReplyMode,
+  ThinkingLevel,
+} from "@agentic-smith/contracts";
 import {
   BOT_AVATAR_SHAPE_COUNT,
   BOT_COLORS,
@@ -6,15 +12,15 @@ import {
   BOT_INSTRUCTIONS_MAX_LENGTH,
   BOT_NAME_MAX_LENGTH,
   resolveBotAvatarSet,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   credentialForModel,
   MODEL_SEARCH_THRESHOLD,
   modelOptionKey,
   parseModelOptionKey,
   resolveSelectableModelId,
-} from "@rakazo/core";
-import { typeScale } from "@rakazo/ui-tokens";
+} from "@agentic-smith/core";
+import { typeScale } from "@agentic-smith/ui-tokens";
 import { Stack, useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import type { Voice } from "expo-speech";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -859,7 +865,7 @@ export default function BotSettingsScreen() {
               label={t("Icon set")}
               choices={[
                 { key: "organic", label: t("Original") },
-                { key: "rakazo", label: t("Rakazo") },
+                { key: "agentic-smith", label: t("Agentic Smith") },
               ]}
               value={avatarSet}
               onChange={(next) => {

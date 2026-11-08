@@ -1,4 +1,4 @@
-import type { ProcessEvent } from "@rakazo/adapter-kit";
+import type { ProcessEvent } from "@agentic-smith/adapter-kit";
 
 /** How a command its caller cancelled ends: the shell's status for an interrupt. */
 export function* abortedCommandEvents(): Generator<ProcessEvent> {

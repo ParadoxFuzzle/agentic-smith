@@ -90,7 +90,7 @@ struct WorkLiveActivity: Widget {
   private func rows(_ rows: [Row]) -> some View {
     VStack(alignment: .leading, spacing: 8) {
       ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
-        Link(destination: row.link ?? URL(string: "rakazo://")!) {
+        Link(destination: row.link ?? URL(string: "agentic-smith://")!) {
           HStack(alignment: .firstTextBaseline, spacing: 8) {
             // A long name gives way to the status, never the other way round.
             Text(row.title).font(.system(size: 15, weight: .semibold)).foregroundStyle(.white)

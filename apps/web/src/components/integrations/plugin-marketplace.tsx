@@ -1,15 +1,19 @@
-import { Plural, Trans, useLingui } from "@lingui/react/macro";
-import { useLinkFavicon } from "@rakazo/chat-ui/web";
+import { useLinkFavicon } from "@agentic-smith/chat-ui/web";
 import type {
   CapabilityInstall,
   McpServer,
   PluginMarketplaceEntry,
   PluginPart,
   PluginPreview,
-} from "@rakazo/contracts";
-import { mcpServerConnection, mcpServerNeedsSignIn, PluginPreviewSchema } from "@rakazo/contracts";
-import { installedPluginParts } from "@rakazo/core";
-import { Button, Spinner } from "@rakazo/ui-web";
+} from "@agentic-smith/contracts";
+import {
+  mcpServerConnection,
+  mcpServerNeedsSignIn,
+  PluginPreviewSchema,
+} from "@agentic-smith/contracts";
+import { installedPluginParts } from "@agentic-smith/core";
+import { Button, Spinner } from "@agentic-smith/ui-web";
+import { Plural, Trans, useLingui } from "@lingui/react/macro";
 import { ArrowUpRight, Check, ChevronLeft, FileText, Plug } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { connectMcpOauth } from "../../lib/mcp-connect";

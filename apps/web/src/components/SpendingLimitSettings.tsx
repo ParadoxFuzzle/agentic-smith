@@ -1,14 +1,13 @@
-import { Trans, useLingui } from "@lingui/react/macro";
 import type {
   SpendingCurrency,
   SpendingLimit,
   SpendingPayment,
   SpendingPeriod,
   SpendingStatus,
-} from "@rakazo/contracts";
-import { SPENDING_CURRENCIES } from "@rakazo/contracts";
-import { formatMinorAmount, parseLimitInput } from "@rakazo/core";
-import { writeSaved } from "@rakazo/core/query";
+} from "@agentic-smith/contracts";
+import { SPENDING_CURRENCIES } from "@agentic-smith/contracts";
+import { formatMinorAmount, parseLimitInput } from "@agentic-smith/core";
+import { writeSaved } from "@agentic-smith/core/query";
 import {
   Button,
   Input,
@@ -18,7 +17,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useSpaceQueries } from "../lib/query";

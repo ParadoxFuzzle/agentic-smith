@@ -1,4 +1,8 @@
-import { importSetupStateInput, isImportSetupComplete, isImportSetupDone } from "@rakazo/core";
+import {
+  importSetupStateInput,
+  isImportSetupComplete,
+  isImportSetupDone,
+} from "@agentic-smith/core";
 import { describe, expect, it } from "vitest";
 import type { ImportSetupBlock } from "./import-setup";
 import { importSetupDetail } from "./import-setup";

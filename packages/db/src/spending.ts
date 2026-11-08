@@ -1,12 +1,12 @@
-import type { SpendingLimit, SpendingPayment, SpendingStatus } from "@rakazo/contracts";
+import type { SpendingLimit, SpendingPayment, SpendingStatus } from "@agentic-smith/contracts";
 import {
   MAX_SPENDING_LIMIT,
   SPENDING_CURRENCIES,
   SpendingLimitSchema,
   SpendingPeriodSchema,
-} from "@rakazo/contracts";
-import { spendingPeriodStart } from "@rakazo/core";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/contracts";
+import { spendingPeriodStart } from "@agentic-smith/core";
+import { getLogger } from "@agentic-smith/logging";
 import type { PrismaClient } from "./client.js";
 import { Prisma } from "./client.js";
 import { runAsSystem } from "./row-security.js";

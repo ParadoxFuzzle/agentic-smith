@@ -1,10 +1,10 @@
-import type { RunErrorKind } from "@rakazo/contracts";
+import type { RunErrorKind } from "@agentic-smith/contracts";
 import {
   COMPUTER_PROVIDER_UNAVAILABLE_ERROR,
   COMPUTER_RATE_LIMIT_ERROR,
   isComputerAllowanceUsed,
   providerQuotaResetAt,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import { stuckWorkStatusMessages } from "./stuck-work.js";
 
 export const MISSING_TOOL_FINAL_RESPONSE_ERROR =
@@ -33,11 +33,11 @@ export const MODEL_REQUEST_LIMIT_ERROR =
 
 export const MISSING_MODEL_RUN_ERROR = "Connect a model in Settings before running bots.";
 
-/** A deployment model run while the organization has not chosen Rakazo credits. */
+/** A deployment model run while the organization has not chosen Agentic Smith credits. */
 export const HOSTED_MODEL_CREDITS_REQUIRED_ERROR =
-  "Connect your own API key in Models or choose Rakazo credits in Billing.";
+  "Connect your own API key in Models or choose Agentic Smith credits in Billing.";
 
-/** A metered model call the organization's Rakazo credits cannot cover. */
+/** A metered model call the organization's Agentic Smith credits cannot cover. */
 export const MODEL_CREDITS_EXHAUSTED_ERROR =
   "Not enough model credits. Add credits in Billing or connect your own API key.";
 

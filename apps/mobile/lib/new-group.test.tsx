@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { GROUP_MEMBER_MAX } from "@rakazo/contracts";
+import { GROUP_MEMBER_MAX } from "@agentic-smith/contracts";
 import type { ReactNode } from "react";
 import { act } from "react";
 import type { Root } from "react-dom/client";
@@ -272,7 +272,7 @@ it("keeps each selected bot's icon set in the name-step group preview", async ()
   const looks = bots.map((bot, index) => ({
     ...bot,
     color: index === 0 ? "#10B981" : "#8B5CF6",
-    avatarSet: index === 0 ? "rakazo" : "organic",
+    avatarSet: index === 0 ? "agentic-smith" : "organic",
   }));
   rpc.mockImplementation(async (procedure: string) =>
     procedure === "bots/list" ? looks : { id: "group-1", name: "Created" },
@@ -283,7 +283,7 @@ it("keeps each selected bot's icon set in the name-step group preview", async ()
     expect.objectContaining({
       members: [
         { botId: "bot-2", color: "#8B5CF6", avatarSet: "organic" },
-        { botId: "bot-1", color: "#10B981", avatarSet: "rakazo" },
+        { botId: "bot-1", color: "#10B981", avatarSet: "agentic-smith" },
       ],
     }),
   );

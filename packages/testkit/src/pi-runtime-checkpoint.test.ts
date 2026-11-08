@@ -1,7 +1,7 @@
 import { mkdtemp, readdir, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import type { AgentRunRequest, AgentRuntimeEvent } from "@rakazo/adapter-kit";
+import type { AgentRunRequest, AgentRuntimeEvent } from "@agentic-smith/adapter-kit";
 import { describe, expect, it, vi } from "vitest";
 import { MAX_APPROVAL_DETAIL_LENGTH } from "../../adapters/src/approval-ask.js";
 import { approvalPausedToolResult } from "../../adapters/src/approval-effect.js";
@@ -232,7 +232,7 @@ describe("paused turn context", () => {
   it("redacts a known run secret in ask_user detail before it is checkpointed or recorded", async () => {
     const secret = "fixture-secret-value-123";
     let capture: (() => string) | undefined;
-    const sessionRoot = await mkdtemp(path.join(tmpdir(), "rakazo-ask-detail-"));
+    const sessionRoot = await mkdtemp(path.join(tmpdir(), "agentic-smith-ask-detail-"));
     const model = await startModelEmulator({
       steps: [
         {
@@ -461,7 +461,7 @@ describe("paused turn context", () => {
   ])(
     "drops a non-string ask_user detail (%s) so nothing unredacted is kept",
     async (_shape, rawDetail, secret) => {
-      const sessionRoot = await mkdtemp(path.join(tmpdir(), "rakazo-ask-shape-"));
+      const sessionRoot = await mkdtemp(path.join(tmpdir(), "agentic-smith-ask-shape-"));
       let capture: (() => string) | undefined;
       const model = await startModelEmulator({
         steps: [
@@ -533,7 +533,7 @@ describe("paused turn context", () => {
   ])(
     "sanitizes a use_tool-wrapped ask_user detail (%s) before it is kept",
     async (shape, rawDetail, secret) => {
-      const sessionRoot = await mkdtemp(path.join(tmpdir(), "rakazo-ask-wrapped-"));
+      const sessionRoot = await mkdtemp(path.join(tmpdir(), "agentic-smith-ask-wrapped-"));
       let capture: (() => string) | undefined;
       const model = await startModelEmulator({
         steps: [

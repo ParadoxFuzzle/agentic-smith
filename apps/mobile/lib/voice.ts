@@ -1,4 +1,4 @@
-import type { SettingsScope } from "@rakazo/contracts";
+import type { SettingsScope } from "@agentic-smith/contracts";
 import {
   ensureAiDataConsent,
   readVoiceAudio,
@@ -7,7 +7,7 @@ import {
   toUtterances,
   VOICE_RESPONSE_TIMEOUT_MS,
   withAbort,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import { createAudioPlayer, setAudioModeAsync } from "expo-audio";
 import { File, Paths } from "expo-file-system";
 import type * as ExpoSpeech from "expo-speech";
@@ -484,7 +484,7 @@ async function renderUtterance(
           method: "POST",
           headers: {
             "content-type": "application/json",
-            origin: "rakazo://",
+            origin: "agentic-smith://",
             ...requestContext.headers,
           },
           body: JSON.stringify({
@@ -644,7 +644,7 @@ async function playWithNativeAudio(bytes: Uint8Array, session?: HostedSession): 
   });
   const file = new File(
     Paths.cache,
-    `rakazo-voice-${Date.now()}.${speechClipType(bytes).extension}`,
+    `agentic-smith-voice-${Date.now()}.${speechClipType(bytes).extension}`,
   );
   file.create({ overwrite: true });
   file.write(bytesToBase64(bytes), { encoding: "base64" });

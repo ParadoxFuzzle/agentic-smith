@@ -1,4 +1,4 @@
-import { pageTileBars } from "@rakazo/ui-tokens";
+import { pageTileBars } from "@agentic-smith/ui-tokens";
 
 /** The page tile shown in a page card's footer. */
 export function PageTileIcon() {

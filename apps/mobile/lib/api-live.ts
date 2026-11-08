@@ -1,11 +1,11 @@
-import type { IncomingBotCall } from "@rakazo/contracts";
-import { IncomingBotCallSchema } from "@rakazo/contracts";
+import type { IncomingBotCall } from "@agentic-smith/contracts";
+import { IncomingBotCallSchema } from "@agentic-smith/contracts";
 import {
   cancelResponseBody,
   displayIdentityEvent,
   isServerUnreachable,
   isUnreachableStatus,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import type { ApiRequestContext } from "./api";
 import {
   captureApiRequestContext,
@@ -105,7 +105,7 @@ async function subscribeRpcEvents(
       headers: {
         "content-type": "application/json",
         accept: "text/event-stream",
-        origin: "rakazo://",
+        origin: "agentic-smith://",
         ...context.headers,
       },
       body: JSON.stringify({ json: input }),

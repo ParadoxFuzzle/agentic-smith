@@ -2,7 +2,7 @@ import * as Haptics from "expo-haptics";
 import * as SecureStore from "expo-secure-store";
 import { AppState, Platform } from "react-native";
 
-const STORAGE_KEY = "rakazo.haptics";
+const STORAGE_KEY = "agentic-smith.haptics";
 let enabled = true;
 let loaded = false;
 let changedLocally = false;

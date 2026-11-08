@@ -1,7 +1,11 @@
-import type { AgentRunRequest, ComputerRef, SemanticMemoryProvider } from "@rakazo/adapter-kit";
-import { DEFAULT_CONTEXT_STRATEGY, runContinueJob } from "@rakazo/adapter-kit";
-import type { MessageBlock, RunStatus } from "@rakazo/contracts";
-import { disabledBuiltinToolSet } from "@rakazo/contracts";
+import type {
+  AgentRunRequest,
+  ComputerRef,
+  SemanticMemoryProvider,
+} from "@agentic-smith/adapter-kit";
+import { DEFAULT_CONTEXT_STRATEGY, runContinueJob } from "@agentic-smith/adapter-kit";
+import type { MessageBlock, RunStatus } from "@agentic-smith/contracts";
+import { disabledBuiltinToolSet } from "@agentic-smith/contracts";
 import {
   BACKGROUND_HELPER_TRIGGER,
   botMessageAllowsSilence,
@@ -20,8 +24,8 @@ import {
   redactSecrets,
   renderBotDirectory,
   userTurnMessageForRun,
-} from "@rakazo/core";
-import type { ThreadEvents } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { ThreadEvents } from "@agentic-smith/db";
 import {
   accountDeactivated,
   appendEventInTransaction,
@@ -39,8 +43,8 @@ import {
   recordUsage,
   settleReleasedTakeoverCards,
   teamChatRunFromOwner,
-} from "@rakazo/db";
-import { enrichLogContext, getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { enrichLogContext, getLogger } from "@agentic-smith/logging";
 import { formatAgentEnvironmentInstruction } from "./agent-environment.js";
 import { createApprovedEffectReplayQueue } from "./approval-effect.js";
 import { PARTIAL_REPLY_NOTE } from "./automated-messages.js";

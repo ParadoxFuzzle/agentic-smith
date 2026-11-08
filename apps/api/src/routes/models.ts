@@ -1,5 +1,4 @@
-import { ORPCError } from "@orpc/server";
-import { isTransientModelError, SecretStoreUnavailableError } from "@rakazo/adapter-kit";
+import { isTransientModelError, SecretStoreUnavailableError } from "@agentic-smith/adapter-kit";
 import {
   compatibleEndpointPreset,
   listPiCatalog,
@@ -16,16 +15,16 @@ import {
   storedOpenAiCompatibleProbeHeaders,
   storedOpenAiCompatibleProbeKey,
   UNAVAILABLE_MODEL_FOR_AUTH_MESSAGE,
-} from "@rakazo/adapters";
-import type { ThinkingLevel } from "@rakazo/contracts";
+} from "@agentic-smith/adapters";
+import type { ThinkingLevel } from "@agentic-smith/contracts";
 import {
   backupChoiceKey,
   canonicalPiProviderId,
   OPENAI_COMPATIBLE_PROVIDER_ID,
   usableModelId,
-} from "@rakazo/contracts";
-import { clampCatalogThinkingLevel } from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/contracts";
+import { clampCatalogThinkingLevel } from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   appliedModelRole,
   comparePreferenceOrder,
@@ -42,9 +41,10 @@ import {
   updateModelRole,
   withTransactionRetry,
   writeModelRole,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
-import { markExpectedFailure } from "@rakazo/logging/hono";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { markExpectedFailure } from "@agentic-smith/logging/hono";
+import { ORPCError } from "@orpc/server";
 import { mayUsePrivateEndpoint } from "../mcp-servers.js";
 import { firstModelConnectAnalytics } from "../model-connect-analytics.js";
 import {

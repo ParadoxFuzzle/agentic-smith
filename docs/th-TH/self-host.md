@@ -1,4 +1,4 @@
-# Self-host Rakazo
+# Self-host Agentic Smith
 
 รัน API, worker, เว็บ, ฐานข้อมูล และ computer ของ bot บนเครื่องที่คุณควบคุม
 
@@ -11,8 +11,8 @@
 ## Published images (ไม่ต้อง checkout)
 
 ```bash
-mkdir -p rakazo && cd rakazo &&
-curl -fsSLO https://raw.githubusercontent.com/elie222/rakazo/main/infra/compose/install-images.sh &&
+mkdir -p agentic-smith && cd agentic-smith &&
+curl -fsSLO https://raw.githubusercontent.com/ParadoxFuzzle/agentic-smith/main/infra/compose/install-images.sh &&
 bash install-images.sh
 ```
 
@@ -22,7 +22,7 @@ bash install-images.sh
 
 เปิด [http://127.0.0.1:5173](http://127.0.0.1:5173) สมัครแล้วไม่ได้สิทธิ์ admin เซิร์ฟเวอร์
 
-เครื่องสาธารณะ: ใส่ TLS หน้า `:5173` ตั้ง `BETTER_AUTH_URL`, `WEB_ORIGIN`, `API_URL` เป็น HTTPS เดียวกัน และ `RAKAZO_HOST` เป็นชื่อโฮสต์ อย่าเปิด port API `3100` ออกสู่ภายนอก
+เครื่องสาธารณะ: ใส่ TLS หน้า `:5173` ตั้ง `BETTER_AUTH_URL`, `WEB_ORIGIN`, `API_URL` เป็น HTTPS เดียวกัน และ `AGENTIC_SMITH_HOST` เป็นชื่อโฮสต์ อย่าเปิด port API `3100` ออกสู่ภายนอก
 
 **อย่าเผยแพร่ Postgres บน interface สาธารณะ**
 

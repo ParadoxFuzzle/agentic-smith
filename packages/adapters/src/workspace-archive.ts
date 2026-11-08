@@ -5,8 +5,8 @@ import type {
   PortableFile,
   StreamedPortableFile,
   WorkspaceExportLimits,
-} from "@rakazo/adapter-kit";
-import { WorkspaceTooLargeError } from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
+import { WorkspaceTooLargeError } from "@agentic-smith/adapter-kit";
 import { normalizeWorkspacePath } from "./computer-support.js";
 
 const BLOCK = 512;

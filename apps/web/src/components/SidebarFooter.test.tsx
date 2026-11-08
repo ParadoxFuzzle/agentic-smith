@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
-import type { DesktopUpdateState } from "@rakazo/contracts";
-import { Toaster } from "@rakazo/ui-web";
+import type { DesktopUpdateState } from "@agentic-smith/contracts";
+import { Toaster } from "@agentic-smith/ui-web";
 import type { ReactNode } from "react";
 import { act } from "react";
 import { createRoot } from "react-dom/client";
@@ -25,7 +25,7 @@ beforeEach(() => {
 afterEach(async () => {
   await act(async () => root.unmount());
   host.remove();
-  delete window.rakazoDesktop;
+  delete window.agenticSmithDesktop;
   vi.restoreAllMocks();
 });
 async function render(
@@ -35,7 +35,7 @@ async function render(
   onBoard?: () => void,
   logos?: Array<{ name: string; logo?: string }>,
 ) {
-  const email = "account@rakazo.test";
+  const email = "account@agentic-smith.test";
   await act(async () =>
     root.render(
       <DesktopUpdatesProvider>
@@ -76,7 +76,7 @@ function bridge(phase: DesktopUpdateState["phase"]) {
     checkedAt: null,
   };
   const install = vi.fn(async () => state);
-  window.rakazoDesktop = {
+  window.agenticSmithDesktop = {
     platform: "darwin",
     window: {
       close: async () => {},
@@ -165,7 +165,7 @@ it("offers Google Play on Android", async () => {
   const mobile = [...document.querySelectorAll("a")].find(
     (link) => link.textContent === "Get the mobile app",
   )!;
-  expect(mobile.href).toBe("https://play.google.com/store/apps/details?id=com.rakazo.app");
+  expect(mobile.href).toBe("https://github.com/ParadoxFuzzle/agentic-smith/releases");
 });
 
 it("falls back when app artwork fails and accepts replacement artwork", async () => {
@@ -190,7 +190,7 @@ it.each(["throw", "state"] as const)(
     if (failure === "throw") install.mockRejectedValueOnce(new Error("offline"));
     else
       install.mockResolvedValueOnce({
-        ...(await window.rakazoDesktop!.update.state()),
+        ...(await window.agenticSmithDesktop!.update.state()),
         phase: "error",
         message: "Update could not be installed",
       });
@@ -269,7 +269,7 @@ async function renderOrganizations(
         <SidebarFooter
           name="Demo User"
           initials="DU"
-          email="account@rakazo.test"
+          email="account@agentic-smith.test"
           open
           onOpenChange={() => {}}
           onIntegrations={() => {}}

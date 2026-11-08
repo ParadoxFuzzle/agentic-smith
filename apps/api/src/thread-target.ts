@@ -1,18 +1,17 @@
-import { ORPCError } from "@orpc/server";
 import type {
   JobPublisher,
   NotificationProvider,
   ProductAnalytics,
   SandboxProvider,
-} from "@rakazo/adapter-kit";
-import { runContinueJob } from "@rakazo/adapter-kit";
-import { notifyMemberMessage } from "@rakazo/adapters";
-import type { Actor, GroupMember, MessageBlock, ReplyPreview } from "@rakazo/contracts";
+} from "@agentic-smith/adapter-kit";
+import { runContinueJob } from "@agentic-smith/adapter-kit";
+import { notifyMemberMessage } from "@agentic-smith/adapters";
+import type { Actor, GroupMember, MessageBlock, ReplyPreview } from "@agentic-smith/contracts";
 import {
   GROUP_MEMBER_MIN,
   MessageBlock as MessageBlockSchema,
   resolveBotAvatarSet,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   ACTIVE_RUN_STATUSES,
   callIdFromClientNonce,
@@ -24,9 +23,9 @@ import {
   QUEUE_HOLDING_RUN_STATUSES,
   resolveGroupTargetBotIds,
   runReadsThreadHistory,
-} from "@rakazo/core";
-import { deriveMessageQuote, messageReplyPreview } from "@rakazo/core/message-quote";
-import type { Prisma, PrismaClient, ThreadEvents } from "@rakazo/db";
+} from "@agentic-smith/core";
+import { deriveMessageQuote, messageReplyPreview } from "@agentic-smith/core/message-quote";
+import type { Prisma, PrismaClient, ThreadEvents } from "@agentic-smith/db";
 import {
   answerWaitingRunWithTextInTransaction,
   appendEventInTransaction,
@@ -45,8 +44,9 @@ import {
   THREAD_LOCK_TRANSACTION_OPTIONS,
   touchGroupUpdatedAt,
   withTransactionRetry,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { ORPCError } from "@orpc/server";
 import {
   buildSendPrompt,
   buildUserMessageBlocks,

@@ -1,6 +1,6 @@
-import { ChatMarkdown, LinkifiedText } from "@rakazo/chat-ui/native";
-import { splitMentionText } from "@rakazo/core";
-import type { ColorTokens, ResolvedAppearance } from "@rakazo/ui-tokens";
+import { ChatMarkdown, LinkifiedText } from "@agentic-smith/chat-ui/native";
+import { splitMentionText } from "@agentic-smith/core";
+import type { ColorTokens, ResolvedAppearance } from "@agentic-smith/ui-tokens";
 import { useContext } from "react";
 import {
   MessageMentionsContext,

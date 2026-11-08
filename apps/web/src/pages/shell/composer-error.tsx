@@ -1,8 +1,8 @@
+import { computerHoursOut } from "@agentic-smith/contracts";
+import { isModelRequiredSendError, normalizeRunError } from "@agentic-smith/core";
+import { Button } from "@agentic-smith/ui-web";
 import { i18n } from "@lingui/core";
 import { useLingui } from "@lingui/react/macro";
-import { computerHoursOut } from "@rakazo/contracts";
-import { isModelRequiredSendError, normalizeRunError } from "@rakazo/core";
-import { Button } from "@rakazo/ui-web";
 import { FileIcon, X } from "lucide-react";
 import type { RefObject } from "react";
 import { useEffect, useId, useRef } from "react";

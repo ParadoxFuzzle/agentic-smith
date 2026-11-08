@@ -1,5 +1,4 @@
-import { MenuView } from "@expo/ui/community/menu";
-import type { BillingStatus } from "@rakazo/contracts";
+import type { BillingStatus } from "@agentic-smith/contracts";
 import {
   ByokTierSchema,
   byokTierChangeOffered,
@@ -9,7 +8,8 @@ import {
   isCancelledTrial,
   MODEL_CREDIT_AMOUNTS,
   ModelCreditAmountSchema,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
+import { MenuView } from "@expo/ui/community/menu";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useCallback, useState } from "react";
 import { Alert, AppState, ScrollView, Share, StyleSheet } from "react-native";
@@ -177,7 +177,7 @@ export default function BillingScreen() {
               : plan === "byok"
                 ? t("Your subscription or API key")
                 : plan === "credits"
-                  ? t("Rakazo credits")
+                  ? t("Agentic Smith credits")
                   : t("None")
           }
         />
@@ -393,7 +393,7 @@ export default function BillingScreen() {
           ) : null}
           {status.canManage && status.funding === "byok" && (status.balanceUsd ?? 0) > 0 ? (
             <SettingsRow
-              title={t("Use Rakazo credits")}
+              title={t("Use Agentic Smith credits")}
               disabled={pending || !status.creditPurchasesEnabled}
               onPress={() =>
                 void action(async () => {

@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
-import type { ToolCallStreak } from "@rakazo/core";
-import { trackToolCallStreak } from "@rakazo/core";
-import { stableJsonValue } from "@rakazo/core/node/approval-effect-key";
+import type { ToolCallStreak } from "@agentic-smith/core";
+import { trackToolCallStreak } from "@agentic-smith/core";
+import { stableJsonValue } from "@agentic-smith/core/node/approval-effect-key";
 import { toolResultError } from "./tool-result-error.js";
 
 const LOOP_GUARD_STOP_PREFIX = "I got stuck calling ";

@@ -1,5 +1,5 @@
-import type { RpcInput, RpcPath, SpaceBot, SpaceGroup } from "@rakazo/contracts";
-import { createSnoozeQueue } from "@rakazo/core";
+import type { RpcInput, RpcPath, SpaceBot, SpaceGroup } from "@agentic-smith/contracts";
+import { createSnoozeQueue } from "@agentic-smith/core";
 import type { Dispatch, SetStateAction } from "react";
 import { useCallback, useState } from "react";
 import { Alert } from "react-native";
@@ -25,7 +25,7 @@ async function chatRequestContext(
 ): Promise<ApiRequestContext | undefined> {
   if (!spaceId || spaceId === selectedSpaceId()) return undefined;
   const context = await captureApiRequestContext();
-  return { ...context, headers: { ...context.headers, "x-rakazo-space-id": spaceId } };
+  return { ...context, headers: { ...context.headers, "x-agentic-smith-space-id": spaceId } };
 }
 
 export async function chatRpc<P extends RpcPath>(
@@ -113,8 +113,8 @@ export function useInboxChatActions({
             const context = await captureApiRequestContext();
             if (context.sessionGeneration !== session) return;
             const headers = { ...context.headers };
-            if (spaceId) headers["x-rakazo-space-id"] = spaceId;
-            else delete headers["x-rakazo-space-id"];
+            if (spaceId) headers["x-agentic-smith-space-id"] = spaceId;
+            else delete headers["x-agentic-smith-space-id"];
             await rpc(
               unread ? "threads/markUnread" : "threads/markRead",
               chatTarget(kind, chat.id),

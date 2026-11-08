@@ -1,4 +1,7 @@
-import { MODEL_CONTEXT_TOO_SMALL_ERROR, VERBATIM_TOOL_RESULT_TOO_LARGE_ERROR } from "@rakazo/core";
+import {
+  MODEL_CONTEXT_TOO_SMALL_ERROR,
+  VERBATIM_TOOL_RESULT_TOO_LARGE_ERROR,
+} from "@agentic-smith/core";
 import { describe, expect, it } from "vitest";
 import {
   ContextBudgetError,
@@ -719,6 +722,59 @@ describe("bounded context selection", () => {
     expect(decoded.conversations.map((c: { name: string }) => c.name)).toEqual(names);
     for (const [index, c] of decoded.conversations.entries())
       expect(c.conversation_id).toBe(`conv${index}`);
+  });
+  it("compresses long cold prose instead of dropping it and keeps exact anchors", () => {
+    const history = Array.from({ length: 20 }, (_, index) =>
+      user(
+        `Message ${index}. We decided to keep the migration because it preserves data. ` +
+          `The file is /workspace/important-${index}.ts and the ticket is TICKET-${1000 + index}. ` +
+          "Routine background follows and should not consume the whole context window. ".repeat(16),
+      ),
+    );
+    const selected = selectContext(history, {
+      budget: { ...budget, contextWindow: 6_000, outputReserve: 100 },
+      strategy: "retrieval",
+      recentExchanges: 30,
+      compressionRatio: 0.2,
+      minMessageChars: 100,
+    });
+    expect(selected.compressedMessages).toBeGreaterThan(0);
+    expect(selected.messages).toHaveLength(history.length);
+    expect(selected.droppedMessages).toBe(0);
+    expect(selected.messages[0]!.content).toContain("/workspace/important-0.ts");
+    expect(selected.messages[0]!.content).toContain("TICKET-1000");
+    expect(selected.messages.at(-1)).toEqual(history.at(-1));
+  });
+  it("does not rewrite a warm cached prefix", () => {
+    const history = Array.from({ length: 20 }, (_, index) =>
+      user(`Message ${index}. ${`A long stable statement about the plan. `.repeat(20)}`),
+    );
+    const selected = selectContext(history, {
+      budget: { ...budget, contextWindow: 8_000, outputReserve: 100 },
+      strategy: "cache-aware",
+      cacheWarmth: "likely-warm",
+      recentExchanges: 20,
+      compressionRatio: 0.2,
+      minMessageChars: 100,
+    });
+    expect(selected.compressedMessages).toBe(0);
+    expect(selected.messages).toEqual(history);
+  });
+  it("compacts shell stdout while preserving the exact exit code", () => {
+    const stdout = [
+      "ERROR: integration build failed",
+      ...Array.from({ length: 120 }, () => "identical build line"),
+      "tail diagnostic",
+    ].join("\n");
+    const source = JSON.stringify({ stdout, stderr: "warning: slow test", code: 42 });
+    const out = shortenToolResultText(source, 1200, { name: "shell" });
+    const parsed = JSON.parse(out);
+    expect(parsed.code).toBe(42);
+    expect(parsed.contextTruncated).toBe(true);
+    expect(parsed.stdout).toContain("compacted tool output");
+    expect(parsed.stdout).toContain("ERROR: integration build failed");
+    expect(parsed.stdout.length).toBeLessThan(stdout.length);
+    expect(out.length).toBeLessThanOrEqual(1200);
   });
   it("fails explicitly if mandatory content cannot fit rather than silently losing the request", () => {
     expect(() =>

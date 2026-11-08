@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
-import type { AccountSecurity } from "@rakazo/contracts";
-import { tokensForAppearance } from "@rakazo/ui-tokens";
+import type { AccountSecurity } from "@agentic-smith/contracts";
+import { tokensForAppearance } from "@agentic-smith/ui-tokens";
 import type { ReactNode } from "react";
 import { act, createElement } from "react";
 import { createRoot } from "react-dom/client";

@@ -1,4 +1,4 @@
-import { nextChatWake } from "@rakazo/core";
+import { nextChatWake } from "@agentic-smith/core";
 import { useEffect, useState } from "react";
 import { AppState } from "react-native";
 

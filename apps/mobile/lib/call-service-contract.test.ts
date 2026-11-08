@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { UI_LOCALES } from "./ui-locale";
 
 const mobileRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const nativeRoot = resolve(mobileRoot, "modules/rakazo-notifications/android/src/main");
+const nativeRoot = resolve(mobileRoot, "modules/agentic-smith-notifications/android/src/main");
 
 function source(path: string) {
   return readFileSync(resolve(nativeRoot, path), "utf8");
@@ -16,12 +16,12 @@ describe("Android call foreground service", () => {
     const manifest = source("AndroidManifest.xml");
     expect(manifest).toContain("android.permission.FOREGROUND_SERVICE_MICROPHONE");
     expect(manifest).toContain("android.permission.WAKE_LOCK");
-    expect(manifest).toContain('android:name=".RakazoCallService"');
+    expect(manifest).toContain('android:name=".AgenticSmithCallService"');
     expect(manifest).toContain('android:foregroundServiceType="microphone"');
   });
 
   it("starts immediately as a foreground service and holds a partial wake lock", () => {
-    const service = source("java/com/rakazo/notifications/RakazoCallService.kt");
+    const service = source("java/com/agenticsmith/notifications/AgenticSmithCallService.kt");
     expect(service).toContain("startForeground");
     expect(service).toContain("FOREGROUND_SERVICE_TYPE_MICROPHONE");
     expect(service).toContain("PowerManager.PARTIAL_WAKE_LOCK");
@@ -33,7 +33,7 @@ describe("Android call foreground service", () => {
   });
 
   it("uses the saved app locale for call notification strings and keeps a supplied title", () => {
-    const service = source("java/com/rakazo/notifications/RakazoCallService.kt");
+    const service = source("java/com/agenticsmith/notifications/AgenticSmithCallService.kt");
     expect(service).toContain(
       "val copyContext = localizedContext(this, NotificationStorage(this).locale)",
     );
@@ -46,7 +46,11 @@ describe("Android call foreground service", () => {
     expect(service).toContain(
       "private fun startForegroundCompat(copyContext: Context, title: String)",
     );
-    for (const key of ["rakazo_call_title", "rakazo_call_text", "rakazo_call_channel"]) {
+    for (const key of [
+      "agentic_smith_call_title",
+      "agentic_smith_call_text",
+      "agentic_smith_call_channel",
+    ]) {
       expect(service).toMatch(new RegExp(`copyContext\\.getString\\(\\s*R\\.string\\.${key}`));
     }
   });
@@ -64,11 +68,11 @@ describe("Android call foreground service", () => {
       pl: "values-pl",
     } as const satisfies Record<(typeof UI_LOCALES)[number], string>;
     const keys = [
-      "rakazo_call_channel",
-      "rakazo_call_title",
-      "rakazo_call_text",
-      "rakazo_call_answer",
-      "rakazo_call_decline",
+      "agentic_smith_call_channel",
+      "agentic_smith_call_title",
+      "agentic_smith_call_text",
+      "agentic_smith_call_answer",
+      "agentic_smith_call_decline",
     ];
     for (const locale of UI_LOCALES) {
       const xml = source(`res/${directories[locale]}/call_strings.xml`);
@@ -78,7 +82,7 @@ describe("Android call foreground service", () => {
 
   // call-card-keep-awake.test.tsx covers the call card starting the service instead of keep-awake.
   it("is exposed to the JS bridge", () => {
-    const module = source("java/com/rakazo/notifications/RakazoNotificationsModule.kt");
+    const module = source("java/com/agenticsmith/notifications/AgenticSmithNotificationsModule.kt");
     expect(module).toContain('AsyncFunction("startCall")');
     expect(module).toContain('AsyncFunction("stopCall")');
   });

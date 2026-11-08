@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="agentic_smith_call_channel">Actief gesprek</string>
+  <string name="agentic_smith_call_title">Agentic Smith-gesprek</string>
+  <string name="agentic_smith_call_text">Microfoon is actief</string>
+  <string name="agentic_smith_call_answer">Opnemen</string>
+  <string name="agentic_smith_call_decline">Weigeren</string>
+</resources>

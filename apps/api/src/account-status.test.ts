@@ -1,10 +1,10 @@
-import type * as Db from "@rakazo/db";
+import type * as Db from "@agentic-smith/db";
 import { describe, expect, it, vi } from "vitest";
 import type { AccountStatusDeps } from "./account-status.js";
 import { endDeactivatedAccess } from "./account-status.js";
 import { revokeUserDevices } from "./user-devices.js";
 
-vi.mock("@rakazo/db", async (original) => ({
+vi.mock("@agentic-smith/db", async (original) => ({
   ...(await original<typeof Db>()),
   cancelDeactivatedAccountRuns: vi.fn(
     async (_prisma: unknown, events: { notify(threadId: string, seq: number): Promise<void> }) => {

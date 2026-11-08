@@ -1,12 +1,13 @@
 import path from "node:path";
-import { RAKAZO_CLOUD_URL } from "./setup-config.js";
+import { AGENTIC_SMITH_CLOUD_URL } from "./setup-config.js";
 
 /**
  * The only relying party a build is associated with (`webcredentials:` entitlement). The bundler
- * inlines `RAKAZO_PASSKEY_RP_ID`, so the app and its entitlements must be built with the same value.
+ * inlines `AGENTIC_SMITH_PASSKEY_RP_ID`, so the app and its entitlements must be built with the same value.
  */
 export const PASSKEY_RP_ID =
-  process.env.RAKAZO_PASSKEY_RP_ID?.trim().toLowerCase() || new URL(RAKAZO_CLOUD_URL).hostname;
+  process.env.AGENTIC_SMITH_PASSKEY_RP_ID?.trim().toLowerCase() ||
+  new URL(AGENTIC_SMITH_CLOUD_URL).hostname;
 
 /**
  * Relying parties whose passkeys this build can use through the system passkey sheet. The
@@ -42,7 +43,8 @@ export function passkeyEntitlements(
   if (!TEAM_ID.test(teamId))
     throw new Error("Apple Team ID must be 10 uppercase letters or digits");
   if (!BUNDLE_ID.test(bundleId)) throw new Error("Invalid bundle identifier");
-  if (!DOMAIN.test(PASSKEY_RP_ID)) throw new Error("RAKAZO_PASSKEY_RP_ID must be a domain name");
+  if (!DOMAIN.test(PASSKEY_RP_ID))
+    throw new Error("AGENTIC_SMITH_PASSKEY_RP_ID must be a domain name");
   const end = base.lastIndexOf("</dict>");
   if (end === -1 || base.includes("com.apple.developer.associated-domains")) {
     throw new Error("Unexpected base entitlements");

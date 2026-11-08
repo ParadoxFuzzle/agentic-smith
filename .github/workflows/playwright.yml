@@ -86,11 +86,11 @@ jobs:
           docker run -d --name ci-postgres \
             -e POSTGRES_USER=postgres \
             -e POSTGRES_PASSWORD=postgres \
-            -e POSTGRES_DB=rakazo \
+            -e POSTGRES_DB=agentic_smith \
             -p 5432:5432 \
             mirror.gcr.io/library/postgres:18-alpine \
             postgres -c fsync=off -c synchronous_commit=off -c full_page_writes=off -c max_connections=500
-          echo "CI_POSTGRES_URL=postgres://postgres:postgres@127.0.0.1:5432/rakazo" >> "$GITHUB_ENV"
+          echo "CI_POSTGRES_URL=postgres://postgres:postgres@127.0.0.1:5432/agentic_smith" >> "$GITHUB_ENV"
       - uses: ./.github/actions/setup-workspace
         if: steps.areas.outputs.e2e != 'false'
         with:
@@ -100,7 +100,7 @@ jobs:
         timeout-minutes: 5
         # Skip --with-deps: GitHub ubuntu-latest already has Chromium's OS libraries,
         # and apt-get against azure.archive.ubuntu.com can stall until the job timeout.
-        run: pnpm --filter @rakazo/web exec playwright install chromium
+        run: pnpm --filter @agentic-smith/web exec playwright install chromium
       - name: Install CJK fonts
         if: steps.areas.outputs.e2e != 'false'
         timeout-minutes: 6
@@ -113,7 +113,7 @@ jobs:
         if: steps.areas.outputs.e2e != 'false'
         run: |
           for i in $(seq 1 30); do
-            if docker exec ci-postgres pg_isready -U postgres -d rakazo; then
+            if docker exec ci-postgres pg_isready -U postgres -d agentic_smith; then
               exit 0
             fi
             sleep 1
@@ -185,11 +185,11 @@ jobs:
           docker run -d --name ci-postgres \
             -e POSTGRES_USER=postgres \
             -e POSTGRES_PASSWORD=postgres \
-            -e POSTGRES_DB=rakazo \
+            -e POSTGRES_DB=agentic_smith \
             -p 5432:5432 \
             mirror.gcr.io/library/postgres:18-alpine \
             postgres -c fsync=off -c synchronous_commit=off -c full_page_writes=off -c max_connections=500
-          echo "CI_POSTGRES_URL=postgres://postgres:postgres@127.0.0.1:5432/rakazo" >> "$GITHUB_ENV"
+          echo "CI_POSTGRES_URL=postgres://postgres:postgres@127.0.0.1:5432/agentic_smith" >> "$GITHUB_ENV"
       - uses: ./.github/actions/setup-workspace
         if: steps.areas.outputs.e2e != 'false'
         with:
@@ -197,18 +197,18 @@ jobs:
       - name: Install Chromium
         if: steps.areas.outputs.e2e != 'false'
         timeout-minutes: 5
-        run: pnpm --filter @rakazo/web exec playwright install chromium
+        run: pnpm --filter @agentic-smith/web exec playwright install chromium
       - name: Install agent-browser
         if: steps.areas.outputs.e2e != 'false' && matrix.agent_browser
         timeout-minutes: 2
         run: |
           infra/sandboxes/computer/install-agent-browser.sh "$RUNNER_TEMP/agent-browser"
-          echo "RAKAZO_AGENT_BROWSER=$RUNNER_TEMP/agent-browser/agent-browser" >> "$GITHUB_ENV"
+          echo "AGENTIC_SMITH_AGENT_BROWSER=$RUNNER_TEMP/agent-browser/agent-browser" >> "$GITHUB_ENV"
       - name: Wait for Postgres
         if: steps.areas.outputs.e2e != 'false'
         run: |
           for i in $(seq 1 30); do
-            if docker exec ci-postgres pg_isready -U postgres -d rakazo; then
+            if docker exec ci-postgres pg_isready -U postgres -d agentic_smith; then
               exit 0
             fi
             sleep 1
@@ -256,11 +256,11 @@ jobs:
       - name: Install Chromium
         if: steps.areas.outputs.e2e != 'false'
         timeout-minutes: 5
-        run: pnpm --filter @rakazo/www exec playwright install chromium
+        run: pnpm --filter @agentic-smith/www exec playwright install chromium
       - name: Capture marketing homepage screenshots
         if: steps.areas.outputs.e2e != 'false'
         id: www_e2e
-        run: pnpm --filter @rakazo/www e2e
+        run: pnpm --filter @agentic-smith/www e2e
       - name: Upload homepage screenshots
         if: always() && steps.areas.outputs.e2e != 'false'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

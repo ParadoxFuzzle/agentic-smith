@@ -1,5 +1,5 @@
+import type { AgentRunModel } from "@agentic-smith/adapter-kit";
 import type { Message, ToolCall } from "@earendil-works/pi-ai";
-import type { AgentRunModel } from "@rakazo/adapter-kit";
 import { withoutThinkingFrom } from "./thinking-signatures.js";
 
 export interface ComputerModeSelection {

@@ -1,4 +1,4 @@
-import type { AgentImportNeed, AgentImportSetupItem, MessageBlock } from "@rakazo/contracts";
+import type { AgentImportNeed, AgentImportSetupItem, MessageBlock } from "@agentic-smith/contracts";
 import { t } from "./i18n";
 
 export type ImportSetupBlock = Extract<MessageBlock, { kind: "import_setup" }>;

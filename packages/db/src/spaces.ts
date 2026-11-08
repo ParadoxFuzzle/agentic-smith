@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { displayName } from "@rakazo/core";
+import { displayName } from "@agentic-smith/core";
 import { GUEST_ROLE, isOwnerRole, ownedOrganizationId } from "./billing.js";
 import type { PrismaClient } from "./client.js";
 import { Prisma } from "./client.js";

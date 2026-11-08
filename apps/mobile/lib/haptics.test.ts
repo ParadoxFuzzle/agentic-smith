@@ -209,7 +209,7 @@ describe("mobile haptics", () => {
   });
 
   it("notifies subscribers when a saved preference has loaded", async () => {
-    values.set("rakazo.haptics", "false");
+    values.set("agentic-smith.haptics", "false");
     const haptics = await import("./haptics");
     const listener = vi.fn();
     haptics.subscribeHaptics(listener);
@@ -256,9 +256,9 @@ describe("mobile haptics", () => {
     firstSave.resolve();
     await Promise.all([first, second, third]);
     expect(storage.setItemAsync.mock.calls).toEqual([
-      ["rakazo.haptics", "false"],
-      ["rakazo.haptics", "true"],
-      ["rakazo.haptics", "false"],
+      ["agentic-smith.haptics", "false"],
+      ["agentic-smith.haptics", "true"],
+      ["agentic-smith.haptics", "false"],
     ]);
     vi.resetModules();
     const reloaded = await import("./haptics");
@@ -267,7 +267,7 @@ describe("mobile haptics", () => {
   });
 
   it("keeps feedback gated when a stored off preference cannot be read", async () => {
-    values.set("rakazo.haptics", "false");
+    values.set("agentic-smith.haptics", "false");
     storage.getItemAsync.mockRejectedValue(new Error("storage unavailable"));
     const haptics = await import("./haptics");
     await expect(haptics.loadHapticsPreference()).resolves.toBeUndefined();
@@ -277,11 +277,11 @@ describe("mobile haptics", () => {
     expectNoFeedback();
     await haptics.loadHapticsPreference();
     expectNoFeedback();
-    expect(values.get("rakazo.haptics")).toBe("false");
+    expect(values.get("agentic-smith.haptics")).toBe("false");
   });
 
   it("allows an explicit on choice to recover from an unread saved preference", async () => {
-    values.set("rakazo.haptics", "false");
+    values.set("agentic-smith.haptics", "false");
     storage.getItemAsync.mockRejectedValue(new Error("storage unavailable"));
     const haptics = await import("./haptics");
     await haptics.loadHapticsPreference();
@@ -294,7 +294,7 @@ describe("mobile haptics", () => {
     expect(feedback.selectionAsync).toHaveBeenCalledOnce();
     expect(feedback.impactAsync).toHaveBeenCalledExactlyOnceWith("light");
     expect(feedback.notificationAsync).toHaveBeenCalledExactlyOnceWith("success");
-    expect(values.get("rakazo.haptics")).toBe("true");
+    expect(values.get("agentic-smith.haptics")).toBe("true");
   });
 
   it.each([false, true])(
@@ -327,7 +327,7 @@ describe("mobile haptics", () => {
   it.each(["false", "true"])(
     "retries an unread saved %s preference and caches its successful read",
     async (stored) => {
-      values.set("rakazo.haptics", stored);
+      values.set("agentic-smith.haptics", stored);
       storage.getItemAsync.mockRejectedValueOnce(new Error("temporarily unavailable"));
       const haptics = await import("./haptics");
       await haptics.loadHapticsPreference();
@@ -345,7 +345,7 @@ describe("mobile haptics", () => {
   );
 
   it("can retry storage that throws synchronously without caching the failed task", async () => {
-    values.set("rakazo.haptics", "false");
+    values.set("agentic-smith.haptics", "false");
     storage.getItemAsync.mockImplementationOnce(() => {
       throw new Error("sync storage failure");
     });
@@ -361,7 +361,7 @@ describe("mobile haptics", () => {
   });
 
   it("keeps a newer explicit choice when retrying an earlier failed read", async () => {
-    values.set("rakazo.haptics", "false");
+    values.set("agentic-smith.haptics", "false");
     storage.getItemAsync.mockRejectedValueOnce(new Error("temporarily unavailable"));
     const haptics = await import("./haptics");
     await haptics.loadHapticsPreference();
@@ -376,7 +376,7 @@ describe("mobile haptics", () => {
   it.each(["false", "true"])(
     "recovers a saved %s preference on demand without replaying gestures",
     async (stored) => {
-      values.set("rakazo.haptics", stored);
+      values.set("agentic-smith.haptics", stored);
       const read = deferred<string | null>();
       storage.getItemAsync
         .mockRejectedValueOnce(new Error("startup read failed"))
@@ -406,7 +406,7 @@ describe("mobile haptics", () => {
   );
 
   it("retries another failed recovery only when a later gesture asks for feedback", async () => {
-    values.set("rakazo.haptics", "true");
+    values.set("agentic-smith.haptics", "true");
     storage.getItemAsync
       .mockRejectedValueOnce(new Error("startup read failed"))
       .mockRejectedValueOnce(new Error("recovery read failed"));
@@ -454,7 +454,7 @@ describe("mobile haptics", () => {
     haptics.hapticSelection();
     expectNoFeedback();
     await haptics.setHapticsEnabled(true);
-    expect(values.get("rakazo.haptics")).toBe("true");
+    expect(values.get("agentic-smith.haptics")).toBe("true");
   });
 
   it("persists a retried off choice after reporting its first save failure", async () => {
@@ -464,7 +464,7 @@ describe("mobile haptics", () => {
     await expect(haptics.setHapticsEnabled(false)).rejects.toThrow("storage unavailable");
     expect(haptics.getHapticsEnabled()).toBe(false);
     await haptics.setHapticsEnabled(false);
-    expect(values.get("rakazo.haptics")).toBe("false");
+    expect(values.get("agentic-smith.haptics")).toBe("false");
     vi.resetModules();
     const reloaded = await import("./haptics");
     await reloaded.loadHapticsPreference();
@@ -485,11 +485,11 @@ describe("mobile haptics", () => {
     await expect(second).rejects.toBe(secondError);
     await third;
     expect(storage.setItemAsync.mock.calls).toEqual([
-      ["rakazo.haptics", "false"],
-      ["rakazo.haptics", "true"],
-      ["rakazo.haptics", "false"],
+      ["agentic-smith.haptics", "false"],
+      ["agentic-smith.haptics", "true"],
+      ["agentic-smith.haptics", "false"],
     ]);
-    expect(values.get("rakazo.haptics")).toBe("false");
+    expect(values.get("agentic-smith.haptics")).toBe("false");
   });
 
   it("swallows synchronous and rejected native failures", async () => {

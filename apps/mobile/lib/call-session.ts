@@ -1,5 +1,5 @@
-import type { BotAvatarSet } from "@rakazo/contracts";
-import type { CallExchange } from "@rakazo/core";
+import type { BotAvatarSet } from "@agentic-smith/contracts";
+import type { CallExchange } from "@agentic-smith/core";
 import {
   ACTIVE_RUN_STATUSES,
   AiConsentBlocked,
@@ -20,7 +20,7 @@ import {
   reduceThreadSnapshot,
   retryDelayMs,
   spokenMemory,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import type { AudioRecorder } from "expo-audio";
 import { File } from "expo-file-system";
 import { useSyncExternalStore } from "react";
@@ -953,7 +953,7 @@ async function transcribeClip(
     `${apiBase}/api/voice/transcribe`,
     {
       method: "POST",
-      headers: { "content-type": "application/json", origin: "rakazo://", ...headers },
+      headers: { "content-type": "application/json", origin: "agentic-smith://", ...headers },
       body: JSON.stringify({ audioBase64: clip.base64, mimeType: clip.mimeType }),
       signal,
     },

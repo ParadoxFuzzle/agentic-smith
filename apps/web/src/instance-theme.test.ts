@@ -13,7 +13,7 @@ import {
 const dir = path.resolve("/srv/theme");
 
 function themeFolder(theme: unknown, files: Record<string, string> = {}) {
-  const folder = mkdtempSync(path.join(tmpdir(), "rakazo-theme-"));
+  const folder = mkdtempSync(path.join(tmpdir(), "agentic-smith-theme-"));
   writeFileSync(path.join(folder, "theme.json"), JSON.stringify(theme));
   for (const [name, body] of Object.entries(files)) writeFileSync(path.join(folder, name), body);
   return path.join(folder, "theme.json");
@@ -100,7 +100,7 @@ describe("instance theme", () => {
   });
 
   it("links the theme only on the pages the SPA fallback resolves to the app", () => {
-    const folder = mkdtempSync(path.join(tmpdir(), "rakazo-dist-"));
+    const folder = mkdtempSync(path.join(tmpdir(), "agentic-smith-dist-"));
     writeFileSync(path.join(folder, "index.html"), "<html><head><title>x</title></head></html>");
     const middleware = instanceThemeIndexMiddleware(folder);
     const page = (url: string, headers: Record<string, string> = {}) => {
@@ -140,7 +140,10 @@ describe("instance theme", () => {
   });
 
   it("refuses a font symlink that points outside the theme's folder", () => {
-    const secret = path.join(mkdtempSync(path.join(tmpdir(), "rakazo-secret-")), "secret.txt");
+    const secret = path.join(
+      mkdtempSync(path.join(tmpdir(), "agentic-smith-secret-")),
+      "secret.txt",
+    );
     writeFileSync(secret, "not a font");
     const file = themeFolder({ fonts: { files: [{ family: "Onest", file: "Onest.ttf" }] } });
     symlinkSync(secret, path.join(path.dirname(file), "Onest.ttf"));

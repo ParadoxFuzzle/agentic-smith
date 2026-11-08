@@ -20,7 +20,7 @@ afterEach(() => {
 
 /** A web app with one string that no committed catalog lists yet. */
 function newStringProject() {
-  project = mkdtempSync(path.join(tmpdir(), "rakazo-lingui-"));
+  project = mkdtempSync(path.join(tmpdir(), "agentic-smith-lingui-"));
   mkdirSync(path.join(project, "src"));
   writeFileSync(
     path.join(project, "src/app.ts"),

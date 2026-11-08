@@ -1,12 +1,12 @@
 import { setTimeout as delay } from "node:timers/promises";
-import type { FetchError, ResponseError } from "@boatdev/sdk";
 import {
   SandboxProviderAccountError,
   SandboxRateLimitError,
   SandboxUnavailableError,
   SandboxUnresponsiveError,
-} from "@rakazo/adapter-kit";
-import { redactSecrets } from "@rakazo/core";
+} from "@agentic-smith/adapter-kit";
+import { redactSecrets } from "@agentic-smith/core";
+import type { FetchError, ResponseError } from "@boatdev/sdk";
 import { readBodyCapped } from "./web-ssrf.js";
 
 const MAX_BOAT_ERROR_RESPONSE_BYTES = 16 * 1024;

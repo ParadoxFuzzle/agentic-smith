@@ -1,5 +1,5 @@
-import type { SecretMigrationRepository, SecretMigrationRow } from "@rakazo/adapters";
-import type { PrismaClient } from "@rakazo/db";
+import type { SecretMigrationRepository, SecretMigrationRow } from "@agentic-smith/adapters";
+import type { PrismaClient } from "@agentic-smith/db";
 
 const tables = ["secret", "botSecret", "vaultCredential", "integrationProviderConfig"] as const;
 

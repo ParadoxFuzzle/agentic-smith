@@ -1,20 +1,20 @@
-appId: com.rakazo.app
+appId: com.agenticsmith.app
 name: Skills
 ---
 - runFlow:
     file: ../subflows/sign-in.yaml
     env:
-      RAKAZO_ACTIVE_EMAIL: ${RAKAZO_SCREENSHOT_EMAIL}
-- openLink: "rakazo:///skills"
+      AGENTIC_SMITH_ACTIVE_EMAIL: ${AGENTIC_SMITH_SCREENSHOT_EMAIL}
+- openLink: "agentic-smith:///skills"
 - extendedWaitUntil:
     visible: ".*Review Kit.*"
     timeout: 20000
 - waitForAnimationToEnd:
     timeout: 3000
 - takeScreenshot: 01-skills
-- tapOn: "Rakazo"
+- tapOn: "Agentic Smith"
 - extendedWaitUntil:
-    visible: ".*name: Rakazo.*"
+    visible: ".*name: AgenticSmith.*"
     timeout: 15000
 - waitForAnimationToEnd:
     timeout: 3000
@@ -27,7 +27,7 @@ name: Skills
 - waitForAnimationToEnd:
     timeout: 3000
 - takeScreenshot: 03-new-skill
-- openLink: "rakazo:///skills"
+- openLink: "agentic-smith:///skills"
 - tapOn: ".*Review Kit.*"
 - extendedWaitUntil:
     visible: ".*Install.*|.*Add.*"
@@ -35,7 +35,7 @@ name: Skills
 - waitForAnimationToEnd:
     timeout: 3000
 - takeScreenshot: 04-plugin
-- openLink: "rakazo:///bot-templates"
+- openLink: "agentic-smith:///bot-templates"
 - extendedWaitUntil:
     visible: "Morning briefing"
     timeout: 15000

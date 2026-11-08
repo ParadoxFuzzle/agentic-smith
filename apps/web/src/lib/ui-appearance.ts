@@ -1,10 +1,10 @@
-import type { AppearancePreference, ResolvedAppearance } from "@rakazo/ui-tokens";
+import type { AppearancePreference, ResolvedAppearance } from "@agentic-smith/ui-tokens";
 import {
   persistAppearancePreference,
   resolveAppearance,
   resolveAppearancePreference,
   webTokensForAppearance,
-} from "@rakazo/ui-tokens";
+} from "@agentic-smith/ui-tokens";
 
 export type { AppearancePreference, ResolvedAppearance };
 

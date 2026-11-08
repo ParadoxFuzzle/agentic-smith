@@ -1,7 +1,7 @@
-import type { MessagingInboundMessage } from "@rakazo/adapter-kit";
-import { toTeamChatInbound } from "@rakazo/adapters";
-import { SpaceDeletionInProgressError } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+import type { MessagingInboundMessage } from "@agentic-smith/adapter-kit";
+import { toTeamChatInbound } from "@agentic-smith/adapters";
+import { SpaceDeletionInProgressError } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type { MessagingInboundDeps } from "./messaging-inbound.js";
 import { teamChatSenderCanWakeMessageRoutines, wakeMessageRoutines } from "./messaging-inbound.js";
 import type { TeamChatBridge } from "./team-chat-bridge.js";

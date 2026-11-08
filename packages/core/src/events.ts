@@ -1,4 +1,4 @@
-import type { MessageBlock, ThreadMessage } from "@rakazo/contracts";
+import type { MessageBlock, ThreadMessage } from "@agentic-smith/contracts";
 import { cloudAgentBlockFromPayload } from "./cloud-agent.js";
 import { preserveIdentitySource } from "./identity-source.js";
 import { payloadAuthor } from "./message-replies.js";
@@ -219,7 +219,7 @@ export function isRunTerminalEvent(event: { type: string }): boolean {
   );
 }
 
-export const RESPONSE_STREAMING_STORAGE_KEY = "rakazo.responseStreaming";
+export const RESPONSE_STREAMING_STORAGE_KEY = "agentic-smith.responseStreaming";
 export type ResponseStreamingPreference = "on" | "off";
 
 /** Missing and unknown values stay off; only an explicit "on" enables streaming. */

@@ -3,8 +3,11 @@ import type {
   PaymentWalletCredential,
   PaymentWalletProvider,
   PurchaseRequest,
-} from "@rakazo/adapter-kit";
-import { PaymentWalletDisconnected, PaymentWalletRequestRejected } from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
+import {
+  PaymentWalletDisconnected,
+  PaymentWalletRequestRejected,
+} from "@agentic-smith/adapter-kit";
 import { Challenge, Credential } from "mppx";
 import { describe, expect, it, vi } from "vitest";
 import { LinkWalletProvider } from "./link-wallet.js";
@@ -37,7 +40,7 @@ function purchase(overrides: Partial<PurchaseRequest> = {}): PurchaseRequest {
 }
 
 async function connect(provider: PaymentWalletProvider): Promise<PaymentWalletCredential> {
-  const start = await provider.beginConnect({ clientName: "Rakazo" }, ctx);
+  const start = await provider.beginConnect({ clientName: "Agentic Smith" }, ctx);
   expect(start.verificationUrl).toMatch(/^https:\/\//);
   expect(start.userCode).toBeTruthy();
   expect(start.expiresAt.getTime()).toBeGreaterThan(Date.now());
@@ -441,7 +444,7 @@ describe("Link wallet protocol", () => {
   it("signs in with the device flow and backs off on slow_down", async () => {
     const link = fakeLink();
     const provider = new LinkWalletProvider({ fetch: link.fetch });
-    const start = await provider.beginConnect({ clientName: "Rakazo" }, ctx);
+    const start = await provider.beginConnect({ clientName: "Agentic Smith" }, ctx);
     expect(start).toMatchObject({
       verificationUrl: "https://app.link.com/device?code=ABCD-EFGH",
       userCode: "ABCD-EFGH",
@@ -480,7 +483,7 @@ describe("Link wallet protocol", () => {
         return oversized;
       },
     });
-    await expect(provider.beginConnect({ clientName: "Rakazo" }, ctx)).rejects.toThrow(
+    await expect(provider.beginConnect({ clientName: "Agentic Smith" }, ctx)).rejects.toThrow(
       /^Link response is too large\.$/,
     );
     expect(cancel).toHaveBeenCalledOnce();

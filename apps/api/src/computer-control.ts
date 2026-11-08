@@ -1,8 +1,7 @@
 import { randomUUID } from "node:crypto";
-import { ORPCError } from "@orpc/server";
-import type { AdapterContext } from "@rakazo/adapter-kit";
-import { computerControlExpireJobKey } from "@rakazo/adapter-kit";
-import type { ComputerExecutionLease } from "@rakazo/adapters";
+import type { AdapterContext } from "@agentic-smith/adapter-kit";
+import { computerControlExpireJobKey } from "@agentic-smith/adapter-kit";
+import type { ComputerExecutionLease } from "@agentic-smith/adapters";
 import {
   acquireComputerExecutionLease,
   anotherPersonHoldsControl,
@@ -19,12 +18,18 @@ import {
   revokeScreenControl,
   scheduleComputerSleep,
   screenLeaseIdForRun,
-} from "@rakazo/adapters";
-import type { Actor, ComputerReleaseReason, ComputerStatus } from "@rakazo/contracts";
-import { ACTIVE_RUN_STATUSES } from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
-import { createRepos, IsolationError, recordComputerRunEnd, spaceIsShared } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapters";
+import type { Actor, ComputerReleaseReason, ComputerStatus } from "@agentic-smith/contracts";
+import { ACTIVE_RUN_STATUSES } from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
+import {
+  createRepos,
+  IsolationError,
+  recordComputerRunEnd,
+  spaceIsShared,
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { ORPCError } from "@orpc/server";
 import { resolveBusyBotName, toComputerStatus } from "./computer-status.js";
 import type { RouterDeps } from "./router.js";
 import { computerContext } from "./routes/shared.js";

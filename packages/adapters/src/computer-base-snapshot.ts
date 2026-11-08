@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { getLogger } from "@rakazo/logging";
+import { getLogger } from "@agentic-smith/logging";
 
 /** Bounds a base snapshot build: a fresh machine, the desktop install, and the save. */
 export const BASE_SNAPSHOT_BUILD_TIMEOUT_MS = 30 * 60_000;
@@ -11,7 +11,7 @@ const BASE_SNAPSHOT_LOOKUP_RETRY_MS = 60_000;
 /** A snapshot name that changes with the setup it captures, so older computers keep theirs. */
 export function computerSnapshotName(setup: readonly string[]): string {
   const hash = createHash("sha256").update(setup.join("\0")).digest("hex").slice(0, 12);
-  return `rakazo-computer-${hash}`;
+  return `agentic-smith-computer-${hash}`;
 }
 
 /** Where a provider's saved base snapshot stands; `saving` means another process is saving it. */

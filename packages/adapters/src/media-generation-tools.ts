@@ -3,12 +3,12 @@ import type {
   GeneratedMedia,
   MediaGenerationProvider,
   MediaVideoJob,
-} from "@rakazo/adapter-kit";
-import { MediaGenerationError } from "@rakazo/adapter-kit";
-import type { MessageBlock } from "@rakazo/contracts";
-import { messageBlockForArtifact } from "@rakazo/core";
-import type { ExternalEffect, Prisma, PrismaClient } from "@rakazo/db";
-import { isUniqueViolation } from "@rakazo/db";
+} from "@agentic-smith/adapter-kit";
+import { MediaGenerationError } from "@agentic-smith/adapter-kit";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { messageBlockForArtifact } from "@agentic-smith/core";
+import type { ExternalEffect, Prisma, PrismaClient } from "@agentic-smith/db";
+import { isUniqueViolation } from "@agentic-smith/db";
 import { z } from "zod";
 import { mediaPromptSchema, validateGeneratedMedia } from "./media-generation-provider.js";
 

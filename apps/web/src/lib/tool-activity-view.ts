@@ -1,5 +1,5 @@
-import type { MessageBlock } from "@rakazo/contracts";
-import { isRetiredImportSetup, isToolActivityBlock } from "@rakazo/core";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { isRetiredImportSetup, isToolActivityBlock } from "@agentic-smith/core";
 
 /** Number of tool calls behind a steps block: the sum of each row's count. */
 export function toolStepCount(steps: readonly { count: number }[]): number {

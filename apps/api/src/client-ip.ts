@@ -2,9 +2,9 @@ import { lookup } from "node:dns/promises";
 import { existsSync } from "node:fs";
 import { BlockList, isIP } from "node:net";
 import { networkInterfaces } from "node:os";
+import { CLIENT_IP_HEADER } from "@agentic-smith/auth";
+import { withSecurityRequest } from "@agentic-smith/db";
 import { getConnInfo } from "@hono/node-server/conninfo";
-import { CLIENT_IP_HEADER } from "@rakazo/auth";
-import { withSecurityRequest } from "@rakazo/db";
 import type { Context, MiddlewareHandler } from "hono";
 
 export interface ClientIpConfig {
@@ -147,7 +147,7 @@ function normalizeIp(value: string): string {
   return (mapped?.[1] ?? value).toLowerCase();
 }
 
-const CLIENT_IP_KEY = "rakazo.clientIp";
+const CLIENT_IP_KEY = "agentic-smith.clientIp";
 
 /** Resolve the caller once per request and make it available to security events. */
 export function clientIpMiddleware(resolver: ClientIpResolver, header: string): MiddlewareHandler {

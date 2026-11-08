@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
-import type * as CoreModule from "@rakazo/core";
-import { reduceThreadSnapshot } from "@rakazo/core";
+import type * as CoreModule from "@agentic-smith/core";
+import { reduceThreadSnapshot } from "@agentic-smith/core";
 import { act, createElement } from "react";
 import { createRoot } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -21,7 +21,7 @@ vi.mock("./api", () => ({
 vi.mock("./api-live", () => ({
   subscribeThread: vi.fn(),
 }));
-vi.mock("@rakazo/core", async (importOriginal) => ({
+vi.mock("@agentic-smith/core", async (importOriginal) => ({
   ...(await importOriginal<typeof CoreModule>()),
   reduceThreadSnapshot: vi.fn(),
 }));
@@ -115,7 +115,7 @@ describe("thread foreground subscription", () => {
   });
 
   it("keeps group member status right in older history, where no refresh corrects it", async () => {
-    const actual = await vi.importActual<typeof CoreModule>("@rakazo/core");
+    const actual = await vi.importActual<typeof CoreModule>("@agentic-smith/core");
     vi.mocked(reduceThreadSnapshot).mockImplementation(actual.reduceThreadSnapshot);
     vi.mocked(rpc).mockResolvedValue({ cursor: 10, threadId: "thread-1" } as never);
     let deliver: (event: LiveEvent & { botId?: string; createdAt?: string }) => void = () => {};
@@ -189,7 +189,7 @@ describe("thread foreground subscription", () => {
   });
 
   it("confirms live completions once and suppresses failures, hidden chats and catch-up events", async () => {
-    const actual = await vi.importActual<typeof CoreModule>("@rakazo/core");
+    const actual = await vi.importActual<typeof CoreModule>("@agentic-smith/core");
     vi.mocked(reduceThreadSnapshot).mockImplementation(actual.reduceThreadSnapshot);
     type Event = Parameters<Parameters<typeof subscribeThread>[2]>[0];
     let deliver: (event: Event) => void = () => {};
@@ -299,7 +299,7 @@ describe("thread foreground subscription", () => {
     "replays feedback without rewinding a newer snapshot (head retry %s)",
     async (retryHead) => {
       if (retryHead) vi.useFakeTimers();
-      const actual = await vi.importActual<typeof CoreModule>("@rakazo/core");
+      const actual = await vi.importActual<typeof CoreModule>("@agentic-smith/core");
       vi.mocked(reduceThreadSnapshot).mockImplementation(actual.reduceThreadSnapshot);
       type Event = Parameters<Parameters<typeof subscribeThread>[2]>[0];
       let deliver: (event: Event) => void = () => {};
@@ -493,7 +493,7 @@ describe("thread foreground subscription", () => {
     "bounds a slow feedback lookup and handles HTTP %s without holding up chat",
     async (status) => {
       vi.useFakeTimers();
-      const actual = await vi.importActual<typeof CoreModule>("@rakazo/core");
+      const actual = await vi.importActual<typeof CoreModule>("@agentic-smith/core");
       vi.mocked(reduceThreadSnapshot).mockImplementation(actual.reduceThreadSnapshot);
       type Event = Parameters<Parameters<typeof subscribeThread>[2]>[0];
       let deliver: (event: Event) => void = () => {};
@@ -600,7 +600,7 @@ describe("thread foreground subscription", () => {
 
   it("recovers feedback on a 500 ms connection without delaying live chat or refocusing", async () => {
     vi.useFakeTimers();
-    const actual = await vi.importActual<typeof CoreModule>("@rakazo/core");
+    const actual = await vi.importActual<typeof CoreModule>("@agentic-smith/core");
     vi.mocked(reduceThreadSnapshot).mockImplementation(actual.reduceThreadSnapshot);
     type Event = Parameters<Parameters<typeof subscribeThread>[2]>[0];
     let deliver: (event: Event) => void = () => {};

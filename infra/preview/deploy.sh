@@ -4,12 +4,12 @@
 # the image only moves from the local Docker daemon to the host's registry.
 #
 # Env: PR, HEAD_SHA, IMAGE (local tag), FLY_API_TOKEN, FLY_ORG, REGION, GH_TOKEN, REPO,
-# APP_PREFIX (default rakazo-pr).
+# APP_PREFIX (default agentic-smith-pr).
 set -euo pipefail
 
 [[ $PR =~ ^[0-9]+$ ]] || { echo "Bad pull request number" >&2; exit 1; }
 [[ $HEAD_SHA =~ ^[0-9a-f]{40}$ ]] || { echo "Bad commit" >&2; exit 1; }
-app="${APP_PREFIX:-rakazo-pr}-$PR"
+app="${APP_PREFIX:-agentic-smith-pr}-$PR"
 here=$(cd "$(dirname "$0")" && pwd)
 
 flyctl status --app "$app" > /dev/null 2>&1 || flyctl apps create "$app" --org "$FLY_ORG"
@@ -24,9 +24,9 @@ docker push --quiet "$remote"
 flyctl deploy --app "$app" --config "$here/fly.toml" --image "$remote" \
   --primary-region "$REGION" --ha=false
 
-marker="<!-- rakazo-preview -->"
+marker="<!-- agentic-smith-preview -->"
 body="$marker
-**Preview:** https://$app.fly.dev · \`preview@example.com\` / \`rakazo-preview-demo\` · ${HEAD_SHA:0:7}"
+**Preview:** https://$app.fly.dev · \`preview@example.com\` / \`agentic-smith-preview-demo\` · ${HEAD_SHA:0:7}"
 existing=$(gh api "repos/$REPO/issues/$PR/comments" --paginate \
   --jq ".[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$marker\"))) | .id" |
   head -n 1)

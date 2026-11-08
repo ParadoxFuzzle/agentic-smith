@@ -1,13 +1,12 @@
-import { Trans, useLingui } from "@lingui/react/macro";
-import type { BotAvatarSet } from "@rakazo/contracts";
-import { BOT_NAME_MAX_LENGTH } from "@rakazo/contracts";
+import type { BotAvatarSet } from "@agentic-smith/contracts";
+import { BOT_NAME_MAX_LENGTH } from "@agentic-smith/contracts";
 import {
   newClientId,
   ORGANIC_AVATAR_HEART_FAMILY,
   ORGANIC_AVATAR_LOOKS,
   organicAvatarFamily,
   organicAvatarSampleIdentity,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import {
   BOT_AVATAR_COLORS,
   BotAvatar,
@@ -19,7 +18,8 @@ import {
   DialogTitle,
   Input,
   parseBotAvatar,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { useRef, useState } from "react";
 import { errorText } from "../../lib/user-error";
 import { BotLookPicker } from "./avatar-studio-popover";
@@ -78,7 +78,7 @@ export function CreateBotDialog({
       await onCreate({
         name: trimmed,
         color: look.value,
-        ...(avatarSet === "rakazo" ? { id: previewId } : {}),
+        ...(avatarSet === "agentic-smith" ? { id: previewId } : {}),
         ...(organic ? { avatarFamily: organicAvatarFamily(look.identity) } : {}),
       });
     } catch (err) {
@@ -116,7 +116,7 @@ export function CreateBotDialog({
           <div className="flex justify-center py-2">
             <BotAvatar
               color={look.value}
-              identity={avatarSet === "rakazo" ? previewId : look.identity}
+              identity={avatarSet === "agentic-smith" ? previewId : look.identity}
               size={96}
               avatarSet={avatarSet}
             />
@@ -141,7 +141,7 @@ export function CreateBotDialog({
           ) : null}
           <BotLookPicker
             value={look.value}
-            identity={avatarSet === "rakazo" ? previewId : look.identity}
+            identity={avatarSet === "agentic-smith" ? previewId : look.identity}
             organicIdentities={ORGANIC_IDENTITIES}
             avatarSet={avatarSet}
             onChange={(value, identity) => {

@@ -1,7 +1,7 @@
+import type { Bot, Group, Space } from "@agentic-smith/contracts";
+import { createSnoozeQueue } from "@agentic-smith/core";
+import { toast } from "@agentic-smith/ui-web";
 import { useLingui } from "@lingui/react/macro";
-import type { Bot, Group, Space } from "@rakazo/contracts";
-import { createSnoozeQueue } from "@rakazo/core";
-import { toast } from "@rakazo/ui-web";
 import type { Dispatch, SetStateAction } from "react";
 import { useCallback, useState } from "react";
 import type { createSpaceRpc } from "../../lib/rpc";

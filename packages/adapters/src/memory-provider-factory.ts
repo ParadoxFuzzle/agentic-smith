@@ -1,6 +1,10 @@
-import type { DurableMemoryScope, SecretStore, SemanticMemoryProvider } from "@rakazo/adapter-kit";
-import type { PrismaClient } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+import type {
+  DurableMemoryScope,
+  SecretStore,
+  SemanticMemoryProvider,
+} from "@agentic-smith/adapter-kit";
+import type { PrismaClient } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import {
   createHonchoProvider,
   HONCHO_PROVIDER_ID,

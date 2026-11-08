@@ -1,9 +1,13 @@
-import type { JobPublisher, MessagingInboundMessage, SandboxProvider } from "@rakazo/adapter-kit";
-import { messagingDeliverJob, runContinueJob } from "@rakazo/adapter-kit";
-import { insertOutboundRows } from "@rakazo/adapters";
-import type { MessageBlock } from "@rakazo/contracts";
-import { ATTACHMENT_MAX_COUNT, isAttachmentAudioMimeType } from "@rakazo/contracts";
-import type { MessagingCommand } from "@rakazo/core";
+import type {
+  JobPublisher,
+  MessagingInboundMessage,
+  SandboxProvider,
+} from "@agentic-smith/adapter-kit";
+import { messagingDeliverJob, runContinueJob } from "@agentic-smith/adapter-kit";
+import { insertOutboundRows } from "@agentic-smith/adapters";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { ATTACHMENT_MAX_COUNT, isAttachmentAudioMimeType } from "@agentic-smith/contracts";
+import type { MessagingCommand } from "@agentic-smith/core";
 import {
   displayName,
   messageBlockForArtifact,
@@ -11,7 +15,7 @@ import {
   parseMessagingCommand,
   promptTextForAttachments,
   sanitizeMessagingLabel,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import type {
   MessagingIdentityRequest,
   Prisma,
@@ -19,7 +23,7 @@ import type {
   ProvisionedMessagingIdentity,
   SignupPolicyEnv,
   ThreadEvents,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
 import {
   accountDeactivated,
   createThreadMessage,
@@ -28,8 +32,8 @@ import {
   redeemMessagingLinkCode,
   SpaceDeletionInProgressError,
   THREAD_LOCK_TRANSACTION_OPTIONS,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type { InboundAttachmentStore } from "./inbound-attachments.js";
 import { storeInboundAttachments } from "./inbound-attachments.js";
 import type { MessagingReceipts } from "./messaging-receipts.js";
@@ -889,7 +893,7 @@ async function handleChannelEvent(
         idempotencyKey: `intro:${channel.id}`,
         kind: "intro",
         threadId: channel.threadId,
-        body: "Hi. This line hosts Rakazo personal agents. Some people in this group haven't messaged it yet; send any message to this line first if you want your own agent here.",
+        body: "Hi. This line hosts Agentic Smith personal agents. Some people in this group haven't messaged it yet; send any message to this line first if you want your own agent here.",
       },
     ]);
     await deps.prisma.messagingChannel.update({
@@ -990,7 +994,7 @@ async function queueInvite(
         idempotencyKey: `invite:${channel.id}:${identity.id}`,
         kind: "dm",
         identityId: identity.id,
-        body: `"${name}" was linked to your Rakazo agent. Reply YES to let your agent join the conversation there, or NO to stay out.`,
+        body: `"${name}" was linked to your Agentic Smith agent. Reply YES to let your agent join the conversation there, or NO to stay out.`,
       },
     ],
     skipDuplicates: true,

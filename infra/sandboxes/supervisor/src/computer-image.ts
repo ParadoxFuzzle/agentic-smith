@@ -1,7 +1,7 @@
 import { constants } from "node:fs";
 import { access } from "node:fs/promises";
 import path from "node:path";
-import { getLogger } from "@rakazo/logging";
+import { getLogger } from "@agentic-smith/logging";
 import type Docker from "dockerode";
 import { COMPUTER_IMAGE_CONTEXT_FILES, isRegistryQualifiedImage } from "./computer-spec.js";
 
@@ -46,10 +46,13 @@ async function provideComputerImage(docker: Docker, image: string, context: stri
     );
     return;
   }
-  // Every Rakazo build path tags the stock image rakazo/computer. Any other name may be a custom
+  // Every Agentic Smith build path tags the stock image agentic-smith/computer. Any other name may be a custom
   // build, such as a Brave image, which a stock build must not replace. dockerode's tar packer
   // crashes the process on a context file it cannot read.
-  if (!/^rakazo\/computer(:[\w][\w.-]*)?$/.test(image) || !(await contextReadable(context))) {
+  if (
+    !/^agentic-smith\/computer(:[\w][\w.-]*)?$/.test(image) ||
+    !(await contextReadable(context))
+  ) {
     throw new Error(
       `Missing ${image}. Build it with: docker build -t ${image} infra/sandboxes/computer`,
     );

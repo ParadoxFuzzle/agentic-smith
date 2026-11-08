@@ -1,5 +1,5 @@
 import { randomBytes } from "node:crypto";
-import { signupPolicyFromEnv } from "@rakazo/core";
+import { signupPolicyFromEnv } from "@agentic-smith/core";
 import type { PrismaClient } from "./client.js";
 import { isUniqueViolation } from "./prisma-errors.js";
 

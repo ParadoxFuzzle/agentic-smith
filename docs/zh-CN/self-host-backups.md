@@ -15,12 +15,12 @@
 
 脚本使用 `pg_dump` 备份数据库，并将 `data/` 打包到 `backups/<stamp>/`。
 备份目录权限是 `0700`，文件权限是 `0600`，即使复用已有路径也会设置权限。
-没有 `data/`，或设置 `RAKAZO_BACKUP_SKIP_HOMES=1` 时，会生成空归档，恢复时视为未包含主目录。
+没有 `data/`，或设置 `AGENTIC_SMITH_BACKUP_SKIP_HOMES=1` 时，会生成空归档，恢复时视为未包含主目录。
 数据库或归档失败会使备份失败，应丢弃该次输出目录。
 
 ### 恢复源码备份
 
-`scripts/restore.sh` 只接收上面脚本生成的备份，目标是开发 Compose 中的空 `rakazo` 数据库：
+`scripts/restore.sh` 只接收上面脚本生成的备份，目标是开发 Compose 中的空 `agentic-smith` 数据库：
 
 ```bash
 ./scripts/restore.sh backups/<stamp>
@@ -36,26 +36,26 @@ SQL 成功后，原目录移到 `data.rollback.<random>/data`，脚本打印回�
 
 全部成功后才启动服务。如果关闭写入后又发生失败，脚本会再次尝试停止服务。
 SQL 提交后的文件替换失败不能自动回滚数据库。应保持应用停止，保留两个目录，恢复与回滚目录配套的数据库后再恢复文件。
-需要回滚时，必须事先单独备份恢复前的数据库。此脚本不能读取生产备份的 `rakazo.dump` 或 `appdata.tgz`。
+需要回滚时，必须事先单独备份恢复前的数据库。此脚本不能读取生产备份的 `agentic-smith.dump` 或 `appdata.tgz`。
 
 ## 生产快照
 
-单虚拟机生产部署使用 `infra/compose/backup-prod.sh`，安装到 `/usr/local/sbin/rakazo-backup`，
-并启用配套的 `rakazo-backup.timer`。它在 `/var/backups/rakazo` 创建经过验证的 Postgres 自定义格式备份和应用数据归档，文件权限为 `0600`。
+单虚拟机生产部署使用 `infra/compose/backup-prod.sh`，安装到 `/usr/local/sbin/agentic-smith-backup`，
+并启用配套的 `agentic-smith-backup.timer`。它在 `/var/backups/agentic-smith` 创建经过验证的 Postgres 自定义格式备份和应用数据归档，文件权限为 `0600`。
 安装步骤见[生产部署（英文）](../self-host-production.md)。
 
-默认保留 `RAKAZO_BACKUP_KEEP=3` 份快照，受 `RAKAZO_BACKUP_MAX_GB=50` GiB 限制，并保留至少
-`RAKAZO_BACKUP_MIN_FREE_GB=5` GiB 可用磁盘空间。
+默认保留 `AGENTIC_SMITH_BACKUP_KEEP=3` 份快照，受 `AGENTIC_SMITH_BACKUP_MAX_GB=50` GiB 限制，并保留至少
+`AGENTIC_SMITH_BACKUP_MIN_FREE_GB=5` GiB 可用磁盘空间。
 脚本先清理遗留的未完成快照和超额历史，再检查容量；空间不足时保留最新的已验证快照，失败时清理该次未完成输出。
 仅有本地快照无法应对整台服务器丢失。
 
-默认部署目录是 `/srv/rakazo`。其他目录可在 root 所有、权限为 `0600` 的 `/etc/rakazo/backup.env` 中设置：
+默认部署目录是 `/srv/agentic-smith`。其他目录可在 root 所有、权限为 `0600` 的 `/etc/agentic-smith/backup.env` 中设置：
 
 ```env
-RAKAZO_DEPLOY_DIR=/srv/rakazo
-RAKAZO_BACKUP_KEEP=3
-RAKAZO_BACKUP_MAX_GB=50
-RAKAZO_BACKUP_MIN_FREE_GB=5
+AGENTIC_SMITH_DEPLOY_DIR=/srv/agentic-smith
+AGENTIC_SMITH_BACKUP_KEEP=3
+AGENTIC_SMITH_BACKUP_MAX_GB=50
+AGENTIC_SMITH_BACKUP_MIN_FREE_GB=5
 ```
 
 自定义 Compose 项目名时，还要设置相同的 `COMPOSE_PROJECT_NAME`。
@@ -67,28 +67,28 @@ RAKAZO_BACKUP_MIN_FREE_GB=5
 在自己掌控的另一台机器上生成 age 密钥，不要在服务器上生成或保存私钥：
 
 ```bash
-age-keygen -o rakazo-backup.key
+age-keygen -o agentic-smith-backup.key
 ```
 
 离线保存身份文件（私钥），并考虑为另一位运维人员添加第二个接收者。
-服务器需安装 `age`；`harden-host.sh` 会安装它。将公钥填入 `/etc/rakazo/backup.env`：
+服务器需安装 `age`；`harden-host.sh` 会安装它。将公钥填入 `/etc/agentic-smith/backup.env`：
 
 ```env
-RAKAZO_BACKUP_AGE_RECIPIENTS=age1exampleprimaryrecipient age1examplerecoveryrecipient
+AGENTIC_SMITH_BACKUP_AGE_RECIPIENTS=age1exampleprimaryrecipient age1examplerecoveryrecipient
 # 也可指定每行一个公钥的文件：
-# RAKAZO_BACKUP_AGE_RECIPIENTS_FILE=/etc/rakazo/backup-recipients.txt
+# AGENTIC_SMITH_BACKUP_AGE_RECIPIENTS_FILE=/etc/agentic-smith/backup-recipients.txt
 ```
 
-示例公钥必须替换为实际公钥。设置后，快照包含 `rakazo.dump.age`、`appdata.tgz.age`、`SOURCE_SIZE_KB` 和 `SHA256SUMS`。
+示例公钥必须替换为实际公钥。设置后，快照包含 `agentic-smith.dump.age`、`appdata.tgz.age`、`SOURCE_SIZE_KB` 和 `SHA256SUMS`。
 数据库和文件流直接进入 age，明文不落盘；验证过程不需要私钥。
 未设置接收者时会生成明文并告警；一旦成功生成过加密备份，之后缺少接收者会拒绝备份。
-只有明确接受明文风险时才设置 `RAKAZO_BACKUP_ALLOW_PLAINTEXT=1`。
+只有明确接受明文风险时才设置 `AGENTIC_SMITH_BACKUP_ALLOW_PLAINTEXT=1`。
 
 异地备份需要 `rclone`，在同一设置文件中配置目标，例如：
 
 ```env
-RAKAZO_BACKUP_OFFSITE_REMOTE=offsite:rakazo-backups
-RAKAZO_BACKUP_OFFSITE_KEEP=14
+AGENTIC_SMITH_BACKUP_OFFSITE_REMOTE=offsite:agentic-smith-backups
+AGENTIC_SMITH_BACKUP_OFFSITE_KEEP=14
 RCLONE_CONFIG_OFFSITE_TYPE=s3
 RCLONE_CONFIG_OFFSITE_PROVIDER=Other
 RCLONE_CONFIG_OFFSITE_ENDPOINT=https://s3.example.com
@@ -98,7 +98,7 @@ RCLONE_CONFIG_OFFSITE_SECRET_ACCESS_KEY=replace-me
 
 将占位值替换为自己的配置。异地副本必须加密；上传后通过 `rclone check` 校验，最后上传 `SHA256SUMS` 标记完成。
 默认保留最新 14 份完整异地快照，与本地保留数量独立。
-设置 `RAKAZO_BACKUP_OFFSITE_KEEP=0` 可让存储桶生命周期规则负责删除，此时凭据无需删除权限。
+设置 `AGENTIC_SMITH_BACKUP_OFFSITE_KEEP=0` 可让存储桶生命周期规则负责删除，此时凭据无需删除权限。
 上传失败保留本地快照，但备份服务会失败并触发告警。
 
 ## 演练与恢复生产快照
@@ -106,8 +106,8 @@ RCLONE_CONFIG_OFFSITE_SECRET_ACCESS_KEY=replace-me
 在私钥所在机器取回快照，再运行验证演练；不要将私钥留在服务器：
 
 ```bash
-rclone copy offsite:rakazo-backups/<stamp> ./<stamp>
-bash infra/compose/backup-drill.sh ./<stamp> rakazo-backup.key
+rclone copy offsite:agentic-smith-backups/<stamp> ./<stamp>
+bash infra/compose/backup-drill.sh ./<stamp> agentic-smith-backup.key
 ```
 
 需要 `age`、`tar`，以及与服务器 Postgres 主版本相同或更新的 `pg_restore`；生产 Compose 当前使用 Postgres 18。
@@ -120,7 +120,7 @@ bash infra/compose/backup-drill.sh ./<stamp> rakazo-backup.key
 
 生产恢复命令依赖实际 Compose 项目名和 `/data` 挂载的数据卷，必须先核对并替换占位值，再按照
 [加密快照恢复完整步骤（英文）](../self-host-backups.md#restoring-an-encrypted-backup)执行。
-新实例应先创建 `rakazo_app` 角色，不要先运行会创建新表的迁移；最终启动时会应用迁移。
+新实例应先创建 `agentic_smith_app` 角色，不要先运行会创建新表的迁移；最终启动时会应用迁移。
 
 ## 时间点恢复与账号迁移
 
@@ -128,7 +128,7 @@ bash infra/compose/backup-drill.sh ./<stamp> rakazo-backup.key
 默认保留七天，默认关闭，需使用 Postgres 18 的生产 Compose。
 它只覆盖数据库，应用文件仍需快照。启用、容量限制、演练与恢复见[时间点恢复（英文）](../self-host-backups.md#point-in-time-recovery)。
 
-在不同 Rakazo 实例之间迁移账号，可在旧实例“设置 → 导出数据”，在新实例导入。
+在不同 Agentic Smith 实例之间迁移账号，可在旧实例“设置 → 导出数据”，在新实例导入。
 导出 ZIP 包含所属空间的机器人、聊天、文件、记忆、例行任务、技能、工作区文件，以及自己拥有空间的看板。
 ZIP 中的内容已解密，应保密保存。导入会创建自己拥有的新空间，例行任务默认关闭。
 模型密钥和其他连接凭据不会迁移，需重新连接。工作区中超过 8 MiB 的文件不会导出；

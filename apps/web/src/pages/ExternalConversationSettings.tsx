@@ -1,12 +1,11 @@
-import { Trans, useLingui } from "@lingui/react/macro";
 import type {
   AutomatedSenderPolicies,
   AutomatedSenderPolicyMode,
   Bot,
   ExternalConversation,
   ExternalConversationPolicy,
-} from "@rakazo/contracts";
-import type { ListenMode } from "@rakazo/core";
+} from "@agentic-smith/contracts";
+import type { ListenMode } from "@agentic-smith/core";
 import {
   AUTOMATED_SENDER_MODES,
   ambientValue,
@@ -15,7 +14,7 @@ import {
   senderPolicy,
   withRollupHours,
   withSenderMode,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import {
   Button,
   Input,
@@ -29,7 +28,8 @@ import {
   SelectTrigger,
   SelectValue,
   Textarea,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { RotateCcw } from "lucide-react";
 import { useId, useMemo, useRef, useState } from "react";
 import { SuccessPop } from "../components/ai/primitives";

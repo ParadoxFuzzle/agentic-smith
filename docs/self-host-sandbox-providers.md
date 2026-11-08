@@ -38,23 +38,23 @@ The Electron desktop app is a client of the same API. Docker remains the default
 Native file reads and workspace exports are limited to 8 MiB per file. A larger workspace file fails the checkpoint and preserves the previous saved workspace; local files remain on the computer. Writes are bounded by the 12 MiB encoded request limit.
 
 - **Published images** (`docker-compose.images.yml`) default to `SANDBOX_PROVIDER=docker` with a
-  local supervisor and published `ghcr.io/elie222/rakazo/computer` image. No E2B account required.
+  local supervisor and published `ghcr.io/paradoxfuzzle/agentic-smith/computer` image. No E2B account required.
   Optional: set `e2b`, `novita`, `daytona`, `createos`, or `boat` plus the matching API key for remote computers.
 - **Docker** is the quick-start default for published images and for a source checkout / full local
   Compose stack. Workspace bots share a persistent Team Computer by default; Private computers are
   optional. Keep the supervisor private, as the included Compose files do.
-- **E2B** runs bot computers away from the Rakazo host and is a good choice for public or multi-user
-  production deployments. Rakazo checkpoints the portable workspace and browser-profile directory to
+- **E2B** runs bot computers away from the Agentic Smith host and is a good choice for public or multi-user
+  production deployments. Agentic Smith checkpoints the portable workspace and browser-profile directory to
   `DATA_DIR`; the E2B disk is a runtime cache, not the durable source of truth.
 - **Daytona** provides the same remote-computer contract through Daytona sandboxes. Configure
   `DAYTONA_API_KEY` and optionally `DAYTONA_API_URL` / `DAYTONA_TARGET` / `DAYTONA_SNAPSHOT`.
 - **CreateOS** provides the same remote-computer contract through CreateOS desktop sandboxes.
   Configure `CREATEOS_SANDBOX_API_KEY` and optionally `CREATEOS_SANDBOX_BASE_URL`,
-  `CREATEOS_SANDBOX_SHAPE`, or `CREATEOS_SANDBOX_ROOTFS`. Rakazo defaults to
+  `CREATEOS_SANDBOX_SHAPE`, or `CREATEOS_SANDBOX_ROOTFS`. Agentic Smith defaults to
   `https://api.sb.createos.sh`, `s-2vcpu-2gb`, and `desktop:1`.
 - **Boat** provides a managed Linux desktop through `BOAT_API_KEY` and optionally
-  `BOAT_API_URL`. Rakazo always creates or resumes sandboxes with `noEnv: true`, keeps the portable
-  workspace under `/home/user/rakazo-home`, and refreshes a two-hour TTL. Boat uses the shared Linux
+  `BOAT_API_URL`. Agentic Smith always creates or resumes sandboxes with `noEnv: true`, keeps the portable
+  workspace under `/home/user/agentic-smith-home`, and refreshes a two-hour TTL. Boat uses the shared Linux
   desktop runtime and protected port routes for concurrent bot desktops. Each bot has its own
   persistent Chrome profile; logins are not shared between bots.
 - **Local computer access** in the app-managed Electron instance runs commands on Windows, macOS,
@@ -78,7 +78,7 @@ Native file reads and workspace exports are limited to 8 MiB per file. A larger 
 
 Compose starts a **sandbox supervisor** (from the app image) on the internal
 network (port `7091` in published-images). It creates sibling **computer**
-containers from `RAKAZO_COMPUTER_IMAGE` + `RAKAZO_COMPUTER_IMAGE_TAG`.
+containers from `AGENTIC_SMITH_COMPUTER_IMAGE` + `AGENTIC_SMITH_COMPUTER_IMAGE_TAG`.
 
 Requirements:
 
@@ -106,15 +106,15 @@ The published computer image uses Chromium. To use Google Chrome or Brave instea
 with `BROWSER=chrome` or `BROWSER=brave` and point Compose at it:
 
 ```bash
-docker build --build-arg BROWSER=chrome -t rakazo-computer-chrome infra/sandboxes/computer
+docker build --build-arg BROWSER=chrome -t agentic-smith-computer-chrome infra/sandboxes/computer
 ```
 
 ```env
-RAKAZO_COMPUTER_IMAGE=rakazo-computer-chrome
-RAKAZO_COMPUTER_IMAGE_TAG=latest
+AGENTIC_SMITH_COMPUTER_IMAGE=agentic-smith-computer-chrome
+AGENTIC_SMITH_COMPUTER_IMAGE_TAG=latest
 ```
 
-The image holds one browser, and `rakazo-browser` launches whichever is installed. A locally built
+The image holds one browser, and `agentic-smith-browser` launches whichever is installed. A locally built
 image is not on a registry, so start the stack with `bash install-images.sh --pull-never` after
 pulling the other images once. Brave's Rewards, Wallet, Leo, VPN and News are disabled by managed
 policy.
@@ -136,8 +136,8 @@ The API and worker talk to the Kubernetes API with their own service account (or
 
 | Variable | Default | Notes |
 | --- | --- | --- |
-| `KUBERNETES_SANDBOX_NAMESPACE` | `rakazo-sandboxes` | Namespace for computer pods; it must exist |
-| `KUBERNETES_SANDBOX_COMPUTER_IMAGE` | `ghcr.io/elie222/rakazo/computer:edge` | Pin a digest in production |
+| `KUBERNETES_SANDBOX_NAMESPACE` | `agentic-smith-sandboxes` | Namespace for computer pods; it must exist |
+| `KUBERNETES_SANDBOX_COMPUTER_IMAGE` | `ghcr.io/paradoxfuzzle/agentic-smith/computer:edge` | Pin a digest in production |
 | `KUBERNETES_SANDBOX_RUNTIME_CLASS_NAME` | unset | For example `kata` or `gvisor` for a VM or user-space kernel boundary |
 | `KUBERNETES_SANDBOX_CPU_LIMIT` / `_MEMORY_LIMIT` | unset | Container limits, such as `2` and `4Gi` |
 | `KUBERNETES_SANDBOX_POD_LABELS` / `_POD_ANNOTATIONS` | unset | JSON objects of strings, merged into every pod |
@@ -147,7 +147,7 @@ Each pod runs the image's own user (uid 1000) with no service account token and 
 with all Linux capabilities dropped, privilege escalation off and the runtime's default seccomp
 profile, like a Docker computer (these apply to newly created pods; a pod that was already running
 keeps its old spec until it is stopped and recreated),
-and is labelled `app.kubernetes.io/name=rakazo-computer` and `rakazo-bot-id=<bot id>`. Commands,
+and is labelled `app.kubernetes.io/name=agentic-smith-computer` and `agentic-smith-bot-id=<bot id>`. Commands,
 file transfers and workspace save and restore go through `pods/exec`; save and restore stream the
 home as one tar archive. Screens use the image's desktop gateway on the pod IP, so the API, the
 worker and the web screen proxy must be able to reach pods in that namespace on port `6080` and the
@@ -165,7 +165,7 @@ local Docker computer. The claim must be in the computer namespace, so in practi
 run in the API's namespace. Because a ReadWriteOnce volume is attached to one node,
 `KUBERNETES_SANDBOX_HOME_COLOCATE_NAMESPACE` and `KUBERNETES_SANDBOX_HOME_COLOCATE_LABELS` (a JSON
 object) are required with it and become a required pod affinity to the pods that hold the volume,
-for example `{"app":"rakazo-api"}`. The pod gets `fsGroup: 1000`. An existing pod without the home
+for example `{"app":"agentic-smith-api"}`. The pod gets `fsGroup: 1000`. An existing pod without the home
 volume keeps copying its files until it is stopped; its next fresh pod mounts the saved home. This applies only to the local home store; with
 `OBJECT_STORAGE_BUCKET` set, the home claim is ignored and homes are copied as usual.
 
@@ -175,8 +175,8 @@ The API and worker service account needs this in the computer namespace:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: rakazo-computers
-  namespace: rakazo-sandboxes
+  name: agentic-smith-computers
+  namespace: agentic-smith-sandboxes
 rules:
   - apiGroups: [""]
     resources: ["pods"]
@@ -204,7 +204,7 @@ involved.
 | `INCUS_SANDBOX_CLIENT_CERT` / `_CLIENT_KEY` | none | PEM client certificate and key; `\n` escapes are accepted. API and worker only |
 | `INCUS_SANDBOX_SERVER_CERT` | unset | The server's own certificate (`incus info` shows it), trusted exactly. Unset uses the system CAs and the URL's host name |
 | `INCUS_SANDBOX_PROJECT` | `default` | Use a project of its own, below |
-| `INCUS_SANDBOX_COMPUTER_IMAGE` | `ghcr.io/elie222/rakazo/computer:edge` | Pin a release tag or digest in production |
+| `INCUS_SANDBOX_COMPUTER_IMAGE` | `ghcr.io/paradoxfuzzle/agentic-smith/computer:edge` | Pin a release tag or digest in production |
 | `INCUS_SANDBOX_CPU_LIMIT` / `_MEMORY_LIMIT` / `_PROCESS_LIMIT` | `2` / `2GiB` / `2048` | Incus `limits.cpu`, `limits.memory` and `limits.processes` of each computer |
 
 Computers without the URL, certificate or key fall back to `none`.
@@ -215,7 +215,7 @@ own start command and every command run as uid 1000, set on the instance and on 
 than taken from the image's user, with no privilege
 escalation, the same boundary as a Docker computer, so a custom image must keep that command.
 
-Each start creates a new instance named `rakazo-<uuid>` and labelled `user.rakazo-bot-id=<bot id>`;
+Each start creates a new instance named `agentic-smith-<uuid>` and labelled `user.agentic-smith-bot-id=<bot id>`;
 one carrying another bot's id is never reused or deleted. Instances are ephemeral: Incus deletes
 one when it stops, and the saved workspace is the persistence boundary, copied in when a computer
 starts and saved back when it stops, as on Kubernetes. Only cache paths and the screen size are set
@@ -230,36 +230,36 @@ instance on a network the host routes to the computers.
 
 ### Restricted project and certificate
 
-Give Rakazo a project and a client certificate that can reach nothing else. A restricted
+Give Agentic Smith a project and a client certificate that can reach nothing else. A restricted
 certificate cannot change its project's restrictions or limits. On the Incus host:
 
 ```bash
-incus network create rakazo0
-incus network acl create rakazo-computers
+incus network create agentic-smith0
+incus network acl create agentic-smith-computers
 # Public internet only: no host, LAN, link-local, multicast or cloud-metadata addresses.
-incus network acl rule add rakazo-computers egress action=reject \
+incus network acl rule add agentic-smith-computers egress action=reject \
   destination=0.0.0.0/8,10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.168.0.0/16,198.18.0.0/15,224.0.0.0/3
-incus network acl rule add rakazo-computers egress action=reject protocol=tcp \
+incus network acl rule add agentic-smith-computers egress action=reject protocol=tcp \
   destination=::1/128,fc00::/7,fe80::/10,ff00::/8
-incus network acl rule add rakazo-computers egress action=reject protocol=udp \
+incus network acl rule add agentic-smith-computers egress action=reject protocol=udp \
   destination=::1/128,fc00::/7,fe80::/10,ff00::/8
-incus network acl rule add rakazo-computers egress action=reject protocol=icmp6 icmp_type=128 \
+incus network acl rule add agentic-smith-computers egress action=reject protocol=icmp6 icmp_type=128 \
   destination=::1/128,fc00::/7,fe80::/10
 # Screens, from the address the API, worker and web connect from.
-incus network acl rule add rakazo-computers ingress action=allow protocol=tcp \
-  source=<rakazo-server-address> destination_port=6100
+incus network acl rule add agentic-smith-computers ingress action=allow protocol=tcp \
+  source=<agentic-smith-server-address> destination_port=6100
 
-incus project create rakazo -c features.images=true -c features.profiles=true \
-  -c restricted=true -c restricted.networks.access=rakazo0 \
+incus project create agentic-smith -c features.images=true -c features.profiles=true \
+  -c restricted=true -c restricted.networks.access=agentic-smith0 \
   -c restricted.images.servers=ghcr.io
-incus profile device add default root disk path=/ pool=default --project rakazo
-incus profile device add default eth0 nic network=rakazo0 --project rakazo \
-  security.acls=rakazo-computers security.acls.default.egress.action=allow \
+incus profile device add default root disk path=/ pool=default --project agentic-smith
+incus profile device add default eth0 nic network=agentic-smith0 --project agentic-smith \
+  security.acls=agentic-smith-computers security.acls.default.egress.action=allow \
   security.ipv4_filtering=true security.ipv6_filtering=true
 
 openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:secp384r1 -nodes -days 3650 \
-  -subj /CN=rakazo -keyout rakazo.key -out rakazo.crt
-incus config trust add-certificate rakazo.crt --restricted --projects rakazo
+  -subj /CN=agentic-smith -keyout agentic-smith.key -out agentic-smith.crt
+incus config trust add-certificate agentic-smith.crt --restricted --projects agentic-smith
 ```
 
 The ACL sits on each computer's network device, so it also keeps computers from reaching each
@@ -268,14 +268,14 @@ computer are refused except to the screen port. IPv6 neighbour discovery keeps w
 echo requests are refused among ICMPv6 messages to private addresses; DHCP and DNS from the bridge are
 allowed by Incus before any ACL rule. The IP filtering options stop
 a computer from spoofing addresses or sending router advertisements to the host. Set
-`INCUS_SANDBOX_PROJECT=rakazo` and the certificate and key from `rakazo.crt` and `rakazo.key`.
+`INCUS_SANDBOX_PROJECT=agentic-smith` and the certificate and key from `agentic-smith.crt` and `agentic-smith.key`.
 
 ## `wuying`
 
 Bot computers run on one existing Wuying (无影) cloud computer. An admin can also set this up in
 **Settings → Computer** instead of these variables; see [Wuying cloud computers](./wuying-computers.md)
 for the full setup. Each computer's home is a folder
-under the desktop user's profile (`%USERPROFILE%\rakazo\<home>`), and the desktop's own disk
+under the desktop user's profile (`%USERPROFILE%\agentic-smith\<home>`), and the desktop's own disk
 keeps it between stops, so nothing is copied in or out. Commands run in PowerShell; files,
 screenshots and input go through the desktop's MCP gateway. Stopping the last computer on it
 powers the desktop off; deleting one removes only its home folder, never the desktop.
@@ -306,7 +306,7 @@ the same Windows desktop and account permissions, including files outside their 
 folders. Use it only in a trusted deployment.
 The gateway bounds each call to one minute, 16 KiB of command output and 1,000 folder entries.
 A command allowed longer than a minute runs detached with its output in files under
-`%USERPROFILE%\rakazo\.runs`, read back every second and removed when it ends or is cancelled.
+`%USERPROFILE%\agentic-smith\.runs`, read back every second and removed when it ends or is cancelled.
 
 ## `none`
 
@@ -324,7 +324,7 @@ Set `SANDBOX_PROVIDER` to exactly one of:
 | `boat` | `BOAT_API_KEY` | Optional `BOAT_API_URL` (see `.env.example`) |
 | `boxd` | `BOXD_API_KEY` | Optional `BOXD_ORG` to create computers in a boxd organization |
 | `createos` | `CREATEOS_SANDBOX_API_KEY` | Optional `CREATEOS_SANDBOX_BASE_URL`, `CREATEOS_SANDBOX_SHAPE`, `CREATEOS_SANDBOX_ROOTFS` |
-| `railway` | `RAILWAY_API_TOKEN` and `RAILWAY_ENVIRONMENT_ID` | Optional `RAILWAY_SANDBOX_REGION`; `RAILWAY_MAX_WORKSPACE_FILE_BYTES` (default 64 MiB) caps each workspace file Rakazo reads or saves. Railway supplies the environment ID when Rakazo runs there; see the [Railway template](../infra/railway/README.md) |
+| `railway` | `RAILWAY_API_TOKEN` and `RAILWAY_ENVIRONMENT_ID` | Optional `RAILWAY_SANDBOX_REGION`; `RAILWAY_MAX_WORKSPACE_FILE_BYTES` (default 64 MiB) caps each workspace file Agentic Smith reads or saves. Railway supplies the environment ID when Agentic Smith runs there; see the [Railway template](../infra/railway/README.md) |
 | `wuying` | `WUYING_*` (below) | One existing Wuying cloud computer (Windows) |
 
 Remote paths still need a working API/worker; they do not replace Postgres or
@@ -355,7 +355,7 @@ computer's owner and space. A run starts when the computer becomes ready (boot t
 counted) and ends when it stops. `endReason` says how: `stopped`, `idle`, `active_limit`,
 `replaced` (update, recovery, or reset), `gone` (the provider had already stopped or lost
 the sandbox), `deleted`, or `reconciled` (the end was never seen; the worker found the
-computer no longer running). For `gone` and `reconciled`, `endedAt` is when Rakazo
+computer no longer running). For `gone` and `reconciled`, `endedAt` is when Agentic Smith
 noticed, so the true end may be earlier. The worker also opens the run of a running
 computer whose start was not recorded. An open run whose computer still reads as running
 is a computer that may be left on. Deleting a user or space keeps their runs with
@@ -407,7 +407,7 @@ rechecks each selected PID's marker descriptors before signaling it.
 
 ### E2B computer template
 
-E2B computers start from the `rakazo-computer` template: E2B's stock desktop at
+E2B computers start from the `agentic-smith-computer` template: E2B's stock desktop at
 2 vCPU and 4 GB instead of its 8 vCPU and 8 GB. Build it once in the E2B team that
 owns `E2B_API_KEY`, and again whenever its definition in
 `packages/adapters/src/e2b-template.ts` changes:
@@ -428,7 +428,7 @@ Build the desktop template once in the account that owns that key:
 NOVITA_API_KEY=<deployment-key> pnpm sandbox:novita-template
 ```
 
-The `rakazo-computer` template uses Novita's desktop image at 2 vCPU and 4 GB.
+The `agentic-smith-computer` template uses Novita's desktop image at 2 vCPU and 4 GB.
 The provider requires this template and does not fall back to the larger stock desktop.
 To use another desktop template, set `SANDBOX_TEMPLATE` to the same name when building
 and on both services. Rebuild when the template definition changes; existing computers
@@ -455,7 +455,7 @@ or network error does not authorize replacing an existing computer.
 
 ### Boat computer snapshot
 
-Boat computers start from a named snapshot, `rakazo-computer-<hash>`, that already has the
+Boat computers start from a named snapshot, `agentic-smith-computer-<hash>`, that already has the
 desktop tools installed. The hash follows the setup in `packages/adapters/src/boat-sandbox.ts`,
 so changing it produces a new name and existing computers keep the one they started from.
 
@@ -472,7 +472,7 @@ BOAT_API_KEY=<deployment key> pnpm sandbox:boat-snapshot
 ### boxd computers
 
 boxd computers are isolated microVMs: no boxd credentials inside, and no route to the
-account's other machines. They start from a snapshot, `rakazo-computer-<hash>`, with the
+account's other machines. They start from a snapshot, `agentic-smith-computer-<hash>`, with the
 desktop tools and Chrome installed, built the same way as Boat's: once in the background
 when missing, from a fresh machine that is deleted afterwards. To build it ahead of the
 first computer:

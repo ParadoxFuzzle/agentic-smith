@@ -1,7 +1,7 @@
+import type { Routine } from "@agentic-smith/contracts";
+import { cronFromPreset } from "@agentic-smith/core";
+import { Button, Input, Switch, Textarea } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { Routine } from "@rakazo/contracts";
-import { cronFromPreset } from "@rakazo/core";
-import { Button, Input, Switch, Textarea } from "@rakazo/ui-web";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronLeft, X } from "lucide-react";
 import { useId } from "react";

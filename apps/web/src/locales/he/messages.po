@@ -879,8 +879,8 @@ msgid "Allow once"
 msgstr "אישור חד-פעמי"
 
 #: src/lib/dictation.ts
-msgid "Allow Rakazo to use Speech Recognition and the microphone in System Settings."
-msgstr "יש לאפשר ל-Rakazo להשתמש בזיהוי דיבור ובמיקרופון בהגדרות המערכת."
+msgid "Allow Agentic Smith to use Speech Recognition and the microphone in System Settings."
+msgstr "יש לאפשר ל-Agentic Smith להשתמש בזיהוי דיבור ובמיקרופון בהגדרות המערכת."
 
 #: src/pages/memory-providers/SerenitySettingsForm.tsx
 msgid "Allow writing"
@@ -1632,8 +1632,8 @@ msgstr "בחירת תיקייה"
 
 #: src/components/ModelCredits.tsx
 #: src/components/SubscriptionGate.tsx
-msgid "Choose how to use Rakazo"
-msgstr "בחירת אופן השימוש ב-Rakazo"
+msgid "Choose how to use Agentic Smith"
+msgstr "בחירת אופן השימוש ב-Agentic Smith"
 
 #: src/components/vault/VaultItemEditor.tsx
 msgid "City"
@@ -1969,8 +1969,8 @@ msgstr "יש לחבר קודם את הספק של המודל הזה."
 
 #. js-lingui-explicit-id
 #: src/lib/run-error.ts
-msgid "Connect your own API key in Models or choose Rakazo credits in Billing."
-msgstr "חבר מפתח API משלך במודלים או בחר בקרדיטים של Rakazo בחיוב."
+msgid "Connect your own API key in Models or choose Agentic Smith credits in Billing."
+msgstr "חבר מפתח API משלך במודלים או בחר בקרדיטים של Agentic Smith בחיוב."
 
 #: src/components/bot-templates/bot-templates-dialog.tsx
 #: src/components/ComputerDeviceSettings.tsx
@@ -2790,8 +2790,8 @@ msgid "Create space"
 msgstr "יצירת מרחב"
 
 #: src/pages/Auth.tsx
-msgid "Create your Rakazo"
-msgstr "יצירת Rakazo משלך"
+msgid "Create your Agentic Smith"
+msgstr "יצירת Agentic Smith משלך"
 
 #: src/components/AskCard.tsx
 msgid "Created"
@@ -3277,8 +3277,8 @@ msgid "Ends {day}"
 msgstr "מסתיים ב-{day}"
 
 #: src/components/GitHubStarPrompt.tsx
-msgid "Enjoying Rakazo?"
-msgstr "נהנים מ-Rakazo?"
+msgid "Enjoying Agentic Smith?"
+msgstr "נהנים מ-Agentic Smith?"
 
 #: src/lib/user-error.ts
 msgid "Enter a password"
@@ -3804,8 +3804,8 @@ msgid "How to check"
 msgstr "איך לבדוק"
 
 #: src/components/SignupSurvey.tsx
-msgid "How will you use Rakazo?"
-msgstr "איך Rakazo ישמש אותך?"
+msgid "How will you use Agentic Smith?"
+msgstr "איך Agentic Smith ישמש אותך?"
 
 #: src/pages/shell/computer-release-actions.tsx
 msgid "I’m done"
@@ -4924,8 +4924,8 @@ msgid "Not imported"
 msgstr "לא יובא"
 
 #: src/pages/shell/import-status.ts
-msgid "Not in Rakazo's catalog"
-msgstr "לא בקטלוג של Rakazo"
+msgid "Not in Agentic Smith's catalog"
+msgstr "לא בקטלוג של Agentic Smith"
 
 #: src/pages/plugins/plugin-browse.tsx
 msgid "Not in the plugin catalog"
@@ -4938,12 +4938,12 @@ msgstr "לא עכשיו"
 
 #: src/pages/shell/agent-import-plan.tsx
 #: src/pages/shell/import-status.ts
-msgid "Not supported in Rakazo"
-msgstr "לא נתמך ב-Rakazo"
+msgid "Not supported in Agentic Smith"
+msgstr "לא נתמך ב-Agentic Smith"
 
 #: src/pages/shell/agent-import-plan.tsx
-msgid "Not used by Rakazo"
-msgstr "לא בשימוש ב-Rakazo"
+msgid "Not used by Agentic Smith"
+msgstr "לא בשימוש ב-Agentic Smith"
 
 #: src/components/McpServerHealthLine.tsx
 #: src/pages/plugins/parts.tsx
@@ -5084,8 +5084,8 @@ msgstr "פתיחת הניווט"
 #: src/components/pages/PublicPageShell.tsx
 #: src/pages/Invite.tsx
 #: src/pages/SharedPage.tsx
-msgid "Open Rakazo"
-msgstr "פתיחת Rakazo"
+msgid "Open Agentic Smith"
+msgstr "פתיחת Agentic Smith"
 
 #: src/pages/ScratchpadSection.tsx
 msgid "Open work"
@@ -5263,8 +5263,8 @@ msgid "Paste a replacement key"
 msgstr "יש להדביק מפתח חלופי"
 
 #: src/pages/model-settings/compatible-model-fields.tsx
-msgid "Paste the OpenAI-compatible address from your server. Rakazo adds /v1 if needed."
-msgstr "יש להדביק את הכתובת התואמת ל-OpenAI מהשרת. Rakazo מוסיף /v1 במידת הצורך."
+msgid "Paste the OpenAI-compatible address from your server. Agentic Smith adds /v1 if needed."
+msgstr "יש להדביק את הכתובת התואמת ל-OpenAI מהשרת. Agentic Smith מוסיף /v1 במידת הצורך."
 
 #: src/pages/shell/agent-import.tsx
 msgid "Paste the reply"
@@ -5460,16 +5460,16 @@ msgstr "בתור"
 
 #: src/pages/AccountSettingsOverlay.tsx
 #: src/pages/shell/avatar-studio-popover.tsx
-msgid "Rakazo"
-msgstr "Rakazo"
+msgid "Agentic Smith"
+msgstr "Agentic Smith"
 
 #: src/pages/onboarding/use-onboarding-model.ts
-msgid "Rakazo credits"
-msgstr "קרדיטים של Rakazo"
+msgid "Agentic Smith credits"
+msgstr "קרדיטים של Agentic Smith"
 
 #: src/pages/memory-providers/HonchoSettingsForm.tsx
-msgid "rakazo-shared and IDs starting with bot- are reserved for Rakazo."
-msgstr "rakazo-shared ומזהים שמתחילים ב-bot- שמורים ל-Rakazo."
+msgid "agentic-smith-shared and IDs starting with bot- are reserved for AgenticSmith."
+msgstr "agentic-smith-shared ומזהים שמתחילים ב-bot- שמורים ל-AgenticSmith."
 
 #: src/pages/shell/message-hover-actions.tsx
 msgid "React"
@@ -5505,8 +5505,8 @@ msgid "Recall and write"
 msgstr "שליפה וכתיבה"
 
 #: src/pages/memory-providers/HonchoSettingsForm.tsx
-msgid "Recall from this peer; save to Rakazo’s own peers."
-msgstr "שליפה מהעמית הזה; שמירה בעמיתים של Rakazo."
+msgid "Recall from this peer; save to Agentic Smith’s own peers."
+msgstr "שליפה מהעמית הזה; שמירה בעמיתים של AgenticSmith."
 
 #: src/pages/memory-providers/SerenitySettingsForm.tsx
 msgid "Recall only"
@@ -5937,8 +5937,8 @@ msgstr "חזרה לשיחה עם {0}"
 
 #: src/pages/McpOAuthCallback.tsx
 #: src/pages/SlackInstallCallback.tsx
-msgid "Return to Rakazo"
-msgstr "חזרה ל-Rakazo"
+msgid "Return to Agentic Smith"
+msgstr "חזרה ל-Agentic Smith"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Review provider settings and test again."
@@ -6440,8 +6440,8 @@ msgid "Sign in at <0>{0}</0>, then paste the code here."
 msgstr "התחברו ב-<0>{0}</0> והדביקו כאן את הקוד."
 
 #: src/pages/Auth.tsx
-msgid "Sign in to Rakazo"
-msgstr "התחברות ל-Rakazo"
+msgid "Sign in to Agentic Smith"
+msgstr "התחברות ל-Agentic Smith"
 
 #: src/lib/user-error.ts
 msgid "Sign in to your existing account to link SSO"
@@ -7128,8 +7128,8 @@ msgid "This server's tool result does not fit the model. Turn off Keep tool resu
 msgstr "תוצאת הכלי מהשרת הזה לא נכנסת למודל. יש לכבות את „שמירת תוצאות כלים במלואן” עבור השרת הזה, או לבחור מודל אחר."
 
 #: src/pages/model-settings/connection-controls.tsx
-msgid "This subscription sign-in is not available in Rakazo yet. Use a deployment credential or choose another provider."
-msgstr "התחברות עם המנוי הזה עדיין לא זמינה ב-Rakazo. אפשר להשתמש בפרטי גישה של ההתקנה או לבחור ספק אחר."
+msgid "This subscription sign-in is not available in Agentic Smith yet. Use a deployment credential or choose another provider."
+msgstr "התחברות עם המנוי הזה עדיין לא זמינה ב-AgenticSmith. אפשר להשתמש בפרטי גישה של ההתקנה או לבחור ספק אחר."
 
 #: src/components/bot-templates/bot-templates-dialog.tsx
 msgid "This template was just updated. Check it again."
@@ -7485,8 +7485,8 @@ msgid "Use Protected input for passwords."
 msgstr "לסיסמאות יש להשתמש בקלט מוגן."
 
 #: src/components/ModelCredits.tsx
-msgid "Use Rakazo credits"
-msgstr "שימוש בקרדיטים של Rakazo"
+msgid "Use Agentic Smith credits"
+msgstr "שימוש בקרדיטים של Agentic Smith"
 
 #: src/pages/memory-providers/HonchoSettingsForm.tsx
 msgid "Use up to 512 letters, digits, _ or -."
@@ -7633,8 +7633,8 @@ msgid "Weekly"
 msgstr "שבועי"
 
 #: src/components/SignupSurvey.tsx
-msgid "Welcome to Rakazo"
-msgstr "ברוכים הבאים ל-Rakazo"
+msgid "Welcome to Agentic Smith"
+msgstr "ברוכים הבאים ל-Agentic Smith"
 
 #: src/pages/shell/dialogs.tsx
 msgid "What about its memories?"
@@ -7645,8 +7645,8 @@ msgid "What can this space use?"
 msgstr "במה המרחב הזה יכול להשתמש?"
 
 #: src/components/SignupSurvey.tsx
-msgid "What do you most want Rakazo to help with?"
-msgstr "במה הכי חשוב לך ש-Rakazo יעזור?"
+msgid "What do you most want Agentic Smith to help with?"
+msgstr "במה הכי חשוב לך ש-Agentic Smith יעזור?"
 
 #: src/pages/shell/message-cards.tsx
 msgid "What do you want me on first?"

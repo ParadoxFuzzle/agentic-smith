@@ -1,12 +1,12 @@
-import { Trans, useLingui } from "@lingui/react/macro";
-import type { ComputerStatus } from "@rakazo/contracts";
+import type { ComputerStatus } from "@agentic-smith/contracts";
 import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { computerUpdates } from "../lib/computer-updates";

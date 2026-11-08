@@ -1,10 +1,10 @@
-import type { RealtimeFanout } from "@rakazo/adapter-kit";
+import type { RealtimeFanout } from "@agentic-smith/adapter-kit";
 import type {
   BotSecretDestination,
   LoginFieldInput,
   MessageBlock,
   OneTimeCodeTarget,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   BOT_INSTRUCTIONS_MAX_LENGTH,
   BOT_SECRET_VALUE_MAX_LENGTH,
@@ -12,7 +12,7 @@ import {
   loginAnswerValue,
   MessageBlock as MessageBlockSchema,
   normalizeOneTimeCode,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   ACTIVE_RUN_STATUSES,
   callIdFromClientNonce,
@@ -23,9 +23,9 @@ import {
   messageReaction,
   resolveAskChoice,
   SITE_SENDING_TOOLS,
-} from "@rakazo/core";
-import { urlSite } from "@rakazo/core/egress";
-import { approvalEffectKey } from "@rakazo/core/node/approval-effect-key";
+} from "@agentic-smith/core";
+import { urlSite } from "@agentic-smith/core/egress";
+import { approvalEffectKey } from "@agentic-smith/core/node/approval-effect-key";
 import { saveApprovalRule, storedBatchActions } from "./approval-settings.js";
 import type { Prisma, PrismaClient } from "./client.js";
 import { expireComputerExecutionLeases } from "./computers.js";

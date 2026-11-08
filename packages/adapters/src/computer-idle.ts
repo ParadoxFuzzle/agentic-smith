@@ -4,7 +4,7 @@ import type {
   ComputerRef,
   JobPublisher,
   SandboxProvider,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import {
   computerSleepJob,
   runJobKey,
@@ -12,10 +12,10 @@ import {
   SandboxUnavailableError,
   SandboxUnresponsiveError,
   WorkspaceTooLargeError,
-} from "@rakazo/adapter-kit";
-import { COMPUTER_ALLOWANCE_USED_ERROR } from "@rakazo/contracts";
-import { COMPUTER_USING_RUNS, QUEUE_HOLDING_RUN_STATUSES, withAbort } from "@rakazo/core";
-import type { PrismaClient, ThreadEvents } from "@rakazo/db";
+} from "@agentic-smith/adapter-kit";
+import { COMPUTER_ALLOWANCE_USED_ERROR } from "@agentic-smith/contracts";
+import { COMPUTER_USING_RUNS, QUEUE_HOLDING_RUN_STATUSES, withAbort } from "@agentic-smith/core";
+import type { PrismaClient, ThreadEvents } from "@agentic-smith/db";
 import {
   appendEventInTransaction,
   clearEndedExecutionRunBinding,
@@ -24,8 +24,8 @@ import {
   isUniqueViolation,
   recordComputerRunEnd,
   recordComputerRunSeen,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { activeCodingAgent } from "./coding-agent-activity.js";
 import { expireComputerControl, hasActiveComputerControl } from "./computer-control.js";
 import { diskUpdate, measureComputerDisk } from "./computer-disk.js";
@@ -59,8 +59,8 @@ export const ABANDONED_SUSPEND_CLAIM_MS = 60 * 60 * 1000;
 const IDLE_SWEEP_INTERVAL_MS = 10 * 60 * 1000;
 const STATUS_CHECK_TIMEOUT_MS = 15_000;
 const EXECUTING_RUN_STATUSES = ["leased", "running"] as const;
-const BACKGROUND_WORK_MARKER_PREFIX = "/tmp/rakazo-background-";
-const BACKGROUND_WORK_IDLE_SENTINEL = "rakazo-background-idle";
+const BACKGROUND_WORK_MARKER_PREFIX = "/tmp/agentic-smith-background-";
+const BACKGROUND_WORK_IDLE_SENTINEL = "agentic-smith-background-idle";
 
 export const BACKGROUND_WORK_LAUNCH = [
   `marker="${BACKGROUND_WORK_MARKER_PREFIX}$1-$2-$3"`,
@@ -160,7 +160,7 @@ export const CANCEL_COMPUTER_RUN_WORK = [
   "  fi",
   "  exit 0",
   'elif [ "$(uname -s 2>/dev/null)" = "Darwin" ] && command -v lsof >/dev/null 2>&1; then',
-  `  pkill -TERM -f "rakazo-background-launch $computerId $runId " 2>/dev/null || true`,
+  `  pkill -TERM -f "agentic-smith-background-launch $computerId $runId " 2>/dev/null || true`,
   '  for marker in "$prefix"*; do',
   '    [ -e "$marker" ] || continue',
   '    for pid in $(lsof -t -- "$marker" 2>/dev/null); do',
@@ -171,7 +171,7 @@ export const CANCEL_COMPUTER_RUN_WORK = [
   "  exit 0",
   "fi",
   "sleep 0.2",
-  `pkill -KILL -f "rakazo-background-launch $computerId $runId " 2>/dev/null || true`,
+  `pkill -KILL -f "agentic-smith-background-launch $computerId $runId " 2>/dev/null || true`,
   'if [ "$(uname -s 2>/dev/null)" = "Darwin" ] && command -v lsof >/dev/null 2>&1; then',
   '  for marker in "$prefix"*; do',
   '    [ -e "$marker" ] || continue',
@@ -220,7 +220,14 @@ export const CANCEL_PRIMARY_BROWSER_WORK = [
 ].join("; ");
 
 export function cancelComputerRunWorkArgv(computerId: string, runId: string): string[] {
-  return ["bash", "-c", CANCEL_COMPUTER_RUN_WORK, "rakazo-cancel-run-work", computerId, runId];
+  return [
+    "bash",
+    "-c",
+    CANCEL_COMPUTER_RUN_WORK,
+    "agentic-smith-cancel-run-work",
+    computerId,
+    runId,
+  ];
 }
 
 export async function cancelComputerRunWork(
@@ -1108,7 +1115,7 @@ export async function probeBackgroundWork(
   for await (const event of sandbox.execute(
     computer,
     {
-      argv: ["bash", "-c", BACKGROUND_WORK_PROBE, "rakazo-background-probe", computerId],
+      argv: ["bash", "-c", BACKGROUND_WORK_PROBE, "agentic-smith-background-probe", computerId],
       timeoutMs: 10_000,
     },
     context,

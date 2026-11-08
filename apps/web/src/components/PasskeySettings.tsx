@@ -1,5 +1,5 @@
+import { Button, Input } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, Input } from "@rakazo/ui-web";
 import { Pencil, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { authClient } from "../lib/auth";

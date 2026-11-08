@@ -1,8 +1,8 @@
 import { setTimeout as sleep } from "node:timers/promises";
-import type { JobPublisher, JobWorkerHost } from "@rakazo/adapter-kit";
-import { unwrapEnvFromKeyManager } from "@rakazo/adapters";
-import { loadRootEnv } from "@rakazo/core/node/load-root-env";
-import { stopOnShutdownSignals } from "@rakazo/core/node/shutdown-signals";
+import type { JobPublisher, JobWorkerHost } from "@agentic-smith/adapter-kit";
+import { unwrapEnvFromKeyManager } from "@agentic-smith/adapters";
+import { loadRootEnv } from "@agentic-smith/core/node/load-root-env";
+import { stopOnShutdownSignals } from "@agentic-smith/core/node/shutdown-signals";
 import { startWorkerHealth, watchEventLoopStalls } from "./health.js";
 import { createWorkerSecretStore } from "./secret-store.js";
 
@@ -60,8 +60,8 @@ import {
   WorkActivities,
   withRunWorker,
   withSecretPersistence,
-} from "@rakazo/adapters";
-import { resolveSupervisorToken } from "@rakazo/core";
+} from "@agentic-smith/adapters";
+import { resolveSupervisorToken } from "@agentic-smith/core";
 import {
   createBoardEvents,
   createDb,
@@ -77,10 +77,10 @@ import {
   rowSecurityWarning,
   runAsSystem,
   verifyContentKeys,
-} from "@rakazo/db";
-import { SERVICE_NAMES } from "@rakazo/logging";
-import { createRootLogger } from "@rakazo/logging/axiom";
-import { MarkdownMemoryStore } from "@rakazo/memory";
+} from "@agentic-smith/db";
+import { SERVICE_NAMES } from "@agentic-smith/logging";
+import { createRootLogger } from "@agentic-smith/logging/axiom";
+import { MarkdownMemoryStore } from "@agentic-smith/memory";
 
 const logger = await createRootLogger(SERVICE_NAMES.worker);
 
@@ -98,7 +98,7 @@ async function main() {
   // A larger max competes for Postgres max_connections (53300).
   const created = createDb(databaseUrl, {
     poolMax,
-    applicationName: "rakazo-worker",
+    applicationName: "agentic-smith-worker",
     keyProvider: contentKeyProviderFromEnv(),
   });
   const { pool } = created;

@@ -1,5 +1,5 @@
 {
-  "name": "@rakazo/updater",
+  "name": "@agentic-smith/updater",
   "version": "0.1.0",
   "private": true,
   "license": "Apache-2.0",
@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@hono/node-server": "2.1.6",
-    "@rakazo/contracts": "workspace:*",
-    "@rakazo/core": "workspace:*",
-    "@rakazo/logging": "workspace:*",
+    "@agentic-smith/contracts": "workspace:*",
+    "@agentic-smith/core": "workspace:*",
+    "@agentic-smith/logging": "workspace:*",
     "hono": "4.13.16",
     "tsx": "4.23.15"
   },

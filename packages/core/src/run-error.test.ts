@@ -2,7 +2,7 @@ import {
   COMPUTER_ALLOWANCE_USED_ERROR,
   COMPUTER_PROVIDER_UNAVAILABLE_ERROR,
   COMPUTER_RATE_LIMIT_ERROR,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   APPROVED_ACTION_NOT_RUN_ERROR,
@@ -474,7 +474,7 @@ describe("normalizeRunError", () => {
       });
     });
 
-    it("keeps the advice when Rakazo credits run out", () => {
+    it("keeps the advice when Agentic Smith credits run out", () => {
       expect(normalizeRunError(MODEL_CREDITS_EXHAUSTED_ERROR)).toEqual({
         summary: MODEL_CREDITS_EXHAUSTED_ERROR,
         details: MODEL_CREDITS_EXHAUSTED_ERROR,

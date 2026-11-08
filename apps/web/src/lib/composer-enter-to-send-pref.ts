@@ -1,6 +1,6 @@
 import { createStoredPreference } from "./stored-preference";
 
-export const COMPOSER_ENTER_TO_SEND_STORAGE_KEY = "rakazo.composerEnterToSend";
+export const COMPOSER_ENTER_TO_SEND_STORAGE_KEY = "jerithai.composerEnterToSend";
 
 function detectCoarsePointer(): boolean {
   try {

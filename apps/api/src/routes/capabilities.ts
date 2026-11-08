@@ -1,5 +1,4 @@
 import { createHash } from "node:crypto";
-import { ORPCError } from "@orpc/server";
 import {
   applyMcpSourcePreset,
   createPluginMarketplace,
@@ -11,11 +10,17 @@ import {
   previewPluginInstall,
   sanitizeIntegrationError,
   verifyMcpInstall,
-} from "@rakazo/adapters";
-import type { Actor } from "@rakazo/contracts";
-import { comparePlugins, containsSecret, matchesPluginQuery } from "@rakazo/core";
-import type { Prisma } from "@rakazo/db";
-import { AVAILABILITY_SELECT, availableInSpace, itemSecretIn, spaceAvailability } from "@rakazo/db";
+} from "@agentic-smith/adapters";
+import type { Actor } from "@agentic-smith/contracts";
+import { comparePlugins, containsSecret, matchesPluginQuery } from "@agentic-smith/core";
+import type { Prisma } from "@agentic-smith/db";
+import {
+  AVAILABILITY_SELECT,
+  availableInSpace,
+  itemSecretIn,
+  spaceAvailability,
+} from "@agentic-smith/db";
+import { ORPCError } from "@orpc/server";
 import { requireAdmin } from "../admins.js";
 import { searchIntegrationCatalog } from "../integration-catalog.js";
 import { assertMcpRemoteEndpoint, mayUsePrivateEndpoint } from "../mcp-servers.js";

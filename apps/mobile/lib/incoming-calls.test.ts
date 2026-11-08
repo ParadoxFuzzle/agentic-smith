@@ -43,7 +43,7 @@ vi.mock("./api", () => ({
   captureApiRequestContext: async (spaceId: string) => ({
     apiBase: "https://example.invalid",
     headers: {
-      "x-rakazo-space-id": spaceId,
+      "x-agentic-smith-space-id": spaceId,
       ...(fake.locked ? {} : { authorization: "Bearer fake-session" }),
     },
     sessionGeneration: fake.generation,
@@ -165,7 +165,7 @@ describe("mobile incoming calls", () => {
         answered: { callId: "call-1" },
         session: 1,
         requestContext: expect.objectContaining({
-          headers: expect.objectContaining({ "x-rakazo-space-id": "space-1" }),
+          headers: expect.objectContaining({ "x-agentic-smith-space-id": "space-1" }),
         }),
       }),
     );
@@ -209,7 +209,7 @@ describe("mobile incoming calls", () => {
     { botId: orgBot.id, callId },
     {
       requestContext: expect.objectContaining({
-        headers: expect.objectContaining({ "x-rakazo-space-id": orgBot.spaceId }),
+        headers: expect.objectContaining({ "x-agentic-smith-space-id": orgBot.spaceId }),
       }),
     },
   ];

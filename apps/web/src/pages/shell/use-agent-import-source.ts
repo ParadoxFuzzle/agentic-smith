@@ -1,11 +1,10 @@
-import { useLingui } from "@lingui/react/macro";
 import type {
   AgentImportFile,
   AgentImportMemoryDestination,
   AgentImportPlan,
-} from "@rakazo/contracts";
-import { BOT_INSTRUCTIONS_MAX_LENGTH } from "@rakazo/contracts";
-import type { AgentImportReader } from "@rakazo/core";
+} from "@agentic-smith/contracts";
+import { BOT_INSTRUCTIONS_MAX_LENGTH } from "@agentic-smith/contracts";
+import type { AgentImportReader } from "@agentic-smith/core";
 import {
   AGENT_IMPORT_ARCHIVE_LIMITS,
   AGENT_IMPORT_NOT_FOUND,
@@ -17,7 +16,8 @@ import {
   hasAgentImportSecrets,
   newClientId,
   openAgentImportArchive,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
+import { useLingui } from "@lingui/react/macro";
 import { useEffect, useRef, useState } from "react";
 import { readAgentDocument } from "../../lib/agent-document";
 import { agentImportErrorText } from "../../lib/agent-import-errors";

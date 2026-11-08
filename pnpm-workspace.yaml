@@ -21,9 +21,28 @@ supportedArchitectures:
     - arm64
 
 overrides:
+  "brace-expansion@>=4.0.0 <5.0.12": 5.0.12
+  "@xmldom/xmldom@>=0.9.0 <=0.9.11": 0.9.12
+  node-forge@<1.4.1: 1.4.1
+  "@xmldom/xmldom@<0.8.15": 0.8.15
+  "body-parser@<2.4.0": 2.4.0
+  "brace-expansion@>=2.0.0 <2.1.7": 2.1.7
+  "compression@<1.8.2": 1.8.2
+  "decode-uri-component@<=0.5.0": 0.5.1
+  "devalue@>=5.1.0 <=5.9.2": 5.9.3
+  "fast-uri@>=3.0.0 <3.1.9": 3.1.9
+  "glob@>=9.0.0 <=14.0.1": 14.0.3
+  "follow-redirects@>=1.16.0 <=1.16.1": 1.16.2
+  "ip-address@<10.7.4": 10.7.4
+  "js-yaml@>=4.0.0 <4.3.2": 4.3.2
+  "katex@>=0.11.0 <0.18.2": 0.18.2
+  "markdown-it@>=14.0.0 <14.3.3": 14.3.3
+  "minimatch@>=7.0.0 <11.0.1": 11.0.4
   react: 19.2.3
   react-dom: 19.2.3
   proxy-addr@<2.0.8: 2.0.8
+  qs@<6.16.1: 6.16.1
+  smol-toml@<=1.8.0: 1.9.1
   dompurify@<3.4.17: 3.4.17
   ws@>=8 <8.21.1: 8.22.0
   "@grpc/grpc-js@<1.14.5": 1.14.7

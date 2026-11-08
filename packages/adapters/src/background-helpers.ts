@@ -1,5 +1,5 @@
-import { runContinueJob } from "@rakazo/adapter-kit";
-import type { MessageBlock } from "@rakazo/contracts";
+import { runContinueJob } from "@agentic-smith/adapter-kit";
+import type { MessageBlock } from "@agentic-smith/contracts";
 import {
   ACTIVE_RUN_STATUSES,
   BACKGROUND_HELPER_TRIGGER,
@@ -7,15 +7,15 @@ import {
   HELPER_RESULT_TRIGGER,
   isConversationalRun,
   STOPPED_HELPER_RESULT,
-} from "@rakazo/core";
-import type { Prisma } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { Prisma } from "@agentic-smith/db";
 import {
   appendEventInTransaction,
   assertRunCanWriteHistory,
   createThreadMessageInTransaction,
   THREAD_LOCK_TRANSACTION_OPTIONS,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type { ExecutorDeps } from "./executor-deps.js";
 import { helperResultText, MAX_PARALLEL_SUBAGENTS } from "./pi-runtime-subagent.js";
 import type { RunContext } from "./run-context.js";

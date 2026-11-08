@@ -1,5 +1,5 @@
+import type { AgentRunRequest, AgentSteeringMessage } from "@agentic-smith/adapter-kit";
 import type { Context, Message } from "@earendil-works/pi-ai";
-import type { AgentRunRequest, AgentSteeringMessage } from "@rakazo/adapter-kit";
 import { neutralizeSpeakerLabels } from "./history-speakers.js";
 
 export function toPiImages(images: AgentRunRequest["currentTurnImages"]) {
@@ -14,7 +14,11 @@ export function toPiImages(images: AgentRunRequest["currentTurnImages"]) {
  * Provider, api and model stamped on replayed own replies. None matches a real model, so Pi
  * replays them as plain text from another model: no signatures or reasoning, same on every provider.
  */
-const HISTORY_ASSISTANT = { api: "rakazo-history", provider: "rakazo-history", model: "history" };
+const HISTORY_ASSISTANT = {
+  api: "agentic-smith-history",
+  provider: "agentic-smith-history",
+  model: "history",
+};
 const NO_USAGE = {
   input: 0,
   output: 0,
@@ -27,9 +31,9 @@ const NO_USAGE = {
 const CONVERSATION_START = "[Conversation start]";
 
 type HistoryMessage = Message & {
-  rakazoHistory: true;
-  rakazoMessageId?: string;
-  rakazoCreatedAt?: string;
+  agenticSmithHistory: true;
+  agenticSmithMessageId?: string;
+  agenticSmithCreatedAt?: string;
 };
 
 /** What the model reads for a message by someone other than this bot or the human of a direct chat. */
@@ -68,9 +72,9 @@ export function toHistory(
     const created = m.createdAt ? Date.parse(m.createdAt) : Number.NaN;
     const common = {
       timestamp: Number.isNaN(created) ? 0 : created,
-      rakazoHistory: true as const,
-      rakazoMessageId: m.id,
-      rakazoCreatedAt: m.createdAt,
+      agenticSmithHistory: true as const,
+      agenticSmithMessageId: m.id,
+      agenticSmithCreatedAt: m.createdAt,
     };
     if (m.role === "assistant" && !m.speaker) {
       // A reply that holds only tool work has no text to replay.
@@ -108,7 +112,7 @@ export function toHistory(
 export function isHistoryReply(message: Message | undefined): boolean {
   return (
     message?.role === "assistant" &&
-    Boolean((message as Message & { rakazoHistory?: true }).rakazoHistory)
+    Boolean((message as Message & { agenticSmithHistory?: true }).agenticSmithHistory)
   );
 }
 

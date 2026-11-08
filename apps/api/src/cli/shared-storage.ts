@@ -7,10 +7,10 @@ import {
   migrateLocalPushTokens,
   PrismaPushTokenStore,
   unwrapEnvFromKeyManager,
-} from "@rakazo/adapters";
-import { resolveEncryptionKey } from "@rakazo/core";
-import { loadRootEnv } from "@rakazo/core/node/load-root-env";
-import { createDb } from "@rakazo/db";
+} from "@agentic-smith/adapters";
+import { resolveEncryptionKey } from "@agentic-smith/core";
+import { loadRootEnv } from "@agentic-smith/core/node/load-root-env";
+import { createDb } from "@agentic-smith/db";
 
 loadRootEnv();
 await unwrapEnvFromKeyManager();
@@ -24,7 +24,7 @@ if (positionals.length !== 1 || !["artifacts", "push-tokens"].includes(positiona
   );
 if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is required");
 const { prisma, pool, contentKeys } = createDb(process.env.DATABASE_URL, {
-  applicationName: "rakazo-storage-migration",
+  applicationName: "agentic-smith-storage-migration",
   keyProvider: contentKeyProviderFromEnv(),
 });
 const dataDir = process.env.DATA_DIR ?? "./data";

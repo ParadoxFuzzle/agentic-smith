@@ -10,16 +10,16 @@ import type {
   PaymentWalletProvider,
   SandboxProvider,
   SecretStore,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import {
   messagingDeliverJob,
   SandboxRateLimitError,
   SandboxUnavailableError,
   SandboxUnresponsiveError,
-} from "@rakazo/adapter-kit";
-import type { PrismaClient, ThreadEvents } from "@rakazo/db";
-import { runAsSystem, runAsTenant } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import type { PrismaClient, ThreadEvents } from "@agentic-smith/db";
+import { runAsSystem, runAsTenant } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { settleCallRequest } from "./call-request.js";
 import type { CloudAgentConnection } from "./cloud-agent-factory.js";
 import { pollCloudAgent } from "./cloud-agent-poll.js";

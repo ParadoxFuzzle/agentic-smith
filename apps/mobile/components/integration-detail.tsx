@@ -1,6 +1,6 @@
-import type { Connection, ConnectionCatalogItem, RpcOutput } from "@rakazo/contracts";
-import { CONNECTION_LABEL_MAX_LENGTH } from "@rakazo/contracts";
-import { catalogItemKey, humanizeToolName } from "@rakazo/core";
+import type { Connection, ConnectionCatalogItem, RpcOutput } from "@agentic-smith/contracts";
+import { CONNECTION_LABEL_MAX_LENGTH } from "@agentic-smith/contracts";
+import { catalogItemKey, humanizeToolName } from "@agentic-smith/core";
 import type { Dispatch, SetStateAction } from "react";
 import { ActivityIndicator, Pressable, Text, TextInput, View } from "react-native";
 import { useI18n } from "../lib/i18n";

@@ -1,12 +1,11 @@
-import { Trans, useLingui } from "@lingui/react/macro";
-import type { SettingsScope } from "@rakazo/contracts";
+import type { SettingsScope } from "@agentic-smith/contracts";
 import {
   connectionDisplayName,
   modelRoleChoiceKey,
   OPENAI_COMPATIBLE_PROVIDER_ID,
   savedCompatibleEndpointMatches,
-} from "@rakazo/contracts";
-import { popularModelProvidersFirst } from "@rakazo/core";
+} from "@agentic-smith/contracts";
+import { popularModelProvidersFirst } from "@agentic-smith/core";
 import {
   Button,
   Dialog,
@@ -17,7 +16,8 @@ import {
   DropdownMenuItem,
   ModelThinkingOptions,
   Spinner,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";

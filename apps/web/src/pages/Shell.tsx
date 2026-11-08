@@ -1,12 +1,11 @@
-import { Trans, useLingui } from "@lingui/react/macro";
 import type {
   AgentSkillCatalogEntry,
   Bot,
   SpaceMemoryConfig,
   ThreadMessage,
   VoiceStatus,
-} from "@rakazo/contracts";
-import { DEFAULT_NEW_BOT_AVATAR_SET } from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
+import { DEFAULT_NEW_BOT_AVATAR_SET } from "@agentic-smith/contracts";
 import {
   activeThreadRuns,
   answerableAskMessageIds,
@@ -23,11 +22,12 @@ import {
   newClientId,
   otherAuthor,
   workingRoutineName,
-} from "@rakazo/core";
-import { writeSaved } from "@rakazo/core/query";
-import type { GroupAvatarMember } from "@rakazo/ui-web";
-import { Button } from "@rakazo/ui-web";
-import { useIsMobile } from "@rakazo/ui-web/hooks/use-mobile";
+} from "@agentic-smith/core";
+import { writeSaved } from "@agentic-smith/core/query";
+import type { GroupAvatarMember } from "@agentic-smith/ui-web";
+import { Button } from "@agentic-smith/ui-web";
+import { useIsMobile } from "@agentic-smith/ui-web/hooks/use-mobile";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { useQuery } from "@tanstack/react-query";
 import { Plus } from "lucide-react";
 import {

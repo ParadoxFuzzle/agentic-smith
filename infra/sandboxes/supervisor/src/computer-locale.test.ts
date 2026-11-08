@@ -37,7 +37,7 @@ describe("computer time zone and language", () => {
 
   it("starts computers with the owner's time zone and language only when known", () => {
     const base = {
-      name: "rakazo-bot-x",
+      name: "agentic-smith-bot-x",
       image: "img",
       botId: "x",
       spaceId: "s",
@@ -58,7 +58,7 @@ describe("computer time zone and language", () => {
     const warsaw = { timezone: "Europe/Warsaw", language: "pl" };
     const env = (locale?: typeof warsaw) =>
       containerCreateOptions({
-        name: "rakazo-bot-x",
+        name: "agentic-smith-bot-x",
         image: "img",
         botId: "x",
         spaceId: "s",

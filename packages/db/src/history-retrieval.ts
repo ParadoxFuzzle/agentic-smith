@@ -1,11 +1,11 @@
 import { createHash } from "node:crypto";
-import type { HistoryReadInput, HistorySearchInput } from "@rakazo/contracts";
+import type { HistoryReadInput, HistorySearchInput } from "@agentic-smith/contracts";
 import {
   ATTACHMENT_MAX_COUNT,
   HISTORY_ATTACHMENTS_PER_RESPONSE,
   HistoryQueriesSchema,
-} from "@rakazo/contracts";
-import { attachmentComputerPath, shortenedTextLength, textBoundary } from "@rakazo/core";
+} from "@agentic-smith/contracts";
+import { attachmentComputerPath, shortenedTextLength, textBoundary } from "@agentic-smith/core";
 import { LISTED_ARTIFACT } from "./artifact-versions.js";
 import type { PrismaClient } from "./client.js";
 import { Prisma } from "./client.js";

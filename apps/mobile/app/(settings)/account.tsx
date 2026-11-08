@@ -1,6 +1,6 @@
+import type { AccountSecurity, UsageSummary } from "@agentic-smith/contracts";
+import { APP_LOCALE_LABELS, accountDisplay, displayName } from "@agentic-smith/core";
 import { MenuView } from "@expo/ui/community/menu";
-import type { AccountSecurity, UsageSummary } from "@rakazo/contracts";
-import { APP_LOCALE_LABELS, accountDisplay, displayName } from "@rakazo/core";
 import * as Notifications from "expo-notifications";
 import type { Href } from "expo-router";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
@@ -652,7 +652,7 @@ export default function Account() {
               }}
               options={[
                 { value: "organic", label: t("Original") },
-                { value: "rakazo", label: t("Rakazo") },
+                { value: "agentic-smith", label: t("Agentic Smith") },
               ]}
               value={me.botAvatarSet}
             />

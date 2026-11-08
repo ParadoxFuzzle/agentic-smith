@@ -19,7 +19,7 @@ vi.mock("../lib/rpc", () => ({
     },
   }),
   selectedSpaceId: () => space.selected,
-  SPACE_SELECTED_EVENT: "rakazo:space-selected",
+  SPACE_SELECTED_EVENT: "agentic-smith:space-selected",
 }));
 vi.mock("../lib/bootstrap", () => ({ peekInitialBootstrap: () => undefined }));
 vi.mock("../pages/Paywall", () => ({
@@ -113,7 +113,7 @@ it("reloads billing for a newly selected Space", async () => {
 
   api.status.mockResolvedValue({ access: true });
   await act(async () => {
-    window.dispatchEvent(new Event("rakazo:space-selected"));
+    window.dispatchEvent(new Event("agentic-smith:space-selected"));
     await new Promise((resolve) => setTimeout(resolve, 0));
   });
   expect(container.textContent).toBe("app");
@@ -128,7 +128,7 @@ it("keeps checking billing after a newly selected Space's read fails", async () 
 
   api.status.mockRejectedValueOnce(new Error("offline"));
   await act(async () => {
-    window.dispatchEvent(new Event("rakazo:space-selected"));
+    window.dispatchEvent(new Event("agentic-smith:space-selected"));
     await new Promise((resolve) => setTimeout(resolve, 0));
   });
   expect(container.textContent).toBe("app");
@@ -162,7 +162,7 @@ it("hands the plan choice the client of the space its prices were read for", asy
 
   // Selecting another organization in this tab moves billing with it.
   await act(async () => {
-    window.dispatchEvent(new Event("rakazo:space-selected"));
+    window.dispatchEvent(new Event("agentic-smith:space-selected"));
     await new Promise((resolve) => setTimeout(resolve, 0));
   });
   expect(container.textContent).toBe("paywall space-b");

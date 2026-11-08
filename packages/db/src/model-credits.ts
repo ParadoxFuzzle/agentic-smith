@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import type { AgentUsage, BillingCreditPurchase } from "@rakazo/adapter-kit";
-import { MODEL_CREDITS_EXHAUSTED_ERROR } from "@rakazo/core";
+import type { AgentUsage, BillingCreditPurchase } from "@agentic-smith/adapter-kit";
+import { MODEL_CREDITS_EXHAUSTED_ERROR } from "@agentic-smith/core";
 import type { PrismaClient } from "./client.js";
 import type { Prisma } from "./generated/prisma/client.js";
 import type { CreditAllocation } from "./model-credit-lots.js";

@@ -17,7 +17,7 @@ import { fileURLToPath } from "node:url";
 const script = fileURLToPath(new URL("./setup-worktree.mjs", import.meta.url));
 
 test("worktree settings stay private and local", () => {
-  const dir = mkdtempSync(path.join(os.tmpdir(), "rakazo worktree "));
+  const dir = mkdtempSync(path.join(os.tmpdir(), "agentic-smith worktree "));
   const main = path.join(dir, "main");
   const worktree = path.join(dir, process.platform === "win32" ? "worktree" : "worktree ");
   const git = (...args) => execFileSync("git", args, { cwd: main, stdio: "pipe" });
@@ -32,7 +32,7 @@ test("worktree settings stay private and local", () => {
     setup(worktree);
     assert.equal(existsSync(path.join(worktree, ".env")), false);
 
-    const settings = "RAKAZO_DEV_TAILNET=\nBETTER_AUTH_SECRET=fake-test-secret\n";
+    const settings = "AGENTIC_SMITH_DEV_TAILNET=\nBETTER_AUTH_SECRET=fake-test-secret\n";
     writeFileSync(path.join(main, ".env"), settings);
     setup(worktree);
     assert.equal(readFileSync(path.join(worktree, ".env"), "utf8"), settings);
@@ -43,16 +43,25 @@ test("worktree settings stay private and local", () => {
       execFileSync("git", ["status", "--porcelain"], { cwd: worktree, encoding: "utf8" }),
       "",
     );
-    writeFileSync(path.join(worktree, ".env"), "RAKAZO_DEV_TAILNET=0\n");
+    writeFileSync(path.join(worktree, ".env"), "AGENTIC_SMITH_DEV_TAILNET=0\n");
     setup(worktree);
-    assert.equal(readFileSync(path.join(worktree, ".env"), "utf8"), "RAKAZO_DEV_TAILNET=0\n");
+    assert.equal(
+      readFileSync(path.join(worktree, ".env"), "utf8"),
+      "AGENTIC_SMITH_DEV_TAILNET=0\n",
+    );
 
     writeFileSync(path.join(worktree, ".gitignore"), "");
     setup(worktree);
-    assert.equal(readFileSync(path.join(worktree, ".env"), "utf8"), "RAKAZO_DEV_TAILNET=0\n");
+    assert.equal(
+      readFileSync(path.join(worktree, ".env"), "utf8"),
+      "AGENTIC_SMITH_DEV_TAILNET=0\n",
+    );
     execFileSync("git", ["add", ".env"], { cwd: worktree, stdio: "pipe" });
     setup(worktree);
-    assert.equal(readFileSync(path.join(worktree, ".env"), "utf8"), "RAKAZO_DEV_TAILNET=0\n");
+    assert.equal(
+      readFileSync(path.join(worktree, ".env"), "utf8"),
+      "AGENTIC_SMITH_DEV_TAILNET=0\n",
+    );
     execFileSync("git", ["reset", "--", ".env"], { cwd: worktree, stdio: "pipe" });
     rmSync(path.join(worktree, ".env"));
     assert.throws(() => setup(worktree));
@@ -80,9 +89,12 @@ test("worktree settings stay private and local", () => {
       symlinkSync(unrelated, path.join(main, ".env"));
       assert.throws(() => setup(worktree));
       assert.equal(existsSync(path.join(worktree, ".env")), false);
-      writeFileSync(path.join(worktree, ".env"), "RAKAZO_DEV_TAILNET=0\n");
+      writeFileSync(path.join(worktree, ".env"), "AGENTIC_SMITH_DEV_TAILNET=0\n");
       setup(worktree);
-      assert.equal(readFileSync(path.join(worktree, ".env"), "utf8"), "RAKAZO_DEV_TAILNET=0\n");
+      assert.equal(
+        readFileSync(path.join(worktree, ".env"), "utf8"),
+        "AGENTIC_SMITH_DEV_TAILNET=0\n",
+      );
     }
   } finally {
     rmSync(dir, { recursive: true, force: true });

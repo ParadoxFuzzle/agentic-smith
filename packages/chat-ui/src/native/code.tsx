@@ -1,5 +1,5 @@
-import type { ColorTokens, ResolvedAppearance } from "@rakazo/ui-tokens";
-import { darkTokens } from "@rakazo/ui-tokens";
+import type { ColorTokens, ResolvedAppearance } from "@agentic-smith/ui-tokens";
+import { darkTokens } from "@agentic-smith/ui-tokens";
 import type { MarkdownStyleMap } from "@ronradtke/react-native-markdown-display";
 import { Highlight, themes } from "prism-react-renderer";
 import type { ComponentType, ReactNode } from "react";

@@ -1,6 +1,6 @@
+import type { OrganizationList } from "@agentic-smith/contracts";
+import { typeScale } from "@agentic-smith/ui-tokens";
 import { MenuView } from "@expo/ui/community/menu";
-import type { OrganizationList } from "@rakazo/contracts";
-import { typeScale } from "@rakazo/ui-tokens";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import { resolveMobileAppearance } from "../lib/appearance";
 import { useI18n } from "../lib/i18n";

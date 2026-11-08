@@ -1,6 +1,6 @@
-import type { AdapterContext, ComputerRef } from "@rakazo/adapter-kit";
-import { SandboxRequestRejectedError } from "@rakazo/adapter-kit";
-import * as Logging from "@rakazo/logging";
+import type { AdapterContext, ComputerRef } from "@agentic-smith/adapter-kit";
+import { SandboxRequestRejectedError } from "@agentic-smith/adapter-kit";
+import * as Logging from "@agentic-smith/logging";
 import { describe, expect, it, vi } from "vitest";
 import {
   browserActFromTool,

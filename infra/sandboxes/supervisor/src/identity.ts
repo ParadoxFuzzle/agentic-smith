@@ -10,21 +10,21 @@ export async function findBotContainer(botId: string, spaceId: string) {
     filters: {
       // Space IDs were preserved when workspaces became Spaces. Search by the
       // stable bot label, then validate either generation of the Space label.
-      label: [`rakazo.botId=${botId}`],
+      label: [`agentic-smith.botId=${botId}`],
     },
   });
   for (const item of listed) {
     const container = docker.getContainer(item.Id);
     const info = await container.inspect();
-    if (isRakazoContainer(info, botId, spaceId)) return container;
+    if (isAgenticSmithContainer(info, botId, spaceId)) return container;
   }
   return undefined;
 }
 
 /** Count managed computers for a space, including legacy workspaceId / unlabeled-managed. */
 export async function countSpaceContainers(spaceId: string): Promise<number> {
-  // Do not filter by rakazo.managed=true: legacy computers are still managed via
-  // COMPUTER_IMAGE + rakazo.workspaceId (same rule as isRakazoContainer).
+  // Do not filter by agentic-smith.managed=true: legacy computers are still managed via
+  // COMPUTER_IMAGE + agentic-smith.workspaceId (same rule as isAgenticSmithContainer).
   const listed = await docker.listContainers({ all: true });
   let count = 0;
   for (const item of listed) {
@@ -39,19 +39,20 @@ async function isManagedSpaceContainer(
 ): Promise<boolean> {
   const labels = item.Labels;
   if (labels) {
-    const listedSpaceId = labels["rakazo.spaceId"] ?? labels["rakazo.workspaceId"];
+    const listedSpaceId = labels["agentic-smith.spaceId"] ?? labels["agentic-smith.workspaceId"];
     // Labeled for another space (or no space identity) cannot count toward this cap.
     if (listedSpaceId !== spaceId) return false;
-    if (labels["rakazo.managed"] === "true" || item.Image === COMPUTER_IMAGE) return true;
+    if (labels["agentic-smith.managed"] === "true" || item.Image === COMPUTER_IMAGE) return true;
     // Space matches but Image may be an ID after the tag moved — confirm via inspect.
   }
-  // Missing list Labels: inspect with the same managed rule as isRakazoContainer.
+  // Missing list Labels: inspect with the same managed rule as isAgenticSmithContainer.
   try {
     const info = await docker.getContainer(item.Id).inspect();
     const infoLabels = info.Config?.Labels ?? {};
     const managed =
-      infoLabels["rakazo.managed"] === "true" || info.Config?.Image === COMPUTER_IMAGE;
-    const infoSpaceId = infoLabels["rakazo.spaceId"] ?? infoLabels["rakazo.workspaceId"];
+      infoLabels["agentic-smith.managed"] === "true" || info.Config?.Image === COMPUTER_IMAGE;
+    const infoSpaceId =
+      infoLabels["agentic-smith.spaceId"] ?? infoLabels["agentic-smith.workspaceId"];
     return managed && infoSpaceId === spaceId;
   } catch {
     // Container might have been removed concurrently
@@ -65,12 +66,12 @@ export async function managedContainer(id: string, botId?: string, spaceId?: str
   if (!botId || !spaceId) throw new ComputerIdentityError("missing computer identity");
   const container = docker.getContainer(id);
   const info = await container.inspect();
-  if (!isRakazoContainer(info, botId, spaceId))
+  if (!isAgenticSmithContainer(info, botId, spaceId))
     throw new ComputerIdentityError("computer identity mismatch");
   return { container, info };
 }
 
-export function isRakazoContainer(
+export function isAgenticSmithContainer(
   info: Docker.ContainerInspectInfo,
   botId: string,
   spaceId: string,

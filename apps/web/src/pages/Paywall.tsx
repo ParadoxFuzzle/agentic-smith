@@ -1,6 +1,6 @@
+import type { BillingStatus } from "@agentic-smith/contracts";
+import { Button } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { BillingStatus } from "@rakazo/contracts";
-import { Button } from "@rakazo/ui-web";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import { AccountMenu } from "../components/AccountMenu";

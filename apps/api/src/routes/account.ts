@@ -1,4 +1,3 @@
-import { ORPCError } from "@orpc/server";
 import {
   changeUserTimezone,
   effectiveModelRole,
@@ -7,14 +6,14 @@ import {
   loadUserIncomingCalls,
   PushSessionEndedError,
   settleCallRequest,
-} from "@rakazo/adapters";
-import type { ActionApprovalRule, Actor, Me, SettingsScope } from "@rakazo/contracts";
+} from "@agentic-smith/adapters";
+import type { ActionApprovalRule, Actor, Me, SettingsScope } from "@agentic-smith/contracts";
 import {
   approvalModeFromPreference,
   approvalPreferenceFromMode,
   callRequestClientNonce,
-} from "@rakazo/core";
-import { urlSite } from "@rakazo/core/egress";
+} from "@agentic-smith/core";
+import { urlSite } from "@agentic-smith/core/egress";
 import {
   auditLogOrganization,
   commitBotUpdate,
@@ -37,8 +36,9 @@ import {
   selectVoicePreference,
   voicePreferenceTarget,
   withTransactionRetry,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { ORPCError } from "@orpc/server";
 import { createAccessGrant, listAccessGrants, revokeAccessGrant } from "../access-grants.js";
 import { requireAdmin } from "../admins.js";
 import { aiConsentStatus, allowAiConsent } from "../ai-consent.js";

@@ -1,6 +1,6 @@
-import type { RealtimeFanout, SecretStore } from "@rakazo/adapter-kit";
-import { createSecretStore } from "@rakazo/adapters";
-import { resolveEncryptionKey } from "@rakazo/core";
+import type { RealtimeFanout, SecretStore } from "@agentic-smith/adapter-kit";
+import { createSecretStore } from "@agentic-smith/adapters";
+import { resolveEncryptionKey } from "@agentic-smith/core";
 
 /** Worker composition without starting job hosts or database connections. */
 export async function createWorkerSecretStore(

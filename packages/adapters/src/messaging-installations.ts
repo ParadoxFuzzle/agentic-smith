@@ -5,11 +5,11 @@ import type {
   MessagingInstallationStore,
   MessagingInstallProvider,
   SecretStore,
-} from "@rakazo/adapter-kit";
-import type { Actor, MessagingInstallationSummary } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
-import { IsolationError, runAsSystem } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import type { Actor, MessagingInstallationSummary } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
+import { IsolationError, runAsSystem } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { credentialDigest } from "./credential-digest.js";
 import { installationSenderAddress } from "./installed-messaging-surface.js";
 

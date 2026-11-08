@@ -54,12 +54,14 @@ found="$(grep -E \
 mkdir "${work}/app"
 tar -xf "${rootfs}" -C "${work}/app" --exclude=node_modules app
 while IFS= read -r file; do
-  if awk '/-----BEGIN ([A-Z0-9]+ )*PRIVATE KEY-----/ {
-        if ((getline body) > 0 && body ~ /^[A-Za-z0-9+\/=]{40,}$/) { found = 1; exit }
+  if awk '/-----BEGIN [A-Z0-9 ]*PRIVATE KEY-----/ {
+        if ((getline body) > 0 && body ~ /^[A-Za-z0-9+\/=]+$/ && length(body) >= 40) {
+          found = 1; exit
+        }
       } END { exit !found }' "${file}"; then
     found+="${found:+$'\n'}${file#"${work}/app/"}"
   fi
-done < <(grep -rlE -- '-----BEGIN ([A-Z0-9]+ )*PRIVATE KEY-----' "${work}/app" 2>/dev/null || true)
+done < <(grep -rlF -- 'PRIVATE KEY-----' "${work}/app" 2>/dev/null || true)
 
 if [[ -n "${found}" ]]; then
   echo "${source} contains files that must not ship:" >&2

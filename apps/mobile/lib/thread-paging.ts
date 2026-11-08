@@ -1,4 +1,8 @@
-import { appendNewerThreadPage, forwardProbeAfterPage, threadWindowMessages } from "@rakazo/core";
+import {
+  appendNewerThreadPage,
+  forwardProbeAfterPage,
+  threadWindowMessages,
+} from "@agentic-smith/core";
 import { useState } from "react";
 import type { LayoutChangeEvent, NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 import { rpc } from "./api";

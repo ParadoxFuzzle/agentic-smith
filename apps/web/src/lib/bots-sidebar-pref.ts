@@ -1,6 +1,6 @@
 import { readStoredString, writeStoredString } from "./stored-preference";
 
-const STORAGE_PREFIX = "rakazo:bots-sidebar-collapsed:";
+const STORAGE_PREFIX = "agentic-smith:bots-sidebar-collapsed:";
 
 export function botsSidebarCollapsedStorageKey(userId: string | null | undefined): string | null {
   if (!userId) return null;
@@ -28,7 +28,7 @@ export const BOTS_SIDEBAR_SNAP_WIDTH = 160;
 const MIN_CHAT_WIDTH = 320;
 
 export function botsSidebarWidthStorageKey(userId: string | null | undefined): string | null {
-  return userId ? `rakazo:bots-sidebar-width:${userId}` : null;
+  return userId ? `agentic-smith:bots-sidebar-width:${userId}` : null;
 }
 
 export function maximumBotsSidebarWidth(viewportWidth: number): number {

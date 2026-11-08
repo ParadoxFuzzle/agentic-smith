@@ -1,5 +1,4 @@
 import { setTimeout as sleep } from "node:timers/promises";
-import { ORPCError } from "@orpc/server";
 import type {
   BillingByokPlan,
   BillingPrice,
@@ -7,15 +6,15 @@ import type {
   BillingSubscriptionSnapshot,
   ProductAnalytics,
   SandboxProvider,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import {
   BillingCheckoutCompletedError,
   BillingCustomerNotFoundError,
   BillingNoMonthlyCreditsError,
   BillingPaymentNotCompletedError,
-} from "@rakazo/adapter-kit";
-import { sandboxAllowance, sandboxHoursLeft } from "@rakazo/adapters";
-import type { Actor, BillingStatus, ByokInterval, ByokTier } from "@rakazo/contracts";
+} from "@agentic-smith/adapter-kit";
+import { sandboxAllowance, sandboxHoursLeft } from "@agentic-smith/adapters";
+import type { Actor, BillingStatus, ByokInterval, ByokTier } from "@agentic-smith/contracts";
 import {
   BYOK_TIERS,
   ByokTierSchema,
@@ -23,8 +22,8 @@ import {
   INVITED_TRIAL_WEEKS,
   sandboxAllowanceHours,
   TRIAL_DAYS,
-} from "@rakazo/contracts";
-import type { BillingAccount, Prisma, PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/contracts";
+import type { BillingAccount, Prisma, PrismaClient } from "@agentic-smith/db";
 import {
   billingAccountForOrganization,
   byokFreeUntil,
@@ -52,8 +51,9 @@ import {
   replaceBillingCustomer,
   reserveByokTrialCheckout,
   syncBillingSnapshot,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { ORPCError } from "@orpc/server";
 import { applyAccessGrants } from "./access-grants.js";
 import { createReferrals } from "./referrals.js";
 

@@ -1,4 +1,4 @@
-import type { MessageBlock } from "@rakazo/contracts";
+import type { MessageBlock } from "@agentic-smith/contracts";
 
 const TOPICS = [
   "the onboarding funnel",

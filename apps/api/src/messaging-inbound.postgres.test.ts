@@ -1,6 +1,6 @@
-import type { MessagingInboundMessage } from "@rakazo/adapter-kit";
-import type { PrismaClient } from "@rakazo/db";
-import { createDb, createThreadEvents, runAsSystem } from "@rakazo/db";
+import type { MessagingInboundMessage } from "@agentic-smith/adapter-kit";
+import type { PrismaClient } from "@agentic-smith/db";
+import { createDb, createThreadEvents, runAsSystem } from "@agentic-smith/db";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { createMessagingInboundHandler } from "./messaging-inbound.js";
 
@@ -81,7 +81,7 @@ describe.skipIf(!enabled)("group roster versioning under concurrency (PostgreSQL
         data: {
           id: ids.userId,
           name: ids.userId,
-          email: `${ids.userId}@rakazo.test`,
+          email: `${ids.userId}@agentic-smith.test`,
           emailVerified: false,
         },
       });

@@ -1,7 +1,12 @@
-import { useNativeLinkConfirm } from "@rakazo/chat-ui/native";
-import type { PageDetail } from "@rakazo/contracts";
-import { pageCopyRequest, pageCopyResult, pageLinkRequest, pageReplyText } from "@rakazo/core";
-import { webTokensForAppearance } from "@rakazo/ui-tokens";
+import { useNativeLinkConfirm } from "@agentic-smith/chat-ui/native";
+import type { PageDetail } from "@agentic-smith/contracts";
+import {
+  pageCopyRequest,
+  pageCopyResult,
+  pageLinkRequest,
+  pageReplyText,
+} from "@agentic-smith/core";
+import { webTokensForAppearance } from "@agentic-smith/ui-tokens";
 import * as Clipboard from "expo-clipboard";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -80,7 +85,8 @@ export default function PageScreen() {
     (data: string, answer: (message: object) => void) => {
       if (!pageActionAllowed(tappedAt.current, Date.now())) return;
       const message = pageMessage(data) as { type?: unknown; text?: unknown } | null;
-      const reply = message?.type === "rakazo-page:reply" ? pageReplyText(message.text) : null;
+      const reply =
+        message?.type === "agentic-smith-page:reply" ? pageReplyText(message.text) : null;
       const page = loaded.status === "ready" ? loaded.page : null;
       const chat = reply && page ? pageChat(page) : null;
       const url = pageLinkRequest(message);

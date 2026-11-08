@@ -16,7 +16,7 @@ export function mockSecureStore(store: Map<string, string>) {
 export function pendingSignOutRecords(
   store: Map<string, string>,
 ): { apiBase: string; token: string }[] {
-  const raw = store.get("rakazo.pending_sign_out");
+  const raw = store.get("agentic-smith.pending_sign_out");
   if (!raw) return [];
   const parsed: unknown = JSON.parse(raw);
   if (!Array.isArray(parsed)) return [];

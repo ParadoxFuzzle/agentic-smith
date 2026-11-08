@@ -1,5 +1,5 @@
-import type { SpendingCurrency, SpendingPeriod } from "@rakazo/contracts";
-import { MAX_SPENDING_LIMIT } from "@rakazo/contracts";
+import type { SpendingCurrency, SpendingPeriod } from "@agentic-smith/contracts";
+import { MAX_SPENDING_LIMIT } from "@agentic-smith/contracts";
 import { wallClock, zonedDateTime } from "./cron.js";
 
 // A symbol another currency shares is read as the one listed. Nearly every other dollar or pound is

@@ -2,11 +2,11 @@ import type {
   BillingByokCheckoutRequest,
   BillingCheckoutRequest,
   BillingCreditCheckoutRequest,
-} from "@rakazo/adapter-kit";
-import { BillingEmulator } from "@rakazo/adapters";
-import type { Actor } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
-import { asSystem, billingAccountForOrganization, createDb } from "@rakazo/db";
+} from "@agentic-smith/adapter-kit";
+import { BillingEmulator } from "@agentic-smith/adapters";
+import type { Actor } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
+import { asSystem, billingAccountForOrganization, createDb } from "@agentic-smith/db";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createBillingService } from "./billing.js";
 
@@ -44,7 +44,7 @@ dbTests("billing checkout coordination", () => {
   const actor: Actor = {
     userId,
     spaceId,
-    email: `checkout-${stamp}@rakazo.test`,
+    email: `checkout-${stamp}@agentic-smith.test`,
     isDeploymentOwner: false,
   };
   let prisma: PrismaClient, db: ReturnType<typeof createDb>;
@@ -197,7 +197,7 @@ dbTests("checkout and organization deletion", () => {
     const actor: Actor = {
       userId,
       spaceId,
-      email: `deletion-${stamp}@rakazo.test`,
+      email: `deletion-${stamp}@agentic-smith.test`,
       isDeploymentOwner: false,
     };
     return { organizationId, spaceId, actor };
@@ -210,7 +210,7 @@ dbTests("checkout and organization deletion", () => {
       data: {
         id: userId,
         name: "Deletion owner",
-        email: `deletion-${stamp}@rakazo.test`,
+        email: `deletion-${stamp}@agentic-smith.test`,
         emailVerified: false,
       },
     });

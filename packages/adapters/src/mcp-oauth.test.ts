@@ -1,5 +1,5 @@
-import { MCP_OAUTH_CLIENT_REQUIRED } from "@rakazo/contracts";
-import { getLogger } from "@rakazo/logging";
+import { MCP_OAUTH_CLIENT_REQUIRED } from "@agentic-smith/contracts";
+import { getLogger } from "@agentic-smith/logging";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { OAuthMaterial } from "./mcp-oauth.js";
 import {
@@ -1795,7 +1795,10 @@ describe("MCP OAuth", () => {
       if (started.status !== "authorization_required") throw new Error("OAuth was not requested");
       const authorizationUrl = new URL(started.authorizationUrl);
 
-      expect(registration).toMatchObject({ client_name: "Rakazo", application_type: "native" });
+      expect(registration).toMatchObject({
+        client_name: "Agentic Smith",
+        application_type: "native",
+      });
       expect(authorizationUrl.origin).toBe("https://auth.example.test");
       expect(authorizationUrl.searchParams.get("client_id")).toBe("registered-client-id");
       expect(authorizationUrl.searchParams.get("code_challenge_method")).toBe("S256");
@@ -1947,7 +1950,7 @@ describe("MCP OAuth", () => {
     expect(started.status).toBe("authorization_required");
     if (started.status !== "authorization_required") throw new Error("OAuth was not requested");
 
-    expect(registration).toMatchObject({ client_name: "Rakazo" });
+    expect(registration).toMatchObject({ client_name: "Agentic Smith" });
     expect(registration).not.toHaveProperty("token_endpoint_auth_method");
     expect(new URL(started.authorizationUrl).searchParams.get("client_id")).toBe(
       "confidential-client-id",

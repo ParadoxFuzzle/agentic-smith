@@ -3,14 +3,14 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import os from "node:os";
 import path from "node:path";
+import type { createApp } from "@agentic-smith/api/app";
+import { abortableDelay, RESPONSE_STREAMING_STORAGE_KEY } from "@agentic-smith/core";
+import { loadRootEnv } from "@agentic-smith/core/node/load-root-env";
+import type { PrismaClient, ThreadEvents } from "@agentic-smith/db";
+import { createThreadEvents, createThreadMessage, runAsSystem } from "@agentic-smith/db";
 import { serve } from "@hono/node-server";
 import type { Browser, BrowserContext, CDPSession, Page } from "@playwright/test";
 import { chromium } from "@playwright/test";
-import type { createApp } from "@rakazo/api/app";
-import { abortableDelay, RESPONSE_STREAMING_STORAGE_KEY } from "@rakazo/core";
-import { loadRootEnv } from "@rakazo/core/node/load-root-env";
-import type { PrismaClient, ThreadEvents } from "@rakazo/db";
-import { createThreadEvents, createThreadMessage, runAsSystem } from "@rakazo/db";
 import type { NumericSummary } from "../performance-report.js";
 import {
   parseTcpPort,
@@ -106,7 +106,9 @@ async function benchmark() {
   const reportPath =
     argument("--out") ??
     path.join(root, ".context/performance", `web-chat-${safeName(label)}.json`);
-  const temporaryRoot = await mkdtemp(path.join(os.tmpdir(), "rakazo-web-chat-performance-"));
+  const temporaryRoot = await mkdtemp(
+    path.join(os.tmpdir(), "agentic-smith-web-chat-performance-"),
+  );
   const database = await startBenchmarkDatabase(
     argument("--database-url") ?? process.env.PERF_DATABASE_URL,
   );
@@ -122,12 +124,12 @@ async function benchmark() {
       dataDir: path.join(temporaryRoot, "data"),
     });
     Object.assign(process.env, env);
-    if (!skipBuild) run("pnpm", ["--filter", "@rakazo/web", "build"], env);
+    if (!skipBuild) run("pnpm", ["--filter", "@agentic-smith/web", "build"], env);
     migrateDatabase(env);
 
     const [{ InMemoryRealtimeFanout }, { createApp }] = await Promise.all([
-      import("@rakazo/adapters"),
-      import("@rakazo/api/app"),
+      import("@agentic-smith/adapters"),
+      import("@agentic-smith/api/app"),
     ]);
     // Shared with the event writer below, so streamed updates reach the app's subscribers.
     const realtime = new InMemoryRealtimeFanout();
@@ -256,7 +258,7 @@ async function prepareAccount(bench: Bench, sizes: number[]): Promise<Account> {
   const context = await newContext(bench);
   try {
     const page = await context.newPage();
-    const email = `benchmark-${Date.now()}@rakazo.test`;
+    const email = `benchmark-${Date.now()}@agentic-smith.test`;
     const response = await page.request.post("/api/auth/sign-up/email", {
       data: { email, password: "password12", name: "Benchmark User" },
       headers: { origin: bench.webOrigin },

@@ -1,12 +1,12 @@
 # การตั้งค่า
 
-Rakazo อ่านจากตัวแปรสภาพแวดล้อม ปกติเก็บใน `.env` ข้างไฟล์ Compose แก้แล้ว restart บริการที่อ่านค่านั้น **อย่า commit `.env`**
+Agentic Smith อ่านจากตัวแปรสภาพแวดล้อม ปกติเก็บใน `.env` ข้างไฟล์ Compose แก้แล้ว restart บริการที่อ่านค่านั้น **อย่า commit `.env`**
 
 ## ที่อยู่การตั้งค่า
 
 ดูรายการหลักใน `.env.example` (checkout) หรือ `.env.images.example` (published images)
 
-ชื่อที่คุณตั้งเอง เช่น `TELEGRAM_BOT_TOKEN_<NAME>` ต้องใส่ในบล็อก `environment` ของ `api` และ `worker` ใน `docker-compose.override.yml` แล้วชี้ `-f docker-compose.override.yml` หลังไฟล์หลัก updater ต้องรวม override ใน `RAKAZO_COMPOSE_FILE` ด้วย
+ชื่อที่คุณตั้งเอง เช่น `TELEGRAM_BOT_TOKEN_<NAME>` ต้องใส่ในบล็อก `environment` ของ `api` และ `worker` ใน `docker-compose.override.yml` แล้วชี้ `-f docker-compose.override.yml` หลังไฟล์หลัก updater ต้องรวม override ใน `AGENTIC_SMITH_COMPOSE_FILE` ด้วย
 
 ## ค่าหลักที่มักปรับ
 
@@ -23,7 +23,7 @@ COMPUTER_MAX_ACTIVE_MS=7200000
 
 โมเดล: `MODEL_STREAM_TIMEOUT_MS`, `MODEL_STREAM_IDLE_TIMEOUT_MS`, `MODEL_CONNECT_TIMEOUT_MS` (1000–300000 ms)
 
-ฐานข้อมูลแยก login — owner สำหรับ migration (`DATABASE_MIGRATION_URL` / `POSTGRES_PASSWORD`) กับ `rakazo_app` (`DATABASE_URL` / `POSTGRES_APP_PASSWORD`) ถ้ามีแค่ `DATABASE_URL` อย่างเดียวจะมีคำเตือน RLS
+ฐานข้อมูลแยก login — owner สำหรับ migration (`DATABASE_MIGRATION_URL` / `POSTGRES_PASSWORD`) กับ `agentic_smith_app` (`DATABASE_URL` / `POSTGRES_APP_PASSWORD`) ถ้ามีแค่ `DATABASE_URL` อย่างเดียวจะมีคำเตือน RLS
 
 `DB_POOL_MAX`, `REALTIME_DATABASE_URL`, `GRAPHILE_WORKER_CONCURRENCY` — ปรับ pool และ realtime
 

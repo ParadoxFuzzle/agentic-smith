@@ -1,5 +1,5 @@
-import type { Run, RunStatus, RunTrigger, ThreadMessage } from "@rakazo/contracts";
-import { RUN_TRIGGERS } from "@rakazo/contracts";
+import type { Run, RunStatus, RunTrigger, ThreadMessage } from "@agentic-smith/contracts";
+import { RUN_TRIGGERS } from "@agentic-smith/contracts";
 import {
   isRunTerminalEvent,
   progressMessageId,

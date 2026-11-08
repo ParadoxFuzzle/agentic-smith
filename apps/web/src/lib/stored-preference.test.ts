@@ -103,7 +103,7 @@ describe("createStoredPreference", () => {
     preference.set(true);
     const listener = vi.fn();
     preference.subscribe(listener);
-    window.dispatchEvent(new StorageEvent("storage", { key: null, storageArea: sessionStorage }));
+    window.dispatchEvent(new StorageEvent("storage", { key: null, storageArea: null }));
     expect(preference.get()).toBe(true);
     expect(listener).not.toHaveBeenCalled();
   });

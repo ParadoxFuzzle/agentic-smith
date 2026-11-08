@@ -1,5 +1,5 @@
-import type { RunActivityRow } from "@rakazo/contracts";
-import { isRetryableError } from "@rakazo/core";
+import type { RunActivityRow } from "@agentic-smith/contracts";
+import { isRetryableError } from "@agentic-smith/core";
 import type { RefObject } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { fetchSpaceActivity } from "./activity";

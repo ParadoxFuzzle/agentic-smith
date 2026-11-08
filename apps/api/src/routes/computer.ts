@@ -1,8 +1,7 @@
 import { randomUUID } from "node:crypto";
-import { ORPCError } from "@orpc/server";
-import type { SandboxProvider } from "@rakazo/adapter-kit";
-import { computerControlExpireJobKey } from "@rakazo/adapter-kit";
-import type { ComputerExecutionLease } from "@rakazo/adapters";
+import type { SandboxProvider } from "@agentic-smith/adapter-kit";
+import { computerControlExpireJobKey } from "@agentic-smith/adapter-kit";
+import type { ComputerExecutionLease } from "@agentic-smith/adapters";
 import {
   applyTeachingDesktopInput,
   COMPUTER_SCREEN_UNAVAILABLE,
@@ -32,24 +31,25 @@ import {
   takeoverLeaseMs,
   toComputerRef,
   touchRunningComputer,
-} from "@rakazo/adapters";
+} from "@agentic-smith/adapters";
 import {
   attachmentMaxBytes,
   attachmentSizeLabel,
   ComputerCommandSchema,
   foldComputerCommands,
-} from "@rakazo/contracts";
-import { ACTIVE_RUN_STATUSES, COMPUTER_USING_RUNS, scrollDirection } from "@rakazo/core";
-import { addScreenProxyCapability } from "@rakazo/core/node/screen-capability";
-import type { ComputerRunEnd } from "@rakazo/db";
+} from "@agentic-smith/contracts";
+import { ACTIVE_RUN_STATUSES, COMPUTER_USING_RUNS, scrollDirection } from "@agentic-smith/core";
+import { addScreenProxyCapability } from "@agentic-smith/core/node/screen-capability";
+import type { ComputerRunEnd } from "@agentic-smith/db";
 import {
   expireComputerExecutionLeases,
   IsolationError,
   isRecordNotFound,
   parseComputerMode,
   recordComputerRunEnd,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { ORPCError } from "@orpc/server";
 import {
   acquireBootLease,
   assertNotAnotherPersonsControl,

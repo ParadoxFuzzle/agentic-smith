@@ -1,4 +1,4 @@
-import { MAX_FONT_SCALE } from "@rakazo/ui-tokens";
+import { MAX_FONT_SCALE } from "@agentic-smith/ui-tokens";
 import type {
   ASTNode,
   createMarkdownIt,

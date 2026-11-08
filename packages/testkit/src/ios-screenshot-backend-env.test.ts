@@ -1,6 +1,6 @@
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { databaseUrls } from "@rakazo/db";
+import { databaseUrls } from "@agentic-smith/db";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 const developerUrl = "postgres://owner:fixture@127.0.0.1:5433/developer_fixture";
@@ -17,8 +17,8 @@ vi.mock("node:child_process", async (importOriginal) => ({
   },
 }));
 
-vi.mock("@rakazo/db", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@rakazo/db")>()),
+vi.mock("@agentic-smith/db", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@agentic-smith/db")>()),
   createDb: () => ({
     pool: { query: async () => ({ rows: [] }), end: async () => {} },
     prisma: { $disconnect: async () => {} },
@@ -43,12 +43,12 @@ describe("iOS screenshot backend environment", () => {
         root: process.cwd(),
         serverUrl,
         port: 0,
-        dataDir: path.join(tmpdir(), `rakazo-ios-backend-env-${process.pid}`),
+        dataDir: path.join(tmpdir(), `agentic-smith-ios-backend-env-${process.pid}`),
       }),
     ).rejects.toThrow("stop after migrate");
 
     const urls = databaseUrls(migrateEnv.value ?? {});
-    expect(urls.url).toMatch(/\/rakazo_ios_screenshots$/);
+    expect(urls.url).toMatch(/\/agentic_smith_ios_screenshots$/);
     expect(urls.migrationUrl).toBe(urls.url);
     expect(migrateEnv.value?.REALTIME_DATABASE_URL).toBe(urls.url);
   });

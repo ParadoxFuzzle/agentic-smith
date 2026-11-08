@@ -1,7 +1,7 @@
 import { timingSafeEqual } from "node:crypto";
-import { LOCAL_COMPUTER_HOST_PATH, LOCAL_SETTINGS_TOKEN_HEADER } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
-import { runAsSystem } from "@rakazo/db";
+import { LOCAL_COMPUTER_HOST_PATH, LOCAL_SETTINGS_TOKEN_HEADER } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
+import { runAsSystem } from "@agentic-smith/db";
 import type { Hono } from "hono";
 import { readBoundedBody } from "./http-body.js";
 

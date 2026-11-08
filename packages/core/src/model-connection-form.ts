@@ -6,7 +6,7 @@ import type {
   ModelHeaderRow,
   SettingsScope,
   ThinkingLevel,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   DEFAULT_MODEL_CONTEXT_WINDOW,
   ModelHeaderRowsSchema,
@@ -17,7 +17,7 @@ import {
   parseModelMaxImagesPerPrompt,
   parseModelMaxTokens,
   savedCompatibleEndpointMatches,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   clampCatalogThinkingLevel,
   compatibleThinkingLevels,

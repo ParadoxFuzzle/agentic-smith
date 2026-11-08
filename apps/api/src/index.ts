@@ -1,14 +1,14 @@
 import type { Socket } from "node:net";
-import { unwrapEnvFromKeyManager } from "@rakazo/adapters";
-import { loadRootEnv } from "@rakazo/core/node/load-root-env";
-import { stopOnShutdownSignals } from "@rakazo/core/node/shutdown-signals";
+import { unwrapEnvFromKeyManager } from "@agentic-smith/adapters";
+import { loadRootEnv } from "@agentic-smith/core/node/load-root-env";
+import { stopOnShutdownSignals } from "@agentic-smith/core/node/shutdown-signals";
 
 loadRootEnv();
 await unwrapEnvFromKeyManager();
 
+import { SERVICE_NAMES } from "@agentic-smith/logging";
+import { createRootLogger } from "@agentic-smith/logging/axiom";
 import { serve } from "@hono/node-server";
-import { SERVICE_NAMES } from "@rakazo/logging";
-import { createRootLogger } from "@rakazo/logging/axiom";
 import { createApp } from "./app.js";
 import { loadEnv } from "./env.js";
 

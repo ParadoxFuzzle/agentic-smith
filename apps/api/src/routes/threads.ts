@@ -1,7 +1,6 @@
-import { ORPCError } from "@orpc/server";
-import { runContinueJob, runJobKey } from "@rakazo/adapter-kit";
-import { settleCallRequest } from "@rakazo/adapters";
-import type { Actor } from "@rakazo/contracts";
+import { runContinueJob, runJobKey } from "@agentic-smith/adapter-kit";
+import { settleCallRequest } from "@agentic-smith/adapters";
+import type { Actor } from "@agentic-smith/contracts";
 import {
   AttachmentValidationError,
   CALL_CLIENT_NONCE_PREFIX,
@@ -9,8 +8,8 @@ import {
   expandSkillReferencesInPrompt,
   MODEL_REQUIRED_SEND_ERROR,
   QUEUE_HOLDING_RUN_STATUSES,
-} from "@rakazo/core";
-import type { Prisma } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { Prisma } from "@agentic-smith/db";
 import {
   AnswerTooLongError,
   appendEventInTransaction,
@@ -23,8 +22,9 @@ import {
   THREAD_LOCK_TRANSACTION_OPTIONS,
   touchGroupUpdatedAt,
   withTransactionRetry,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { ORPCError } from "@orpc/server";
 import { releaseComputerControl } from "../computer-control.js";
 import type { RouterDeps } from "../router.js";
 import { createRoutineTestRun, routineTestRunNonce, routineTestTarget } from "../routines.js";

@@ -1,6 +1,6 @@
-import type { VoiceChatGroup } from "@rakazo/core";
-import { speechFromBlocks, voiceChatDuration, voiceChatSummary } from "@rakazo/core";
-import { typeScale } from "@rakazo/ui-tokens";
+import type { VoiceChatGroup } from "@agentic-smith/core";
+import { speechFromBlocks, voiceChatDuration, voiceChatSummary } from "@agentic-smith/core";
+import { typeScale } from "@agentic-smith/ui-tokens";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useI18n } from "../lib/i18n";

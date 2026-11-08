@@ -1,5 +1,5 @@
+import { Button, Disclosure, Input } from "@agentic-smith/ui-web";
 import { Plural, Trans, useLingui } from "@lingui/react/macro";
-import { Button, Disclosure, Input } from "@rakazo/ui-web";
 import { Check, Copy } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
@@ -351,8 +351,8 @@ export function ConnectionControls({
       {selected?.auth === "oauth" && !subscriptionSignIn ? (
         <p className="mt-5 text-body-sm leading-[1.5] text-muted-foreground first:mt-0">
           <Trans>
-            This subscription sign-in is not available in Rakazo yet. Use a deployment credential or
-            choose another provider.
+            This subscription sign-in is not available in Agentic Smith yet. Use a deployment
+            credential or choose another provider.
           </Trans>
         </p>
       ) : null}

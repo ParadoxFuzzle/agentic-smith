@@ -1,4 +1,4 @@
-import type { AppLocaleSchema } from "@rakazo/contracts";
+import type { AppLocaleSchema } from "@agentic-smith/contracts";
 
 /** Each app language named in itself, for language pickers. */
 export const APP_LOCALE_LABELS: Record<(typeof AppLocaleSchema.options)[number], string> = {

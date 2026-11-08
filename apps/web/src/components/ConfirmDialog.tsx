@@ -1,4 +1,3 @@
-import { Trans } from "@lingui/react/macro";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -8,7 +7,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { Trans } from "@lingui/react/macro";
 import type { ReactNode } from "react";
 
 /**

@@ -1,6 +1,6 @@
-import type { RealtimeFanout } from "@rakazo/adapter-kit";
-import type { ProductEvent } from "@rakazo/contracts";
-import { getLogger } from "@rakazo/logging";
+import type { RealtimeFanout } from "@agentic-smith/adapter-kit";
+import type { ProductEvent } from "@agentic-smith/contracts";
+import { getLogger } from "@agentic-smith/logging";
 import type { PrismaClient } from "./client.js";
 import { readRunTimingFields } from "./run-timing.js";
 

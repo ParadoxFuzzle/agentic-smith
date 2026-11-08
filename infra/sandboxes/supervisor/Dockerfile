@@ -9,7 +9,7 @@ COPY packages/core packages/core
 COPY packages/ui-tokens packages/ui-tokens
 COPY packages/logging packages/logging
 COPY infra/sandboxes/supervisor infra/sandboxes/supervisor
-RUN corepack enable && pnpm install --frozen-lockfile --prod --filter "@rakazo/sandbox-supervisor..."
+RUN corepack enable && pnpm install --frozen-lockfile --prod --filter "@agentic-smith/sandbox-supervisor..."
 RUN /tmp/apt-security.sh --check && rm -f /tmp/apt-security.sh
 WORKDIR /app/infra/sandboxes/supervisor
 CMD ["pnpm", "exec", "tsx", "src/index.ts"]

@@ -1,3 +1,4 @@
+import { TICKET_STATUSES } from "@agentic-smith/contracts";
 import { Button, Host, List, Menu, Section, Spacer, Text, VStack } from "@expo/ui/swift-ui";
 import {
   contentShape,
@@ -12,7 +13,6 @@ import {
   refreshable,
   shapes,
 } from "@expo/ui/swift-ui/modifiers";
-import { TICKET_STATUSES } from "@rakazo/contracts";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ticketStatusLabel } from "../lib/board";
 import { useFloatingHeaderInset } from "../lib/floating-header";

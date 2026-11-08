@@ -65,7 +65,7 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Verify mobile project
         if: inputs.ios_build_id == ''
-        run: pnpm --filter @rakazo/mobile check
+        run: pnpm --filter @agentic-smith/mobile check
 
       - name: Build iOS or reuse an uploaded build
         id: build

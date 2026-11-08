@@ -1,5 +1,5 @@
+import { Disclosure } from "@agentic-smith/ui-web";
 import { Trans } from "@lingui/react/macro";
-import { Disclosure } from "@rakazo/ui-web";
 import type { ReactNode } from "react";
 
 /** A hosted endpoint needs its key, so the field shows; elsewhere it stays tucked away. */

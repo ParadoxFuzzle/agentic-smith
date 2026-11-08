@@ -4,7 +4,7 @@ import { captureScreenshot, completeOnboarding, signup } from "./helpers";
 test("ordinary accounts can add personal MCP connections without server setup", async ({
   page,
 }, testInfo) => {
-  await signup(page, `personal-mcp-${Date.now()}@rakazo.test`, "password12", "Personal MCP");
+  await signup(page, `personal-mcp-${Date.now()}@agentic-smith.test`, "password12", "Personal MCP");
   await completeOnboarding(page);
   await page.goto("/integrations/setup");
   await expect(page.getByRole("heading", { name: "Add MCP server" })).toBeVisible();
@@ -52,7 +52,7 @@ test("ordinary accounts can add personal MCP connections without server setup", 
   await expect(page.getByRole("alert")).toContainText(message);
   await expect(page.getByRole("link", { name: "Troubleshoot", exact: true })).toHaveAttribute(
     "href",
-    "https://rakazo.com/docs/troubleshooting/#mcp-oauth-redirect-mismatch",
+    "https://jerithai.com/docs/troubleshooting/#mcp-oauth-redirect-mismatch",
   );
   await captureScreenshot(page, testInfo, "personal-mcp-callback-mismatch");
   await page.route("**/rpc/mcp/oauth/begin", (route) =>

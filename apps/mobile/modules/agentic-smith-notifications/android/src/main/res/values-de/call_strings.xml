@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="agentic_smith_call_channel">Laufender Anruf</string>
+  <string name="agentic_smith_call_title">Agentic Smith-Anruf</string>
+  <string name="agentic_smith_call_text">Mikrofon ist aktiv</string>
+  <string name="agentic_smith_call_answer">Annehmen</string>
+  <string name="agentic_smith_call_decline">Ablehnen</string>
+</resources>

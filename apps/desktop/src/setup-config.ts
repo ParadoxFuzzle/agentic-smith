@@ -1,13 +1,13 @@
 import { createHash } from "node:crypto";
-import type { DesktopSetup, DesktopStackProbeResponse } from "@rakazo/contracts";
-import { parseServerHeaders } from "@rakazo/contracts";
-import { isLoopbackHost, isPrivateNetworkHost } from "@rakazo/contracts/network-host";
+import type { DesktopSetup, DesktopStackProbeResponse } from "@agentic-smith/contracts";
+import { parseServerHeaders } from "@agentic-smith/contracts";
+import { isLoopbackHost, isPrivateNetworkHost } from "@agentic-smith/contracts/network-host";
 import { t } from "./i18n.js";
 
 /** Managed desktop origin; development keeps its usual web/API ports. */
 export const DEFAULT_LOCAL_WEB_URL = "http://127.0.0.1:45173";
-/** Hosted Rakazo; setup saves it as an `existing` server so it opens like any other. */
-export const RAKAZO_CLOUD_URL = "https://app.rakazo.com";
+/** Hosted Agentic Smith; setup saves it as an `existing` server so it opens like any other. */
+export const AGENTIC_SMITH_CLOUD_URL = "https://app.jerithai.com";
 export const PROBE_RESPONSE_LIMIT_BYTES = 64 * 1024;
 
 export const SETUP_FILE_NAME = "setup.json";
@@ -19,9 +19,9 @@ export type StartupTarget =
 const SCHEME = /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//;
 
 /**
- * Accepts what a person would actually type ("localhost:5173", "rakazo.example.com")
+ * Accepts what a person would actually type ("localhost:5173", "agentic-smith.example.com")
  * and returns a canonical http(s) origin, or null when the input can never
- * securely address a Rakazo server.
+ * securely address a Agentic Smith server.
  */
 export function normalizeServerUrl(input: string): string | null {
   const trimmed = input.trim();
@@ -46,7 +46,7 @@ export function normalizeServerUrl(input: string): string | null {
   // Public login cookies and API traffic must never cross a cleartext connection.
   if (url.protocol === "http:" && !isPrivateNetworkHost(url.hostname)) return null;
 
-  // Rakazo serves its renderer, RPC, and auth routes from one origin. Keeping a
+  // Agentic Smith serves its renderer, RPC, and auth routes from one origin. Keeping a
   // user-supplied path would make the setup probe and the loaded app disagree.
   return url.origin;
 }
@@ -123,9 +123,9 @@ export function serializeSetup(setup: DesktopSetup): string {
 }
 
 /**
- * Decides between the setup window and the app window. A first launch opens Rakazo
+ * Decides between the setup window and the app window. A first launch opens Agentic Smith
  * Cloud; other servers are a choice made from setup later. An explicit
- * `RAKAZO_WEB_URL` still wins over saved configuration so test and performance
+ * `AGENTIC_SMITH_WEB_URL` still wins over saved configuration so test and performance
  * harnesses can point the shell anywhere without touching a user's real setup.
  */
 export function resolveStartupTarget(input: {
@@ -143,7 +143,7 @@ export function resolveStartupTarget(input: {
     if (saved !== null) return { kind: "app", url: saved.serverUrl, source: "saved" };
     return { kind: "setup" };
   }
-  return { kind: "app", url: RAKAZO_CLOUD_URL, source: "cloud" };
+  return { kind: "app", url: AGENTIC_SMITH_CLOUD_URL, source: "cloud" };
 }
 
 /** Turns a network failure into something a person can act on. */
@@ -178,13 +178,13 @@ export function servesBundledRenderer(targetUrl: string, managedLocalStack: bool
   }
 }
 
-/** Each Rakazo origin gets its own persistent cookie and storage partition. */
+/** Each Agentic Smith origin gets its own persistent cookie and storage partition. */
 export function sessionPartitionForServerUrl(targetUrl: string): string | null {
   try {
     const url = new URL(targetUrl);
     if (url.protocol !== "http:" && url.protocol !== "https:") return null;
     const digest = createHash("sha256").update(url.origin).digest("hex").slice(0, 24);
-    return `persist:rakazo-${digest}`;
+    return `persist:agentic-smith-${digest}`;
   } catch {
     return null;
   }
@@ -201,7 +201,7 @@ export function safeExternalUrl(targetUrl: string): string | null {
   }
 }
 
-export function isRakazoHealth(value: unknown): boolean {
+export function isAgenticSmithHealth(value: unknown): boolean {
   if (typeof value !== "object" || value === null) return false;
   const json = (value as { json?: unknown }).json;
   return (

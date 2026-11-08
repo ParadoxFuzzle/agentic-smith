@@ -1,8 +1,8 @@
 // @vitest-environment jsdom
 
-import type { BillingStatus, Bot } from "@rakazo/contracts";
-import { BOT_COLORS } from "@rakazo/contracts";
-import type * as UiWeb from "@rakazo/ui-web";
+import type { BillingStatus, Bot } from "@agentic-smith/contracts";
+import { BOT_COLORS } from "@agentic-smith/contracts";
+import type * as UiWeb from "@agentic-smith/ui-web";
 import type { ComponentProps, ReactNode } from "react";
 import { act } from "react";
 import type { Root } from "react-dom/client";
@@ -21,7 +21,7 @@ vi.mock("@lingui/react/macro", () => ({
   Plural: ({ value, one, other }: { value: number; one: string; other: string }) =>
     (value === 1 ? one : other).replace("#", String(value)),
 }));
-vi.mock("@rakazo/ui-web", async (importOriginal) => {
+vi.mock("@agentic-smith/ui-web", async (importOriginal) => {
   const { useCopyText } = await importOriginal<typeof UiWeb>();
   const Plain = ({ children }: { children?: ReactNode }) => <>{children}</>;
   return {
@@ -66,7 +66,7 @@ afterEach(() => {
   container.remove();
   billing.status = null;
   writeText.mockClear();
-  delete window.rakazoDesktop;
+  delete window.agenticSmithDesktop;
   vi.unstubAllGlobals();
 });
 
@@ -95,7 +95,7 @@ function renderHeader({ inGroup = false } = {}) {
 const gift = () => container.querySelector<HTMLButtonElement>('[aria-label="Invite a friend"]');
 
 it("clears the macOS traffic lights beside Open navigation on a narrow desktop window", () => {
-  window.rakazoDesktop = { platform: "darwin" } as never;
+  window.agenticSmithDesktop = { platform: "darwin" } as never;
   renderHeader();
   expect(container.querySelector('[aria-label="Open navigation"]')!.className).toContain(
     "md:hidden",
@@ -104,7 +104,7 @@ it("clears the macOS traffic lights beside Open navigation on a narrow desktop w
   expect(spacer?.className).toContain("md:hidden");
   expect(spacer?.style.width).toBe("72px");
 
-  delete window.rakazoDesktop;
+  delete window.agenticSmithDesktop;
   renderHeader();
   expect(container.querySelector(".app-drag")).toBeNull();
 });

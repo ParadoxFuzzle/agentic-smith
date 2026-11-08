@@ -15,15 +15,15 @@ import type {
   ScreenRequest,
   ScreenSession,
   TerminalRequest,
-} from "@rakazo/adapter-kit";
-import { INVALID_BROWSER_REQUEST, SandboxRequestRejectedError } from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
+import { INVALID_BROWSER_REQUEST, SandboxRequestRejectedError } from "@agentic-smith/adapter-kit";
 import {
   boundedSandboxCommandTimeoutMs,
   cancelResponseBody,
   requestDeadline,
   resolveSupervisorToken,
-} from "@rakazo/core";
-import { outgoingCorrelationHeaders } from "@rakazo/logging";
+} from "@agentic-smith/core";
+import { outgoingCorrelationHeaders } from "@agentic-smith/logging";
 import {
   boundedComputerActions,
   clampRounded,
@@ -131,12 +131,14 @@ export class DockerSandboxProvider implements SandboxProvider {
   private headers(context: AdapterContext, botId?: string) {
     return {
       authorization: `Bearer ${this.supervisorToken}`,
-      "x-rakazo-space-id": context.spaceId,
+      "x-agentic-smith-space-id": context.spaceId,
       ...outgoingCorrelationHeaders(),
-      ...(botId ? { "x-rakazo-bot-id": botId } : {}),
-      ...(context.botId ? { "x-rakazo-screen-id": context.botId } : {}),
-      ...(context.screenLeaseId ? { "x-rakazo-screen-lease-id": context.screenLeaseId } : {}),
-      ...(context.cancelRunWork ? { "x-rakazo-cancel-run-work": "1" } : {}),
+      ...(botId ? { "x-agentic-smith-bot-id": botId } : {}),
+      ...(context.botId ? { "x-agentic-smith-screen-id": context.botId } : {}),
+      ...(context.screenLeaseId
+        ? { "x-agentic-smith-screen-lease-id": context.screenLeaseId }
+        : {}),
+      ...(context.cancelRunWork ? { "x-agentic-smith-cancel-run-work": "1" } : {}),
     };
   }
 
@@ -198,7 +200,7 @@ export class DockerSandboxProvider implements SandboxProvider {
       body: JSON.stringify({
         ...request,
         argv: sandboxCommandArgv(request),
-        cwd: workspaceCwd("/home/rakazo", request.cwd),
+        cwd: workspaceCwd("/home/agentic-smith", request.cwd),
         timeoutMs,
       }),
       signal: context.signal,
@@ -545,7 +547,7 @@ export class DockerSandboxProvider implements SandboxProvider {
           headers: {
             ...this.headers(context, computer.botId),
             ...(context.keepScreenWarm && !context.cancelRunWork && !context.signal.aborted
-              ? { "x-rakazo-preserve-screen": "1" }
+              ? { "x-agentic-smith-preserve-screen": "1" }
               : {}),
           },
           signal: deadline.signal,

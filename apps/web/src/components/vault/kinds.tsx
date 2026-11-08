@@ -1,7 +1,7 @@
+import type { BotSecretMetadata, VaultKind } from "@agentic-smith/contracts";
+import { vaultItemSubtitle } from "@agentic-smith/contracts";
+import { cn } from "@agentic-smith/ui-web";
 import { useLingui } from "@lingui/react/macro";
-import type { BotSecretMetadata, VaultKind } from "@rakazo/contracts";
-import { vaultItemSubtitle } from "@rakazo/contracts";
-import { cn } from "@rakazo/ui-web";
 import type { LucideIcon } from "lucide-react";
 import { Braces, CreditCard, KeyRound, MapPin, SquareTerminal } from "lucide-react";
 

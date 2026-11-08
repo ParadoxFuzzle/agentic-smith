@@ -1,10 +1,8 @@
-import { t } from "@lingui/core/macro";
-import { Trans, useLingui } from "@lingui/react/macro";
-import { ChatMarkdown } from "@rakazo/chat-ui/web";
-import type { Artifact, Bot } from "@rakazo/contracts";
-import { artifactPreviewKind } from "@rakazo/contracts";
-import { artifactTypeLabel } from "@rakazo/core";
-import { writeSaved } from "@rakazo/core/query";
+import { ChatMarkdown } from "@agentic-smith/chat-ui/web";
+import type { Artifact, Bot } from "@agentic-smith/contracts";
+import { artifactPreviewKind } from "@agentic-smith/contracts";
+import { artifactTypeLabel } from "@agentic-smith/core";
+import { writeSaved } from "@agentic-smith/core/query";
 import {
   BotAvatar,
   Button,
@@ -27,7 +25,9 @@ import {
   Spinner,
   ToggleGroup,
   ToggleGroupItem,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
+import { t } from "@lingui/core/macro";
+import { Trans, useLingui } from "@lingui/react/macro";
 import { skipToken, useInfiniteQuery, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ChevronLeft,
@@ -66,7 +66,7 @@ import { WindowChrome } from "./WindowChrome";
 type ViewMode = "grid" | "list";
 type DateFilter = "all" | "today" | "week" | "month";
 const viewModePreference = createStoredPreference<ViewMode>({
-  key: "rakazo:artifacts-view-mode",
+  key: "agentic-smith:artifacts-view-mode",
   parse: (raw) => (raw === "list" ? "list" : "grid"),
   serialize: (mode) => mode,
 });

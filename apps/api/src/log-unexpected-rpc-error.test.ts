@@ -1,5 +1,3 @@
-import { ORPCError, onError, os } from "@orpc/server";
-import { RPCHandler } from "@orpc/server/fetch";
 import {
   SandboxAllowanceUsedError,
   SandboxDamagedError,
@@ -7,24 +5,26 @@ import {
   SandboxUnavailableError,
   SandboxUnresponsiveError,
   VoiceAccountError,
-} from "@rakazo/adapter-kit";
-import { ThreadMessagePageSchema } from "@rakazo/contracts";
-import { MODEL_IMAGE_INPUT_ERROR } from "@rakazo/core";
-import { IsolationError, SpaceDeletionInProgressError } from "@rakazo/db";
-import { createLogger, createTestSink, installLogger } from "@rakazo/logging";
-import { markExpectedFailure, requestLogging } from "@rakazo/logging/hono";
+} from "@agentic-smith/adapter-kit";
+import { ThreadMessagePageSchema } from "@agentic-smith/contracts";
+import { MODEL_IMAGE_INPUT_ERROR } from "@agentic-smith/core";
+import { IsolationError, SpaceDeletionInProgressError } from "@agentic-smith/db";
+import { createLogger, createTestSink, installLogger } from "@agentic-smith/logging";
+import { markExpectedFailure, requestLogging } from "@agentic-smith/logging/hono";
+import { ORPCError, onError, os } from "@orpc/server";
+import { RPCHandler } from "@orpc/server/fetch";
 import { Hono } from "hono";
 import { afterEach, describe, expect, it } from "vitest";
 import { handleRpcError, logUnexpectedRpcError } from "./rpc-errors.js";
 
 describe("logUnexpectedRpcError", () => {
   afterEach(() => {
-    installLogger(createLogger({ service: "rakazo-api", level: "off", sinks: [] }));
+    installLogger(createLogger({ service: "agentic-smith-api", level: "off", sinks: [] }));
   });
 
   it("stays quiet for an error the router chose to return", () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
 
     logUnexpectedRpcError(new ORPCError("BAD_REQUEST", { message: "file is too large" }), [
       "computer",
@@ -36,7 +36,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("reports a procedure's own 5xx under the procedure with its cause", () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const cause = new Error("key service unreachable");
 
     logUnexpectedRpcError(new ORPCError("SERVICE_UNAVAILABLE", { cause }), ["models", "list"]);
@@ -50,7 +50,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("completes a request the provider outage answered with 503 as a warning", async () => {
     const sink = createTestSink();
-    const logger = createLogger({ service: "rakazo-api", sinks: [sink] });
+    const logger = createLogger({ service: "agentic-smith-api", sinks: [sink] });
     installLogger(logger);
     const rpc = new RPCHandler(
       {
@@ -82,7 +82,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("leaves a 5xx out of error reports when the procedure marked its outage expected", async () => {
     const sink = createTestSink();
-    const logger = createLogger({ service: "rakazo-api", sinks: [sink] });
+    const logger = createLogger({ service: "agentic-smith-api", sinks: [sink] });
     installLogger(logger);
     const rpc = new RPCHandler(
       {
@@ -116,7 +116,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("keeps an image send the model cannot read out of error reports", () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const rejection = new ORPCError("CONFLICT", {
       message: MODEL_IMAGE_INPUT_ERROR,
       data: { reason: "model_image_input_unsupported" },
@@ -128,7 +128,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("answers work refused in a Space being deleted as a conflict, without an error report", () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
 
     expect(() => handleRpcError(new SpaceDeletionInProgressError(), ["threads", "send"])).toThrow(
       expect.objectContaining({ code: "CONFLICT" }),
@@ -138,7 +138,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("names the fields a procedure's output got wrong, without their values", async () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const router = {
       messages: os.output(ThreadMessagePageSchema).handler(() => ({
         threadId: "thread-1",
@@ -181,7 +181,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("names the procedure and every cause behind an opaque failure", () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const error = new Error("fetch failed", {
       cause: Object.assign(new Error("connect ECONNREFUSED 127.0.0.1:7091"), {
         code: "ECONNREFUSED",
@@ -201,7 +201,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("keeps a failure after the client disconnected out of error reports", async () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const client = new AbortController();
     const router = {
       voices: os.handler(() => {
@@ -232,7 +232,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("returns a provider rate limit as too many requests without an error report", () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const error = new SandboxRateLimitError({ cause: new Error("HTTP 429, rate_limited") });
 
     let thrown: unknown;
@@ -255,7 +255,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("returns a computer the provider never started as a retryable 503 without an error report", () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const error = new SandboxUnavailableError({ cause: new Error("sandbox did not become ready") });
 
     let thrown: unknown;
@@ -278,7 +278,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("returns an unreachable computer provider as a retryable 503 without an error report", () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const error = new SandboxUnresponsiveError("Boat API request failed (HTTP 502)");
 
     let thrown: unknown;
@@ -304,7 +304,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("returns a spent computer allowance with its message and no error report", () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const error = new SandboxAllowanceUsedError();
 
     let thrown: unknown;
@@ -322,7 +322,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("returns a damaged computer's Recover message as a conflict without an error report", () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const error = new SandboxDamagedError();
 
     let thrown: unknown;
@@ -340,7 +340,7 @@ describe("logUnexpectedRpcError", () => {
   });
 
   it("sends a provider rate limit to the client as HTTP 429 with the plain message", async () => {
-    installLogger(createLogger({ service: "rakazo-api", sinks: [createTestSink()] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [createTestSink()] }));
     const router = {
       boot: os.handler(() => {
         throw new SandboxRateLimitError({ cause: new Error("HTTP 429, rate_limited") });
@@ -365,7 +365,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("sends a spent voice provider account to the client as HTTP 402 with its code and no error report", async () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const router = {
       voices: os.handler(() => {
         throw new VoiceAccountError(
@@ -396,7 +396,7 @@ describe("logUnexpectedRpcError", () => {
 
   it("sends a missing or foreign resource to the client as HTTP 404 without an error report", async () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-api", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-api", sinks: [sink] }));
     const router = {
       read: os.handler(() => {
         throw new IsolationError();

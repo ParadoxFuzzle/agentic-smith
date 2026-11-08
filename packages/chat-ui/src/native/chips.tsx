@@ -1,5 +1,5 @@
-import type { ColorTokens } from "@rakazo/ui-tokens";
-import { darkTokens, pageIconBars, typeScale } from "@rakazo/ui-tokens";
+import type { ColorTokens } from "@agentic-smith/ui-tokens";
+import { darkTokens, pageIconBars, typeScale } from "@agentic-smith/ui-tokens";
 import type { MarkdownStyleMap } from "@ronradtke/react-native-markdown-display";
 import type { ReactNode } from "react";
 import { createContext, useContext } from "react";

@@ -1,4 +1,4 @@
-import type { LoginFieldInput, RpcInput } from "@rakazo/contracts";
+import type { LoginFieldInput, RpcInput } from "@agentic-smith/contracts";
 import { hapticSuccess } from "./haptics";
 import type { MobileMessage } from "./mobile-types";
 

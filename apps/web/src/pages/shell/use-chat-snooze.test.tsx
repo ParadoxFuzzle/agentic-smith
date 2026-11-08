@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import type { Bot, Group, Space } from "@rakazo/contracts";
+import type { Bot, Group, Space } from "@agentic-smith/contracts";
 import { act, createElement, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { expect, it, vi } from "vitest";
@@ -11,7 +11,7 @@ const toast = vi.hoisted(() => ({ error: vi.fn() }));
 vi.mock("@lingui/react/macro", () => ({
   useLingui: () => ({ t: (parts: TemplateStringsArray) => parts.join("") }),
 }));
-vi.mock("@rakazo/ui-web", () => ({ toast }));
+vi.mock("@agentic-smith/ui-web", () => ({ toast }));
 vi.mock("../../lib/rpc", () => ({ rpcForSpace: vi.fn() }));
 
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true;

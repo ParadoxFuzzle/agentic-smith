@@ -1,5 +1,5 @@
-import type { PrismaClient } from "@rakazo/db";
-import { runAsSystem, withTransactionRetry } from "@rakazo/db";
+import type { PrismaClient } from "@agentic-smith/db";
+import { runAsSystem, withTransactionRetry } from "@agentic-smith/db";
 import { advisoryLock } from "./advisory-lock.js";
 import { credentialDigest } from "./credential-digest.js";
 import { EncryptedSecretStore } from "./secrets.js";

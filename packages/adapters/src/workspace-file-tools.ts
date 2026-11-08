@@ -1,10 +1,10 @@
-import type { AdapterContext, ComputerRef, SandboxProvider } from "@rakazo/adapter-kit";
-import { isSandboxProviderOutage } from "@rakazo/adapter-kit";
-import type { ComputerMode } from "@rakazo/contracts";
-import { ATTACHMENT_MAX_BYTES } from "@rakazo/contracts";
-import { redactSecrets } from "@rakazo/core";
-import { PLOT_TOOL_GUIDE, searchChartCatalog } from "@rakazo/core/plot-catalog";
-import { getLogger } from "@rakazo/logging";
+import type { AdapterContext, ComputerRef, SandboxProvider } from "@agentic-smith/adapter-kit";
+import { isSandboxProviderOutage } from "@agentic-smith/adapter-kit";
+import type { ComputerMode } from "@agentic-smith/contracts";
+import { ATTACHMENT_MAX_BYTES } from "@agentic-smith/contracts";
+import { redactSecrets } from "@agentic-smith/core";
+import { PLOT_TOOL_GUIDE, searchChartCatalog } from "@agentic-smith/core/plot-catalog";
+import { getLogger } from "@agentic-smith/logging";
 import { JSDOM } from "jsdom";
 import { displayBotWorkspacePath, resolveBotWorkspacePath } from "./computer-support.js";
 import type { ExecutorDeps } from "./executor-deps.js";

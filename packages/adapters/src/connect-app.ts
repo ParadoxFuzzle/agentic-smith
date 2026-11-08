@@ -1,12 +1,12 @@
-import type { AdapterContext, ManagedConnectorProvider } from "@rakazo/adapter-kit";
-import type { MessageBlock } from "@rakazo/contracts";
-import { appConnectCard, matchAppCatalog, matchesAppConnection } from "@rakazo/core";
-import type { PrismaClient, ThreadEvents } from "@rakazo/db";
+import type { AdapterContext, ManagedConnectorProvider } from "@agentic-smith/adapter-kit";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { appConnectCard, matchAppCatalog, matchesAppConnection } from "@agentic-smith/core";
+import type { PrismaClient, ThreadEvents } from "@agentic-smith/db";
 import {
   appendEventInTransaction,
   createThreadMessageInTransaction,
   THREAD_LOCK_TRANSACTION_OPTIONS,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
 
 const RECENT_MESSAGES = 50;
 

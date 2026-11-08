@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTitle,
   useCopyText,
-} from "@rakazo/ui-web";
+} from "@agentic-smith/ui-web";
 import type { ComponentPropsWithoutRef, ReactElement, ReactNode } from "react";
 import {
   Children,

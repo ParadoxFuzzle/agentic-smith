@@ -1,5 +1,5 @@
-import type { Bot, BotSection, Group } from "@rakazo/contracts";
-import { chatSnoozed } from "@rakazo/core";
+import type { Bot, BotSection, Group } from "@agentic-smith/contracts";
+import { chatSnoozed } from "@agentic-smith/core";
 import { lazyOverlay } from "../../components/ErrorBoundary";
 import type { createSpaceRpc } from "../../lib/rpc";
 import type { ShellDialogsState } from "./shell-dialogs";

@@ -1,9 +1,9 @@
 import { randomUUID } from "node:crypto";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
-import { boundedSandboxCommandTimeoutMs } from "@rakazo/core";
-import { getLogger } from "@rakazo/logging";
-import { requestLogging } from "@rakazo/logging/hono";
+import { boundedSandboxCommandTimeoutMs } from "@agentic-smith/core";
+import { getLogger } from "@agentic-smith/logging";
+import { requestLogging } from "@agentic-smith/logging/hono";
 import type Docker from "dockerode";
 import type { Context } from "hono";
 import { Hono } from "hono";
@@ -61,7 +61,7 @@ import {
   ComputerIdentityError,
   countSpaceContainers,
   findBotContainer,
-  isRakazoContainer,
+  isAgenticSmithContainer,
   managedContainer,
 } from "./identity.js";
 import { withBotLifecycleLock, withComputerScreenLock, withSpaceComputerLock } from "./locks.js";
@@ -120,10 +120,10 @@ app.use("*", requestLogging());
 /** The bot, Space, and screen a request acts for, as the API sends them. */
 function identityHeaders(c: Context) {
   return {
-    botId: c.req.header("x-rakazo-bot-id"),
-    spaceId: c.req.header("x-rakazo-space-id"),
-    screenId: c.req.header("x-rakazo-screen-id"),
-    screenLeaseId: c.req.header("x-rakazo-screen-lease-id"),
+    botId: c.req.header("x-agentic-smith-bot-id"),
+    spaceId: c.req.header("x-agentic-smith-space-id"),
+    screenId: c.req.header("x-agentic-smith-screen-id"),
+    screenLeaseId: c.req.header("x-agentic-smith-screen-lease-id"),
   };
 }
 
@@ -327,7 +327,7 @@ app.post("/computers", async (c) => {
           removeOwnedComputer(
             docker.getContainer(name),
             (id) => docker.getContainer(id).remove({ force: true }),
-            (info) => isRakazoContainer(info, body.botId, body.spaceId),
+            (info) => isAgenticSmithContainer(info, body.botId, body.spaceId),
             (id) => clearComputerScreenRegistry(computerScreens, computerScreenBoots, id),
           );
         try {
@@ -439,7 +439,7 @@ app.post("/computers/:id/exec", async (c) => {
           container,
           body.argv.length ? body.argv : ["/bin/echo", "ready"],
           {
-            workingDir: body.cwd ?? "/home/rakazo",
+            workingDir: body.cwd ?? "/home/agentic-smith",
             env: [
               ...computerCommandEnv(layout),
               ...Object.entries(body.env ?? {}).map(([k, v]) => `${k}=${v}`),
@@ -536,7 +536,7 @@ app.post("/computers/:id/browser", async (c) => {
               z.object({
                 kind: z.literal("click"),
                 ref: z.string().min(1).max(200),
-                // The user approved a purchase click on this site (see rakazo-page-browser).
+                // The user approved a purchase click on this site (see agentic-smith-page-browser).
                 approved: z.boolean().optional(),
                 // Empty for a page without a host (about:blank, data:, file:).
                 site: z.string().max(253).optional(),
@@ -621,20 +621,22 @@ app.post("/computers/:id/browser", async (c) => {
       // also keep the argv copy so a computer still on an older image keeps working until it is
       // replaced.
       [
-        "/usr/local/bin/rakazo-page-browser",
+        "/usr/local/bin/agentic-smith-page-browser",
         body.command,
         ...(carriesSavedLogin ? [] : [JSON.stringify(body)]),
       ],
       {
         env: [
           `DISPLAY=${layout.display}`,
-          `RAKAZO_CDP_PORT=${layout.debugPort}`,
-          "HOME=/home/rakazo",
+          `AGENTIC_SMITH_CDP_PORT=${layout.debugPort}`,
+          "HOME=/home/agentic-smith",
           "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-          "RAKAZO_BROWSER_WATCH_STDIN=1",
-          "RAKAZO_BROWSER_ARGS_STDIN=1",
-          ...(process.env.RAKAZO_BROWSER_UPLOAD_MAX_BYTES !== undefined
-            ? [`RAKAZO_BROWSER_UPLOAD_MAX_BYTES=${process.env.RAKAZO_BROWSER_UPLOAD_MAX_BYTES}`]
+          "AGENTIC_SMITH_BROWSER_WATCH_STDIN=1",
+          "AGENTIC_SMITH_BROWSER_ARGS_STDIN=1",
+          ...(process.env.AGENTIC_SMITH_BROWSER_UPLOAD_MAX_BYTES !== undefined
+            ? [
+                `AGENTIC_SMITH_BROWSER_UPLOAD_MAX_BYTES=${process.env.AGENTIC_SMITH_BROWSER_UPLOAD_MAX_BYTES}`,
+              ]
             : []),
         ],
         timeoutMs: 25_000,
@@ -1029,8 +1031,9 @@ app.delete("/computers/:id/screen", async (c) => {
     const { container } = await managedContainer(id, headers.botId, headers.spaceId);
     containerFound = true;
     const screenId = headers.screenId || headers.botId || id;
-    const cancelRunWork = c.req.header("x-rakazo-cancel-run-work") === "1";
-    const keepScreenWarm = c.req.header("x-rakazo-preserve-screen") === "1" && !cancelRunWork;
+    const cancelRunWork = c.req.header("x-agentic-smith-cancel-run-work") === "1";
+    const keepScreenWarm =
+      c.req.header("x-agentic-smith-preserve-screen") === "1" && !cancelRunWork;
     const screenLeaseId = headers.screenLeaseId;
     await withComputerScreenLock(id, async () => {
       const info = await container.inspect();

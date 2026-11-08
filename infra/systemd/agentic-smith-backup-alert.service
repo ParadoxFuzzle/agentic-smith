@@ -1,0 +1,11 @@
+[Unit]
+Description=Notify operators when a production backup fails
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/agentic-smith-host-alert backup-failure "Nightly backup failed. Inspect agentic-smith-backup.service on the server."
+StateDirectory=agentic-smith/alerts
+StateDirectoryMode=0700
+ProtectSystem=strict
+ReadWritePaths=/var/lib/agentic-smith/alerts
+PrivateTmp=true

@@ -2,10 +2,10 @@ import { createHmac, randomUUID } from "node:crypto";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import type { TransactionalEmailProvider } from "@rakazo/adapter-kit";
-import { FakeSandboxProvider } from "@rakazo/adapters";
-import type { PrismaClient } from "@rakazo/db";
-import { asSystem, bootstrapUserSpace, createRepos } from "@rakazo/db";
+import type { TransactionalEmailProvider } from "@agentic-smith/adapter-kit";
+import { FakeSandboxProvider } from "@agentic-smith/adapters";
+import type { PrismaClient } from "@agentic-smith/db";
+import { asSystem, bootstrapUserSpace, createRepos } from "@agentic-smith/db";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import type { AppHandles } from "./app.js";
 import { createApp } from "./app.js";
@@ -36,7 +36,7 @@ describePostgres("directory provisioning over SCIM (PostgreSQL)", () => {
   };
 
   beforeAll(async () => {
-    dataDir = await mkdtemp(join(tmpdir(), "rakazo-directory-"));
+    dataDir = await mkdtemp(join(tmpdir(), "agentic-smith-directory-"));
     handles = await createApp({
       databaseUrl: databaseUrl!,
       dataDir,

@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { ComposioConnector, FakeComposioClient } from "@rakazo/adapters";
+import { ComposioConnector, FakeComposioClient } from "@agentic-smith/adapters";
 import { describe, expect, it } from "vitest";
 import { discardBotIntroRun } from "./discard-bot-intro.js";
 import { sessionCookieHeader } from "./index.js";
@@ -64,10 +64,10 @@ describe.skipIf(!enabled)("earlier files through history tools", () => {
         },
       ],
     });
-    const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-history-files-"));
+    const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-history-files-"));
     let stop: (() => Promise<void>) | undefined;
     try {
-      const { createApp } = await import("@rakazo/api/app");
+      const { createApp } = await import("@agentic-smith/api/app");
       const handles = await createApp({
         databaseUrl: process.env.DATABASE_URL!,
         realtimeDatabaseUrl: process.env.DATABASE_URL!,
@@ -87,7 +87,7 @@ describe.skipIf(!enabled)("earlier files through history tools", () => {
         method: "POST",
         headers: { "content-type": "application/json", origin },
         body: JSON.stringify({
-          email: `history-files-${randomUUID()}@rakazo.test`,
+          email: `history-files-${randomUUID()}@agentic-smith.test`,
           password: "password12",
           name: "History files fixture",
         }),

@@ -1,9 +1,8 @@
 {
   "expo": {
-    "name": "Rakazo",
-    "slug": "rakazo",
-    "owner": "inbox-zero",
-    "scheme": "rakazo",
+    "name": "Agentic Smith",
+    "slug": "agentic-smith",
+    "scheme": "agentic-smith",
     "version": "1.0.12",
     "orientation": "default",
     "userInterfaceStyle": "automatic",
@@ -26,14 +25,14 @@
         "expo-audio",
         {
           "enableBackgroundPlayback": false,
-          "microphonePermission": "Rakazo uses the microphone for voice calls with your bots."
+          "microphonePermission": "Agentic Smith uses the microphone for voice calls with your bots."
         }
       ],
       [
         "expo-speech-recognition",
         {
-          "speechRecognitionPermission": "Rakazo turns your speech into messages during voice calls.",
-          "microphonePermission": "Rakazo uses the microphone for voice calls with your bots."
+          "speechRecognitionPermission": "Agentic Smith turns your speech into messages during voice calls.",
+          "microphonePermission": "Agentic Smith uses the microphone for voice calls with your bots."
         }
       ],
       "expo-localization",
@@ -48,9 +47,9 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Rakazo uses your photo library so you can attach images to a bot message.",
-          "cameraPermission": "Rakazo uses the camera so you can attach photos to a bot message.",
-          "microphonePermission": "Rakazo uses the microphone for voice calls with your bots."
+          "photosPermission": "Agentic Smith uses your photo library so you can attach images to a bot message.",
+          "cameraPermission": "Agentic Smith uses the camera so you can attach photos to a bot message.",
+          "microphonePermission": "Agentic Smith uses the microphone for voice calls with your bots."
         }
       ],
       "./plugins/with-share-extension",
@@ -59,7 +58,7 @@
         {
           "ios": {
             "enabled": true,
-            "appGroupId": "group.com.rakazo.app",
+            "appGroupId": "group.com.agenticsmith.app",
             "activationRule": {
               "supportsText": true,
               "supportsWebUrlWithMaxCount": 1,
@@ -102,17 +101,17 @@
       "pl": "./locales/pl.json"
     },
     "ios": {
-      "bundleIdentifier": "com.rakazo.app",
+      "bundleIdentifier": "com.agenticsmith.app",
       "buildNumber": "1",
       "supportsTablet": true,
-      "icon": "../../packages/ui-tokens/assets/Rakazo.icon",
+      "icon": "../../packages/ui-tokens/assets/AgenticSmith.icon",
       "config": {
         "usesNonExemptEncryption": false
       },
       "infoPlist": {
-        "NSCameraUsageDescription": "Rakazo uses the camera so you can attach photos to a bot message.",
-        "NSPhotoLibraryUsageDescription": "Rakazo uses your photo library so you can attach images to a bot message.",
-        "NSLocalNetworkUsageDescription": "Rakazo connects to a self-hosted Rakazo server on your local network.",
+        "NSCameraUsageDescription": "Agentic Smith uses the camera so you can attach photos to a bot message.",
+        "NSPhotoLibraryUsageDescription": "Agentic Smith uses your photo library so you can attach images to a bot message.",
+        "NSLocalNetworkUsageDescription": "Agentic Smith connects to a self-hosted Agentic Smith server on your local network.",
         "NSAppTransportSecurity": {
           "NSAllowsLocalNetworking": true
         },
@@ -125,7 +124,7 @@
       }
     },
     "android": {
-      "package": "com.rakazo.app",
+      "package": "com.agenticsmith.app",
       "versionCode": 10,
       "softwareKeyboardLayoutMode": "resize",
       "icon": "./assets/icon.png",
@@ -142,25 +141,24 @@
       "router": {},
       "supportsRTL": true,
       "eas": {
-        "projectId": "07f7eb04-45e3-47fe-9374-99a2f991131e",
         "build": {
           "experimental": {
             "ios": {
               "appExtensions": [
                 {
-                  "targetName": "RakazoWidgets",
-                  "bundleIdentifier": "com.rakazo.app.widgets"
+                  "targetName": "AgenticSmithWidgets",
+                  "bundleIdentifier": "com.agenticsmith.app.widgets"
                 },
                 {
                   "targetName": "expo-sharing-extension",
-                  "bundleIdentifier": "com.rakazo.app.expo-sharing-extension",
+                  "bundleIdentifier": "com.agenticsmith.app.expo-sharing-extension",
                   "entitlements": {
-                    "com.apple.security.application-groups": ["group.com.rakazo.app"]
+                    "com.apple.security.application-groups": ["group.com.agenticsmith.app"]
                   }
                 },
                 {
                   "targetName": "AgentNotifications",
-                  "bundleIdentifier": "com.rakazo.app.notifications",
+                  "bundleIdentifier": "com.agenticsmith.app.notifications",
                   "entitlements": {
                     "com.apple.developer.usernotifications.communication": true
                   }
@@ -173,9 +171,6 @@
     },
     "runtimeVersion": {
       "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/07f7eb04-45e3-47fe-9374-99a2f991131e"
     }
   }
 }

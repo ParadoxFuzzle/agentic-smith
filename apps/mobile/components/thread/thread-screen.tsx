@@ -1,4 +1,4 @@
-import type { AgentSkillCatalogEntry } from "@rakazo/contracts";
+import type { AgentSkillCatalogEntry } from "@agentic-smith/contracts";
 import {
   buildComposerMentionOptions,
   channelMessageSender,
@@ -13,7 +13,7 @@ import {
   otherAuthor,
   displayName as safeDisplayName,
   workingRoutineName,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import { useFocusEffect, useIsFocused, useLocalSearchParams, useRouter } from "expo-router";
 import { useHeaderHeight } from "expo-router/react-navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";

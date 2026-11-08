@@ -5,11 +5,11 @@ import type {
   JobPublisher,
   MessagingSurface,
   SandboxProvider,
-} from "@rakazo/adapter-kit";
-import { SandboxUnresponsiveError } from "@rakazo/adapter-kit";
-import type { PrismaClient, ThreadEvents } from "@rakazo/db";
-import { currentDbContext } from "@rakazo/db";
-import { createLogger, createTestSink, installLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import { SandboxUnresponsiveError } from "@agentic-smith/adapter-kit";
+import type { PrismaClient, ThreadEvents } from "@agentic-smith/db";
+import { currentDbContext } from "@agentic-smith/db";
+import { createLogger, createTestSink, installLogger } from "@agentic-smith/logging";
 import { describe, expect, it, vi } from "vitest";
 import { createBackgroundJobHandlers } from "./background-job-handlers.js";
 import type * as ComputerControl from "./computer-control.js";
@@ -46,7 +46,7 @@ describe("createBackgroundJobHandlers", () => {
       }),
     } as unknown as JobPublisher;
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-worker", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-worker", sinks: [sink] }));
     const handlers = createBackgroundJobHandlers({
       executor: {
         continueRun: vi.fn(async () => undefined),
@@ -78,7 +78,7 @@ describe("createBackgroundJobHandlers", () => {
     expect(sink.events.some((event) => event.message === "messaging.deliver enqueue error")).toBe(
       true,
     );
-    installLogger(createLogger({ service: "rakazo-worker", level: "off", sinks: [] }));
+    installLogger(createLogger({ service: "agentic-smith-worker", level: "off", sinks: [] }));
   });
 
   it("sends a running run's interim messages without marking the run mirrored", async () => {
@@ -215,7 +215,7 @@ describe("createBackgroundJobHandlers", () => {
 
   it("tries a control release again later when the computer provider is unreachable", async () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-worker", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-worker", sinks: [sink] }));
     vi.mocked(expireComputerControl).mockRejectedValueOnce(
       new SandboxUnresponsiveError("Boat could not be reached"),
     );

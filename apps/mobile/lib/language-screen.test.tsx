@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { APP_LOCALE_LABELS } from "@rakazo/core";
+import { APP_LOCALE_LABELS } from "@agentic-smith/core";
 import { setItemAsync } from "expo-secure-store";
 import type { ReactNode } from "react";
 import { act } from "react";
@@ -18,7 +18,7 @@ vi.mock("./api-server", () => ({}));
 vi.mock("./api-auth", () => ({}));
 vi.mock("./api-live", () => ({}));
 vi.mock("./api", () => ({
-  currentApiBase: () => "https://rakazo.test",
+  currentApiBase: () => "https://agentic-smith.test",
   rpc: vi.fn(async () => ({})),
   selectedSpaceId: () => "space-1",
 }));
@@ -126,7 +126,11 @@ it.each(["ru", "de", "zh-TW"] as const)(
       await vi.mocked(i18n.setUiLocale).mock.results[0]!.value;
     });
     expect(i18n.getActiveUiLocale()).toBe(locale);
-    expect(resumeLiveNotifications).toHaveBeenCalledWith("https://rakazo.test", "token", "space-1");
+    expect(resumeLiveNotifications).toHaveBeenCalledWith(
+      "https://agentic-smith.test",
+      "token",
+      "space-1",
+    );
     expect(rpc).toHaveBeenCalledExactlyOnceWith("preferences/update", { locale });
     expectSelected(APP_LOCALE_LABELS[locale]);
     expect(row("English").getAttribute("aria-pressed")).toBe("false");

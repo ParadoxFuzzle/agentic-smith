@@ -30,7 +30,7 @@ export const PROBE_TIMEOUT_MS = 8_000;
 /** The server or the network refused the page; the setup window says so and the server logs its side. */
 export class ServerUnavailable extends Error {}
 const bundledRendererInstallations = new Set<string>();
-const WARM_WINDOW_TTL_MS = warmWindowTtlMs(process.env.RAKAZO_WARM_WINDOW_TTL_MS);
+const WARM_WINDOW_TTL_MS = warmWindowTtlMs(process.env.AGENTIC_SMITH_WARM_WINDOW_TTL_MS);
 export function permissionTarget() {
   if (desktop.mainWindow === null || desktop.mainWindow.isDestroyed()) return null;
   const url = appWindowTargets.get(desktop.mainWindow);
@@ -224,7 +224,7 @@ export function createWindow(url: string, partition: string | null) {
     if (
       process.platform === "darwin" &&
       !desktop.quitting &&
-      process.env.RAKAZO_DISABLE_WARM_WINDOW !== "1"
+      process.env.AGENTIC_SMITH_DISABLE_WARM_WINDOW !== "1"
     ) {
       event.preventDefault();
       win.hide();
@@ -396,7 +396,7 @@ export async function installBundledRenderer(
   partition: string | null,
   managedLocalStack: boolean,
 ) {
-  if (!app.isPackaged || process.env.RAKAZO_DISABLE_BUNDLED_RENDERER === "1") return;
+  if (!app.isPackaged || process.env.AGENTIC_SMITH_DISABLE_BUNDLED_RENDERER === "1") return;
   if (!servesBundledRenderer(targetUrl, managedLocalStack)) return;
   const webUrl = new URL(targetUrl);
   const installationKey = `${partition ?? "default"}:${webUrl.protocol}`;

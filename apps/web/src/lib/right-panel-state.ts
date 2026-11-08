@@ -27,7 +27,7 @@ export function rightPanelStorageKey(
   kind: "bot" | "group",
   targetId: string,
 ): string {
-  return `rakazo:right-panel-state:${userId}:${spaceId}:${kind}:${targetId}`;
+  return `agentic-smith:right-panel-state:${userId}:${spaceId}:${kind}:${targetId}`;
 }
 
 export function readRightPanelState(key: string): RightPanelState {

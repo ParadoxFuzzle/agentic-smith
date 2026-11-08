@@ -6,7 +6,7 @@ import type {
   ProductEvent,
   RoutineHistory,
   ThreadSnapshot,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import {
   activeThreadRuns,
   anySignal,
@@ -19,8 +19,8 @@ import {
   reduceThreadSnapshot,
   rememberTerminalRun,
   runThreadSubscription,
-} from "@rakazo/core";
-import { fetchFresh } from "@rakazo/core/query";
+} from "@agentic-smith/core";
+import { fetchFresh } from "@agentic-smith/core/query";
 import type { RefObject } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {

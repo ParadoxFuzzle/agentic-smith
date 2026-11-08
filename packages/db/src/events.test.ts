@@ -1,10 +1,10 @@
-import type { RealtimeFanout } from "@rakazo/adapter-kit";
-import { BOT_SECRET_VALUE_MAX_LENGTH, encodeLoginSecret } from "@rakazo/contracts";
+import type { RealtimeFanout } from "@agentic-smith/adapter-kit";
+import { BOT_SECRET_VALUE_MAX_LENGTH, encodeLoginSecret } from "@agentic-smith/contracts";
 import {
   TAKEOVER_COMPUTER_DONE_STATE,
   TAKEOVER_COMPUTER_PENDING_STATE,
   TAKEOVER_COMPUTER_SKIPPED_STATE,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import { describe, expect, it, vi } from "vitest";
 import { commitBotUpdate } from "./bot-update.js";
 import type { PrismaClient } from "./client.js";

@@ -1,10 +1,10 @@
-import type { BotSecretMetadata, ContactFields } from "@rakazo/contracts";
+import type { BotSecretMetadata, ContactFields } from "@agentic-smith/contracts";
 import {
   decodeCardSecret,
   decodeContactSecret,
   decodeLoginSecret,
   vaultKind,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("./i18n", () => ({

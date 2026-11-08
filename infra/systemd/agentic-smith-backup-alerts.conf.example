@@ -1,0 +1,9 @@
+# Optional drop-in: /etc/systemd/system/agentic-smith-backup.service.d/alerts.conf
+[Unit]
+OnFailure=agentic-smith-backup-alert.service
+
+[Service]
+ExecStartPost=-/usr/local/sbin/agentic-smith-host-alert backup-failure ""
+ReadWritePaths=/var/lib/agentic-smith/alerts
+StateDirectory=agentic-smith/alerts
+StateDirectoryMode=0700

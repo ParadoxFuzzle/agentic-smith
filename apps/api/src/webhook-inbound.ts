@@ -1,12 +1,16 @@
 import { createHash } from "node:crypto";
-import type { JobPublisher, SecretStore } from "@rakazo/adapter-kit";
-import { runContinueJob, SecretStoreUnavailableError } from "@rakazo/adapter-kit";
-import { inboundRoutineModelPin } from "@rakazo/adapters";
-import type { MessageBlock } from "@rakazo/contracts";
-import { escapePromptData, inboundRoutineBlock, messageBlockForArtifact } from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
-import { accountDeactivated, SpaceDeletionInProgressError } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+import type { JobPublisher, SecretStore } from "@agentic-smith/adapter-kit";
+import { runContinueJob, SecretStoreUnavailableError } from "@agentic-smith/adapter-kit";
+import { inboundRoutineModelPin } from "@agentic-smith/adapters";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import {
+  escapePromptData,
+  inboundRoutineBlock,
+  messageBlockForArtifact,
+} from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
+import { accountDeactivated, SpaceDeletionInProgressError } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type { Context } from "hono";
 
 export const WEBHOOK_MAX_BODY_BYTES = 64 * 1024;

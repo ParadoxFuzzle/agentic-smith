@@ -3,10 +3,13 @@ import type {
   ConnectorCall,
   ManagedConnectorProvider,
   SecretStore,
-} from "@rakazo/adapter-kit";
-import type { IntegrationProviderConfig, IntegrationProviderId } from "@rakazo/contracts";
-import { IntegrationProviderConfigSchema, IntegrationProviderIdSchema } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/adapter-kit";
+import type { IntegrationProviderConfig, IntegrationProviderId } from "@agentic-smith/contracts";
+import {
+  IntegrationProviderConfigSchema,
+  IntegrationProviderIdSchema,
+} from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import { ComposioConnector } from "./composio-connector.js";
 import { credentialDigest } from "./credential-digest.js";
 import { PipedreamConnector } from "./pipedream-connector.js";

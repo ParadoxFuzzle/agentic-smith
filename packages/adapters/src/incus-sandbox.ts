@@ -18,9 +18,9 @@ import type {
   ScreenRequest,
   ScreenSession,
   TerminalRequest,
-} from "@rakazo/adapter-kit";
-import { COMPUTER_CACHE_ENV } from "@rakazo/core/node/desktop-runtime";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import { COMPUTER_CACHE_ENV } from "@agentic-smith/core/node/desktop-runtime";
+import { getLogger } from "@agentic-smith/logging";
 import { Agent, request as httpRequest } from "undici";
 import WebSocket from "ws";
 import type { RawExecEvent } from "./exec-computer.js";
@@ -38,7 +38,7 @@ const DESKTOP_PORT_START = 6100;
 const READY_PORT = 6080;
 const DEFAULT_PROJECT = "default";
 // Pin a release tag or digest with INCUS_SANDBOX_COMPUTER_IMAGE in production.
-const DEFAULT_COMPUTER_IMAGE = "ghcr.io/elie222/rakazo/computer:edge";
+const DEFAULT_COMPUTER_IMAGE = "ghcr.io/paradoxfuzzle/agentic-smith/computer:edge";
 // The Docker computer's default ceilings, in Incus units.
 const DEFAULT_CPU_LIMIT = "2";
 const DEFAULT_MEMORY_LIMIT = "2GiB";
@@ -59,10 +59,10 @@ const IMAGE_USER = 1000;
 // The computer image's own command (its Dockerfile CMD). The instance starts it without privilege
 // escalation, as Docker and Kubernetes computers start, which a restricted project cannot set on
 // the container itself.
-const IMAGE_COMMAND = "/usr/bin/env -u LD_PRELOAD /usr/local/bin/rakazo-computer";
+const IMAGE_COMMAND = "/usr/bin/env -u LD_PRELOAD /usr/local/bin/agentic-smith-computer";
 // Names the bot that owns an instance. An instance carrying another bot's value is never
 // reused or replaced.
-const BOT_ID_KEY = "user.rakazo-bot-id";
+const BOT_ID_KEY = "user.agentic-smith-bot-id";
 
 export interface IncusSandboxOptions {
   /** HTTPS address of the Incus API, such as `https://incus.example.test:8443`. */
@@ -234,7 +234,7 @@ export class IncusSandboxProvider implements SandboxProvider {
     await this.removeOrphans(request.botId, request.providerRef, signal);
     // A new name for every start, as the Daytona provider does: a later start never adopts an
     // instance that an abandoned one created, so that one can be deleted without a race.
-    const name = `rakazo-${randomUUID()}`;
+    const name = `agentic-smith-${randomUUID()}`;
     await this.create(name, request.botId, signal);
     try {
       await this.waitForReady(name, request.botId, context);

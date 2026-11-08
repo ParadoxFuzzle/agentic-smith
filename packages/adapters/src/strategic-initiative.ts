@@ -1,20 +1,20 @@
-import type { JobPublisher } from "@rakazo/adapter-kit";
-import { runContinueJob } from "@rakazo/adapter-kit";
+import type { JobPublisher } from "@agentic-smith/adapter-kit";
+import { runContinueJob } from "@agentic-smith/adapter-kit";
 import {
   ACTIVE_RUN_STATUSES,
   COMPUTER_USING_RUNS,
   escapePromptData,
   ONCE_ROUTINE_CRON,
   truncatePlainText,
-} from "@rakazo/core";
-import type { Prisma, PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { Prisma, PrismaClient } from "@agentic-smith/db";
 import {
   isUniqueViolation,
   memberHasModelAccess,
   STRATEGIC_INITIATIVE_NONCE_PREFIX,
   THREAD_LOCK_TRANSACTION_OPTIONS,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { modelCreditBillingEnabled } from "./run-model.js";
 
 const STRATEGIC_INITIATIVE_INTERVAL_MS = 24 * 60 * 60 * 1000;

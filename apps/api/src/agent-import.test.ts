@@ -1,5 +1,5 @@
-import type { Actor, Bot } from "@rakazo/contracts";
-import { AgentImportCreateInput } from "@rakazo/contracts";
+import type { Actor, Bot } from "@agentic-smith/contracts";
+import { AgentImportCreateInput } from "@agentic-smith/contracts";
 import { describe, expect, it, vi } from "vitest";
 import type { AgentImportServices } from "./agent-import.js";
 import { agentImportSetupState, createImportedBot, requestDigest } from "./agent-import.js";
@@ -236,7 +236,7 @@ describe("an imported server asked for twice", () => {
 });
 
 describe("portable avatar appearance on import", () => {
-  it.each([undefined, "organic", "rakazo"] as const)(
+  it.each([undefined, "organic", "agentic-smith"] as const)(
     "preserves explicit sets and leaves the rest to the owner's default (set=%s)",
     async (avatarSet) => {
       const createBot = vi.fn<AgentImportServices["createBot"]>(async (_actor, request) => {

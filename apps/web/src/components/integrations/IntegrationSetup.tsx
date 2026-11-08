@@ -1,7 +1,7 @@
+import type { IntegrationCatalogResult } from "@agentic-smith/contracts";
+import { newClientId } from "@agentic-smith/core";
+import { Button, Disclosure, Input } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { IntegrationCatalogResult } from "@rakazo/contracts";
-import { newClientId } from "@rakazo/core";
-import { Button, Disclosure, Input } from "@rakazo/ui-web";
 import { useEffect, useRef, useState } from "react";
 import { connectMcpOauth } from "../../lib/mcp-connect";
 import { rpc } from "../../lib/rpc";

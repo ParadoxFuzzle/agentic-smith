@@ -1,4 +1,4 @@
-import type { ThreadMessage } from "@rakazo/contracts";
+import type { ThreadMessage } from "@agentic-smith/contracts";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { loadPeerHistory } from "./peer-history.js";
 

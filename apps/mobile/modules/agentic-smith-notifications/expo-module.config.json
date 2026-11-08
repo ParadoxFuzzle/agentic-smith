@@ -1,0 +1,10 @@
+{
+  "platforms": ["android", "apple"],
+  "android": {
+    "modules": ["com.agenticsmith.notifications.AgenticSmithNotificationsModule"]
+  },
+  "apple": {
+    "modules": ["AgenticSmithNotificationsModule"],
+    "appDelegateSubscribers": ["AgenticSmithCallsSubscriber"]
+  }
+}

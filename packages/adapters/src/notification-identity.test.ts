@@ -1,4 +1,4 @@
-import { notificationAvatarSource } from "@rakazo/core";
+import { notificationAvatarSource } from "@agentic-smith/core";
 import { expect, it, vi } from "vitest";
 import { notificationIdentity } from "./notification-identity.js";
 
@@ -7,7 +7,7 @@ const MAX_AVATAR_BYTES = 1050;
 
 it.each([
   { style: "organic", avatarSet: "organic", color: "#14b8a6" },
-  { style: "logo", avatarSet: "rakazo", color: "#14b8a6" },
+  { style: "logo", avatarSet: "agentic-smith", color: "#14b8a6" },
   { style: "shape", avatarSet: null, color: "#8B5CF6::shape_3" },
   { style: "dark shape", avatarSet: null, color: "#111827::shape_5" },
 ])("sends the $style avatar at 96px within the app's limit", async ({ avatarSet, color }) => {

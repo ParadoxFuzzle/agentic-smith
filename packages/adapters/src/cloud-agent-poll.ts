@@ -3,17 +3,17 @@ import type {
   AdapterContext,
   BackgroundJobPayloads,
   CloudAgentSnapshot,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import {
   CloudAgentRequestRejected,
   CloudAgentRetryLater,
   runContinueJob,
-} from "@rakazo/adapter-kit";
-import type { MessageBlock } from "@rakazo/contracts";
-import { cloudAgentHttpsUrl } from "@rakazo/core";
-import type { CloudAgent } from "@rakazo/db";
-import { appendEventInTransaction, Prisma } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import { cloudAgentHttpsUrl } from "@agentic-smith/core";
+import type { CloudAgent } from "@agentic-smith/db";
+import { appendEventInTransaction, Prisma } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { cloudAgentsEnabled } from "./cloud-agent-factory.js";
 import type { CloudAgentDeps } from "./cloud-agent-service.js";
 import { cloudAgentBlock, enqueueCloudAgent } from "./cloud-agent-service.js";

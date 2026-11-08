@@ -1,5 +1,5 @@
-import { ATTACHMENT_MAX_COUNT } from "@rakazo/contracts";
-import { SpaceDeletionInProgressError } from "@rakazo/db";
+import { ATTACHMENT_MAX_COUNT } from "@agentic-smith/contracts";
+import { SpaceDeletionInProgressError } from "@agentic-smith/db";
 import { describe, expect, it, vi } from "vitest";
 import type { MessagingInboundDeps } from "./messaging-inbound.js";
 import {

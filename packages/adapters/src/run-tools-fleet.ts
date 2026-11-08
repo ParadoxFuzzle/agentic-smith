@@ -1,4 +1,4 @@
-import { BotSettingsValuesSchema } from "@rakazo/contracts";
+import { BotSettingsValuesSchema } from "@agentic-smith/contracts";
 import {
   appendEventInTransaction,
   commitBotUpdate,
@@ -10,8 +10,8 @@ import {
   SpaceLimitError,
   THREAD_LOCK_TRANSACTION_OPTIONS,
   writeBotInstructions,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { uncertainEffectResult } from "./approval-effect.js";
 import { archiveSpawnedBot, spawnBot } from "./child-bots.js";
 import {

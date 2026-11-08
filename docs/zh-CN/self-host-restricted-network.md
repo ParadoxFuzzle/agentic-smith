@@ -8,8 +8,8 @@ GitHub 或容器注册表无法访问时，可以使用自己掌控的镜像源�
 | 失败位置 | 设置或处理方式 |
 | --- | --- |
 | 安装脚本 | 从可信镜像下载或复制到本地 |
-| Compose 文件 | `RAKAZO_DOWNLOAD_BASE`、`--local` 或 `RAKAZO_DOWNLOAD_SKIP_EXISTING=1` |
-| 应用或计算机镜像 | `RAKAZO_IMAGE`、`RAKAZO_IMAGE_TAG`、`RAKAZO_COMPUTER_IMAGE`、`RAKAZO_COMPUTER_IMAGE_TAG` |
+| Compose 文件 | `AGENTIC_SMITH_DOWNLOAD_BASE`、`--local` 或 `AGENTIC_SMITH_DOWNLOAD_SKIP_EXISTING=1` |
+| 应用或计算机镜像 | `AGENTIC_SMITH_IMAGE`、`AGENTIC_SMITH_IMAGE_TAG`、`AGENTIC_SMITH_COMPUTER_IMAGE`、`AGENTIC_SMITH_COMPUTER_IMAGE_TAG` |
 | Postgres 或 busybox 镜像 | `POSTGRES_IMAGE`、`BUSYBOX_IMAGE`，或 Docker 的 `registry-mirrors` |
 
 ## 安装脚本与 Compose 文件
@@ -17,14 +17,14 @@ GitHub 或容器注册表无法访问时，可以使用自己掌控的镜像源�
 raw GitHub 不可用时，将以下示例地址替换为自己的可信 HTTPS 镜像地址：
 
 ```bash
-export RAKAZO_INSTALLER_URL=https://example.com/mirror/rakazo/infra/compose/install-images.sh
-export RAKAZO_DOWNLOAD_BASE=https://example.com/mirror/rakazo/infra/compose
-mkdir -p rakazo && cd rakazo &&
-curl -fsSL -o install-images.sh "${RAKAZO_INSTALLER_URL}" &&
+export AGENTIC_SMITH_INSTALLER_URL=https://example.com/mirror/agentic-smith/infra/compose/install-images.sh
+export AGENTIC_SMITH_DOWNLOAD_BASE=https://example.com/mirror/agentic-smith/infra/compose
+mkdir -p agentic-smith && cd agentic-smith &&
+curl -fsSL -o install-images.sh "${AGENTIC_SMITH_INSTALLER_URL}" &&
 bash install-images.sh --prepare-only
 ```
 
-`RAKAZO_INSTALLER_URL` 供这条 curl 命令下载脚本，`RAKAZO_DOWNLOAD_BASE` 决定脚本下载 Compose 文件的位置。
+`AGENTIC_SMITH_INSTALLER_URL` 供这条 curl 命令下载脚本，`AGENTIC_SMITH_DOWNLOAD_BASE` 决定脚本下载 Compose 文件的位置。
 GitHub 完全受阻时，两者都要设置。地址末尾的斜杠会被移除，不接受非 HTTPS 基础地址，下载有重试次数限制。
 
 如果已将 `docker-compose.images.yml` 和 `.env.images.example` 放在安装目录：
@@ -32,7 +32,7 @@ GitHub 完全受阻时，两者都要设置。地址末尾的斜杠会被移除�
 ```bash
 bash install-images.sh --local --prepare-only
 # 等价的环境设置：
-RAKAZO_DOWNLOAD_SKIP_EXISTING=1 bash install-images.sh --prepare-only
+AGENTIC_SMITH_DOWNLOAD_SKIP_EXISTING=1 bash install-images.sh --prepare-only
 ```
 
 `--local` 只跳过已有文件，缺失文件仍会下载。`--prepare-only` 创建 `.env`，但不启动服务。
@@ -58,10 +58,10 @@ bash install-images.sh --offline
 完成准备后，在 `.env` 中配置自己的镜像仓库：
 
 ```env
-RAKAZO_IMAGE=registry.example.com/mirror/rakazo/app
-RAKAZO_IMAGE_TAG=edge
-RAKAZO_COMPUTER_IMAGE=registry.example.com/mirror/rakazo/computer
-RAKAZO_COMPUTER_IMAGE_TAG=edge
+AGENTIC_SMITH_IMAGE=registry.example.com/mirror/agentic-smith/app
+AGENTIC_SMITH_IMAGE_TAG=edge
+AGENTIC_SMITH_COMPUTER_IMAGE=registry.example.com/mirror/agentic-smith/computer
+AGENTIC_SMITH_COMPUTER_IMAGE_TAG=edge
 POSTGRES_IMAGE=registry.example.com/library/postgres@sha256:<trusted-postgres-digest>
 BUSYBOX_IMAGE=registry.example.com/library/busybox@sha256:<trusted-busybox-digest>
 ```

@@ -1,6 +1,6 @@
+import type { DesktopUpdateState } from "@agentic-smith/contracts";
+import { Button, SectionHeading, toast } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import type { DesktopUpdateState } from "@rakazo/contracts";
-import { Button, SectionHeading, toast } from "@rakazo/ui-web";
 import type { ReactNode } from "react";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { desktopBridge } from "../lib/desktop";

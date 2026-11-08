@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { mkdtemp, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { createDb, createThreadEvents, runAsSystem } from "@rakazo/db";
+import { createDb, createThreadEvents, runAsSystem } from "@agentic-smith/db";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { LocalArtifactStore } from "./artifacts.js";
 import type { ExecutorDeps } from "./executor-deps.js";
@@ -26,10 +26,10 @@ postgres("attach_file (PostgreSQL)", () => {
   let bytes = new Uint8Array();
 
   beforeAll(async () => {
-    root = await mkdtemp(path.join(tmpdir(), "rakazo-attach-file-"));
+    root = await mkdtemp(path.join(tmpdir(), "agentic-smith-attach-file-"));
     run = await fixture(async () => {
       await prisma.user.create({
-        data: { id: userId, name: "Attach tester", email: `${id}@rakazo.test` },
+        data: { id: userId, name: "Attach tester", email: `${id}@agentic-smith.test` },
       });
       await prisma.organization.create({
         data: { id: organizationId, name: "Attach tests", slug: id, createdAt: new Date() },

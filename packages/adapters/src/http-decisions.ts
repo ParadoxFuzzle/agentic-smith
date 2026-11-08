@@ -6,8 +6,8 @@ import type {
   DecisionProviderOptions,
   DecisionRequest,
   DecisionResult,
-} from "@rakazo/adapter-kit";
-import { DecisionProviderError } from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
+import { DecisionProviderError } from "@agentic-smith/adapter-kit";
 import { z } from "zod";
 import { estimateTextTokens, lowTextTokens } from "./context-selection.js";
 import { decisionModel } from "./decision-models.js";

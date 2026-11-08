@@ -1,5 +1,5 @@
-import { runContinueJob } from "@rakazo/adapter-kit";
-import { MessageBlock } from "@rakazo/contracts";
+import { runContinueJob } from "@agentic-smith/adapter-kit";
+import { MessageBlock } from "@agentic-smith/contracts";
 import {
   BOT_MESSAGE_MAX_LENGTH,
   BOT_MESSAGE_TOO_LONG,
@@ -9,8 +9,8 @@ import {
   renderBotGroupDirectory,
   renderGroupMembersContext,
   resolveBotAddress,
-} from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   appendEventInTransaction,
   createThreadMessageInTransaction,
@@ -18,8 +18,8 @@ import {
   lockSpaceGroup,
   THREAD_LOCK_TRANSACTION_OPTIONS,
   touchGroupUpdatedAt,
-} from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import type { ExecutorDeps } from "./executor-deps.js";
 import { runLeaseFor } from "./run-messages.js";
 

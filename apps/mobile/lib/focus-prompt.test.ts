@@ -30,7 +30,7 @@ it.each([true, false])(
     const requestContext: ApiRequestContext = {
       apiBase: "https://api.example.test",
       sessionGeneration: 1,
-      headers: { "x-rakazo-space-id": "space-work" },
+      headers: { "x-agentic-smith-space-id": "space-work" },
     };
     allowFocusPrompt("bot-new");
     scheduleFocusPrompt("bot-new", immediate, requestContext);

@@ -14,10 +14,10 @@ import type {
   TerminalRequest,
   WorkspaceDirectoryRequest,
   WorkspaceExportLimits,
-} from "@rakazo/adapter-kit";
-import type { PrismaClient } from "@rakazo/db";
-import { runAsSystem } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import type { PrismaClient } from "@agentic-smith/db";
+import { runAsSystem } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { cancelComputerRunWork, providerKeepsHome } from "./computer-idle.js";
 import { computerProviderDescriptor } from "./computer-provider-registry.js";
 import { manageComputerWorkspaceDirectories } from "./computer-workspace.js";

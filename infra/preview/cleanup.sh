@@ -2,16 +2,16 @@
 # Deletes previews: the one for PR when it is set (the pull request closed), otherwise every
 # preview whose pull request is no longer open, to catch a missed close.
 #
-# Env: FLY_API_TOKEN, FLY_ORG, GH_TOKEN, REPO, optional PR, APP_PREFIX (default rakazo-pr).
+# Env: FLY_API_TOKEN, FLY_ORG, GH_TOKEN, REPO, optional PR, APP_PREFIX (default agentic-smith-pr).
 set -euo pipefail
 
-prefix="${APP_PREFIX:-rakazo-pr}"
+prefix="${APP_PREFIX:-agentic-smith-pr}"
 
 destroy() {
   local number=$1 app="$prefix-$1"
   flyctl status --app "$app" > /dev/null 2>&1 || return 0
   flyctl apps destroy "$app" --yes
-  local marker="<!-- rakazo-preview -->" existing
+  local marker="<!-- agentic-smith-preview -->" existing
   existing=$(gh api "repos/$REPO/issues/$number/comments" --paginate \
     --jq ".[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$marker\"))) | .id" |
     head -n 1)

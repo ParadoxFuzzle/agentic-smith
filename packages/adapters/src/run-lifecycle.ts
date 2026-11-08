@@ -2,8 +2,8 @@ import {
   runContinueJob,
   SandboxUnavailableError,
   SandboxUnresponsiveError,
-} from "@rakazo/adapter-kit";
-import type { RunStatus } from "@rakazo/contracts";
+} from "@agentic-smith/adapter-kit";
+import type { RunStatus } from "@agentic-smith/contracts";
 import {
   assertTransition,
   BACKGROUND_HELPER_TRIGGER,
@@ -12,11 +12,11 @@ import {
   nextFence,
   redactSecrets,
   userRunError,
-} from "@rakazo/core";
-import type { PrismaClient } from "@rakazo/db";
-import { isTooManyDatabaseConnections, spaceTakesWork } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
-import { sanitizedError } from "@rakazo/logging/monitoring";
+} from "@agentic-smith/core";
+import type { PrismaClient } from "@agentic-smith/db";
+import { isTooManyDatabaseConnections, spaceTakesWork } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { sanitizedError } from "@agentic-smith/logging/monitoring";
 import { returnHelperOutcome } from "./background-helpers.js";
 import { returnBotMessageOutcome } from "./bot-messages.js";
 import { sleepDeferReason } from "./computer-idle.js";
@@ -461,7 +461,7 @@ export async function retryRunSetup(
   const setupMessage = redactSecrets(userRunError(setupError), runSecrets);
   const reportedSetupError = sanitizedError(setupError, (text) => redactSecrets(text, runSecrets));
   // An outage at the computer provider is retried like any setup failure, but is not a
-  // Rakazo bug to report.
+  // Agentic Smith bug to report.
   const providerOutage =
     setupError instanceof SandboxUnavailableError || setupError instanceof SandboxUnresponsiveError;
   // A lost lease aborted setup on purpose; whatever that interrupted is not a failure.

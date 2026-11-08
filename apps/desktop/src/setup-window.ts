@@ -1,6 +1,6 @@
 import path from "node:path";
-import type { DesktopReachability, DesktopSetup } from "@rakazo/contracts";
-import { parseServerHeaders } from "@rakazo/contracts";
+import type { DesktopReachability, DesktopSetup } from "@agentic-smith/contracts";
+import { parseServerHeaders } from "@agentic-smith/contracts";
 import type { Session } from "electron";
 import { app, BrowserWindow, ipcMain, screen, shell } from "electron";
 import type { createAppOpener } from "./app-opener.js";
@@ -8,7 +8,7 @@ import { developmentIcon, handleOnlyFrom, markOnce } from "./app-window.js";
 import { desktop } from "./desktop-state.js";
 import { DOCKER_INSTALL_LINKS, isDesktopSetupLink } from "./docker-cli.js";
 import { desktopDirection, desktopLocale, desktopMessages, t } from "./i18n.js";
-import { managedLocalOpenUrl, parseSetupInput, RAKAZO_CLOUD_URL } from "./setup-config.js";
+import { AGENTIC_SMITH_CLOUD_URL, managedLocalOpenUrl, parseSetupInput } from "./setup-config.js";
 import { writeSetup } from "./setup-store.js";
 import { setupWindowOptions } from "./window-options.js";
 
@@ -67,7 +67,7 @@ function restoreAppWindowAfterSetup() {
   desktop.mainWindow.show();
   desktop.mainWindow.focus();
 }
-/** Setup IPC must only answer the setup window, never a connected Rakazo server. */
+/** Setup IPC must only answer the setup window, never a connected Agentic Smith server. */
 function fromSetupWindow(event: Pick<Electron.IpcMainInvokeEvent, "sender">) {
   return (
     desktop.setupWindow !== null &&
@@ -140,7 +140,7 @@ export function registerSetupIpc({
     "desktop.setup.state",
     () => ({
       defaultLocalUrl: desktop.localStack.webUrl(),
-      cloudUrl: RAKAZO_CLOUD_URL,
+      cloudUrl: AGENTIC_SMITH_CLOUD_URL,
       saved: desktop.currentSetup,
       error: desktop.setupError ?? undefined,
     }),
@@ -187,7 +187,7 @@ export function registerSetupIpc({
           if (managedUrl === null || !(await desktop.localStack.matchesDesiredStack())) {
             return {
               ok: false,
-              error: t("The app-managed Rakazo services are not ready. Retry setup."),
+              error: t("The app-managed Agentic Smith services are not ready. Retry setup."),
             };
           }
           openSetup = { mode: "new", serverUrl: managedUrl };

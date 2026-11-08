@@ -1,11 +1,11 @@
-import type { MessageBlock } from "@rakazo/contracts";
+import type { MessageBlock } from "@agentic-smith/contracts";
 import {
   blocksToAgentHistoryText,
   isConversationalRun,
   messagingChannelId,
   QUEUE_HOLDING_RUN_STATUSES,
   STEERING_CONTINUATION_PROMPT,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import type { Prisma, PrismaClient } from "./client.js";
 import { appendEventInTransaction } from "./events.js";
 import { THREAD_LOCK_TRANSACTION_OPTIONS, withTransactionRetry } from "./transaction-retry.js";

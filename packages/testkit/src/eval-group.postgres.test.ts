@@ -38,7 +38,7 @@ async function runGroupBudgetTrial(fixture: {
   let memberCalls = 0;
   const isMember = (request: ModelEmulatorRequest) =>
     JSON.stringify(request.messages).includes("member-keeps-searching");
-  const { createDb, asSystem } = await import("@rakazo/db");
+  const { createDb, asSystem } = await import("@agentic-smith/db");
   const db = createDb(process.env.DATABASE_URL!);
   const system = asSystem(db.prisma);
   // Both cases share one database, so lookups only count this trial's runs.
@@ -110,13 +110,13 @@ async function runGroupBudgetTrial(fixture: {
     grade: fixture.grade ?? (() => []),
     ...(fixture.scenarioJudge ? { judge: fixture.scenarioJudge } : {}),
   };
-  const dataDir = await mkdtemp(path.join(tmpdir(), "rakazo-group-budget-"));
+  const dataDir = await mkdtemp(path.join(tmpdir(), "agentic-smith-group-budget-"));
   // The per-run product cap would end Mika's turn at the trial budget, hiding the
   // window the trial itself must guard; keep the run cap above it for this fixture.
   const previousRunCap = process.env.MAX_TOOL_CALLS_PER_TURN;
   process.env.MAX_TOOL_CALLS_PER_TURN = "0";
   try {
-    const { createApp } = await import("@rakazo/api/app");
+    const { createApp } = await import("@agentic-smith/api/app");
     const result = await runTrial(scenario, 1, {
       connection: {
         provider: model.model.provider,

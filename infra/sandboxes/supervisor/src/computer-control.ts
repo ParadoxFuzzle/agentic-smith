@@ -1,4 +1,4 @@
-import { readBoundedJsonResponse } from "@rakazo/core";
+import { readBoundedJsonResponse } from "@agentic-smith/core";
 import type Docker from "dockerode";
 import type { z } from "zod";
 import {
@@ -16,8 +16,8 @@ import {
 
 export function computerControlEndpoint(info: Docker.ContainerInspectInfo) {
   const token = info.Config.Env?.find((value) =>
-    value.startsWith("RAKAZO_COMPUTER_CONTROL_TOKEN="),
-  )?.slice("RAKAZO_COMPUTER_CONTROL_TOKEN=".length);
+    value.startsWith("AGENTIC_SMITH_COMPUTER_CONTROL_TOKEN="),
+  )?.slice("AGENTIC_SMITH_COMPUTER_CONTROL_TOKEN=".length);
   const publishedHostPort = controlViaLoopback
     ? publishedLoopbackControlHostPort(info.NetworkSettings?.Ports)
     : undefined;

@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { getLogger } from "@rakazo/logging";
+import { getLogger } from "@agentic-smith/logging";
 import type Docker from "dockerode";
 import { screenPorts } from "./computer-spec.js";
 import { teamScreenLimit } from "./context.js";
@@ -184,7 +184,7 @@ async function ensureManagedScreenAttempt(
     const browserLog = await runContainerCommand(container, [
       "bash",
       "-c",
-      `tail -c 4000 /tmp/rakazo/screen-${layout.displayNumber}-browser.log 2>/dev/null || true`,
+      `tail -c 4000 /tmp/agentic-smith/screen-${layout.displayNumber}-browser.log 2>/dev/null || true`,
     ]).catch(() => ({ stdout: "", stderr: "", code: 1 }));
     releaseAssignedScreen(assigned, screenKey);
     await teardownReleasedScreen(assigned, screenKey, index, () =>
@@ -221,5 +221,5 @@ export async function setInteractiveScreen(
     interactiveScreenCommand(interactive, controlToken, layout),
   ]);
   if (result.code !== 0) throw new Error(result.stderr || "control screen failed to start");
-  return interactive || !controlToken || result.stdout.includes("RAKAZO_CONTROL_RELEASED\n");
+  return interactive || !controlToken || result.stdout.includes("AGENTIC_SMITH_CONTROL_RELEASED\n");
 }

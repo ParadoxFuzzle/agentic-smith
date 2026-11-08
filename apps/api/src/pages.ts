@@ -1,11 +1,17 @@
 import { createHash, randomBytes } from "node:crypto";
-import type { SecretStore } from "@rakazo/adapter-kit";
-import { forgetPageShareSecrets } from "@rakazo/adapters";
-import type { Actor, PageDetail, PageSummary, PageVisibility, SharedPage } from "@rakazo/contracts";
-import { pageShareTokenFromSlug, pageShareUrl } from "@rakazo/contracts";
-import type { PageShareSecret, Prisma, PrismaClient } from "@rakazo/db";
-import { IsolationError, isRecordNotFound, runAsSystem } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+import type { SecretStore } from "@agentic-smith/adapter-kit";
+import { forgetPageShareSecrets } from "@agentic-smith/adapters";
+import type {
+  Actor,
+  PageDetail,
+  PageSummary,
+  PageVisibility,
+  SharedPage,
+} from "@agentic-smith/contracts";
+import { pageShareTokenFromSlug, pageShareUrl } from "@agentic-smith/contracts";
+import type { PageShareSecret, Prisma, PrismaClient } from "@agentic-smith/db";
+import { IsolationError, isRecordNotFound, runAsSystem } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 
 const PAGE_SHARE_SECRET_KIND = "page_share";
 const DEFAULT_LIST_LIMIT = 30;

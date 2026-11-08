@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import type { ComputerStatus } from "@rakazo/contracts";
+import type { ComputerStatus } from "@agentic-smith/contracts";
 import type { ReactNode } from "react";
 import { act, createElement, useEffect } from "react";
 import type { Root } from "react-dom/client";
@@ -302,7 +302,9 @@ describe("archived chat read failures", () => {
       "bots/restore",
       { botId: bot.id },
       expect.objectContaining({
-        requestContext: expect.objectContaining({ headers: { "x-rakazo-space-id": bot.spaceId } }),
+        requestContext: expect.objectContaining({
+          headers: { "x-agentic-smith-space-id": bot.spaceId },
+        }),
       }),
     );
     expect(container.textContent).toBe("No archived chats");
@@ -365,7 +367,7 @@ describe("archived chat read failures", () => {
       { groupId: group.id },
       expect.objectContaining({
         requestContext: expect.objectContaining({
-          headers: { "x-rakazo-space-id": group.spaceId },
+          headers: { "x-agentic-smith-space-id": group.spaceId },
         }),
       }),
     );

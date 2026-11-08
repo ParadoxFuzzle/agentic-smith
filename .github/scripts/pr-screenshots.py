@@ -15,8 +15,8 @@ import re
 import sys
 from pathlib import Path
 
-START = "<!-- rakazo-pr-screenshots:start -->"
-END = "<!-- rakazo-pr-screenshots:end -->"
+START = "<!-- agentic-smith-pr-screenshots:start -->"
+END = "<!-- agentic-smith-pr-screenshots:end -->"
 MAX_SHOTS = 4
 MAX_CAPTION = 200
 MAX_BYTES = 5 * 1024 * 1024

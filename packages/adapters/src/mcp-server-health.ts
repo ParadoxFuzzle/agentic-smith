@@ -1,7 +1,7 @@
-import type { McpServerHealth } from "@rakazo/contracts";
-import { MCP_OAUTH_CLIENT_REQUIRED } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+import type { McpServerHealth } from "@agentic-smith/contracts";
+import { MCP_OAUTH_CLIENT_REQUIRED } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 
 const HEALTH_MESSAGE_MAX = 2000;
 

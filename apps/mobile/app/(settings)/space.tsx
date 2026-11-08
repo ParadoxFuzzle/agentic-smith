@@ -1,4 +1,4 @@
-import type { SpaceSetting } from "@rakazo/contracts";
+import type { SpaceSetting } from "@agentic-smith/contracts";
 import { useQuery } from "@tanstack/react-query";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useMemo, useState } from "react";

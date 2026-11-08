@@ -1,4 +1,4 @@
-import { MCP_APP_MIME_TYPE } from "@rakazo/contracts";
+import { MCP_APP_MIME_TYPE } from "@agentic-smith/contracts";
 import type { PrismaClient } from "./client.js";
 import { Prisma } from "./client.js";
 import { isUniqueViolation } from "./prisma-errors.js";

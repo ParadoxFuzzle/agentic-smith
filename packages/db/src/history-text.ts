@@ -1,4 +1,4 @@
-import type { MessageBlock } from "@rakazo/contracts";
+import type { MessageBlock } from "@agentic-smith/contracts";
 import type { Prisma } from "./client.js";
 
 function objectBlocks(blocks: Prisma.JsonValue): MessageBlock[] {

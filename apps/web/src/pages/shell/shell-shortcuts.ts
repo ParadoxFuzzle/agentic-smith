@@ -1,5 +1,5 @@
-import type { DesktopMenuCommand } from "@rakazo/contracts";
-import { isDesktopMenuCommand } from "@rakazo/contracts";
+import type { DesktopMenuCommand } from "@agentic-smith/contracts";
+import { isDesktopMenuCommand } from "@agentic-smith/contracts";
 import { useEffect, useRef } from "react";
 import { desktopBridge } from "../../lib/desktop";
 

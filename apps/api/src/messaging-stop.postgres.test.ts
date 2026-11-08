@@ -1,13 +1,13 @@
 import { randomUUID } from "node:crypto";
-import type { MessagingInboundMessage } from "@rakazo/adapter-kit";
-import type { PrismaClient } from "@rakazo/db";
+import type { MessagingInboundMessage } from "@agentic-smith/adapter-kit";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   asSystem,
   createDb,
   createThreadEvents,
   provisionMessagingIdentity,
   runAsSystem,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import { createMessagingInboundHandler } from "./messaging-inbound.js";
 import { STOPPED_BY_MESSAGE_NOTE } from "./thread-stop.js";
@@ -214,7 +214,7 @@ describe.skipIf(!enabled)("a linked owner's stop command (PostgreSQL)", () => {
     expect(sandbox.execute).toHaveBeenCalledWith(
       expect.objectContaining({ providerRef: `ref-${running.id}` }),
       expect.objectContaining({
-        argv: expect.arrayContaining(["rakazo-cancel-run-work", computer.id, running.id]),
+        argv: expect.arrayContaining(["agentic-smith-cancel-run-work", computer.id, running.id]),
       }),
       expect.objectContaining({ cancelRunWork: true, runId: running.id }),
     );

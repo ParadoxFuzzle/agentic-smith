@@ -1,19 +1,19 @@
 ---
 type Props = {
   otherName: string;
-  rakazo: readonly string[];
+  agenticSmith: readonly string[];
   other: readonly string[];
 };
 
-const { otherName, rakazo, other } = Astro.props;
+const { otherName, agenticSmith, other } = Astro.props;
 ---
 
 <figure class="vs-card">
   <div class="vs-card__grid">
     <div class="vs-card__col">
-      <p class="vs-card__name">Rakazo</p>
+      <p class="vs-card__name">Agentic Smith</p>
       <ul>
-        {rakazo.map((item) => <li>{item}</li>)}
+        {agenticSmith.map((item) => <li>{item}</li>)}
       </ul>
     </div>
     <p class="vs-card__vs" aria-hidden="true">vs</p>
@@ -24,5 +24,5 @@ const { otherName, rakazo, other } = Astro.props;
       </ul>
     </div>
   </div>
-  <figcaption class="sr-only">Rakazo compared with {otherName}</figcaption>
+  <figcaption class="sr-only">Agentic Smith compared with {otherName}</figcaption>
 </figure>

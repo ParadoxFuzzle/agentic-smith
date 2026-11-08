@@ -1,10 +1,10 @@
+import type { UsageOperationKind } from "@agentic-smith/adapter-kit";
+import { resolveBotWorkspacePath } from "@agentic-smith/adapters";
+import type { ExportManifest } from "@agentic-smith/contracts";
+import { attachmentMaxBytes, resolveBotAvatarSet } from "@agentic-smith/contracts";
+import { AttachmentValidationError } from "@agentic-smith/core";
+import { IsolationError, LISTED_ARTIFACT, parseComputerMode } from "@agentic-smith/db";
 import { ORPCError } from "@orpc/server";
-import type { UsageOperationKind } from "@rakazo/adapter-kit";
-import { resolveBotWorkspacePath } from "@rakazo/adapters";
-import type { ExportManifest } from "@rakazo/contracts";
-import { attachmentMaxBytes, resolveBotAvatarSet } from "@rakazo/contracts";
-import { AttachmentValidationError } from "@rakazo/core";
-import { IsolationError, LISTED_ARTIFACT, parseComputerMode } from "@rakazo/db";
 import {
   ArtifactListCursorError,
   createOwnedArtifact,

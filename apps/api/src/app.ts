@@ -1,6 +1,4 @@
 import { AsyncLocalStorage } from "node:async_hooks";
-import { onError } from "@orpc/server";
-import { RPCHandler } from "@orpc/server/fetch";
 import type {
   AgentContextStrategy,
   AgentRuntime,
@@ -13,7 +11,7 @@ import type {
   RealtimeFanout,
   SandboxProvider,
   TransactionalEmailProvider,
-} from "@rakazo/adapter-kit";
+} from "@agentic-smith/adapter-kit";
 import type {
   ComposioProvider,
   ConnectorRegistry,
@@ -23,7 +21,7 @@ import type {
   RemoteConnectorDependencies,
   RunRuntimeEnv,
   UserDeviceGateway,
-} from "@rakazo/adapters";
+} from "@agentic-smith/adapters";
 import {
   ChatSdkMessagingSurface,
   CodexCatalogCache,
@@ -73,23 +71,23 @@ import {
   verifyModelServesAgents,
   WorkActivities,
   withSecretPersistence,
-} from "@rakazo/adapters";
-import type { DirectoryAccountChange } from "@rakazo/auth";
+} from "@agentic-smith/adapters";
+import type { DirectoryAccountChange } from "@agentic-smith/auth";
 import {
   buildTrustedOrigins,
   CLIENT_IP_HEADER,
   createAuth,
   createDirectory,
   isBlockedAuthPath,
-} from "@rakazo/auth";
-import type { Actor, AuthCapabilities } from "@rakazo/contracts";
+} from "@agentic-smith/auth";
+import type { Actor, AuthCapabilities } from "@agentic-smith/contracts";
 import {
   isLocalhostOrLoopbackIp,
   PLUGIN_SUBMISSIONS_PATH,
   SERVER_BUILD_HEADER,
-} from "@rakazo/contracts";
-import { encryptionKeyWarning, signupPolicyFromEnv } from "@rakazo/core";
-import type { Pool, PrismaClient } from "@rakazo/db";
+} from "@agentic-smith/contracts";
+import { encryptionKeyWarning, signupPolicyFromEnv } from "@agentic-smith/core";
+import type { Pool, PrismaClient } from "@agentic-smith/db";
 import {
   configureProviderTransactionPool,
   createBoardEvents,
@@ -107,17 +105,19 @@ import {
   rowSecurityWarning,
   runAsSystem,
   verifyContentKeys,
-} from "@rakazo/db";
-import type { Logger } from "@rakazo/logging";
+} from "@agentic-smith/db";
+import type { Logger } from "@agentic-smith/logging";
 import {
   createServiceLogger,
   enrichLogContext,
   getLogger,
   installLogger,
   SERVICE_NAMES,
-} from "@rakazo/logging";
-import { requestLogging } from "@rakazo/logging/hono";
-import { MarkdownMemoryStore } from "@rakazo/memory";
+} from "@agentic-smith/logging";
+import { requestLogging } from "@agentic-smith/logging/hono";
+import { MarkdownMemoryStore } from "@agentic-smith/memory";
+import { onError } from "@orpc/server";
+import { RPCHandler } from "@orpc/server/fetch";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { deleteAccountContent, finishStalledOrganizationDeletions } from "./account-deletion.js";
@@ -173,7 +173,7 @@ import { mountWebhookHttpRoutes } from "./webhook.js";
  * The loopback entries are the Expo web dev server.
  */
 export const MOBILE_AUTH_ORIGINS = [
-  "rakazo://",
+  "agentic-smith://",
   "http://localhost:8081",
   "http://127.0.0.1:8081",
   "http://localhost:19006",
@@ -267,7 +267,7 @@ async function buildApp(overrides: CreateAppOverrides): Promise<AppHandles> {
     ? { prisma: prismaOverride, pool: undefined }
     : createDb(env.databaseUrl, {
         poolMax,
-        applicationName: "rakazo-api",
+        applicationName: "agentic-smith-api",
         keyProvider: contentKeyProviderFromEnv(),
         encryptContent: env.contentEncryption,
       });
@@ -339,7 +339,7 @@ async function buildApp(overrides: CreateAppOverrides): Promise<AppHandles> {
   if (!inMemoryJobs && !created.pool) {
     ownedJobPool = createPool(env.databaseUrl, {
       poolMax: parsePositiveInteger(process.env.DB_POOL_MAX, 4),
-      applicationName: "rakazo-api-jobs",
+      applicationName: "agentic-smith-api-jobs",
     });
   }
   const jobPool = created.pool ?? ownedJobPool;
@@ -933,7 +933,7 @@ async function buildApp(overrides: CreateAppOverrides): Promise<AppHandles> {
       requireMembership(
         prisma,
         session.user.id,
-        request.headers.get("x-rakazo-space-id"),
+        request.headers.get("x-agentic-smith-space-id"),
         session.session.id,
       ),
     );
@@ -1138,7 +1138,7 @@ export function isTrustedOrigin(
   env: Pick<AppEnv, "webOrigin" | "apiUrl" | "authUrl">,
 ) {
   if (!origin) return true;
-  if (origin.startsWith("rakazo://")) return true;
+  if (origin.startsWith("agentic-smith://")) return true;
   return new Set(trustedRequestOrigins(env)).has(origin);
 }
 

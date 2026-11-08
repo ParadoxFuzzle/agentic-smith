@@ -1,5 +1,5 @@
+import type { AgentRunModel, AgentRunRequest, ConnectorTool } from "@agentic-smith/adapter-kit";
 import type { AgentTool } from "@earendil-works/pi-agent-core";
-import type { AgentRunModel, AgentRunRequest, ConnectorTool } from "@rakazo/adapter-kit";
 import type { RuntimeModelTarget } from "./pi-runtime-models.js";
 import {
   cardOutputCeiling,

@@ -1,5 +1,4 @@
-import type { OAuthCredential } from "@earendil-works/pi-ai";
-import type { ModelApiProtocol, ModelContextLimits, ThinkingLevel } from "@rakazo/contracts";
+import type { ModelApiProtocol, ModelContextLimits, ThinkingLevel } from "@agentic-smith/contracts";
 import {
   MAX_MODEL_CONTEXT_WINDOW,
   MAX_MODEL_MAX_TOKENS,
@@ -7,7 +6,8 @@ import {
   ModelContextLimitsSchema,
   parseModelHeaders,
   ThinkingLevelSchema,
-} from "@rakazo/contracts";
+} from "@agentic-smith/contracts";
+import type { OAuthCredential } from "@earendil-works/pi-ai";
 
 const CORRUPT_MODEL_SECRET_MESSAGE =
   "Stored model credential is corrupt. Connect the provider again.";

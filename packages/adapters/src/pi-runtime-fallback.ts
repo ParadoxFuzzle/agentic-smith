@@ -1,3 +1,18 @@
+import type { AgentRunRequest, ConnectorTool } from "@agentic-smith/adapter-kit";
+import {
+  isModelCredentialRejected,
+  isRetryableProviderUnavailable,
+  isTransientModelError,
+} from "@agentic-smith/adapter-kit";
+import type { ModelBackupOutcome } from "@agentic-smith/core";
+import {
+  abortableDelay,
+  MODEL_CONTEXT_TOO_SMALL_ERROR,
+  MODEL_OUTPUT_CUT_ERROR,
+  MODEL_OUTPUT_LIMIT_ERROR,
+  MODEL_REQUEST_LIMIT_ERROR,
+} from "@agentic-smith/core";
+import { getLogger } from "@agentic-smith/logging";
 import type {
   AssistantMessage,
   AssistantMessageEvent,
@@ -9,21 +24,6 @@ import type {
 } from "@earendil-works/pi-ai";
 import { getSupportedThinkingLevels } from "@earendil-works/pi-ai";
 import { AssistantMessageEventStream } from "@earendil-works/pi-ai/utils/event-stream";
-import type { AgentRunRequest, ConnectorTool } from "@rakazo/adapter-kit";
-import {
-  isModelCredentialRejected,
-  isRetryableProviderUnavailable,
-  isTransientModelError,
-} from "@rakazo/adapter-kit";
-import type { ModelBackupOutcome } from "@rakazo/core";
-import {
-  abortableDelay,
-  MODEL_CONTEXT_TOO_SMALL_ERROR,
-  MODEL_OUTPUT_CUT_ERROR,
-  MODEL_OUTPUT_LIMIT_ERROR,
-  MODEL_REQUEST_LIMIT_ERROR,
-} from "@rakazo/core";
-import { getLogger } from "@rakazo/logging";
 import { ModelImageLimitError, pruneForRebuild } from "./context-pruning.js";
 import { ContextBudgetError } from "./context-selection.js";
 import { groqRequestContextWindow } from "./groq-request-budget.js";

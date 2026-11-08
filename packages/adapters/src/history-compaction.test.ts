@@ -3,11 +3,16 @@ import type {
   AgentRuntime,
   JobPublisher,
   SemanticMemoryResponse,
-} from "@rakazo/adapter-kit";
-import { historyCompactJob } from "@rakazo/adapter-kit";
-import type { MessageBlock } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
-import { createLogger, createTestSink, installLogger, wrapJobPayload } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import { historyCompactJob } from "@agentic-smith/adapter-kit";
+import type { MessageBlock } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
+import {
+  createLogger,
+  createTestSink,
+  installLogger,
+  wrapJobPayload,
+} from "@agentic-smith/logging";
 import { describe, expect, it, vi } from "vitest";
 import {
   COMPACTION_BATCH_SIZE,
@@ -181,7 +186,7 @@ describe("selectCompactedHistory", () => {
 describe("formatCompactedSummary", () => {
   it("labels the summary as data and records its coverage", () => {
     expect(formatCompactedSummary("facts", 49)).toContain(
-      "Rakazo-owned compacted context through message sequence 49",
+      "Agentic Smith-owned compacted context through message sequence 49",
     );
     expect(formatCompactedSummary("facts", 49)).toContain("<compacted_thread_summary>");
   });
@@ -234,13 +239,13 @@ describe("formatRecalledMemory", () => {
         memory: "Ava prefers feature flags.",
         id: "fact-1",
         provenance: "evals/corpora/ava.yaml",
-        entity: "rakazo-space/workspace-1",
+        entity: "agentic-smith-space/workspace-1",
       },
     ]);
     expect(block).toContain("Ava prefers feature flags.");
     expect(block).toContain("provenance: evals/corpora/ava.yaml");
     expect(block).toContain("id: fact-1");
-    expect(block).toContain("entity: rakazo-space/workspace-1");
+    expect(block).toContain("entity: agentic-smith-space/workspace-1");
   });
 });
 
@@ -482,12 +487,12 @@ describe("summarizeTimeoutMs", () => {
 
 function installCompactionLogger() {
   const sink = createTestSink();
-  installLogger(createLogger({ service: "rakazo-worker", sinks: [sink] }));
+  installLogger(createLogger({ service: "agentic-smith-worker", sinks: [sink] }));
   return sink;
 }
 
 function silenceLogger() {
-  installLogger(createLogger({ service: "rakazo-worker", level: "off", sinks: [] }));
+  installLogger(createLogger({ service: "agentic-smith-worker", level: "off", sinks: [] }));
 }
 
 describe("recordHistoryCompactAttemptsExhausted", () => {
@@ -972,7 +977,7 @@ describe("compactHistory", () => {
     });
     harness.purgeHistory.mockRejectedValueOnce(new Error("provider unavailable"));
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-worker", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-worker", sinks: [sink] }));
 
     await expect(compactHistory(harness.deps, "thread-1")).resolves.toBeUndefined();
 
@@ -982,7 +987,7 @@ describe("compactHistory", () => {
         (event) => event.message === "history.compact could not purge stale semantic memory",
       ),
     ).toBe(true);
-    installLogger(createLogger({ service: "rakazo-worker", level: "off", sinks: [] }));
+    installLogger(createLogger({ service: "agentic-smith-worker", level: "off", sinks: [] }));
   });
 
   it("falls back to the deployment's configured default model when no deployment key is available", async () => {

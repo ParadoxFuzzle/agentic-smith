@@ -1,4 +1,4 @@
-import type { AdapterContext } from "@rakazo/adapter-kit";
+import type { AdapterContext } from "@agentic-smith/adapter-kit";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { ElevenLabsVoiceProvider } from "./elevenlabs-voice.js";
 

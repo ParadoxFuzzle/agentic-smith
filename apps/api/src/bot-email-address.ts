@@ -1,8 +1,8 @@
+import type { BotEmailAddress, BotEmailAddresses } from "@agentic-smith/contracts";
+import { BOT_EMAIL_NAME_TAKEN } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
+import { claimBotEmailName } from "@agentic-smith/db";
 import { ORPCError } from "@orpc/server";
-import type { BotEmailAddress, BotEmailAddresses } from "@rakazo/contracts";
-import { BOT_EMAIL_NAME_TAKEN } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
-import { claimBotEmailName } from "@rakazo/db";
 
 export const EMAIL_NOT_RECEIVED = "This server doesn't receive email.";
 

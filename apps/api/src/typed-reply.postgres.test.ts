@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
-import type { Actor, MessageBlock } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
+import type { Actor, MessageBlock } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import {
   answerRunInput,
   asSystem,
@@ -11,7 +11,7 @@ import {
   runAsSystem,
   runAsTenant,
   SpaceDeletionInProgressError,
-} from "@rakazo/db";
+} from "@agentic-smith/db";
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
 import type { ThreadTarget } from "./thread-target.js";
 import { sendThreadMessage } from "./thread-target.js";
@@ -749,7 +749,7 @@ describe.skipIf(!enabled)("typed replies to waiting cards (PostgreSQL)", () => {
     expect(sandbox.execute).toHaveBeenCalledWith(
       expect.objectContaining({ providerRef: `ref-${run.id}` }),
       expect.objectContaining({
-        argv: expect.arrayContaining(["rakazo-cancel-run-work", computer.id, run.id]),
+        argv: expect.arrayContaining(["agentic-smith-cancel-run-work", computer.id, run.id]),
       }),
       expect.objectContaining({ cancelRunWork: true, runId: run.id }),
     );

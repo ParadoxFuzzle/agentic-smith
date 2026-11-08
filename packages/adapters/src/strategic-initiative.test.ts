@@ -1,7 +1,7 @@
-import type { JobPublisher } from "@rakazo/adapter-kit";
-import type * as Db from "@rakazo/db";
-import type { PrismaClient } from "@rakazo/db";
-import { memberHasModelAccess } from "@rakazo/db";
+import type { JobPublisher } from "@agentic-smith/adapter-kit";
+import type * as Db from "@agentic-smith/db";
+import type { PrismaClient } from "@agentic-smith/db";
+import { memberHasModelAccess } from "@agentic-smith/db";
 import { describe, expect, it, vi } from "vitest";
 import {
   createStrategicInitiativeReconciler,
@@ -11,7 +11,7 @@ import {
   strategicInitiativeToolAllowed,
 } from "./strategic-initiative.js";
 
-vi.mock("@rakazo/db", async (importOriginal) => ({
+vi.mock("@agentic-smith/db", async (importOriginal) => ({
   ...(await importOriginal<typeof Db>()),
   memberHasModelAccess: vi.fn(async () => true),
 }));

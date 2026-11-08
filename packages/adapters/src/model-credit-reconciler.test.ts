@@ -1,12 +1,12 @@
-import type { AgentUsage, ModelUsageLookup } from "@rakazo/adapter-kit";
-import type * as Db from "@rakazo/db";
-import type { PrismaClient } from "@rakazo/db";
-import { recordUsage } from "@rakazo/db";
-import { createLogger, createTestSink, installLogger } from "@rakazo/logging";
+import type { AgentUsage, ModelUsageLookup } from "@agentic-smith/adapter-kit";
+import type * as Db from "@agentic-smith/db";
+import type { PrismaClient } from "@agentic-smith/db";
+import { recordUsage } from "@agentic-smith/db";
+import { createLogger, createTestSink, installLogger } from "@agentic-smith/logging";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createModelCreditReconciler } from "./model-credit-reconciler.js";
 
-vi.mock("@rakazo/db", async (importOriginal) => ({
+vi.mock("@agentic-smith/db", async (importOriginal) => ({
   ...(await importOriginal<typeof Db>()),
   recordUsage: vi.fn(),
 }));
@@ -72,7 +72,7 @@ const charged = () => vi.mocked(recordUsage).mock.calls[0]?.[1];
 describe("model credit reconciler", () => {
   beforeEach(() => vi.mocked(recordUsage).mockReset());
   afterEach(() => {
-    installLogger(createLogger({ service: "rakazo-worker", level: "off", sinks: [] }));
+    installLogger(createLogger({ service: "agentic-smith-worker", level: "off", sinks: [] }));
   });
 
   it("charges the provider's cost for a stopped call when its lookup finds one", async () => {
@@ -273,7 +273,7 @@ describe("model credit reconciler", () => {
 
   it("reports why the provider could not price a call", async () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-worker", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-worker", sinks: [sink] }));
     await reconcile(
       { usage: stopped, providerRequestId: "gen-fixture", reconciliationAttempts: 5 },
       lookup(async () => null),
@@ -288,7 +288,7 @@ describe("model credit reconciler", () => {
 
   it("flags a hold it cannot attribute for review with the reason", async () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-worker", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-worker", sinks: [sink] }));
 
     const updateMany = await reconcile({ model: null, reconciliationAttempts: 5 });
 
@@ -312,7 +312,7 @@ describe("model credit reconciler", () => {
 
   it("keeps the failure reason on each attempt that could not verify a call", async () => {
     const sink = createTestSink();
-    installLogger(createLogger({ service: "rakazo-worker", sinks: [sink] }));
+    installLogger(createLogger({ service: "agentic-smith-worker", sinks: [sink] }));
     await reconcile({ model: null });
 
     expect(sink.events).toEqual([

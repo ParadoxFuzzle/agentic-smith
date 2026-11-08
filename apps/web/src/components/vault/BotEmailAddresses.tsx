@@ -1,5 +1,5 @@
+import { Button, SectionHeading } from "@agentic-smith/ui-web";
 import { Trans, useLingui } from "@lingui/react/macro";
-import { Button, SectionHeading } from "@rakazo/ui-web";
 import { useQuery } from "@tanstack/react-query";
 import { Check, Copy, Mail } from "lucide-react";
 import { useCopyText } from "../../lib/copy-text";

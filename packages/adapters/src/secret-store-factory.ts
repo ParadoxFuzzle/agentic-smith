@@ -6,8 +6,8 @@ import type {
   SecretContext,
   SecretPutOptions,
   SecretStore,
-} from "@rakazo/adapter-kit";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import { getLogger } from "@agentic-smith/logging";
 import type { InfisicalSecretStoreOptions } from "./infisical-secret-store.js";
 import { INFISICAL_REF_PREFIX, InfisicalSecretStore } from "./infisical-secret-store.js";
 import { SecretChanges } from "./secret-changes.js";

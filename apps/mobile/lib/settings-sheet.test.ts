@@ -61,7 +61,7 @@ describe("settings sheet", () => {
 
 describe("settings links", () => {
   it.each([true, false])("opens the share target for cold/warm arrivals (%s)", (initial) => {
-    expect(redirectSystemPath({ path: "rakazo://expo-sharing", initial })).toBe("/share");
+    expect(redirectSystemPath({ path: "agentic-smith://expo-sharing", initial })).toBe("/share");
   });
   it("knows every public page in the settings group", () => {
     const pages = readdirSync(resolve(mobileRoot, "app/(settings)"))
@@ -72,41 +72,45 @@ describe("settings links", () => {
   });
 
   it("reads the page from any link form", () => {
-    expect(isSettingsLink("rakazo:///models")).toBe(true);
+    expect(isSettingsLink("agentic-smith:///models")).toBe(true);
     // Picker sessions only exist after an in-sheet push, never from a link.
-    expect(isSettingsLink("rakazo:///model-picker")).toBe(false);
-    expect(isSettingsLink("rakazo:///model-connection")).toBe(false);
-    expect(isSettingsLink("rakazo://voice")).toBe(true);
-    expect(isSettingsLink("rakazo:///account?focus=usage")).toBe(true);
-    expect(isSettingsLink("rakazo://integrations/")).toBe(true);
+    expect(isSettingsLink("agentic-smith:///model-picker")).toBe(false);
+    expect(isSettingsLink("agentic-smith:///model-connection")).toBe(false);
+    expect(isSettingsLink("agentic-smith://voice")).toBe(true);
+    expect(isSettingsLink("agentic-smith:///account?focus=usage")).toBe(true);
+    expect(isSettingsLink("agentic-smith://integrations/")).toBe(true);
     expect(isSettingsLink("/change-password")).toBe(true);
-    expect(isSettingsLink("rakazo:///thread?botId=bot-1")).toBe(false);
-    expect(isSettingsLink("rakazo://group-thread?groupId=group-1")).toBe(false);
+    expect(isSettingsLink("agentic-smith:///thread?botId=bot-1")).toBe(false);
+    expect(isSettingsLink("agentic-smith://group-thread?groupId=group-1")).toBe(false);
     expect(isSettingsLink("/new")).toBe(false);
     expect(isSettingsLink("/artifacts")).toBe(false);
-    expect(isSettingsLink("rakazo:///artifacts")).toBe(false);
-    expect(isSettingsLink("rakazo://")).toBe(false);
-    expect(isSettingsLink("rakazo:///accounts")).toBe(false);
+    expect(isSettingsLink("agentic-smith:///artifacts")).toBe(false);
+    expect(isSettingsLink("agentic-smith://")).toBe(false);
+    expect(isSettingsLink("agentic-smith:///accounts")).toBe(false);
   });
 
   it("closes the sheet before a link to another screen, and keeps settings links in it", () => {
     const close = vi.fn();
     const unregister = registerSettingsSheet(close);
 
-    expect(redirectSystemPath({ path: "rakazo:///voice", initial: false })).toBe("rakazo:///voice");
-    expect(redirectSystemPath({ path: "rakazo:///account?focus=usage", initial: false })).toBe(
-      "rakazo:///account?focus=usage",
+    expect(redirectSystemPath({ path: "agentic-smith:///voice", initial: false })).toBe(
+      "agentic-smith:///voice",
     );
+    expect(
+      redirectSystemPath({ path: "agentic-smith:///account?focus=usage", initial: false }),
+    ).toBe("agentic-smith:///account?focus=usage");
     expect(close).not.toHaveBeenCalled();
 
-    expect(redirectSystemPath({ path: "rakazo:///thread?botId=bot-1", initial: false })).toBe(
-      "rakazo:///thread?botId=bot-1",
-    );
+    expect(
+      redirectSystemPath({ path: "agentic-smith:///thread?botId=bot-1", initial: false }),
+    ).toBe("agentic-smith:///thread?botId=bot-1");
     expect(close).toHaveBeenCalledTimes(1);
-    expect(redirectSystemPath({ path: "rakazo://expo-sharing", initial: true })).toBe("/share");
+    expect(redirectSystemPath({ path: "agentic-smith://expo-sharing", initial: true })).toBe(
+      "/share",
+    );
     expect(close).toHaveBeenCalledTimes(2);
-    expect(redirectSystemPath({ path: "rakazo:///artifacts", initial: false })).toBe(
-      "rakazo:///artifacts",
+    expect(redirectSystemPath({ path: "agentic-smith:///artifacts", initial: false })).toBe(
+      "agentic-smith:///artifacts",
     );
     expect(close).toHaveBeenCalledTimes(3);
     unregister();

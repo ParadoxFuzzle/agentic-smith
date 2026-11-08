@@ -1,5 +1,4 @@
-import { ORPCError } from "@orpc/server";
-import type { McpOAuthBroker, McpOAuthSummary, McpStdioPolicy } from "@rakazo/adapters";
+import type { McpOAuthBroker, McpOAuthSummary, McpStdioPolicy } from "@agentic-smith/adapters";
 import {
   assertNoMcpEndpointCredential,
   assertSafeRemoteUrl,
@@ -7,12 +6,13 @@ import {
   mcpServerHealthDto,
   mcpStdioRefusal,
   recordMcpServerHealth,
-} from "@rakazo/adapters";
-import type { Actor, McpServer, McpServerConfigInput } from "@rakazo/contracts";
-import { mcpOAuthEnvReferences } from "@rakazo/contracts";
-import type { McpServer as McpServerRow, Prisma } from "@rakazo/db";
-import { itemSecretIn, spaceAvailability } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapters";
+import type { Actor, McpServer, McpServerConfigInput } from "@agentic-smith/contracts";
+import { mcpOAuthEnvReferences } from "@agentic-smith/contracts";
+import type { McpServer as McpServerRow, Prisma } from "@agentic-smith/db";
+import { itemSecretIn, spaceAvailability } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
+import { ORPCError } from "@orpc/server";
 import { isAdmin } from "./admins.js";
 import { assertNameFreeWhereAvailable, userAddedAvailability } from "./availability.js";
 import { dismissMcpServerApprovals } from "./mcp-approval.js";

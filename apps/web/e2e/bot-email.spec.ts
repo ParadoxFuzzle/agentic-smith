@@ -13,7 +13,7 @@ test("a bot gets its email address from its settings and lists it in the Vault",
   page,
 }, testInfo) => {
   const stamp = Date.now();
-  await signup(page, `bot-email-${stamp}@rakazo.test`, "password12", "Bot Email");
+  await signup(page, `bot-email-${stamp}@agentic-smith.test`, "password12", "Bot Email");
   await completeOnboarding(page);
   const botId = activeBotId(page);
   await openBotPanelTab(page, "Computer");
@@ -22,12 +22,12 @@ test("a bot gets its email address from its settings and lists it in the Vault",
   await header.getByRole("button", { name: "Get an email address" }).click();
   await header.getByRole("textbox", { name: "Email address" }).fill(`scout-${stamp}`);
   await header.getByRole("button", { name: "Claim" }).click();
-  const address = `scout-${stamp}@bots.rakazo.test`;
+  const address = `scout-${stamp}@bots.agentic-smith.test`;
   await expect(header.getByText(address)).toBeVisible();
   await expect(header.getByRole("button", { name: `Copy ${address}` })).toBeVisible();
   await captureScreenshot(page, testInfo, "bot-email-address");
   expect(await rpc(page, "bots/emailAddress", { botId })).toEqual({
-    domain: "bots.rakazo.test",
+    domain: "bots.agentic-smith.test",
     address,
   });
 

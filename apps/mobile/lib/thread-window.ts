@@ -1,11 +1,11 @@
-import type { ThreadScrollState } from "@rakazo/core";
+import type { ThreadScrollState } from "@agentic-smith/core";
 import {
   foldPeerReplies,
   jumpTargetId,
   leaveThreadWindow,
   openThreadWindow,
   peerExchangeLines,
-} from "@rakazo/core";
+} from "@agentic-smith/core";
 import type { Dispatch, RefObject, SetStateAction } from "react";
 import { rpc } from "./api";
 import { isIntegrationsScopeCurrent } from "./integrations-cache";

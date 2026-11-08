@@ -1,6 +1,6 @@
+import type { OrganizationList } from "@agentic-smith/contracts";
+import { organizationLandingSpaceId, organizationOfSpace } from "@agentic-smith/core";
 import type { MenuAction } from "@expo/ui/community/menu";
-import type { OrganizationList } from "@rakazo/contracts";
-import { organizationLandingSpaceId, organizationOfSpace } from "@rakazo/core";
 import { useQuery } from "@tanstack/react-query";
 import { router } from "expo-router";
 import { selectedSpaceId } from "./api";

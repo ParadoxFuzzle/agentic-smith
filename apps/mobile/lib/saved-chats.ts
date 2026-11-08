@@ -1,4 +1,4 @@
-import { displayIdentityResult, identitySource } from "@rakazo/core";
+import { displayIdentityResult, identitySource } from "@agentic-smith/core";
 import { Directory, File, Paths } from "expo-file-system";
 import { currentApiBase, selectedSpaceId } from "./api";
 import { artifactCacheSession } from "./artifact-cache-session";

@@ -1,9 +1,9 @@
+import type { ModelCatalogEntry, ModelCredential, ThinkingLevel } from "@agentic-smith/contracts";
+import type { ConnectedModelChoice } from "@agentic-smith/core";
+import { connectedModelChoices } from "@agentic-smith/core";
 import { i18n } from "@lingui/core";
-import type { ModelCatalogEntry, ModelCredential, ThinkingLevel } from "@rakazo/contracts";
-import type { ConnectedModelChoice } from "@rakazo/core";
-import { connectedModelChoices } from "@rakazo/core";
 
-export { modelOptionKey, parseModelOptionKey } from "@rakazo/core";
+export { modelOptionKey, parseModelOptionKey } from "@agentic-smith/core";
 
 /** The models the connected credentials can run, as one list for a picker. */
 export function connectedModelOptions(

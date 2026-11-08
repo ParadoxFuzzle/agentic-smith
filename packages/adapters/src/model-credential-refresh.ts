@@ -3,10 +3,10 @@ import type {
   ModelCredentialFailedState,
   ModelCredentialRetireReason,
   SecretStore,
-} from "@rakazo/adapter-kit";
-import type { Prisma, PrismaClient } from "@rakazo/db";
-import { retireModelCredential } from "@rakazo/db";
-import { getLogger } from "@rakazo/logging";
+} from "@agentic-smith/adapter-kit";
+import type { Prisma, PrismaClient } from "@agentic-smith/db";
+import { retireModelCredential } from "@agentic-smith/db";
+import { getLogger } from "@agentic-smith/logging";
 import { advisoryLock } from "./advisory-lock.js";
 import { parseModelSecret, serializeModelSecret } from "./model-secret.js";
 import type { ResolveModelOpts } from "./pi-oauth.js";

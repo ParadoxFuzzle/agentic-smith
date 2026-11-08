@@ -3,22 +3,22 @@
 set -Eeuo pipefail
 
 # A pinned release gets its own Compose files. Like Compose, prefer the shell's tag over .env.
-image_tag="${RAKAZO_IMAGE_TAG-}"
-if [[ -z "${RAKAZO_IMAGE_TAG+x}" && -f .env ]]; then
-  image_tag=$(sed -nE "s/^[[:space:]]*(export[[:space:]]+)?RAKAZO_IMAGE_TAG[[:space:]]*=[[:space:]]*[\"']?([^\"'#[:space:]]*).*/\2/p" .env | tail -n 1)
+image_tag="${AGENTIC_SMITH_IMAGE_TAG-}"
+if [[ -z "${AGENTIC_SMITH_IMAGE_TAG+x}" && -f .env ]]; then
+  image_tag=$(sed -nE "s/^[[:space:]]*(export[[:space:]]+)?AGENTIC_SMITH_IMAGE_TAG[[:space:]]*=[[:space:]]*[\"']?([^\"'#[:space:]]*).*/\2/p" .env | tail -n 1)
 fi
 download_ref=main
 if [[ "$image_tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   download_ref="$image_tag"
 fi
-DOWNLOAD_BASE="${RAKAZO_DOWNLOAD_BASE:-https://raw.githubusercontent.com/elie222/rakazo/${download_ref}/infra/compose}"
+DOWNLOAD_BASE="${AGENTIC_SMITH_DOWNLOAD_BASE:-https://raw.githubusercontent.com/ParadoxFuzzle/agentic-smith/${download_ref}/infra/compose}"
 while [[ "$DOWNLOAD_BASE" == */ ]]; do
   DOWNLOAD_BASE="${DOWNLOAD_BASE%/}"
 done
 case "$DOWNLOAD_BASE" in
   https://*) ;;
   *)
-    echo "Rakazo setup failed: RAKAZO_DOWNLOAD_BASE must use https." >&2
+    echo "Agentic Smith setup failed: AGENTIC_SMITH_DOWNLOAD_BASE must use https." >&2
     exit 1
     ;;
 esac
@@ -35,10 +35,10 @@ prepare_only=false
 skip_existing=false
 pull_never=false
 offline=false
-if [[ "${RAKAZO_DOWNLOAD_SKIP_EXISTING:-}" == "1" ]]; then
+if [[ "${AGENTIC_SMITH_DOWNLOAD_SKIP_EXISTING:-}" == "1" ]]; then
   skip_existing=true
 fi
-if [[ "${RAKAZO_PULL_NEVER:-}" == "1" ]]; then
+if [[ "${AGENTIC_SMITH_PULL_NEVER:-}" == "1" ]]; then
   pull_never=true
 fi
 
@@ -75,7 +75,7 @@ cleanup() {
 trap cleanup EXIT
 
 fail() {
-  echo "Rakazo setup failed: $*" >&2
+  echo "Agentic Smith setup failed: $*" >&2
   exit 1
 }
 
@@ -317,12 +317,12 @@ validate_required_secrets() {
 services:
   api:
     environment:
-      _RAKAZO_VALIDATE_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
-      _RAKAZO_VALIDATE_POSTGRES_APP_PASSWORD: ${POSTGRES_APP_PASSWORD:?Set POSTGRES_APP_PASSWORD in .env}
-      _RAKAZO_VALIDATE_BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Set BETTER_AUTH_SECRET in .env}
-      _RAKAZO_VALIDATE_ENCRYPTION_KEY: ${ENCRYPTION_KEY:?Set ENCRYPTION_KEY in .env}
-      _RAKAZO_VALIDATE_SCREEN_PROXY_SECRET: ${SCREEN_PROXY_SECRET:?Set SCREEN_PROXY_SECRET in .env}
-      _RAKAZO_VALIDATE_SANDBOX_SUPERVISOR_TOKEN: ${SANDBOX_SUPERVISOR_TOKEN:?Set SANDBOX_SUPERVISOR_TOKEN in .env}
+      _AGENTIC_SMITH_VALIDATE_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      _AGENTIC_SMITH_VALIDATE_POSTGRES_APP_PASSWORD: ${POSTGRES_APP_PASSWORD:?Set POSTGRES_APP_PASSWORD in .env}
+      _AGENTIC_SMITH_VALIDATE_BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:?Set BETTER_AUTH_SECRET in .env}
+      _AGENTIC_SMITH_VALIDATE_ENCRYPTION_KEY: ${ENCRYPTION_KEY:?Set ENCRYPTION_KEY in .env}
+      _AGENTIC_SMITH_VALIDATE_SCREEN_PROXY_SECRET: ${SCREEN_PROXY_SECRET:?Set SCREEN_PROXY_SECRET in .env}
+      _AGENTIC_SMITH_VALIDATE_SANDBOX_SUPERVISOR_TOKEN: ${SANDBOX_SUPERVISOR_TOKEN:?Set SANDBOX_SUPERVISOR_TOKEN in .env}
 YAML
   then
     fail "set every required secret in .env to a non-empty value."
@@ -402,7 +402,7 @@ validate_required_secrets
 warn_unpassed_settings
 
 if [[ "$prepare_only" == true ]]; then
-  echo "Rakazo files are ready. Edit .env, then run: bash install-images.sh"
+  echo "Agentic Smith files are ready. Edit .env, then run: bash install-images.sh"
   exit 0
 fi
 
@@ -435,4 +435,4 @@ else
   docker compose --env-file "$ENV_FILE" "${compose_files[@]}" up -d ${up_pull_args[@]+"${up_pull_args[@]}"}
 fi
 
-echo "Rakazo is starting at http://127.0.0.1:5173"
+echo "Agentic Smith is starting at http://127.0.0.1:5173"

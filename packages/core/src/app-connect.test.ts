@@ -1,4 +1,4 @@
-import type { ConnectionCatalogItem, MessageBlock } from "@rakazo/contracts";
+import type { ConnectionCatalogItem, MessageBlock } from "@agentic-smith/contracts";
 import { describe, expect, it } from "vitest";
 import {
   appConnectCard,

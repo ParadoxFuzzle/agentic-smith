@@ -1,6 +1,6 @@
+import type { Actor } from "@agentic-smith/contracts";
+import type { PrismaClient } from "@agentic-smith/db";
 import { RPCHandler } from "@orpc/server/fetch";
-import type { Actor } from "@rakazo/contracts";
-import type { PrismaClient } from "@rakazo/db";
 import { describe, expect, it, vi } from "vitest";
 import type { RouterDeps } from "./router.js";
 import { createRouter } from "./router.js";
@@ -10,7 +10,7 @@ import { createRouter } from "./router.js";
 const actor = {
   spaceId: "space-1",
   userId: "user-1",
-  email: "user@rakazo.test",
+  email: "user@agentic-smith.test",
   isDeploymentOwner: false,
 } satisfies Actor;
 
@@ -64,7 +64,7 @@ function spendingDeps({ card = false, payments = [] as Array<typeof paid> } = {}
       screenProxySecret: "fake-test-secret",
       sandboxProvider: "fake",
     },
-    dataDir: "/tmp/rakazo-router-test",
+    dataDir: "/tmp/agentic-smith-router-test",
   } as unknown as RouterDeps;
   const handler = new RPCHandler(createRouter(deps));
   async function call(path: "get" | "set" | "payments", json: unknown = {}) {

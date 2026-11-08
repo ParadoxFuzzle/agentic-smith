@@ -1,5 +1,5 @@
-import type { AccountExportManifest, AccountExportRecord } from "@rakazo/contracts";
-import { accountExportPaths } from "@rakazo/contracts";
+import type { AccountExportManifest, AccountExportRecord } from "@agentic-smith/contracts";
+import { accountExportPaths } from "@agentic-smith/contracts";
 import { Zip, ZipDeflate } from "fflate";
 
 export type ArchiveFile = [name: string, content: string | Uint8Array];
@@ -81,7 +81,7 @@ export function exportFiles(
 
 export function manifestFor(spaces: Array<{ id: string; name: string }>): AccountExportManifest {
   return {
-    format: "rakazo-account-export",
+    format: "agentic-smith-account-export",
     version: 1,
     exportedAt: "2026-10-01T00:00:00.000Z",
     user: { name: "Ada", email: "ada@example.com", timezone: "UTC" },

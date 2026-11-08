@@ -4,9 +4,9 @@ import {
   createAgentHomeStore,
   ObjectAgentHomeStore,
   unwrapEnvFromKeyManager,
-} from "@rakazo/adapters";
-import { loadRootEnv } from "@rakazo/core/node/load-root-env";
-import { createDb } from "@rakazo/db";
+} from "@agentic-smith/adapters";
+import { loadRootEnv } from "@agentic-smith/core/node/load-root-env";
+import { createDb } from "@agentic-smith/db";
 
 loadRootEnv();
 await unwrapEnvFromKeyManager();
@@ -38,7 +38,7 @@ if (!parsed) {
 if (!process.env.DATABASE_URL) throw new Error("DATABASE_URL is required");
 
 const { prisma, pool } = createDb(process.env.DATABASE_URL, {
-  applicationName: "rakazo-home-storage",
+  applicationName: "agentic-smith-home-storage",
   keyProvider: contentKeyProviderFromEnv(),
 });
 const write = (line: string) => process.stdout.write(`${line}\n`);

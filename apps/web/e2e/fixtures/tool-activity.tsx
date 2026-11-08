@@ -1,5 +1,5 @@
+import type { MessageBlock, ThreadMessage } from "@agentic-smith/contracts";
 import { I18nProvider } from "@lingui/react";
-import type { MessageBlock, ThreadMessage } from "@rakazo/contracts";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { createRoot } from "react-dom/client";
 import { bootstrapI18n, i18n } from "../../src/lib/i18n";
