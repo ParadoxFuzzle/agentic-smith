@@ -831,6 +831,19 @@ msgstr "Erweitert..."
 msgid "Agent from another app"
 msgstr "Agent aus einer anderen App"
 
+#: src/pages/AccountSettingsOverlay.tsx
+#: src/pages/shell/avatar-studio-popover.tsx
+msgid "Agentic Smith"
+msgstr "Agentic Smith"
+
+#: src/pages/onboarding/use-onboarding-model.ts
+msgid "Agentic Smith credits"
+msgstr "Agentic Smith-Guthaben"
+
+#: src/pages/memory-providers/HonchoSettingsForm.tsx
+msgid "agentic-smith-shared and IDs starting with bot- are reserved for AgenticSmith."
+msgstr "agentic-smith-shared und IDs, die mit bot- beginnen, sind für Agentic Smith reserviert."
+
 #: src/components/VaultSettings.tsx
 #: src/pages/PluginsOverlay.tsx
 msgid "All"
@@ -866,6 +879,10 @@ msgstr "Gesamter Zeitraum"
 msgid "Allow"
 msgstr "Erlauben"
 
+#: src/lib/dictation.ts
+msgid "Allow Agentic Smith to use Speech Recognition and the microphone in System Settings."
+msgstr "Erlaube Agentic Smith in den Systemeinstellungen, die Spracherkennung und das Mikrofon zu verwenden."
+
 #: src/pages/shell/bot-settings-sections.tsx
 msgid "Allow cross-space bot communication"
 msgstr "Kommunikation zwischen Bots in verschiedenen Spaces erlauben"
@@ -877,10 +894,6 @@ msgstr "In diesem Space erlauben"
 #: src/components/AskCard.tsx
 msgid "Allow once"
 msgstr "Einmal erlauben"
-
-#: src/lib/dictation.ts
-msgid "Allow Agentic Smith to use Speech Recognition and the microphone in System Settings."
-msgstr "Erlaube Agentic Smith in den Systemeinstellungen, die Spracherkennung und das Mikrofon zu verwenden."
 
 #: src/pages/memory-providers/SerenitySettingsForm.tsx
 msgid "Allow writing"
@@ -5052,6 +5065,12 @@ msgstr "{title} öffnen"
 msgid "Open <0>{0}</0> and enter this code:"
 msgstr "Öffne <0>{0}</0> und gib diesen Code ein:"
 
+#: src/components/pages/PublicPageShell.tsx
+#: src/pages/Invite.tsx
+#: src/pages/SharedPage.tsx
+msgid "Open Agentic Smith"
+msgstr "Agentic Smith öffnen"
+
 #: src/pages/shell/chat-header.tsx
 msgid "Open call"
 msgstr "Anruf öffnen"
@@ -5080,12 +5099,6 @@ msgstr "Link öffnen"
 #: src/pages/shell/chat-header.tsx
 msgid "Open navigation"
 msgstr "Navigation öffnen"
-
-#: src/components/pages/PublicPageShell.tsx
-#: src/pages/Invite.tsx
-#: src/pages/SharedPage.tsx
-msgid "Open Agentic Smith"
-msgstr "Agentic Smith öffnen"
 
 #: src/pages/ScratchpadSection.tsx
 msgid "Open work"
@@ -5457,19 +5470,6 @@ msgstr "Pull Request"
 #: src/pages/ActivityList.tsx
 msgid "Queued"
 msgstr "In Warteschlange"
-
-#: src/pages/AccountSettingsOverlay.tsx
-#: src/pages/shell/avatar-studio-popover.tsx
-msgid "Agentic Smith"
-msgstr "Agentic Smith"
-
-#: src/pages/onboarding/use-onboarding-model.ts
-msgid "Agentic Smith credits"
-msgstr "Agentic Smith-Guthaben"
-
-#: src/pages/memory-providers/HonchoSettingsForm.tsx
-msgid "agentic-smith-shared and IDs starting with bot- are reserved for AgenticSmith."
-msgstr "agentic-smith-shared und IDs, die mit bot- beginnen, sind für Agentic Smith reserviert."
 
 #: src/pages/shell/message-hover-actions.tsx
 msgid "React"
@@ -5930,15 +5930,15 @@ msgstr "Jetzt erneut versuchen"
 msgid "Retry screen"
 msgstr "Bildschirm erneut laden"
 
-#. placeholder {0}: call.botName
-#: src/components/call/CallCard.tsx
-msgid "Return to call with {0}"
-msgstr "Zurück zum Anruf mit {0}"
-
 #: src/pages/McpOAuthCallback.tsx
 #: src/pages/SlackInstallCallback.tsx
 msgid "Return to Agentic Smith"
 msgstr "Zurück zu Agentic Smith"
+
+#. placeholder {0}: call.botName
+#: src/components/call/CallCard.tsx
+msgid "Return to call with {0}"
+msgstr "Zurück zum Anruf mit {0}"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Review provider settings and test again."
@@ -7452,6 +7452,10 @@ msgstr "Verwende 2 bis 64 Zeichen"
 msgid "Use a found model"
 msgstr "Gefundenes Modell verwenden"
 
+#: src/components/ModelCredits.tsx
+msgid "Use Agentic Smith credits"
+msgstr "Agentic Smith-Guthaben verwenden"
+
 #: src/lib/model-connection-preflight.ts
 msgid "Use Connect to verify the key."
 msgstr "Nutze Verbinden, um den Schlüssel zu prüfen."
@@ -7483,10 +7487,6 @@ msgstr "Mein Abonnement oder meinen API-Schlüssel verwenden"
 #: src/components/teach/TeachRecordingChrome.tsx
 msgid "Use Protected input for passwords."
 msgstr "Verwende „Geschützte Eingabe“ für Passwörter."
-
-#: src/components/ModelCredits.tsx
-msgid "Use Agentic Smith credits"
-msgstr "Agentic Smith-Guthaben verwenden"
 
 #: src/pages/memory-providers/HonchoSettingsForm.tsx
 msgid "Use up to 512 letters, digits, _ or -."

@@ -831,6 +831,19 @@ msgstr "Geavanceerd..."
 msgid "Agent from another app"
 msgstr "Agent uit een andere app"
 
+#: src/pages/AccountSettingsOverlay.tsx
+#: src/pages/shell/avatar-studio-popover.tsx
+msgid "Agentic Smith"
+msgstr "Agentic Smith"
+
+#: src/pages/onboarding/use-onboarding-model.ts
+msgid "Agentic Smith credits"
+msgstr "Agentic Smith-tegoed"
+
+#: src/pages/memory-providers/HonchoSettingsForm.tsx
+msgid "agentic-smith-shared and IDs starting with bot- are reserved for AgenticSmith."
+msgstr "agentic-smith-shared en ID's die beginnen met bot- zijn gereserveerd voor AgenticSmith."
+
 #: src/components/VaultSettings.tsx
 #: src/pages/PluginsOverlay.tsx
 msgid "All"
@@ -866,6 +879,10 @@ msgstr "Alle tijd"
 msgid "Allow"
 msgstr "Toestaan"
 
+#: src/lib/dictation.ts
+msgid "Allow Agentic Smith to use Speech Recognition and the microphone in System Settings."
+msgstr "Sta Agentic Smith toe om Spraakherkenning en de microfoon te gebruiken in Systeeminstellingen."
+
 #: src/pages/shell/bot-settings-sections.tsx
 msgid "Allow cross-space bot communication"
 msgstr "Communicatie tussen bots in verschillende ruimtes toestaan"
@@ -877,10 +894,6 @@ msgstr "Toestaan in deze space"
 #: src/components/AskCard.tsx
 msgid "Allow once"
 msgstr "Een keer toestaan"
-
-#: src/lib/dictation.ts
-msgid "Allow Agentic Smith to use Speech Recognition and the microphone in System Settings."
-msgstr "Sta Agentic Smith toe om Spraakherkenning en de microfoon te gebruiken in Systeeminstellingen."
 
 #: src/pages/memory-providers/SerenitySettingsForm.tsx
 msgid "Allow writing"
@@ -5052,6 +5065,12 @@ msgstr "{title} openen"
 msgid "Open <0>{0}</0> and enter this code:"
 msgstr "Open <0>{0}</0> en voer deze code in:"
 
+#: src/components/pages/PublicPageShell.tsx
+#: src/pages/Invite.tsx
+#: src/pages/SharedPage.tsx
+msgid "Open Agentic Smith"
+msgstr "Agentic Smith openen"
+
 #: src/pages/shell/chat-header.tsx
 msgid "Open call"
 msgstr "Gesprek openen"
@@ -5080,12 +5099,6 @@ msgstr "Link openen"
 #: src/pages/shell/chat-header.tsx
 msgid "Open navigation"
 msgstr "Navigatie openen"
-
-#: src/components/pages/PublicPageShell.tsx
-#: src/pages/Invite.tsx
-#: src/pages/SharedPage.tsx
-msgid "Open Agentic Smith"
-msgstr "Agentic Smith openen"
 
 #: src/pages/ScratchpadSection.tsx
 msgid "Open work"
@@ -5457,19 +5470,6 @@ msgstr "Pull request"
 #: src/pages/ActivityList.tsx
 msgid "Queued"
 msgstr "In wachtrij"
-
-#: src/pages/AccountSettingsOverlay.tsx
-#: src/pages/shell/avatar-studio-popover.tsx
-msgid "Agentic Smith"
-msgstr "Agentic Smith"
-
-#: src/pages/onboarding/use-onboarding-model.ts
-msgid "Agentic Smith credits"
-msgstr "Agentic Smith-tegoed"
-
-#: src/pages/memory-providers/HonchoSettingsForm.tsx
-msgid "agentic-smith-shared and IDs starting with bot- are reserved for AgenticSmith."
-msgstr "agentic-smith-shared en ID's die beginnen met bot- zijn gereserveerd voor AgenticSmith."
 
 #: src/pages/shell/message-hover-actions.tsx
 msgid "React"
@@ -5930,15 +5930,15 @@ msgstr "Nu opnieuw proberen"
 msgid "Retry screen"
 msgstr "Scherm opnieuw proberen"
 
-#. placeholder {0}: call.botName
-#: src/components/call/CallCard.tsx
-msgid "Return to call with {0}"
-msgstr "Terug naar het gesprek met {0}"
-
 #: src/pages/McpOAuthCallback.tsx
 #: src/pages/SlackInstallCallback.tsx
 msgid "Return to Agentic Smith"
 msgstr "Terug naar Agentic Smith"
+
+#. placeholder {0}: call.botName
+#: src/components/call/CallCard.tsx
+msgid "Return to call with {0}"
+msgstr "Terug naar het gesprek met {0}"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Review provider settings and test again."
@@ -7452,6 +7452,10 @@ msgstr "Gebruik 2 tot 64 tekens"
 msgid "Use a found model"
 msgstr "Een gevonden model gebruiken"
 
+#: src/components/ModelCredits.tsx
+msgid "Use Agentic Smith credits"
+msgstr "Agentic Smith-tegoed gebruiken"
+
 #: src/lib/model-connection-preflight.ts
 msgid "Use Connect to verify the key."
 msgstr "Gebruik Verbinden om de sleutel te verifiëren."
@@ -7483,10 +7487,6 @@ msgstr "Mijn abonnement of API-sleutel gebruiken"
 #: src/components/teach/TeachRecordingChrome.tsx
 msgid "Use Protected input for passwords."
 msgstr "Gebruik Beveiligde invoer voor wachtwoorden."
-
-#: src/components/ModelCredits.tsx
-msgid "Use Agentic Smith credits"
-msgstr "Agentic Smith-tegoed gebruiken"
 
 #: src/pages/memory-providers/HonchoSettingsForm.tsx
 msgid "Use up to 512 letters, digits, _ or -."

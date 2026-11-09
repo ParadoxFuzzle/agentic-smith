@@ -831,6 +831,19 @@ msgstr "उन्नत..."
 msgid "Agent from another app"
 msgstr "दूसरे ऐप का एजेंट"
 
+#: src/pages/AccountSettingsOverlay.tsx
+#: src/pages/shell/avatar-studio-popover.tsx
+msgid "Agentic Smith"
+msgstr "Agentic Smith"
+
+#: src/pages/onboarding/use-onboarding-model.ts
+msgid "Agentic Smith credits"
+msgstr "Agentic Smith क्रेडिट"
+
+#: src/pages/memory-providers/HonchoSettingsForm.tsx
+msgid "agentic-smith-shared and IDs starting with bot- are reserved for AgenticSmith."
+msgstr "agentic-smith-shared और bot- से शुरू होने वाली ID, Agentic Smith के लिए आरक्षित हैं।"
+
 #: src/components/VaultSettings.tsx
 #: src/pages/PluginsOverlay.tsx
 msgid "All"
@@ -866,6 +879,10 @@ msgstr "अब तक"
 msgid "Allow"
 msgstr "अनुमति दें"
 
+#: src/lib/dictation.ts
+msgid "Allow Agentic Smith to use Speech Recognition and the microphone in System Settings."
+msgstr "सिस्टम सेटिंग्स में Agentic Smith को स्पीच रिकग्निशन और माइक्रोफ़ोन उपयोग करने की अनुमति दें।"
+
 #: src/pages/shell/bot-settings-sections.tsx
 msgid "Allow cross-space bot communication"
 msgstr "अलग-अलग स्पेस के बॉट्स के बीच बातचीत की अनुमति दें"
@@ -877,10 +894,6 @@ msgstr "इस स्पेस में अनुमति दें"
 #: src/components/AskCard.tsx
 msgid "Allow once"
 msgstr "एक बार अनुमति दें"
-
-#: src/lib/dictation.ts
-msgid "Allow Agentic Smith to use Speech Recognition and the microphone in System Settings."
-msgstr "सिस्टम सेटिंग्स में Agentic Smith को स्पीच रिकग्निशन और माइक्रोफ़ोन उपयोग करने की अनुमति दें।"
 
 #: src/pages/memory-providers/SerenitySettingsForm.tsx
 msgid "Allow writing"
@@ -5052,6 +5065,12 @@ msgstr "{title} खोलें"
 msgid "Open <0>{0}</0> and enter this code:"
 msgstr "<0>{0}</0> खोलें और यह कोड दर्ज करें:"
 
+#: src/components/pages/PublicPageShell.tsx
+#: src/pages/Invite.tsx
+#: src/pages/SharedPage.tsx
+msgid "Open Agentic Smith"
+msgstr "Agentic Smith खोलें"
+
 #: src/pages/shell/chat-header.tsx
 msgid "Open call"
 msgstr "कॉल खोलें"
@@ -5080,12 +5099,6 @@ msgstr "लिंक खोलें"
 #: src/pages/shell/chat-header.tsx
 msgid "Open navigation"
 msgstr "नेविगेशन खोलें"
-
-#: src/components/pages/PublicPageShell.tsx
-#: src/pages/Invite.tsx
-#: src/pages/SharedPage.tsx
-msgid "Open Agentic Smith"
-msgstr "Agentic Smith खोलें"
 
 #: src/pages/ScratchpadSection.tsx
 msgid "Open work"
@@ -5457,19 +5470,6 @@ msgstr "पुल अनुरोध"
 #: src/pages/ActivityList.tsx
 msgid "Queued"
 msgstr "कतार में"
-
-#: src/pages/AccountSettingsOverlay.tsx
-#: src/pages/shell/avatar-studio-popover.tsx
-msgid "Agentic Smith"
-msgstr "Agentic Smith"
-
-#: src/pages/onboarding/use-onboarding-model.ts
-msgid "Agentic Smith credits"
-msgstr "Agentic Smith क्रेडिट"
-
-#: src/pages/memory-providers/HonchoSettingsForm.tsx
-msgid "agentic-smith-shared and IDs starting with bot- are reserved for AgenticSmith."
-msgstr "agentic-smith-shared और bot- से शुरू होने वाली ID, Agentic Smith के लिए आरक्षित हैं।"
 
 #: src/pages/shell/message-hover-actions.tsx
 msgid "React"
@@ -5930,15 +5930,15 @@ msgstr "अभी पुनः प्रयास करें"
 msgid "Retry screen"
 msgstr "स्क्रीन फिर से लोड करें"
 
-#. placeholder {0}: call.botName
-#: src/components/call/CallCard.tsx
-msgid "Return to call with {0}"
-msgstr "{0} के साथ कॉल पर लौटें"
-
 #: src/pages/McpOAuthCallback.tsx
 #: src/pages/SlackInstallCallback.tsx
 msgid "Return to Agentic Smith"
 msgstr "Agentic Smith पर लौटें"
+
+#. placeholder {0}: call.botName
+#: src/components/call/CallCard.tsx
+msgid "Return to call with {0}"
+msgstr "{0} के साथ कॉल पर लौटें"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Review provider settings and test again."
@@ -7452,6 +7452,10 @@ msgstr "2 से 64 अक्षर इस्तेमाल करें"
 msgid "Use a found model"
 msgstr "मिला हुआ मॉडल उपयोग करें"
 
+#: src/components/ModelCredits.tsx
+msgid "Use Agentic Smith credits"
+msgstr "Agentic Smith क्रेडिट उपयोग करें"
+
 #: src/lib/model-connection-preflight.ts
 msgid "Use Connect to verify the key."
 msgstr "कुंजी जाँचने के लिए कनेक्ट करें का उपयोग करें।"
@@ -7483,10 +7487,6 @@ msgstr "मेरा सब्सक्रिप्शन या API कुं�
 #: src/components/teach/TeachRecordingChrome.tsx
 msgid "Use Protected input for passwords."
 msgstr "पासवर्ड के लिए सुरक्षित इनपुट का उपयोग करें।"
-
-#: src/components/ModelCredits.tsx
-msgid "Use Agentic Smith credits"
-msgstr "Agentic Smith क्रेडिट उपयोग करें"
 
 #: src/pages/memory-providers/HonchoSettingsForm.tsx
 msgid "Use up to 512 letters, digits, _ or -."

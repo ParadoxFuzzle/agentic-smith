@@ -831,6 +831,19 @@ msgstr "高级..."
 msgid "Agent from another app"
 msgstr "其他应用中的智能体"
 
+#: src/pages/AccountSettingsOverlay.tsx
+#: src/pages/shell/avatar-studio-popover.tsx
+msgid "Agentic Smith"
+msgstr "Agentic Smith"
+
+#: src/pages/onboarding/use-onboarding-model.ts
+msgid "Agentic Smith credits"
+msgstr "Agentic Smith 额度"
+
+#: src/pages/memory-providers/HonchoSettingsForm.tsx
+msgid "agentic-smith-shared and IDs starting with bot- are reserved for AgenticSmith."
+msgstr "agentic-smith-shared 和以 bot- 开头的 ID 保留给 Agentic Smith 使用。"
+
 #: src/components/VaultSettings.tsx
 #: src/pages/PluginsOverlay.tsx
 msgid "All"
@@ -866,6 +879,10 @@ msgstr "全部时间"
 msgid "Allow"
 msgstr "允许"
 
+#: src/lib/dictation.ts
+msgid "Allow Agentic Smith to use Speech Recognition and the microphone in System Settings."
+msgstr "请在系统设置中允许 Agentic Smith 使用语音识别和麦克风。"
+
 #: src/pages/shell/bot-settings-sections.tsx
 msgid "Allow cross-space bot communication"
 msgstr "允许跨空间机器人通信"
@@ -877,10 +894,6 @@ msgstr "在此空间允许"
 #: src/components/AskCard.tsx
 msgid "Allow once"
 msgstr "允许一次"
-
-#: src/lib/dictation.ts
-msgid "Allow Agentic Smith to use Speech Recognition and the microphone in System Settings."
-msgstr "请在系统设置中允许 Agentic Smith 使用语音识别和麦克风。"
 
 #: src/pages/memory-providers/SerenitySettingsForm.tsx
 msgid "Allow writing"
@@ -5052,6 +5065,12 @@ msgstr "打开 {title}"
 msgid "Open <0>{0}</0> and enter this code:"
 msgstr "打开 <0>{0}</0>，输入这个验证码："
 
+#: src/components/pages/PublicPageShell.tsx
+#: src/pages/Invite.tsx
+#: src/pages/SharedPage.tsx
+msgid "Open Agentic Smith"
+msgstr "打开 Agentic Smith"
+
 #: src/pages/shell/chat-header.tsx
 msgid "Open call"
 msgstr "打开通话"
@@ -5080,12 +5099,6 @@ msgstr "打开链接"
 #: src/pages/shell/chat-header.tsx
 msgid "Open navigation"
 msgstr "打开导航"
-
-#: src/components/pages/PublicPageShell.tsx
-#: src/pages/Invite.tsx
-#: src/pages/SharedPage.tsx
-msgid "Open Agentic Smith"
-msgstr "打开 Agentic Smith"
 
 #: src/pages/ScratchpadSection.tsx
 msgid "Open work"
@@ -5457,19 +5470,6 @@ msgstr "拉取请求"
 #: src/pages/ActivityList.tsx
 msgid "Queued"
 msgstr "排队中"
-
-#: src/pages/AccountSettingsOverlay.tsx
-#: src/pages/shell/avatar-studio-popover.tsx
-msgid "Agentic Smith"
-msgstr "Agentic Smith"
-
-#: src/pages/onboarding/use-onboarding-model.ts
-msgid "Agentic Smith credits"
-msgstr "Agentic Smith 额度"
-
-#: src/pages/memory-providers/HonchoSettingsForm.tsx
-msgid "agentic-smith-shared and IDs starting with bot- are reserved for AgenticSmith."
-msgstr "agentic-smith-shared 和以 bot- 开头的 ID 保留给 Agentic Smith 使用。"
 
 #: src/pages/shell/message-hover-actions.tsx
 msgid "React"
@@ -5930,15 +5930,15 @@ msgstr "立即重试"
 msgid "Retry screen"
 msgstr "重新连接屏幕"
 
-#. placeholder {0}: call.botName
-#: src/components/call/CallCard.tsx
-msgid "Return to call with {0}"
-msgstr "返回与 {0} 的通话"
-
 #: src/pages/McpOAuthCallback.tsx
 #: src/pages/SlackInstallCallback.tsx
 msgid "Return to Agentic Smith"
 msgstr "返回 Agentic Smith"
+
+#. placeholder {0}: call.botName
+#: src/components/call/CallCard.tsx
+msgid "Return to call with {0}"
+msgstr "返回与 {0} 的通话"
 
 #: src/lib/model-connection-preflight.ts
 msgid "Review provider settings and test again."
@@ -7452,6 +7452,10 @@ msgstr "请使用 2 到 64 个字符"
 msgid "Use a found model"
 msgstr "使用找到的模型"
 
+#: src/components/ModelCredits.tsx
+msgid "Use Agentic Smith credits"
+msgstr "使用 Agentic Smith 额度"
+
 #: src/lib/model-connection-preflight.ts
 msgid "Use Connect to verify the key."
 msgstr "请使用“连接”验证密钥。"
@@ -7483,10 +7487,6 @@ msgstr "使用我的订阅或 API 密钥"
 #: src/components/teach/TeachRecordingChrome.tsx
 msgid "Use Protected input for passwords."
 msgstr "输入密码时请用受保护输入。"
-
-#: src/components/ModelCredits.tsx
-msgid "Use Agentic Smith credits"
-msgstr "使用 Agentic Smith 额度"
 
 #: src/pages/memory-providers/HonchoSettingsForm.tsx
 msgid "Use up to 512 letters, digits, _ or -."
