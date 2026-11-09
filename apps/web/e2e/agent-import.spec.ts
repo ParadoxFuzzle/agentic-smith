@@ -259,8 +259,8 @@ test("imports an OpenClaw folder and another assistant's document as new bots", 
   }
   await preview.getByRole("button", { name: "Not imported", exact: true }).click();
   await expect(preview.getByTestId("agent-import-skipped").getByRole("listitem")).toHaveText([
-    /IDENTITY\.md: Emoji\s*Not used by AgenticSmith/,
-    /TOOLS\.md\s*Not used by AgenticSmith/,
+    /IDENTITY\.md: Emoji\s*Not used by Agentic Smith/,
+    /TOOLS\.md\s*Not used by Agentic Smith/,
   ]);
   // IDENTITY.md names and describes the bot; it is not part of its instructions.
   await expect(preview.getByRole("textbox", { name: "Name" })).toHaveValue("Pebble");

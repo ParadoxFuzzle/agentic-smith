@@ -317,6 +317,7 @@ export function SettingsOverlay({
               size="icon-sm"
               className={`shrink-0 md:hidden ${navOverflow.previous || navOverflow.next ? "" : "invisible"}`}
               aria-label={t`Next settings sections`}
+              data-testid="settings-nav-next"
               disabled={!navOverflow.next || panelBusy}
               onClick={() => scrollSections(1)}
             >
