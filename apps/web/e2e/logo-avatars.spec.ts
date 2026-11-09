@@ -730,12 +730,9 @@ test("native small-size indicators keep one-pixel strokes and omit fine detail i
 test("directional vector rim follows the source edge falloff without whitening the face", async ({
   page,
 }) => {
-  const original = await readFile(
-    new URL(
-      "../../../packages/ui-tokens/assets/AgenticSmith.icon/Assets/orange-bot.png",
-      import.meta.url,
-    ),
-  );
+  // The rim is validated against the raster the vector art was drawn from, so this fixture
+  // stays pinned even as the shipped mark changes.
+  const original = await readFile(new URL("./fixtures/orange-bot.png", import.meta.url));
   await page.goto("/e2e/fixtures/logo-avatars.html?compare=1&theme=light");
   const art = await page
     .getByRole("img", { name: "Idle", exact: true })

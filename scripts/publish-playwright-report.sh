@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Publication is optional. Runs that have no object-storage configuration at all
+# (the nightly schedule, for example) keep the merged report artifact and skip the
+# upload instead of failing the whole Web E2E job. A partially configured bucket
+# still fails below, so a typo in one variable cannot silently disable publishing.
+if [[ -z "${AWS_ACCESS_KEY_ID:-}" && -z "${AWS_SECRET_ACCESS_KEY:-}" &&
+  -z "${S3_BUCKET:-}" && -z "${S3_ENDPOINT:-}" && -z "${PLAYWRIGHT_PUBLIC_BASE_URL:-}" ]]; then
+  echo "::notice::No S3 credentials are configured; skipping Playwright report publication."
+  exit 0
+fi
+
 : "${AWS_ACCESS_KEY_ID:?AWS_ACCESS_KEY_ID is required}"
 : "${AWS_SECRET_ACCESS_KEY:?AWS_SECRET_ACCESS_KEY is required}"
 : "${S3_BUCKET:?S3_BUCKET is required}"
