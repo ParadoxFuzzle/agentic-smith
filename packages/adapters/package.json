@@ -52,7 +52,7 @@
     "@agentic-smith/db": "workspace:*",
     "@agentic-smith/logging": "workspace:*",
     "@agentic-smith/page-kit": "workspace:*",
-    "@stripe/link-sdk": "0.15.0",
+    "@stripe/link-sdk": "2.1.0",
     "chat": "4.44.0",
     "chat-adapter-sendblue": "0.2.0",
     "d3-dsv": "3.0.2",

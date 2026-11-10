@@ -913,8 +913,8 @@ importers:
         specifier: 3.2.0
         version: 3.2.0(chat@4.44.0(supports-color@8.1.1)(zod@4.6.7))(supports-color@8.1.1)(typescript@7.0.2)(zod@4.6.7)
       '@stripe/link-sdk':
-        specifier: 0.15.0
-        version: 0.15.0
+        specifier: 2.1.0
+        version: 2.1.0
       chat:
         specifier: 4.44.0
         version: 4.44.0(supports-color@8.1.1)(zod@4.6.7)
@@ -5283,8 +5283,8 @@ packages:
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
 
-  '@stripe/link-sdk@0.15.0':
-    resolution: {integrity: sha512-EbTPhou4bGZvsNOqOFMXDqgV6H7f7iDIgcZ/NJMvTSzmqw9/I0vQpIk+nHfbDNGm6yo4rY0uqb3zYT4GOLLLqQ==}
+  '@stripe/link-sdk@2.1.0':
+    resolution: {integrity: sha512-dDItMD+s6wMTpYt28iwDLx3rMUlEsPrcG267nw27XXFBG00RPswrnBbTmlg7XJUqfUTFY/Z2/gxau4tIkotrAw==}
     engines: {node: '>=20'}
 
   '@stripe/stripe-js@9.17.0':
@@ -16846,7 +16846,7 @@ snapshots:
 
   '@standard-schema/spec@1.1.0': {}
 
-  '@stripe/link-sdk@0.15.0':
+  '@stripe/link-sdk@2.1.0':
     dependencies:
       zod: 4.6.7
 
