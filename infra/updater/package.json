@@ -15,7 +15,7 @@
     "@agentic-smith/contracts": "workspace:*",
     "@agentic-smith/core": "workspace:*",
     "@agentic-smith/logging": "workspace:*",
-    "hono": "4.13.16",
+    "hono": "4.13.17",
     "tsx": "4.23.15"
   },
   "devDependencies": {
