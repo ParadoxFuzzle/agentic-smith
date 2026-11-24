@@ -11,11 +11,11 @@
     "test": "vitest run --root ../.. infra/updater/src"
   },
   "dependencies": {
-    "@hono/node-server": "2.1.6",
+    "@hono/node-server": "2.1.11",
     "@agentic-smith/contracts": "workspace:*",
     "@agentic-smith/core": "workspace:*",
     "@agentic-smith/logging": "workspace:*",
-    "hono": "4.13.16",
+    "hono": "4.13.19",
     "tsx": "4.23.15"
   },
   "devDependencies": {
